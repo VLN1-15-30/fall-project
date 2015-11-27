@@ -1,4 +1,3 @@
-
 #include "person.h"
 
 using namespace std;
@@ -61,6 +60,10 @@ void person::initialize(){
     cin >> died;
     cout << endl;
 
+}
+
+void person::showList() const{
+    cout << *this;
 }
 
 ostream& operator<< (ostream& stream,const person& p){

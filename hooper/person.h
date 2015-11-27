@@ -14,7 +14,7 @@ public:
     void initialize();
     //friend istream& operator>> (istream& stream,const person& p);
     friend ostream& operator<< (ostream& stream,const person& p);
-
+    void showList() const;
     string getName();
     string getSex();
     int getBorn();
