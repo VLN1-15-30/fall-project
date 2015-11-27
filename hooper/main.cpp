@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main(int argc, char *argv[])
+int main()
 {
     List str1;
     str1.initialize("persons.txt");
