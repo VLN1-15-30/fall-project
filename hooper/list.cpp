@@ -1,6 +1,6 @@
 #include <iostream>
 #include "list.h"
-
+#include <algorithm>
 using namespace std;
 
 List::List(){
@@ -39,7 +39,6 @@ void List:: initialize(string fileName ){
     }
 
      in_stream.close();
-
 }
 
 
@@ -84,6 +83,35 @@ void List:: writeToFile(vector <person>& p){
 
 }
 
+void List::showList() const{
+    cout << *this;
+}
+
+void List::orderbyNameA_Z(vector <person>& p){
+    sort(p.begin(), p.end(),EntityComp(NAME, 0));
+}
+
+void List::orderbyNameZ_A(vector <person>& p){
+    sort(p.begin(), p.end(),EntityComp(NAME, 1));
+}
+
+void List::showOrderedList(int column, int order){
+   vector<person> p = getChar();
+   if(column == NAME) {
+       if( order == 0) {
+           orderbyNameA_Z(p);
+       } else {
+           orderbyNameZ_A(p);
+       }
+   }
+
+   for (unsigned int i = 0; i < p.size(); i++){
+       cout << p.at(i) << endl;
+   }
+}
+
+
+
 char List:: ask_again(){
 
     char answer;
@@ -93,12 +121,14 @@ char List:: ask_again(){
     return answer;
 }
 
+
 ostream& operator<< (ostream& stream,const List& p){
 
    for (unsigned int i = 0; i< p.charachters.size(); i++) {
        person pers = p.charachters[i];
        stream << pers;
+       cout << "-----------------" << endl;
    }
-    stream << endl;
+   stream << endl;
    return stream;
 }

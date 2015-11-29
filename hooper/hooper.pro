@@ -13,5 +13,6 @@ SOURCES += main.cpp \
 
 HEADERS += \
     person.h \
-    list.h
+    list.h \
+    columns.h
 

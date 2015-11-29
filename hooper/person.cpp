@@ -1,4 +1,5 @@
 #include "person.h"
+#include <assert.h>
 
 using namespace std;
 
@@ -10,20 +11,20 @@ person::person(){
     sex = "";
 }
 
-string person:: getName(){
+string person:: getName() const{
 
     return name;
 }
 
-int person:: getBorn(){
+int person:: getBorn() const{
     return born;
 }
 
-int person:: getDied(){
+int person:: getDied() const{
     return died;
 }
 
-string person:: getSex(){
+string person:: getSex() const{
     return sex;
 }
 
@@ -62,9 +63,12 @@ void person::initialize(){
 
 }
 
-void person::showList() const{
-    cout << *this;
-}
+//bool operator <(const person& p1,const person& p2){
+//    if(p1.getName() < p2.getName())
+//        return true;
+//    else
+//        return false;
+//}
 
 ostream& operator<< (ostream& stream,const person& p){
 
