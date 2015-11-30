@@ -95,6 +95,16 @@ void List::orderbyNameZ_A(vector <person>& p){
     sort(p.begin(), p.end(),EntityComp(NAME, 1));
 }
 
+void List::orderbyBornASC(vector <person>& p){
+    //use stable to preserve order of equivalents
+    stable_sort(p.begin(), p.end(),EntityComp(BORN, 0));
+}
+
+void List::orderbyBornDESC(vector <person>& p){
+
+    stable_sort(p.begin(), p.end(),EntityComp(BORN, 1));
+}
+
 void List::showOrderedList(int column, int order){
    vector<person> p = getChar();
    if(column == NAME) {
@@ -103,14 +113,18 @@ void List::showOrderedList(int column, int order){
        } else {
            orderbyNameZ_A(p);
        }
+   } else if (column == BORN) {
+       if( order == 0) {
+           orderbyBornASC(p);
+       } else {
+           orderbyBornDESC(p);
+       }
    }
 
    for (unsigned int i = 0; i < p.size(); i++){
        cout << p.at(i) << endl;
    }
 }
-
-
 
 char List:: ask_again(){
 

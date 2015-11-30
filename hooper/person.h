@@ -50,9 +50,9 @@ struct EntityComp{
             }
         } else{
             if(sort == BORN) {
-                return p1.getBorn() < p2.getBorn();
-            } else {
                 return p1.getBorn() > p2.getBorn();
+            } else {
+                return p1.getBorn() < p2.getBorn();
             }
         }
     }
