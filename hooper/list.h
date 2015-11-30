@@ -19,8 +19,7 @@ public:
     vector<person> const getChar() const {return charachters;}
     void addData ();
     void search();
-    void performNameSearch();
-    void performSearchBasedOn(char& a);
+    void performSearchBasedOn(const char& selection);
     void showList() const;
     void showOrderedList(int column, int order);
     void orderbyNameA_Z(vector <person>& p);

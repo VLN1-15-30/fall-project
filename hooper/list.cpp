@@ -1,6 +1,7 @@
 #include <iostream>
 #include "list.h"
 #include <algorithm>
+#include <sstream>
 using namespace std;
 
 enum Types{
@@ -148,47 +149,77 @@ void List::search(){
 
     cout << endl;
     cout <<"====Search===="<<endl;
-    cout <<"a: Name"<<endl;
-    cout << "Search by:";
+    cout <<"a: Name "<<endl;
+    cout << "b: Sex " << endl;
+    cout << "c: Year of birth: " << endl;
+    cout << "d: Year of death: " << endl;
+
+    cout << "Search by: ";
 
     char ask;
     cin >> ask;
 
-    if(ask == 'a'||ask == 'A')
-        searchType = search_name;
-    else if(ask == 'b'|| ask == 'B')
-        searchType = search_born;
-
-
-    switch(searchType){
-    case search_name: performNameSearch();
-    break;
-    case search_born:
-    break;
-    default:
-    break;
-
-    }
-
+    performSearchBasedOn(ask);
 }
 
-void List:: performNameSearch(){
+void List:: performSearchBasedOn(const char& selection){
 
-    cout << "Last name: ";
-    string lastName;
-    cin >> lastName;
+    switch(selection){
+        case 'a':cout << "Last name: ";
+        break;
+        case 'b': cout << "Male/female: ";
+        break;
+        case 'c': cout << "Enter year: ";
+        break;
+        case 'd': cout << "Enter year: ";
+        break;
+    }
+
+    string target;
+    cin >> target;
 
     vector <person> sResult;
 
     for (unsigned int i = 0; i < charachters.size(); i++){
         person comparePerson = charachters[i];
-        if(comparePerson.getName().find(lastName)!=string::npos){
-            sResult.push_back(comparePerson);
+        switch (selection) {
+        case 'a':{
+            if(comparePerson.getName().find(target)!=string::npos){
+                sResult.push_back(comparePerson);
+            }
         }
+        break;
+        case 'b':{
+            if(comparePerson.getSex().find(target)!=string::npos){
+                sResult.push_back(comparePerson);
+            }
+        }
+        break;
+        case 'c':{
+
+             ostringstream ss;
+              ss << comparePerson.getBorn();
+            if(ss.str().find(target)!=string::npos){
+                sResult.push_back(comparePerson);
+            }
+        }
+        break;
+        case 'd':{
+            ostringstream ss;
+             ss << comparePerson.getDied();
+            if(ss.str().find(target)!=string::npos){
+                sResult.push_back(comparePerson);
+            }
+        }
+        break;
+        default:
+            break;
+        }
+
     }
 
     if(sResult.size() == 0){
-        cout << "No match found for "<<lastName << endl;
+        cout << "No match found for "<<target << endl;
     }
     else{
         cout <<endl;
@@ -204,11 +235,9 @@ void List:: performNameSearch(){
     cout <<  "Search again ?(y/n): ";
     char again;
     cin >> again;
+
     if(again == 'y'|| again == 'Y')
         search();
-
-
-
 }
 
 ostream& operator<< (ostream& stream,const List& p){
