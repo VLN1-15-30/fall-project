@@ -33,8 +33,8 @@ void List:: initialize(string fileName ){
         int died;
         while ( in_stream >> firstname >> lastname >> sex >> born >> died){
 
-            cout << firstname<<" " << lastname << " "
-                 << sex << " " << born<<" " << died <<" " << endl;
+//            cout << firstname<<" " << lastname << " "
+//                 << sex << " " << born<<" " << died <<" " << endl;
 
             person addPerson;
             addPerson.setFirstName(firstname);
