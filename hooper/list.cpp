@@ -1,7 +1,15 @@
 #include <iostream>
 #include "list.h"
 #include <algorithm>
+#include <sstream>
 using namespace std;
+
+enum Types{
+    search_name,
+    search_born
+};
+
+Types searchType;
 
 List::List(){
 
@@ -95,6 +103,16 @@ void List::orderbyNameZ_A(vector <person>& p){
     sort(p.begin(), p.end(),EntityComp(NAME, 1));
 }
 
+void List::orderbyBornASC(vector <person>& p){
+    //use stable to preserve order of equivalents
+    stable_sort(p.begin(), p.end(),EntityComp(BORN, 0));
+}
+
+void List::orderbyBornDESC(vector <person>& p){
+
+    stable_sort(p.begin(), p.end(),EntityComp(BORN, 1));
+}
+
 void List::showOrderedList(int column, int order){
    vector<person> p = getChar();
    if(column == NAME) {
@@ -103,14 +121,18 @@ void List::showOrderedList(int column, int order){
        } else {
            orderbyNameZ_A(p);
        }
+   } else if (column == BORN) {
+       if( order == 0) {
+           orderbyBornASC(p);
+       } else {
+           orderbyBornDESC(p);
+       }
    }
 
    for (unsigned int i = 0; i < p.size(); i++){
        cout << p.at(i) << endl;
    }
 }
-
-
 
 char List:: ask_again(){
 
@@ -121,6 +143,102 @@ char List:: ask_again(){
     return answer;
 }
 
+
+
+void List::search(){
+
+    cout << endl;
+    cout <<"====Search===="<<endl;
+    cout <<"a: Name "<<endl;
+    cout << "b: Sex " << endl;
+    cout << "c: Year of birth: " << endl;
+    cout << "d: Year of death: " << endl;
+
+    cout << "Search by: ";
+
+    char ask;
+    cin >> ask;
+
+    performSearchBasedOn(ask);
+}
+
+void List:: performSearchBasedOn(const char& selection){
+
+    switch(selection){
+        case 'a':cout << "Last name: ";
+        break;
+        case 'b': cout << "Male/female: ";
+        break;
+        case 'c': cout << "Enter year: ";
+        break;
+        case 'd': cout << "Enter year: ";
+        break;
+    }
+
+    string target;
+    cin >> target;
+
+    vector <person> sResult;
+
+    for (unsigned int i = 0; i < charachters.size(); i++){
+        person comparePerson = charachters[i];
+        switch (selection) {
+        case 'a':{
+            if(comparePerson.getName().find(target)!=string::npos){
+                sResult.push_back(comparePerson);
+            }
+        }
+        break;
+        case 'b':{
+            if(comparePerson.getSex().find(target)!=string::npos){
+                sResult.push_back(comparePerson);
+            }
+        }
+        break;
+        case 'c':{
+
+             ostringstream ss;
+              ss << comparePerson.getBorn();
+            if(ss.str().find(target)!=string::npos){
+                sResult.push_back(comparePerson);
+            }
+        }
+        break;
+        case 'd':{
+            ostringstream ss;
+             ss << comparePerson.getDied();
+            if(ss.str().find(target)!=string::npos){
+                sResult.push_back(comparePerson);
+            }
+        }
+        break;
+        default:
+            break;
+        }
+
+    }
+
+    if(sResult.size() == 0){
+        cout << "No match found for "<<target << endl;
+    }
+    else{
+        cout <<endl;
+        cout << "Found the following results: "<< endl;
+
+        for (unsigned int i = 0; i < sResult.size(); i++){
+
+            person result = sResult[i];
+            cout << result;
+        }
+    }
+
+    cout <<  "Search again ?(y/n): ";
+    char again;
+    cin >> again;
+
+    if(again == 'y'|| again == 'Y')
+        search();
+}
 
 ostream& operator<< (ostream& stream,const List& p){
 

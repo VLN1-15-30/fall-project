@@ -18,12 +18,14 @@ public:
     void writeToFile(vector <person>& p);
     vector<person> const getChar() const {return charachters;}
     void addData ();
+    void search();
+    void performSearchBasedOn(const char& selection);
     void showList() const;
     void showOrderedList(int column, int order);
     void orderbyNameA_Z(vector <person>& p);
     void orderbyNameZ_A(vector <person>& p);
-//    void orderbyBornASCE();
-//    void orderbyBornDESC();
+    void orderbyBornASC(vector <person>& p);
+    void orderbyBornDESC(vector <person>& p);
     char ask_again();
     friend ostream& operator<< (ostream& stream,const List& p);
 
