@@ -11,8 +11,12 @@ class Interface{
 public:
     Interface();
     void welcomeMessage();
+    void actions();
+    void view();
+    void order();
+    void find();
+    void add();
 };
-
 
 #endif // INTERFACE
 
