@@ -27,6 +27,9 @@ public:
     void setBorn(int b);
     void setDied(int d);
 
+    string errorCheckSex(string& sex);
+    int errorCheckNumber(int& number, int index);
+
 
 private:
     int born;

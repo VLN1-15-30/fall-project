@@ -65,15 +65,57 @@ void person::initialize(){
     cout << "Last name: ";
     cin >> lastname;
     cout << endl;
-    cout << "Sex: ";
+    cout << "Sex(m/f): ";
     cin >> sex;
+    sex = errorCheckSex(sex);
     cout << endl;
     cout << "Born: ";
     cin >>born;
+    born = errorCheckNumber(born,0);
     cout << endl;
     cout << "Died: ";
     cin >> died;
+    died = errorCheckNumber(died,1);
     cout << endl;
+
+}
+
+int person:: errorCheckNumber(int &number, int index){
+
+    while (number <=999 || number > 2015){
+
+        cout << "Invalid input, try again"<< endl;
+        if(index == 0)
+            cout << "Born: ";
+        else
+            cout << "Died: ";
+
+        cin >> number;
+
+        if(number > 999 && number < 2015)
+            break;
+    }
+
+    return number;
+
+}
+
+string person:: errorCheckSex(string& sex){
+
+    if(sex == "m" || sex == "f")
+        return sex;
+
+    while (sex != "m" || sex != "f"){
+
+        cout << "Invalid input, try again"<< endl;
+        cout << "Sex(m/f): ";
+        cin >> sex;
+
+        if(sex == "m" || sex == "f")
+            break;
+    }
+
+    return sex;
 
 }
 
