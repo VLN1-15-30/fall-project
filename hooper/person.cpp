@@ -7,14 +7,21 @@ person::person(){
 
     born = 0;
     died = 0;
-    name = "";
+    firstname = "";
+    lastname ="";
     sex = "";
 }
 
-string person:: getName() const{
+string person:: getFirstName() const{
 
-    return name;
+    return firstname;
 }
+
+string person:: getLastName() const{
+
+    return lastname;
+}
+
 
 int person:: getBorn() const{
     return born;
@@ -28,8 +35,12 @@ string person:: getSex() const{
     return sex;
 }
 
-void person:: setName(string n){
-    name = n;
+void person:: setFirstName(string fn){
+    firstname = fn;
+}
+
+void person:: setLastName(string ln){
+    lastname = ln;
 }
 
 void person:: setSex(string s){
@@ -48,8 +59,11 @@ void person:: setDied(int d){
 
 void person::initialize(){
 
-    cout << "Name: ";
-    cin >> name;
+    cout << "First name: ";
+    cin >> firstname;
+    cout << endl;
+    cout << "Last name: ";
+    cin >> lastname;
     cout << endl;
     cout << "Sex: ";
     cin >> sex;
@@ -72,7 +86,8 @@ void person::initialize(){
 
 ostream& operator<< (ostream& stream,const person& p){
 
-   stream << "Name: "<< p.name<<endl;
+   stream << "First name: "<< p.firstname<<endl;
+   stream << "Last name: "<< p.lastname<<endl;
    stream << "Sex: "<< p.sex<<endl;
    stream << "Born: "<< p.born<<endl;
    stream << "Died: "<< p.died<<endl;
