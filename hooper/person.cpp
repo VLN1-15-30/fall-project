@@ -61,18 +61,14 @@ void person::initialize(){
 
     cout << "First name: ";
     cin >> firstname;
-    cout << endl;
     cout << "Last name: ";
     cin >> lastname;
-    cout << endl;
     cout << "Sex(m/f): ";
     cin >> sex;
     sex = errorCheckSex(sex);
-    cout << endl;
     cout << "Born: ";
     cin >>born;
     born = errorCheckNumber(born,0);
-    cout << endl;
     cout << "Died: ";
     cin >> died;
     died = errorCheckNumber(died,1);
