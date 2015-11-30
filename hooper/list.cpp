@@ -96,6 +96,13 @@ void List:: writeToFile(vector <person>& p){
 
 }
 
+void List::printData(vector <person>& p){
+
+    for (unsigned int i = 0; i < p.size(); i++){
+        cout << p.at(i) << endl;
+    }
+}
+
 void List::showList() const{
     cout << *this;
 }
@@ -133,10 +140,7 @@ void List::showOrderedList(int column, int order){
            orderbyBornDESC(p);
        }
    }
-
-   for (unsigned int i = 0; i < p.size(); i++){
-       cout << p.at(i) << endl;
-   }
+   printData(p);
 }
 
 char List:: ask_again(){
@@ -230,11 +234,8 @@ void List:: performSearchBasedOn(const char& selection){
         cout <<endl;
         cout << "Found the following results: "<< endl;
 
-        for (unsigned int i = 0; i < sResult.size(); i++){
-
-            person result = sResult[i];
-            cout << result;
-        }
+        orderbyNameA_Z(sResult);
+        printData(sResult);
     }
 
     cout <<  "Search again ?(y/n): ";
