@@ -4,7 +4,7 @@
 using namespace std;
 
 Interface::Interface(){
-
+        ComputerScientists.initialize("persons.txt");
 }
 void Interface::welcomeMessage(){
     cout << "Welcom to the Hooper database!\n"
@@ -33,8 +33,7 @@ void Interface::view(){
     switch(answer){
         case 'y': order();
         break;
-        case 'n': List list;
-                  list.showList();
+        case 'n': ComputerScientists.showList();
         break;
     }
 }
@@ -45,14 +44,11 @@ void Interface::order(){
     cin >> column;
     cout << "Write 0 for ascending, 1 for descending order" << endl;
     cin >> order;
-    List ordering;
-    ordering.showOrderedList(column, order);
+    ComputerScientists.showOrderedList(column, order);
 }
 void Interface::find(){
-    List searching;
-    searching.search();
+    ComputerScientists.search();
 }
 void Interface::add(){
-    List add;
-    add.addData();
+    ComputerScientists.addData();
 }

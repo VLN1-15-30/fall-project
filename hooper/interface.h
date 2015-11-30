@@ -16,6 +16,9 @@ public:
     void order();
     void find();
     void add();
+private:
+    List ComputerScientists;
+
 };
 
 #endif // INTERFACE
