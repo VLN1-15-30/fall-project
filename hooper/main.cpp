@@ -10,8 +10,7 @@ int main()
 {
     Interface welcome;
     welcome.welcomeMessage();
-    Interface action;
-    action.actions();
+    welcome.actions();
 
     return 0;
 }

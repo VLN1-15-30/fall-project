@@ -3,6 +3,8 @@
 #include <algorithm>
 using namespace std;
 
+List callingList;
+
 Interface::Interface(){
 
 }
@@ -33,8 +35,7 @@ void Interface::view(){
     switch(answer){
         case 'y': order();
         break;
-        case 'n': List list;
-                  list.showList();
+        case 'n': callingList.showList();
         break;
     }
 }
@@ -45,14 +46,11 @@ void Interface::order(){
     cin >> column;
     cout << "Write 0 for ascending, 1 for descending order" << endl;
     cin >> order;
-    List ordering;
-    ordering.showOrderedList(column, order);
+    callingList.showOrderedList(column, order);
 }
 void Interface::find(){
-    List searching;
-    searching.search();
+    callingList.search();
 }
 void Interface::add(){
-    List add;
-    add.addData();
+    callingList.addData();
 }
