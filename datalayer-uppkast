@@ -1,0 +1,51 @@
+#include "datalayer.h"
+
+DataLayer::DataLayer()
+{
+
+}
+
+void DataLayer::test()
+{
+    Person p1("Addi","male",1982,2025);
+    Person p2("Lóa","female",1970,2046);
+    Person p3("Stefán","male",1944,2008);
+    list<Person> perList;
+    perList.push_back(p1);
+    perList.push_back(p2);
+    perList.push_back(p3);
+    string data_test = "Testing this file";
+
+    /*ofstream myfile;
+    myfile.open("datafile.txt");
+    myfile << data_test << endl;
+    myfile.close();
+
+    cout << "HI WORLD" << endl;*/
+    save(perList);
+
+}
+
+void DataLayer::save(list<Person> getList)
+{
+    ofstream myfile;
+    myfile.open("datafile.txt");
+
+    int size = getList.size();
+
+    for (int i = 0; i < size; i++)
+    {
+        myfile << getList.front().getName() << ":";
+        myfile << getList.front().getGender() << ":";
+        myfile << getList.front().getBirthYear() << ":";
+        myfile << getList.front().getDeathYear() << endl;
+        getList.pop_front();
+    }
+    myfile.close();
+
+}
+list<Person> DataLayer::load(string fileName)
+{
+
+
+}
