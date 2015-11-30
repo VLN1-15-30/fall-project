@@ -10,8 +10,14 @@ int main()
 {
     Interface welcome;
     welcome.welcomeMessage();
-    welcome.actions();
 
+    int exit = 0;
+
+    while(exit != 1) {
+        welcome.actions();
+        cout << "Press 1 to quit or 0 to make more actions" << endl;
+        cin >> exit;
+    }
     return 0;
 }
 
