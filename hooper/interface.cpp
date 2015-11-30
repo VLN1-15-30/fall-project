@@ -8,7 +8,7 @@ Interface::Interface(){
     ComputerScientists.initialize("persons.txt");
 }
 void Interface::welcomeMessage(){
-    cout << "Welcom to the Hooper database!\n"
+    cout << "Welcome to the Hooper database!\n"
             "The database contains information about pioneers in computer science." << endl;
 }
 void Interface::actions(){
@@ -29,7 +29,7 @@ void Interface::actions(){
 }
 void Interface::view(){
     char answer;
-    cout << "Do you whish to control the order of the data(y/n)? ";
+    cout << "Do you wish to control the order of the data(y/n)? ";
     cin >> answer;
     switch(answer){
         case 'y': order();
@@ -43,7 +43,7 @@ void Interface::order(){
     int order;
     cout << "Write 0 to order by Name, 1 to order by Born" << endl;
     cin >> column;
-    cout << "Write 0 for ascending, 1 for descending order" << endl;
+    cout << "Write 0 for ascending order, 1 for descending order" << endl;
     cin >> order;
     ComputerScientists.showOrderedList(column, order);
 }
