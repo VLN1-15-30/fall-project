@@ -3,10 +3,9 @@
 #include <algorithm>
 using namespace std;
 
-List callingList;
 
 Interface::Interface(){
-
+    ComputerScientists.initialize("persons.txt");
 }
 void Interface::welcomeMessage(){
     cout << "Welcom to the Hooper database!\n"
@@ -35,7 +34,7 @@ void Interface::view(){
     switch(answer){
         case 'y': order();
         break;
-        case 'n': callingList.showList();
+        case 'n': ComputerScientists.showList();
         break;
     }
 }
@@ -46,11 +45,11 @@ void Interface::order(){
     cin >> column;
     cout << "Write 0 for ascending, 1 for descending order" << endl;
     cin >> order;
-    callingList.showOrderedList(column, order);
+    ComputerScientists.showOrderedList(column, order);
 }
 void Interface::find(){
-    callingList.search();
+    ComputerScientists.search();
 }
 void Interface::add(){
-    callingList.addData();
+    ComputerScientists.addData();
 }
