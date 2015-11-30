@@ -26,16 +26,19 @@ void List:: initialize(string fileName ){
         cout << "Failed to open database."<<endl;
     }
     else{
-        string name;
+        string firstname;
+        string lastname;
         string sex;
         int born;
         int died;
-        while ( in_stream >> name >> sex >> born >> died){
+        while ( in_stream >> firstname >> lastname >> sex >> born >> died){
 
-            cout << name<<" " << sex << " " << born<<" " << died <<" " << endl;
+            cout << firstname<<" " << lastname << " "
+                 << sex << " " << born<<" " << died <<" " << endl;
 
             person addPerson;
-            addPerson.setName(name);
+            addPerson.setFirstName(firstname);
+            addPerson.setLastName(lastname);
             addPerson.setSex(sex);
             addPerson.setBorn(born);
             addPerson.setDied(died);
@@ -84,11 +87,20 @@ void List:: writeToFile(vector <person>& p){
 
     for (unsigned int i = 0; i< p.size(); i++) {
         person pers = p[i];
-          out_stream << pers.getName()<<" "<<pers.getSex() <<" "<< pers.getBorn()<<" "<< pers.getDied() << endl;
+          out_stream << pers.getFirstName()<<" " << pers.getLastName() << " "
+                     << pers.getSex() <<" " << pers.getBorn()<<" "
+                     << pers.getDied() << endl;
     }
 
     out_stream.close( );
 
+}
+
+void List::printData(vector <person>& p){
+
+    for (unsigned int i = 0; i < p.size(); i++){
+        cout << p.at(i) << endl;
+    }
 }
 
 void List::showList() const{
@@ -128,10 +140,7 @@ void List::showOrderedList(int column, int order){
            orderbyBornDESC(p);
        }
    }
-
-   for (unsigned int i = 0; i < p.size(); i++){
-       cout << p.at(i) << endl;
-   }
+   printData(p);
 }
 
 char List:: ask_again(){
@@ -149,7 +158,7 @@ void List::search(){
 
     cout << endl;
     cout <<"====Search===="<<endl;
-    cout <<"a: Name "<<endl;
+    cout <<"a: Last Name "<<endl;
     cout << "b: Sex " << endl;
     cout << "c: Year of birth: " << endl;
     cout << "d: Year of death: " << endl;
@@ -184,7 +193,7 @@ void List:: performSearchBasedOn(const char& selection){
         person comparePerson = charachters[i];
         switch (selection) {
         case 'a':{
-            if(comparePerson.getName().find(target)!=string::npos){
+            if(comparePerson.getLastName().find(target)!=string::npos){
                 sResult.push_back(comparePerson);
             }
         }
@@ -225,11 +234,8 @@ void List:: performSearchBasedOn(const char& selection){
         cout <<endl;
         cout << "Found the following results: "<< endl;
 
-        for (unsigned int i = 0; i < sResult.size(); i++){
-
-            person result = sResult[i];
-            cout << result;
-        }
+        orderbyNameA_Z(sResult);
+        printData(sResult);
     }
 
     cout <<  "Search again ?(y/n): ";
