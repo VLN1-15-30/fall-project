@@ -10,11 +10,8 @@ int main()
 {
     Interface welcome;
     welcome.welcomeMessage();
-    List str1;
-    str1.initialize("persons.txt");
-    str1.showList();
-    str1.addData();
-    //order list
+    Interface action;
+    action.actions();
 
     return 0;
 }

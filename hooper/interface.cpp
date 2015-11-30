@@ -3,7 +3,6 @@
 #include <algorithm>
 using namespace std;
 
-List str1;
 Interface::Interface(){
 
 }
@@ -29,12 +28,12 @@ void Interface::actions(){
 }
 void Interface::view(){
     char answer;
-    cout << "Do you whish to control the order of the data(Y/N)? ";
+    cout << "Do you whish to control the order of the data(y/n)? ";
     cin >> answer;
     switch(answer){
-        case 'Y': order();
+        case 'y': order();
         break;
-        case 'N': List list;
+        case 'n': List list;
                   list.showList();
         break;
     }
@@ -46,7 +45,8 @@ void Interface::order(){
     cin >> column;
     cout << "Write 0 for ascending, 1 for descending order" << endl;
     cin >> order;
-        str1.showOrderedList(column, order);
+    List ordering;
+    ordering.showOrderedList(column, order);
 }
 void Interface::find(){
     List searching;
