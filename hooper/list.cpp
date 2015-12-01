@@ -280,3 +280,65 @@ person List:: returnPersonAtIndex(int index){
     return p;
 }
 
+
+void List:: removeCharacter(){
+
+    cout << "Type last name: ";
+    string name;
+    cin >> name;
+
+    for (unsigned int i = 0; i< charachters.size(); i++) {
+        person pers = charachters[i];
+        if (pers.getLastName() == name)
+            charachters.erase(charachters.begin()+i);
+    }
+
+    OverWriteToFile(charachters);
+
+
+}
+
+void List:: removeCharacterWithIndex(){
+
+    int max = charachters.size();
+
+    if(max > 0){
+
+        cout << "Type a number between 0 and " << max-1 << ": ";
+        int removeIndex;
+        cin >> removeIndex;
+
+        if(removeIndex >= 0 && removeIndex < max){
+            charachters.erase(charachters.begin()+removeIndex);
+        }
+
+        OverWriteToFile(charachters);
+    }
+    else{
+        cout << "Database is empty" << endl;
+    }
+
+
+}
+
+void List:: OverWriteToFile(vector <person>& p){
+
+    ofstream out_stream;
+    out_stream.open("persons.txt");
+
+    if (out_stream.fail( ))
+    {
+        cout << "Failed to write to database."<<endl;
+        return;
+    }
+
+    for (unsigned int i = 0; i< p.size(); i++) {
+        person pers = p[i];
+          out_stream << pers.getFirstName()<<" " << pers.getLastName() << " "
+                     << pers.getSex() <<" " << pers.getBorn()<<" "
+                     << pers.getDied() << endl;
+    }
+
+    out_stream.close( );
+
+}

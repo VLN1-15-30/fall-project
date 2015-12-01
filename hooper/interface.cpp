@@ -16,7 +16,9 @@ void Interface::actions(){
             "Choose 1 to view the database. \n"
             "Choose 2 to search the database. \n"
             "Choose 3 to add a pioneer to the database. \n"
-            "Choose 4 to discover a random pioneer."<< endl;
+            "Choose 4 to discover a random pioneer. \n"
+            "Choose 5 to remove a pioneer from the database."<< endl;
+
 
     int action;
     cin >> action;
@@ -28,6 +30,8 @@ void Interface::actions(){
         case 3: add();
         break;
         case 4: discover();
+        break;
+        case 5: deleteCharacter();
         break;
     }
 }
@@ -63,4 +67,16 @@ void Interface::add(){
 void Interface::discover(){
 
     ComputerScientists.disvoverAPioneer();
+}
+
+void Interface::deleteCharacter(){
+
+    cout << "==== REMOVE ===="<<endl;
+    cout << "Write 0 to remove by index, 1 to remove by last name"<<endl;
+    int type;
+    cin >> type;
+    if (type == 0)
+        ComputerScientists.removeCharacterWithIndex();
+    else if (type == 1)
+         ComputerScientists.removeCharacter();
 }
