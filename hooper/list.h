@@ -16,7 +16,10 @@ public:
     List();
     void initialize(string fileName );
     void writeToFile(vector <person>& p);
+    void OverWriteToFile(vector <person>& p);
+
     vector<person> const getChar() const {return charachters;}
+
     void addData ();
     void search();
     void printData(vector <person>& p);
@@ -27,7 +30,12 @@ public:
     void orderbyNameZ_A(vector <person>& p);
     void orderbyBornASC(vector <person>& p);
     void orderbyBornDESC(vector <person>& p);
+    void disvoverAPioneer();
+    void removeCharacter();
+    void removeCharacterWithIndex();
+
     char ask_again();
+    person returnPersonAtIndex(int index);
     friend ostream& operator<< (ostream& stream,const List& p);
 
 private:

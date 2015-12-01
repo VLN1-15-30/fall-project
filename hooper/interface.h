@@ -16,6 +16,8 @@ public:
     void order();
     void find();
     void add();
+    void discover();
+    void deleteCharacter();
 private:
     List ComputerScientists;
 
