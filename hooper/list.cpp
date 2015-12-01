@@ -210,7 +210,6 @@ void List:: performSearchBasedOn(const char& selection){
         }
         break;
         case 'c':{
-
              ostringstream ss;
               ss << comparePerson.getBorn();
             if(ss.str().find(target)!=string::npos){

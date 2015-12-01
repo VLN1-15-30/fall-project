@@ -69,7 +69,7 @@ void person::initialize(){
     cout << "Born: ";
     cin >>born;
     born = errorCheckNumber(born,0);
-    cout << "Died: ";
+    cout << "Died(0 if alive): ";
     cin >> died;
     died = errorCheckNumber(died,1);
     cout << endl;
@@ -78,20 +78,21 @@ void person::initialize(){
 
 int person:: errorCheckNumber(int &number, int index){
 
-    while (number <=999 || number > 2015){
+    int currentyear = 2015;
+
+    while (number > currentyear){
 
         cout << "Invalid input, try again"<< endl;
         if(index == 0)
             cout << "Born: ";
         else
-            cout << "Died: ";
+            cout << "Died(0 if alive): ";
 
         cin >> number;
 
-        if(number > 999 && number < 2015)
-            break;
+        if(number < currentyear)
+            break; 
     }
-
     return number;
 
 }
@@ -124,11 +125,14 @@ string person:: errorCheckSex(string& sex){
 
 ostream& operator<< (ostream& stream,const person& p){
 
-   stream << "First name: "<< p.firstname<<endl;
    stream << "Last name: "<< p.lastname<<endl;
+   stream << "First name: "<< p.firstname<<endl;
    stream << "Sex: "<< p.sex<<endl;
    stream << "Born: "<< p.born<<endl;
-   stream << "Died: "<< p.died<<endl;
+   if(p.died != 0)
+       stream << "Died: "<< p.died<<endl;
+   else
+       stream << "Died: "<< " - " <<endl;
 
    return stream;
 }
