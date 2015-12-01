@@ -9,9 +9,7 @@
 using namespace std;
 
 List::List(){
-
 }
-
 
 void List:: initialize(string fileName ){
 
@@ -45,7 +43,6 @@ void List:: initialize(string fileName ){
 
      in_stream.close();
 }
-
 
 void List::addData(){
 
@@ -194,8 +191,8 @@ void List::search(){
 
     char ask;
     cin >> ask;
-
-    performSearchBasedOn(ask);
+    if(ask == 'a'||ask == 'b'||ask == 'c'||ask == 'd'||)
+        performSearchBasedOn(ask);
 }
 
 void List:: performSearchBasedOn(const char& selection){
