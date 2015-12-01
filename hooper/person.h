@@ -13,11 +13,11 @@ class person
 public:
     person();
     void initialize();
-    //friend istream& operator>> (istream& stream,const person& p);
     friend ostream& operator<< (ostream& stream,const person& p);
     string getFirstName() const;
     string getLastName() const;
     string getSex() const;
+
     int getBorn() const;
     int getDied() const;
 

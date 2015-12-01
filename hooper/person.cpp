@@ -13,12 +13,10 @@ person::person(){
 }
 
 string person:: getFirstName() const{
-
     return firstname;
 }
 
 string person:: getLastName() const{
-
     return lastname;
 }
 
@@ -73,14 +71,13 @@ void person::initialize(){
     cin >> died;
     died = errorCheckNumber(died,1);
     cout << endl;
-
 }
 
 int person:: errorCheckNumber(int &number, int index){
 
-    int currentyear = 2015;
+    int currentYear = 2015;
 
-    while (number > currentyear){
+    while (number > currentYear){
 
         cout << "Invalid input, try again"<< endl;
         if(index == 0)
@@ -90,7 +87,7 @@ int person:: errorCheckNumber(int &number, int index){
 
         cin >> number;
 
-        if(number < currentyear)
+        if(number < currentYear)
             break; 
     }
     return number;
