@@ -1,8 +1,5 @@
-#include <QCoreApplication>
 #include <iostream>
-#include "list.h"
 #include "interface.h"
-#include <vector>
 
 using namespace std;
 
