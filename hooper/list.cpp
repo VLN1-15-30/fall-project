@@ -191,7 +191,7 @@ void List::search(){
 
     char ask;
     cin >> ask;
-    if(ask == 'a'||ask == 'b'||ask == 'c'||ask == 'd'||)
+    if(ask == 'a'||ask == 'b'||ask == 'c'||ask == 'd')
         performSearchBasedOn(ask);
 }
 
