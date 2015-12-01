@@ -172,11 +172,15 @@ void List:: showOrderedTable(int column, int order){
     for (unsigned int i = 0; i< p.size(); i++) {
 
           person pers = p[i];
+
           cout << left << setw(5) << setfill(separator) << i+1;
-          cout << left << setw(nameWidth) << setfill(separator) << pers.getFirstName();
           cout << left << setw(nameWidth) << setfill(separator) << pers.getLastName();
+          cout << left << setw(nameWidth) << setfill(separator) << pers.getFirstName();
           cout << left << setw(numWidth) << setfill(separator) << pers.getBorn();
-          cout << left << setw(numWidth) << setfill(separator) << pers.getDied();
+          if(pers.getDied() != 0)
+              cout << left << setw(numWidth) << setfill(separator) << pers.getDied();
+          else
+              cout << left << setw(numWidth) << setfill(separator) << " - ";
           cout << endl;
      }
 
@@ -308,9 +312,6 @@ void List:: disvoverAPioneer(){
     person randPers = returnPersonAtIndex(randomCharacter);
     cout << randPers<<endl;
 
-    renderTable();
-
-
 }
 
 person List:: returnPersonAtIndex(int index){
@@ -389,8 +390,8 @@ void List:: tableBegin(){
     const int numWidth      = 15;
 
     cout << left << setw(5) << setfill(separator) << "Nr.";
-    cout << left << setw(nameWidth) << setfill(separator) << "First name";
     cout << left << setw(nameWidth) << setfill(separator) << "Last name";
+    cout << left << setw(nameWidth) << setfill(separator) << "First name";
     cout << left << setw(numWidth) << setfill(separator) << "Year of birth";
     cout << left << setw(numWidth) << setfill(separator) << "Year of death";
     cout << endl;
@@ -416,10 +417,13 @@ void List::renderTable(){
 
            person pers = characters[i];
            cout << left << setw(5) << setfill(separator) << i+1;
-           cout << left << setw(nameWidth) << setfill(separator) << pers.getFirstName();
            cout << left << setw(nameWidth) << setfill(separator) << pers.getLastName();
+           cout << left << setw(nameWidth) << setfill(separator) << pers.getFirstName();
            cout << left << setw(numWidth) << setfill(separator) << pers.getBorn();
-           cout << left << setw(numWidth) << setfill(separator) << pers.getDied();
+           if(pers.getDied() != 0)
+               cout << left << setw(numWidth) << setfill(separator) << pers.getDied();
+           else
+               cout << left << setw(numWidth) << setfill(separator) << " - ";
            cout << endl;
       }
 
