@@ -1,0 +1,10 @@
+John Backus m 1924 2007
+George Boole m 1815 1864
+Jean Bartik f 1924 2011
+Edsger Dijkstra m 1930 2002
+Gottlob Frege m 1848 1925
+Margaret Hamilton f 1936 0
+Alan Turing m 1912 1954
+Grace Hopper f 1906 1992
+Ada Lovelace f 1815 1852
+Leslie Lamport m 1941 0
