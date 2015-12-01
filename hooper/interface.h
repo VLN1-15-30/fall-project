@@ -18,6 +18,7 @@ public:
     void add();
     void discover();
     void deleteCharacter();
+    void viewOptions();
 private:
     List ComputerScientists;
 
