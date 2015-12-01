@@ -110,6 +110,7 @@ void List::printTable(vector <person>& p) {
     const char separator    = ' ';
     const int nameWidth     = 15;
     const int numWidth      = 15;
+    const int genderWidth   = 10;
 
     for (unsigned int i = 0; i< p.size(); i++) {
 
@@ -118,6 +119,7 @@ void List::printTable(vector <person>& p) {
           cout << left << setw(5) << setfill(separator) << i+1;
           cout << left << setw(nameWidth) << setfill(separator) << pers.getLastName();
           cout << left << setw(nameWidth) << setfill(separator) << pers.getFirstName();
+          cout << left << setw(genderWidth) << setfill(separator) << pers.getSex();
           cout << left << setw(numWidth) << setfill(separator) << pers.getBorn();
           if(pers.getDied() != 0)
               cout << left << setw(numWidth) << setfill(separator) << pers.getDied();
@@ -366,10 +368,12 @@ void List:: tableBegin(){
     const char separator    = ' ';
     const int nameWidth     = 15;
     const int numWidth      = 15;
+    const int genderWidth   = 10;
 
     cout << left << setw(5) << setfill(separator) << "Nr.";
     cout << left << setw(nameWidth) << setfill(separator) << "Last name";
     cout << left << setw(nameWidth) << setfill(separator) << "First name";
+    cout << left << setw(genderWidth) << setfill(separator) << "Gender";
     cout << left << setw(numWidth) << setfill(separator) << "Year of birth";
     cout << left << setw(numWidth) << setfill(separator) << "Year of death";
     cout << endl;
@@ -377,6 +381,7 @@ void List:: tableBegin(){
     cout << left << setw(5) << setfill(separator) << "---";
     cout << left << setw(nameWidth) << setfill(separator) << "---------";
     cout << left << setw(nameWidth) << setfill(separator) << "---------";
+    cout << left << setw(genderWidth) << setfill(separator) << "-----";
     cout << left << setw(numWidth) << setfill(separator) << "-------------";
     cout << left << setw(numWidth) << setfill(separator) << "-------------";
     cout << endl;
