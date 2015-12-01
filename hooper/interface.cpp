@@ -44,10 +44,22 @@ void Interface::view(){
         case 'y':order();
         break;
         case 'N':
-        case 'n': ComputerScientists.showList();
+        case 'n': viewOptions();
         break;
     }
 }
+
+void Interface::viewOptions(){
+
+    cout << "Write 0 to view as list, 1 to view as Table" << endl;
+    int view;
+    cin >> view;
+    if(view == 0)
+        ComputerScientists.showList();
+    else if(view == 1)
+        ComputerScientists.renderTable();
+}
+
 void Interface::order(){
     int column;
     int order;
@@ -55,7 +67,16 @@ void Interface::order(){
     cin >> column;
     cout << "Write 0 for ascending order, 1 for descending order" << endl;
     cin >> order;
-    ComputerScientists.showOrderedList(column, order);
+
+    cout << "Write 0 to view as list, 1 to view as Table" << endl;
+    int view;
+    cin >> view;
+
+    if (view == 0)
+         ComputerScientists.showOrderedList(column, order);
+    else if (view  == 1)
+         ComputerScientists.showOrderedTable(column,order);
+
 }
 void Interface::find(){
     ComputerScientists.search();
@@ -65,7 +86,6 @@ void Interface::add(){
 }
 
 void Interface::discover(){
-
     ComputerScientists.disvoverAPioneer();
 }
 

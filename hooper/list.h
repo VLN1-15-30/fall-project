@@ -18,7 +18,7 @@ public:
     void writeToFile(vector <person>& p);
     void OverWriteToFile(vector <person>& p);
 
-    vector<person> const getChar() const {return charachters;}
+    vector<person> const getChar() const {return characters;}
 
     void addData ();
     void search();
@@ -26,6 +26,7 @@ public:
     void performSearchBasedOn(const char& selection);
     void showList() const;
     void showOrderedList(int column, int order);
+    void showOrderedTable (int column, int order);
     void orderbyNameA_Z(vector <person>& p);
     void orderbyNameZ_A(vector <person>& p);
     void orderbyBornASC(vector <person>& p);
@@ -33,18 +34,17 @@ public:
     void disvoverAPioneer();
     void removeCharacter();
     void removeCharacterWithIndex();
+    void renderTable();
+    void tableBegin();
 
     char ask_again();
     person returnPersonAtIndex(int index);
     friend ostream& operator<< (ostream& stream,const List& p);
 
 private:
-    vector<person> charachters;
+    vector<person> characters;
     vector<person> newEntries;
 
-    int numberOfEntries;
-    int addedEntries;
-    int totalEntries;
 };
 
 #endif // LIST

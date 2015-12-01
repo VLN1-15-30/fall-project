@@ -4,19 +4,14 @@
 #include <sstream>
 #include <ctime>
 #include <cstdlib>
+#include <iomanip>
 
 using namespace std;
-
-enum Types{
-    search_name,
-    search_born
-};
-
-Types searchType;
 
 List::List(){
 
 }
+
 
 void List:: initialize(string fileName ){
 
@@ -36,9 +31,6 @@ void List:: initialize(string fileName ){
         int died;
         while ( in_stream >> firstname >> lastname >> sex >> born >> died){
 
-           // cout << firstname<<" " << lastname << " "
-             //    << sex << " " << born<<" " << died <<" " << endl;
-
             person addPerson;
             addPerson.setFirstName(firstname);
             addPerson.setLastName(lastname);
@@ -46,8 +38,7 @@ void List:: initialize(string fileName ){
             addPerson.setBorn(born);
             addPerson.setDied(died);
 
-            charachters.push_back(addPerson);
-            numberOfEntries++;
+            characters.push_back(addPerson);
 
         }
     }
@@ -66,10 +57,9 @@ void List::addData(){
         person newPerson;
         newPerson.initialize();
 
-        charachters.push_back(newPerson);
+        characters.push_back(newPerson);
         newEntries.push_back(newPerson);
 
-        addedEntries++;
         answer = ask_again();
     }
 
@@ -78,7 +68,6 @@ void List::addData(){
 
 void List:: writeToFile(vector <person>& p){
 
-    totalEntries = addedEntries+ numberOfEntries;
 
     ofstream out_stream;
     out_stream.open("persons.txt", ios::app);
@@ -107,9 +96,15 @@ void List::printData(vector <person>& p){
 }
 
 void List::showList() const{
+
     cout <<"==== DATABASE ===="<<endl;
+
+    if(characters.size() == 0)
+        cout << "Nothing to show, start by adding a pioneer."<< endl;
+
     cout << *this;
 }
+
 
 void List::orderbyNameA_Z(vector <person>& p){
     sort(p.begin(), p.end(),EntityComp(NAME, 0));
@@ -145,7 +140,49 @@ void List::showOrderedList(int column, int order){
        }
    }
    cout <<"==== DATABASE ===="<<endl;
-   printData(p);
+   if(p.size() == 0)
+       cout << "Nothing to show, start by adding a pioneer."<< endl;
+
+      printData(p);
+}
+
+void List:: showOrderedTable(int column, int order){
+
+    vector<person> p = getChar();
+    if(column == NAME) {
+        if( order == 0) {
+            orderbyNameA_Z(p);
+        } else {
+            orderbyNameZ_A(p);
+        }
+    } else if (column == BORN) {
+        if( order == 0) {
+            orderbyBornASC(p);
+        } else {
+            orderbyBornDESC(p);
+        }
+    }
+
+    tableBegin();
+
+    const char separator    = ' ';
+    const int nameWidth     = 15;
+    const int numWidth      = 15;
+
+    for (unsigned int i = 0; i< p.size(); i++) {
+
+          person pers = p[i];
+          cout << left << setw(5) << setfill(separator) << i+1;
+          cout << left << setw(nameWidth) << setfill(separator) << pers.getFirstName();
+          cout << left << setw(nameWidth) << setfill(separator) << pers.getLastName();
+          cout << left << setw(numWidth) << setfill(separator) << pers.getBorn();
+          cout << left << setw(numWidth) << setfill(separator) << pers.getDied();
+          cout << endl;
+     }
+
+     cout << endl;
+
+
 }
 
 char List:: ask_again(){
@@ -194,8 +231,8 @@ void List:: performSearchBasedOn(const char& selection){
 
     vector <person> sResult;
 
-    for (unsigned int i = 0; i < charachters.size(); i++){
-        person comparePerson = charachters[i];
+    for (unsigned int i = 0; i < characters.size(); i++){
+        person comparePerson = characters[i];
         switch (selection) {
         case 'a':{
             if(comparePerson.getLastName().find(target)!=string::npos){
@@ -252,8 +289,8 @@ void List:: performSearchBasedOn(const char& selection){
 
 ostream& operator<< (ostream& stream,const List& p){
 
-   for (unsigned int i = 0; i< p.charachters.size(); i++) {
-       person pers = p.charachters[i];
+   for (unsigned int i = 0; i< p.characters.size(); i++) {
+       person pers = p.characters[i];
        stream << pers;
        cout << "-----------------" << endl;
    }
@@ -264,18 +301,21 @@ ostream& operator<< (ostream& stream,const List& p){
 void List:: disvoverAPioneer(){
 
     cout << "==== Discover ===="<<endl;
-    int sizeOfDatabase = charachters.size();
+    int sizeOfDatabase = characters.size();
     srand(time(0));
     int randomCharacter = (rand() % sizeOfDatabase);
 
     person randPers = returnPersonAtIndex(randomCharacter);
     cout << randPers<<endl;
 
+    renderTable();
+
+
 }
 
 person List:: returnPersonAtIndex(int index){
 
-    person p = charachters[index];
+    person p = characters[index];
     return p;
 }
 
@@ -286,20 +326,20 @@ void List:: removeCharacter(){
     string name;
     cin >> name;
 
-    for (unsigned int i = 0; i< charachters.size(); i++) {
-        person pers = charachters[i];
+    for (unsigned int i = 0; i< characters.size(); i++) {
+        person pers = characters[i];
         if (pers.getLastName() == name)
-            charachters.erase(charachters.begin()+i);
+            characters.erase(characters.begin()+i);
     }
 
-    OverWriteToFile(charachters);
+    OverWriteToFile(characters);
 
 
 }
 
 void List:: removeCharacterWithIndex(){
 
-    int max = charachters.size();
+    int max = characters.size();
 
     if(max > 0){
 
@@ -308,10 +348,10 @@ void List:: removeCharacterWithIndex(){
         cin >> removeIndex;
 
         if(removeIndex >= 0 && removeIndex < max){
-            charachters.erase(charachters.begin()+removeIndex);
+            characters.erase(characters.begin()+removeIndex);
         }
 
-        OverWriteToFile(charachters);
+        OverWriteToFile(characters);
     }
     else{
         cout << "Database is empty" << endl;
@@ -340,4 +380,48 @@ void List:: OverWriteToFile(vector <person>& p){
 
     out_stream.close( );
 
+}
+
+void List:: tableBegin(){
+
+    const char separator    = ' ';
+    const int nameWidth     = 15;
+    const int numWidth      = 15;
+
+    cout << left << setw(5) << setfill(separator) << "Nr.";
+    cout << left << setw(nameWidth) << setfill(separator) << "First name";
+    cout << left << setw(nameWidth) << setfill(separator) << "Last name";
+    cout << left << setw(numWidth) << setfill(separator) << "Year of birth";
+    cout << left << setw(numWidth) << setfill(separator) << "Year of death";
+    cout << endl;
+
+    cout << left << setw(5) << setfill(separator) << "---";
+    cout << left << setw(nameWidth) << setfill(separator) << "---------";
+    cout << left << setw(nameWidth) << setfill(separator) << "---------";
+    cout << left << setw(numWidth) << setfill(separator) << "-------------";
+    cout << left << setw(numWidth) << setfill(separator) << "-------------";
+    cout << endl;
+
+}
+
+void List::renderTable(){
+
+     tableBegin();
+
+     const char separator    = ' ';
+     const int nameWidth     = 15;
+     const int numWidth      = 15;
+
+     for (unsigned int i = 0; i< characters.size(); i++) {
+
+           person pers = characters[i];
+           cout << left << setw(5) << setfill(separator) << i+1;
+           cout << left << setw(nameWidth) << setfill(separator) << pers.getFirstName();
+           cout << left << setw(nameWidth) << setfill(separator) << pers.getLastName();
+           cout << left << setw(numWidth) << setfill(separator) << pers.getBorn();
+           cout << left << setw(numWidth) << setfill(separator) << pers.getDied();
+           cout << endl;
+      }
+
+      cout << endl;
 }
