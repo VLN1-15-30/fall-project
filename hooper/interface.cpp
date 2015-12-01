@@ -15,7 +15,9 @@ void Interface::actions(){
     cout << "Choose a number for your next action: \n"
             "Choose 1 to view the database. \n"
             "Choose 2 to search the database. \n"
-            "Choose 3 to add a pioneer to the database." << endl;
+            "Choose 3 to add a pioneer to the database. \n"
+            "Choose 4 to discover a random pioneer."<< endl;
+
     int action;
     cin >> action;
     switch(action){
@@ -25,6 +27,8 @@ void Interface::actions(){
         break;
         case 3: add();
         break;
+        case 4: discover();
+        break;
     }
 }
 void Interface::view(){
@@ -32,8 +36,10 @@ void Interface::view(){
     cout << "Do you wish to control the order of the data(y/n)? ";
     cin >> answer;
     switch(answer){
-        case 'y': order();
+        case 'Y':
+        case 'y':order();
         break;
+        case 'N':
         case 'n': ComputerScientists.showList();
         break;
     }
@@ -52,4 +58,9 @@ void Interface::find(){
 }
 void Interface::add(){
     ComputerScientists.addData();
+}
+
+void Interface::discover(){
+
+    ComputerScientists.disvoverAPioneer();
 }

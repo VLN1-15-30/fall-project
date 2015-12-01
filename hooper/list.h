@@ -27,7 +27,9 @@ public:
     void orderbyNameZ_A(vector <person>& p);
     void orderbyBornASC(vector <person>& p);
     void orderbyBornDESC(vector <person>& p);
+    void disvoverAPioneer();
     char ask_again();
+    person returnPersonAtIndex(int index);
     friend ostream& operator<< (ostream& stream,const List& p);
 
 private:

@@ -2,6 +2,9 @@
 #include "list.h"
 #include <algorithm>
 #include <sstream>
+#include <ctime>
+#include <cstdlib>
+
 using namespace std;
 
 enum Types{
@@ -56,7 +59,7 @@ void List:: initialize(string fileName ){
 void List::addData(){
 
     int answer = 'y';
-    cout << "===== ADD PERSONS =====" << endl;
+    cout << "===== ADD A PIONEER =====" << endl;
 
     while (answer == 'y'|| answer == 'Y') {
 
@@ -104,6 +107,7 @@ void List::printData(vector <person>& p){
 }
 
 void List::showList() const{
+    cout <<"==== DATABASE ===="<<endl;
     cout << *this;
 }
 
@@ -140,6 +144,7 @@ void List::showOrderedList(int column, int order){
            orderbyBornDESC(p);
        }
    }
+   cout <<"==== DATABASE ===="<<endl;
    printData(p);
 }
 
@@ -157,11 +162,11 @@ char List:: ask_again(){
 void List::search(){
 
     cout << endl;
-    cout <<"====Search===="<<endl;
+    cout <<"==== Search ===="<<endl;
     cout <<"a: Last Name "<<endl;
     cout << "b: Sex " << endl;
-    cout << "c: Year of birth: " << endl;
-    cout << "d: Year of death: " << endl;
+    cout << "c: Year of birth " << endl;
+    cout << "d: Year of death " << endl;
 
     cout << "Search by: ";
 
@@ -176,7 +181,7 @@ void List:: performSearchBasedOn(const char& selection){
     switch(selection){
         case 'a':cout << "Last name: ";
         break;
-        case 'b': cout << "Male/female: ";
+        case 'b': cout << "m/f: ";
         break;
         case 'c': cout << "Enter year: ";
         break;
@@ -256,3 +261,22 @@ ostream& operator<< (ostream& stream,const List& p){
    stream << endl;
    return stream;
 }
+
+void List:: disvoverAPioneer(){
+
+    cout << "==== Discover ===="<<endl;
+    int sizeOfDatabase = charachters.size();
+    srand(time(0));
+    int randomCharacter = (rand() % sizeOfDatabase);
+
+    person randPers = returnPersonAtIndex(randomCharacter);
+    cout << randPers<<endl;
+
+}
+
+person List:: returnPersonAtIndex(int index){
+
+    person p = charachters[index];
+    return p;
+}
+
