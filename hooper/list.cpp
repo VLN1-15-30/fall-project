@@ -88,81 +88,26 @@ void List:: writeToFile(vector <person>& p){
 
 }
 
-void List::printData(vector <person>& p){
+void List::printList(vector <person>& p){
 
+    cout <<"==== DATABASE ===="<<endl;
     for (unsigned int i = 0; i < p.size(); i++){
         cout << p.at(i) << endl;
     }
 }
 
-void List::showList() const{
+bool List::databaseEmpty() {
+
+    if(this->characters.size() == 0){
+        cout << "Database empty - start by adding a pioneer."<< endl;
+        return true;
+    }
+    return false;
+}
+
+void List::printTable(vector <person>& p) {
 
     cout <<"==== DATABASE ===="<<endl;
-
-    if(characters.size() == 0)
-        cout << "Nothing to show, start by adding a pioneer."<< endl;
-
-    cout << *this;
-}
-
-
-void List::orderbyNameA_Z(vector <person>& p){
-    sort(p.begin(), p.end(),EntityComp(NAME, 0));
-}
-
-void List::orderbyNameZ_A(vector <person>& p){
-    sort(p.begin(), p.end(),EntityComp(NAME, 1));
-}
-
-void List::orderbyBornASC(vector <person>& p){
-    //use stable to preserve order of equivalents
-    stable_sort(p.begin(), p.end(),EntityComp(BORN, 0));
-}
-
-void List::orderbyBornDESC(vector <person>& p){
-
-    stable_sort(p.begin(), p.end(),EntityComp(BORN, 1));
-}
-
-void List::showOrderedList(int column, int order){
-   vector<person> p = getChar();
-   if(column == NAME) {
-       if( order == 0) {
-           orderbyNameA_Z(p);
-       } else {
-           orderbyNameZ_A(p);
-       }
-   } else if (column == BORN) {
-       if( order == 0) {
-           orderbyBornASC(p);
-       } else {
-           orderbyBornDESC(p);
-       }
-   }
-   cout <<"==== DATABASE ===="<<endl;
-   if(p.size() == 0)
-       cout << "Nothing to show, start by adding a pioneer."<< endl;
-
-      printData(p);
-}
-
-void List:: showOrderedTable(int column, int order){
-
-    vector<person> p = getChar();
-    if(column == NAME) {
-        if( order == 0) {
-            orderbyNameA_Z(p);
-        } else {
-            orderbyNameZ_A(p);
-        }
-    } else if (column == BORN) {
-        if( order == 0) {
-            orderbyBornASC(p);
-        } else {
-            orderbyBornDESC(p);
-        }
-    }
-
     tableBegin();
 
     const char separator    = ' ';
@@ -185,8 +130,46 @@ void List:: showOrderedTable(int column, int order){
      }
 
      cout << endl;
+}
 
+void List::orderbyNameA_Z(vector <person>& p){
+    sort(p.begin(), p.end(),EntityComp(NAME, 0));
+}
 
+void List::orderbyNameZ_A(vector <person>& p){
+    sort(p.begin(), p.end(),EntityComp(NAME, 1));
+}
+
+void List::orderbyBornASC(vector <person>& p){
+    //use stable to preserve order of equivalents
+    stable_sort(p.begin(), p.end(),EntityComp(BORN, 0));
+}
+
+void List::orderbyBornDESC(vector <person>& p){
+
+    stable_sort(p.begin(), p.end(),EntityComp(BORN, 1));
+}
+
+void List::showOrdered(int column, int order, int format){
+   vector<person> p = getChar();
+   if(column == NAME) {
+       if( order == 0) {
+           orderbyNameA_Z(p);
+       } else {
+           orderbyNameZ_A(p);
+       }
+   } else if (column == BORN) {
+       if( order == 0) {
+           orderbyBornASC(p);
+       } else {
+           orderbyBornDESC(p);
+       }
+   }
+
+   if(format == 0)
+        printList(p);
+    else
+        printTable(p);
 }
 
 char List:: ask_again(){
@@ -197,8 +180,6 @@ char List:: ask_again(){
 
     return answer;
 }
-
-
 
 void List::search(){
 
@@ -280,7 +261,7 @@ void List:: performSearchBasedOn(const char& selection){
         cout << "Found the following results: "<< endl;
 
         orderbyNameA_Z(sResult);
-        printData(sResult);
+        printTable(sResult);
     }
 
     cout <<  "Search again ?(y/n): ";
@@ -302,7 +283,7 @@ ostream& operator<< (ostream& stream,const List& p){
    return stream;
 }
 
-void List:: disvoverAPioneer(){
+void List:: discoverAPioneer(){
 
     cout << "==== Discover ===="<<endl;
     int sizeOfDatabase = characters.size();
@@ -405,27 +386,3 @@ void List:: tableBegin(){
 
 }
 
-void List::renderTable(){
-
-     tableBegin();
-
-     const char separator    = ' ';
-     const int nameWidth     = 15;
-     const int numWidth      = 15;
-
-     for (unsigned int i = 0; i< characters.size(); i++) {
-
-           person pers = characters[i];
-           cout << left << setw(5) << setfill(separator) << i+1;
-           cout << left << setw(nameWidth) << setfill(separator) << pers.getLastName();
-           cout << left << setw(nameWidth) << setfill(separator) << pers.getFirstName();
-           cout << left << setw(numWidth) << setfill(separator) << pers.getBorn();
-           if(pers.getDied() != 0)
-               cout << left << setw(numWidth) << setfill(separator) << pers.getDied();
-           else
-               cout << left << setw(numWidth) << setfill(separator) << " - ";
-           cout << endl;
-      }
-
-      cout << endl;
-}

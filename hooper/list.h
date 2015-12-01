@@ -22,19 +22,18 @@ public:
 
     void addData ();
     void search();
-    void printData(vector <person>& p);
+    void printList(vector <person>& p);
     void performSearchBasedOn(const char& selection);
-    void showList() const;
-    void showOrderedList(int column, int order);
-    void showOrderedTable (int column, int order);
+    void printTable(vector <person>& p);
+    bool databaseEmpty();
+    void showOrdered(int column, int order, int format);
     void orderbyNameA_Z(vector <person>& p);
     void orderbyNameZ_A(vector <person>& p);
     void orderbyBornASC(vector <person>& p);
     void orderbyBornDESC(vector <person>& p);
-    void disvoverAPioneer();
+    void discoverAPioneer();
     void removeCharacter();
     void removeCharacterWithIndex();
-    void renderTable();
     void tableBegin();
 
     char ask_again();

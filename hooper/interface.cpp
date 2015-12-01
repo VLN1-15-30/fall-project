@@ -1,6 +1,7 @@
 #include <iostream>
 #include "interface.h"
 #include <algorithm>
+
 using namespace std;
 
 
@@ -36,6 +37,8 @@ void Interface::actions(){
     }
 }
 void Interface::view(){
+
+    if(ComputerScientists.databaseEmpty()) return;
     char answer;
     cout << "Do you wish to control the order of the data(y/n)? ";
     cin >> answer;
@@ -51,13 +54,15 @@ void Interface::view(){
 
 void Interface::viewOptions(){
 
+    vector<person> p = ComputerScientists.getChar();
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
     if(view == 0)
-        ComputerScientists.showList();
-    else if(view == 1)
-        ComputerScientists.renderTable();
+        ComputerScientists.printList(p);
+    else if(view == 1) {
+        ComputerScientists.printTable(p);
+     }
 }
 
 void Interface::order(){
@@ -72,13 +77,11 @@ void Interface::order(){
     int view;
     cin >> view;
 
-    if (view == 0)
-         ComputerScientists.showOrderedList(column, order);
-    else if (view  == 1)
-         ComputerScientists.showOrderedTable(column,order);
+    ComputerScientists.showOrdered(column, order, view);
 
 }
 void Interface::find(){
+    if(ComputerScientists.databaseEmpty()) return;
     ComputerScientists.search();
 }
 void Interface::add(){
@@ -86,11 +89,12 @@ void Interface::add(){
 }
 
 void Interface::discover(){
-    ComputerScientists.disvoverAPioneer();
+    if(ComputerScientists.databaseEmpty()) return;
+    ComputerScientists.discoverAPioneer();
 }
 
 void Interface::deleteCharacter(){
-
+    if(ComputerScientists.databaseEmpty()) return;
     cout << "==== REMOVE ===="<<endl;
     cout << "Write 0 to remove by index, 1 to remove by last name"<<endl;
     int type;
