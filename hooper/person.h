@@ -4,7 +4,9 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <columns.h>
+
+int const NAME = 0;
+int const BORN = 1;
 
 using namespace std;
 
@@ -40,6 +42,7 @@ private:
 
 };
 // sort person by certain column and order
+// based on tutorial http://www.walletfox.com/course/sortvectorofcustomobjects.php
 struct EntityComp{
     int column;
     int sort;

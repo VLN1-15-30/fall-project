@@ -68,7 +68,7 @@ void Interface::viewOptions(){
 void Interface::order(){
     int column;
     int order;
-    cout << "Write 0 to order by Name, 1 to order by Born" << endl;
+    cout << "Write 0 to order by last name, 1 to order by birth year" << endl;
     cin >> column;
     cout << "Write 0 for ascending order, 1 for descending order" << endl;
     cin >> order;
@@ -95,6 +95,8 @@ void Interface::discover(){
 
 void Interface::deleteCharacter(){
     if(ComputerScientists.databaseEmpty()) return;
+    vector<person> p = ComputerScientists.getChar();
+    ComputerScientists.printTable(p);
     cout << "==== REMOVE ===="<<endl;
     cout << "Write 0 to remove by index, 1 to remove by last name"<<endl;
     int type;

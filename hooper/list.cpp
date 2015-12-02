@@ -110,6 +110,7 @@ void List::printTable(vector <person>& p) {
     const char separator    = ' ';
     const int nameWidth     = 15;
     const int numWidth      = 15;
+    const int genderWidth   = 10;
 
     for (unsigned int i = 0; i< p.size(); i++) {
 
@@ -118,6 +119,7 @@ void List::printTable(vector <person>& p) {
           cout << left << setw(5) << setfill(separator) << i+1;
           cout << left << setw(nameWidth) << setfill(separator) << pers.getLastName();
           cout << left << setw(nameWidth) << setfill(separator) << pers.getFirstName();
+          cout << left << setw(genderWidth) << setfill(separator) << pers.getSex();
           cout << left << setw(numWidth) << setfill(separator) << pers.getBorn();
           if(pers.getDied() != 0)
               cout << left << setw(numWidth) << setfill(separator) << pers.getDied();
@@ -304,16 +306,21 @@ void List:: removeCharacter(){
     cout << "Type last name: ";
     string name;
     cin >> name;
+    bool searchsuccess = false;
 
     for (unsigned int i = 0; i< characters.size(); i++) {
         person pers = characters[i];
-        if (pers.getLastName() == name)
+        if (pers.getLastName() == name) {
+            searchsuccess = true;
             characters.erase(characters.begin()+i);
+            cout << "Successfully removed: " << name << endl;
+        }
     }
-
-    OverWriteToFile(characters);
-
-
+    if(searchsuccess) {
+        OverWriteToFile(characters);
+    } else {
+        cout << "No person found with that name" << endl;
+    }
 }
 
 void List:: removeCharacterWithIndex(){
@@ -322,12 +329,17 @@ void List:: removeCharacterWithIndex(){
 
     if(max > 0){
 
-        cout << "Type a number between 0 and " << max-1 << ": ";
+        cout << "Type a number between 1 and " << max << ": ";
         int removeIndex;
         cin >> removeIndex;
 
-        if(removeIndex >= 0 && removeIndex < max){
+        if(removeIndex >= 1 && removeIndex <= max){
+            removeIndex--;
+            string deletedPerson = characters.at(removeIndex).getLastName();
             characters.erase(characters.begin()+removeIndex);
+            cout << "Successfully removed: " << deletedPerson << endl;
+        } else {
+            cout << "No person found with that index" << endl;
         }
 
         OverWriteToFile(characters);
@@ -366,10 +378,12 @@ void List:: tableBegin(){
     const char separator    = ' ';
     const int nameWidth     = 15;
     const int numWidth      = 15;
+    const int genderWidth   = 10;
 
     cout << left << setw(5) << setfill(separator) << "Nr.";
     cout << left << setw(nameWidth) << setfill(separator) << "Last name";
     cout << left << setw(nameWidth) << setfill(separator) << "First name";
+    cout << left << setw(genderWidth) << setfill(separator) << "Gender";
     cout << left << setw(numWidth) << setfill(separator) << "Year of birth";
     cout << left << setw(numWidth) << setfill(separator) << "Year of death";
     cout << endl;
@@ -377,6 +391,7 @@ void List:: tableBegin(){
     cout << left << setw(5) << setfill(separator) << "---";
     cout << left << setw(nameWidth) << setfill(separator) << "---------";
     cout << left << setw(nameWidth) << setfill(separator) << "---------";
+    cout << left << setw(genderWidth) << setfill(separator) << "-----";
     cout << left << setw(numWidth) << setfill(separator) << "-------------";
     cout << left << setw(numWidth) << setfill(separator) << "-------------";
     cout << endl;
