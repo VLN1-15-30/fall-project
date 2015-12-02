@@ -306,16 +306,21 @@ void List:: removeCharacter(){
     cout << "Type last name: ";
     string name;
     cin >> name;
+    bool searchsuccess = false;
 
     for (unsigned int i = 0; i< characters.size(); i++) {
         person pers = characters[i];
-        if (pers.getLastName() == name)
+        if (pers.getLastName() == name) {
+            searchsuccess = true;
             characters.erase(characters.begin()+i);
+            cout << "Successfully removed: " << name << endl;
+        }
     }
-
-    OverWriteToFile(characters);
-
-
+    if(searchsuccess) {
+        OverWriteToFile(characters);
+    } else {
+        cout << "No person found with that name" << endl;
+    }
 }
 
 void List:: removeCharacterWithIndex(){
@@ -324,12 +329,17 @@ void List:: removeCharacterWithIndex(){
 
     if(max > 0){
 
-        cout << "Type a number between 0 and " << max-1 << ": ";
+        cout << "Type a number between 1 and " << max << ": ";
         int removeIndex;
         cin >> removeIndex;
 
-        if(removeIndex >= 0 && removeIndex < max){
+        if(removeIndex >= 1 && removeIndex <= max){
+            removeIndex--;
+            string deletedPerson = characters.at(removeIndex).getLastName();
             characters.erase(characters.begin()+removeIndex);
+            cout << "Successfully removed: " << deletedPerson << endl;
+        } else {
+            cout << "No person found with that index" << endl;
         }
 
         OverWriteToFile(characters);

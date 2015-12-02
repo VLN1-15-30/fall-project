@@ -42,6 +42,7 @@ private:
 
 };
 // sort person by certain column and order
+// based on tutorial http://www.walletfox.com/course/sortvectorofcustomobjects.php
 struct EntityComp{
     int column;
     int sort;
