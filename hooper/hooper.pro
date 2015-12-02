@@ -15,6 +15,5 @@ SOURCES += main.cpp \
 HEADERS += \
     person.h \
     list.h \
-    columns.h \
     interface.h
 

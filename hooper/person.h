@@ -4,7 +4,9 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <columns.h>
+
+int const NAME = 0;
+int const BORN = 1;
 
 using namespace std;
 
