@@ -117,7 +117,7 @@ bool List::databaseEmpty() {
 
     if(this->characters.size() == 0){
         cout << "Database empty - start by adding a pioneer."<< endl;
-        return true;
+        return false;
     }
     return false;
 }
@@ -219,14 +219,20 @@ void List::search(){
 
 void List:: performSearchBasedOn(const char& selection){
 
+    string searchby;
     switch(selection){
-        case 'a':cout << "Last name: ";
+        case 'a': cout << "Last name: ";
+                  searchby = "lastname";
         break;
         case 'b': cout << "m/f: ";
+                  searchby = "sex";
         break;
         case 'c': cout << "Enter year: ";
+                  searchby = "born";
+
         break;
         case 'd': cout << "Enter year: ";
+                  searchby = "died";
         break;
     }
 
@@ -235,42 +241,33 @@ void List:: performSearchBasedOn(const char& selection){
 
     vector <person> sResult;
 
-    for (unsigned int i = 0; i < characters.size(); i++){
-        person comparePerson = characters[i];
-        switch (selection) {
-        case 'a':{
-            if(comparePerson.getLastName().find(target)!=string::npos){
-                sResult.push_back(comparePerson);
-            }
-        }
-        break;
-        case 'b':{
-            if(comparePerson.getSex().find(target)!=string::npos){
-                sResult.push_back(comparePerson);
-            }
-        }
-        break;
-        case 'c':{
-             ostringstream ss;
-              ss << comparePerson.getBorn();
-            if(ss.str().find(target)!=string::npos){
-                sResult.push_back(comparePerson);
-            }
-        }
-        break;
-        case 'd':{
-            ostringstream ss;
-             ss << comparePerson.getDied();
-            if(ss.str().find(target)!=string::npos){
-                sResult.push_back(comparePerson);
-            }
-        }
-        break;
-        default:
-            break;
+    QString obj = target.c_str();
+    QString by = searchby.c_str();
+
+    QSqlQuery query(db);
+    QString s;
+    s = ("SELECT * FROM persons WHERE %1 LIKE '%%2%'");
+    query.exec(s.arg(by).arg(obj));
+    qDebug()<<query.executedQuery();
+
+        while (query.next()) {
+
+                string first = query.value(1).toString().toStdString();
+                string last = query.value(2).toString().toStdString();
+                string sex = query.value(3).toString().toStdString();
+                int born = query.value(4).toUInt();
+                int died = query.value(5).toUInt();
+
+                person searchedPerson;
+                searchedPerson.setFirstName(first);
+                searchedPerson.setLastName(last);
+                searchedPerson.setSex(sex);
+                searchedPerson.setBorn(born);
+                searchedPerson.setDied(died);
+                sResult.push_back(searchedPerson);
+
         }
 
-    }
 
     if(sResult.size() == 0){
         cout << "No match found for "<<target << endl;
