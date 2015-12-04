@@ -153,8 +153,19 @@ void Interface::add(){
             answer = ComputerScientists.ask_again();
         };
         break;
-        //case 2: add();
-        //break;
+        case 3: cout << "===== ADD A CONNECTION =====" << endl;
+        while(answer == 'y' || answer == 'Y'){
+
+            //CHECK IF ID'S exist
+            int pid, cid;
+            cout << "ID of person: ";
+            cin >> pid;
+            cout << "ID of cpu: ";
+            cin >> cid;
+
+            ComputerScientists.addConnection(pid, cid);
+            answer = ComputerScientists.ask_again();
+        };
     }
 
 

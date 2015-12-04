@@ -113,6 +113,35 @@ void List::addComp(computer c){
     }
 }
 
+void List::addConnection(int personID, int computerID){
+
+    QSqlQuery q;
+    QString query = "INSERT INTO PC VALUES(?, ?)";
+    if(q.prepare(query)) {
+        cout << "sucess" << endl;
+        q.addBindValue(personID);
+        q.addBindValue(computerID);
+        q.exec();
+    } else {
+        qDebug() << q.lastError() << endl;
+    }
+
+    QSqlQuery q1;
+    QString query1("SELECT P.lastname, C.name "
+                   "FROM PC I "
+                   "    INNER JOIN persons P ON P.id = I.pID "
+                   "    INNER JOIN computers C ON C.id = I.cID");
+    if(q1.prepare(query1)) {
+        q1.exec();
+        while(q1.next()){
+            string lastname = q1.value(0).toString().toStdString();
+            string computerName = q1.value(1).toString().toStdString();
+            cout << computerName << " was invented by " << lastname << endl;
+        }
+    }
+
+}
+
 void List:: writeToFile(vector <person>& p){
 
 
