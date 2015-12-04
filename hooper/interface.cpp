@@ -10,13 +10,13 @@ Interface::Interface(){
 }
 void Interface::welcomeMessage(){
     cout << "Welcome to the Hooper database!\n"
-            "The database contains information about pioneers in computer science." << endl;
+            "The database contains information about pioneers and computers in computer science." << endl;
 }
 void Interface::actions(){
     cout << "Choose a number for your next action: \n"
             "Choose 1 to view the database. \n"
             "Choose 2 to search the database. \n"
-            "Choose 3 to add a pioneer to the database. \n"
+            "Choose 3 to add to the database. \n"
             "Choose 4 to discover a random pioneer. \n"
             "Choose 5 to remove a pioneer from the database."<< endl;
 
@@ -87,37 +87,76 @@ void Interface::find(){
 void Interface::add(){
 
     int answer = 'y';
-    cout << "===== ADD A PIONEER =====" << endl;
-    while(answer == 'y' || answer == 'Y'){
+    int choice;
+    cout << "Choose 0 to add a pioneer.\n "
+            "Choose 1 to add a computer.\n "
+            "Choose 2 to add a connection.\n";
+    cin >> choice;
+    switch(choice){
+        case 0: cout << "===== ADD A PIONEER =====" << endl;
+        while(answer == 'y' || answer == 'Y'){
 
-        string firstname, lastname, sex;
-        int born, died;
+            string firstname, lastname, sex;
+            int born, died;
 
-        cout << "First name: ";
-        cin >> firstname;
-        cout << "Last name: ";
-        cin >> lastname;
-        cout << "Sex(m/f): ";
-        cin >> sex;
-       // sex = errorCheckSex(sex);
-        cout << "Born: ";
-        cin >>born;
-       // born = errorCheckNumber(born,0);
-        cout << "Died(0 if alive): ";
-        cin >> died;
-       // died = errorCheckNumber(died,1);
-        cout << endl;
+            cout << "First name: ";
+            cin >> firstname;
+            cout << "Last name: ";
+            cin >> lastname;
+            cout << "Sex(m/f): ";
+            cin >> sex;
+           // sex = errorCheckSex(sex);
+            cout << "Born: ";
+            cin >>born;
+           // born = errorCheckNumber(born,0);
+            cout << "Died(0 if alive): ";
+            cin >> died;
+           // died = errorCheckNumber(died,1);
+            cout << endl;
 
-        person pers;
-        pers.setFirstName(firstname);
-        pers.setLastName(lastname);
-        pers.setSex(sex);
-        pers.setBorn(born);
-        pers.setDied(died);
+            person pers;
+            pers.setFirstName(firstname);
+            pers.setLastName(lastname);
+            pers.setSex(sex);
+            pers.setBorn(born);
+            pers.setDied(died);
 
-        ComputerScientists.addData(pers);
-        answer = ComputerScientists.ask_again();
+            ComputerScientists.addData(pers);
+            answer = ComputerScientists.ask_again();
+        };
+        break;
+        case 1: cout << "===== ADD A COMPUTER =====" << endl;
+        while(answer == 'y' || answer == 'Y'){
+
+            string name, type;
+            int year;
+            bool made;
+
+            cout << "Computer name: ";
+            cin >> name;
+            cout << "Computer type: ";
+            cin >> type;
+            cout << "Year made(0 if not made): ";
+            cin >> year;
+            cout << "Was it made(0 if not made else 1): ";
+            cin >> made;
+           // died = errorCheckNumber(died,1);
+            cout << endl;
+
+            computer comp;
+            comp.setName(name);
+            comp.setType(type);
+            comp.setYearMade(year);
+            comp.setWasMade(made);
+
+            ComputerScientists.addComp(comp);
+            answer = ComputerScientists.ask_again();
+        };
+        break;
+        //case 2: add();
+        //break;
     }
+
 
 
 }
