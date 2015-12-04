@@ -50,7 +50,7 @@ void computer::initialize(){
     cin >> type;
     cout << "Year built: ";
     cin >> year;
-    cout << "Was the cumputer made: ";
+    cout << "Was the computer made: ";
     cin >> made;
 }
 

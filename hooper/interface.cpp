@@ -88,12 +88,12 @@ void Interface::add(){
 
     int answer = 'y';
     int choice;
-    cout << "Choose 0 to add a pioneer.\n "
-            "Choose 1 to add a computer.\n "
-            "Choose 2 to add a connection.\n";
+    cout << "Choose 1 to add a pioneer.\n"
+            "Choose 2 to add a computer.\n"
+            "Choose 3 to add a connection.\n";
     cin >> choice;
     switch(choice){
-        case 0: cout << "===== ADD A PIONEER =====" << endl;
+        case 1: cout << "===== ADD A PIONEER =====" << endl;
         while(answer == 'y' || answer == 'Y'){
 
             string firstname, lastname, sex;
@@ -125,7 +125,7 @@ void Interface::add(){
             answer = ComputerScientists.ask_again();
         };
         break;
-        case 1: cout << "===== ADD A COMPUTER =====" << endl;
+        case 2: cout << "===== ADD A COMPUTER =====" << endl;
         while(answer == 'y' || answer == 'Y'){
 
             string name, type;
