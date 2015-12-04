@@ -14,7 +14,7 @@ List::List(){
 
 void List:: initialize(){
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString database = "C:\\Users\\Emil Gunnar\\Desktop\\fall-project-master\\hopper.sqlite";
+    QString database = "C:\\hooper\\hooper.sqlite";
     db.setDatabaseName(database);
     bool db_ok = db.open();
     if(db_ok) {
