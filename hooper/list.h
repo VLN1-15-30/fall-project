@@ -24,6 +24,7 @@ public:
     void setData();
     void addData(person p);
     void addComp (computer c);
+    void addConnection(int personID, int computerID);
     void search();
     void printList(vector <person>& p);
     void performSearchBasedOn(const char& selection);
