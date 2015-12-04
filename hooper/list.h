@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <person.h>
+#include <computer.h>
 #include <fstream>
 #include <algorithm>
 #include <QtSql>
@@ -22,6 +23,7 @@ public:
     vector<person> const getChar() const {return characters;}
 
     void addData(person p);
+    void addComp (computer c);
     void search();
     void printList(vector <person>& p);
     void performSearchBasedOn(const char& selection);

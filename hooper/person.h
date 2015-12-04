@@ -3,7 +3,6 @@
 
 #include <string>
 #include <iostream>
-#include <vector>
 
 int const NAME = 0;
 int const BORN = 1;

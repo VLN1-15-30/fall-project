@@ -9,10 +9,12 @@ TEMPLATE = app
 SOURCES += main.cpp \
     person.cpp \
     list.cpp \
-    interface.cpp
+    interface.cpp \
+    computer.cpp
 
 HEADERS += \
     person.h \
     list.h \
-    interface.h
+    interface.h \
+    computer.h
 

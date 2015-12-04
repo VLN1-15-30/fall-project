@@ -63,6 +63,26 @@ void List::addData(person p){
 
 }
 
+void List::addComp(computer c){
+
+    QString qcname(c.getName().c_str());
+    QString qctype(c.getType().c_str());
+
+    QSqlQuery add;
+    QString query;
+
+    query = ("INSERT INTO computers VALUES(NULL, ?, ?, ?, ?)");
+    if(add.prepare(query)) {
+        cout << "success" << endl;
+        add.addBindValue(qcname);
+        add.addBindValue(qctype);
+        add.addBindValue(c.getYearMade());
+        add.addBindValue(c.getWasMade());
+        add.exec();
+
+    }
+}
+
 void List:: writeToFile(vector <person>& p){
 
 
@@ -338,7 +358,8 @@ void List:: removeCharacterWithIndex(){
             string deletedPerson = characters.at(removeIndex).getLastName();
             characters.erase(characters.begin()+removeIndex);
             cout << "Successfully removed: " << deletedPerson << endl;
-        } else {
+        }
+        else {
             cout << "No person found with that index" << endl;
         }
 
@@ -354,8 +375,7 @@ void List:: OverWriteToFile(vector <person>& p){
     ofstream out_stream;
     out_stream.open("persons.txt");
 
-    if (out_stream.fail( ))
-    {
+    if (out_stream.fail( )){
         cout << "Failed to write to database."<<endl;
         return;
     }
@@ -395,4 +415,5 @@ void List:: tableBegin(){
     cout << endl;
 
 }
+
 
