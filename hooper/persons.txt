@@ -8,3 +8,4 @@ Alan Turing m 1912 1954
 Grace Hopper f 1906 1992
 Ada Lovelace f 1815 1852
 Leslie Lamport m 1941 0
+Emil Gunnarsson m 1990 0

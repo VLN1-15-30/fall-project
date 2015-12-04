@@ -7,6 +7,7 @@
 #include <person.h>
 #include <fstream>
 #include <algorithm>
+#include <QtSql>
 
 using namespace std;
 
@@ -14,13 +15,13 @@ class List
 {
 public:
     List();
-    void initialize(string fileName );
+    void initialize();
     void writeToFile(vector <person>& p);
     void OverWriteToFile(vector <person>& p);
 
     vector<person> const getChar() const {return characters;}
 
-    void addData ();
+    void addData(person p);
     void search();
     void printList(vector <person>& p);
     void performSearchBasedOn(const char& selection);
@@ -43,6 +44,7 @@ public:
 private:
     vector<person> characters;
     vector<person> newEntries;
+    QSqlDatabase db;
 
 };
 

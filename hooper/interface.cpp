@@ -6,7 +6,7 @@ using namespace std;
 
 
 Interface::Interface(){
-    ComputerScientists.initialize("persons.txt");
+    ComputerScientists.initialize();
 }
 void Interface::welcomeMessage(){
     cout << "Welcome to the Hooper database!\n"
@@ -85,7 +85,41 @@ void Interface::find(){
     ComputerScientists.search();
 }
 void Interface::add(){
-    ComputerScientists.addData();
+
+    int answer = 'y';
+    cout << "===== ADD A PIONEER =====" << endl;
+    while(answer == 'y' || answer == 'Y'){
+
+        string firstname, lastname, sex;
+        int born, died;
+
+        cout << "First name: ";
+        cin >> firstname;
+        cout << "Last name: ";
+        cin >> lastname;
+        cout << "Sex(m/f): ";
+        cin >> sex;
+       // sex = errorCheckSex(sex);
+        cout << "Born: ";
+        cin >>born;
+       // born = errorCheckNumber(born,0);
+        cout << "Died(0 if alive): ";
+        cin >> died;
+       // died = errorCheckNumber(died,1);
+        cout << endl;
+
+        person pers;
+        pers.setFirstName(firstname);
+        pers.setLastName(lastname);
+        pers.setSex(sex);
+        pers.setBorn(born);
+        pers.setDied(died);
+
+        ComputerScientists.addData(pers);
+        answer = ComputerScientists.ask_again();
+    }
+
+
 }
 
 void Interface::discover(){

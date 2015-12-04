@@ -6,61 +6,61 @@
 #include <cstdlib>
 #include <iomanip>
 
+
 using namespace std;
 
 List::List(){
 }
 
-void List:: initialize(string fileName ){
-
-    ifstream in_stream;
-
-    in_stream.open(fileName.c_str());
-
-    if (in_stream.fail( ))
-    {
-        cout << "Failed to open database."<<endl;
+void List:: initialize(){
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    QString database = "C:\\Users\\Emil Gunnar\\Desktop\\fall-project-master\\hopper.sqlite";
+    db.setDatabaseName(database);
+    bool db_ok = db.open();
+    if(db_ok) {
+        cout << "Connection established" << endl;
+    } else {
+        cout << "Connection failed" << endl;
     }
-    else{
-        string firstname;
-        string lastname;
-        string sex;
-        int born;
-        int died;
-        while ( in_stream >> firstname >> lastname >> sex >> born >> died){
+}
 
-            person addPerson;
-            addPerson.setFirstName(firstname);
-            addPerson.setLastName(lastname);
-            addPerson.setSex(sex);
-            addPerson.setBorn(born);
-            addPerson.setDied(died);
+void List::addData(person p){
 
-            characters.push_back(addPerson);
+    QString qfirstname(p.getFirstName().c_str());
+    QString qlastname(p.getLastName().c_str());
+    QString qsex(p.getSex().c_str());
+
+    QSqlQuery add;
+    QString query;
+
+    //Death year becomes NULL if person still alive
+    if(p.getDied() != 0) {
+        query = ("INSERT INTO persons VALUES(NULL, ?, ?, ?, ?, ?)");
+        if(add.prepare(query)) {
+            cout << "success" << endl;
+            add.addBindValue(qfirstname);
+            add.addBindValue(qlastname);
+            add.addBindValue(qsex);
+            add.addBindValue(p.getBorn());
+            add.addBindValue(p.getDied());
+            add.exec();
+        }
+    } else {
+        query = "INSERT INTO persons(ID, firstname, lastname, sex, born)" "VALUES(NULL, ?, ?, ?, ?)";
+        if(add.prepare(query)) {
+            add.addBindValue(qfirstname);
+            add.addBindValue(qlastname);
+            add.addBindValue(qsex);
+            add.addBindValue(p.getBorn());
+            add.exec();
+            cout << "Succss 0" << endl;
+        } else {
+            qDebug() << add.lastError() << endl;
 
         }
     }
 
-     in_stream.close();
-}
 
-void List::addData(){
-
-    int answer = 'y';
-    cout << "===== ADD A PIONEER =====" << endl;
-
-    while (answer == 'y'|| answer == 'Y') {
-
-        person newPerson;
-        newPerson.initialize();
-
-        characters.push_back(newPerson);
-        newEntries.push_back(newPerson);
-
-        answer = ask_again();
-    }
-
-    writeToFile(newEntries);
 }
 
 void List:: writeToFile(vector <person>& p){
@@ -344,11 +344,9 @@ void List:: removeCharacterWithIndex(){
 
         OverWriteToFile(characters);
     }
-    else{
+    else {
         cout << "Database is empty" << endl;
     }
-
-
 }
 
 void List:: OverWriteToFile(vector <person>& p){

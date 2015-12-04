@@ -1,5 +1,6 @@
 #include <iostream>
 #include "interface.h"
+#include <QtSql>
 
 using namespace std;
 
@@ -18,3 +19,4 @@ int main()
     return 0;
 }
 
+#
