@@ -20,8 +20,8 @@ public:
     void writeToFile(vector <person>& p);
     void OverWriteToFile(vector <person>& p);
 
-    vector<person> const getChar() const {return characters;}
-
+    vector<person> const getChar();
+    void setData();
     void addData(person p);
     void addComp (computer c);
     void search();

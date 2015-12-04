@@ -14,7 +14,7 @@ List::List(){
 
 void List:: initialize(){
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString database = "C:\\hooper\\hooper.sqlite";
+    QString database = "hooper.sqlite";
     db.setDatabaseName(database);
     bool db_ok = db.open();
     if(db_ok) {
@@ -22,6 +22,36 @@ void List:: initialize(){
     } else {
         cout << "Connection failed" << endl;
     }
+}
+
+vector<person> const List:: getChar(){
+
+    characters.erase(characters.begin(),characters.end());
+
+    QSqlQuery dataQuery(QString("SELECT * FROM persons"));
+    dataQuery.exec();
+    qDebug()<<dataQuery.executedQuery();
+
+        while (dataQuery.next()) {
+
+                string first = dataQuery.value(1).toString().toStdString();
+                string last = dataQuery.value(2).toString().toStdString();
+                string sex = dataQuery.value(3).toString().toStdString();
+                int born = dataQuery.value(4).toUInt();
+                int died = dataQuery.value(5).toUInt();
+
+                person searchedPerson;
+                searchedPerson.setFirstName(first);
+                searchedPerson.setLastName(last);
+                searchedPerson.setSex(sex);
+                searchedPerson.setBorn(born);
+                searchedPerson.setDied(died);
+                characters.push_back(searchedPerson);
+
+        }
+
+        return characters;
+
 }
 
 void List::addData(person p){
