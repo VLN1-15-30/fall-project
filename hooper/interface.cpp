@@ -38,7 +38,7 @@ void Interface::actions(){
 }
 void Interface::view(){
 
-    if(ComputerScientists.databaseEmpty()) return;
+    //if(ComputerScientists.databaseEmpty()) return;
     char answer;
     cout << "Do you wish to control the order of the data(y/n)? ";
     cin >> answer;
@@ -98,16 +98,16 @@ void Interface::add(){
 
             string firstname, lastname, sex;
             int born, died;
-
+            cin.ignore(1);
             cout << "First name: ";
-            cin >> firstname;
+            getline(cin,firstname);
             cout << "Last name: ";
-            cin >> lastname;
+            getline(cin,lastname);
             cout << "Sex(m/f): ";
-            cin >> sex;
+            getline(cin,sex);
            // sex = errorCheckSex(sex);
             cout << "Born: ";
-            cin >>born;
+            cin >> born;
            // born = errorCheckNumber(born,0);
             cout << "Died(0 if alive): ";
             cin >> died;
@@ -131,11 +131,11 @@ void Interface::add(){
             string name, type;
             int year;
             bool made;
-
+            cin.ignore(1);
             cout << "Computer name: ";
-            cin >> name;
+            getline(cin, name);
             cout << "Computer type: ";
-            cin >> type;
+            getline(cin, type);
             cout << "Year made(0 if not made): ";
             cin >> year;
             cout << "Was it made(0 if not made else 1): ";
