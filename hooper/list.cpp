@@ -1,7 +1,6 @@
 #include <iostream>
 #include "list.h"
 #include <algorithm>
-#include <sstream>
 #include <ctime>
 #include <cstdlib>
 #include <iomanip>
@@ -453,26 +452,15 @@ void List:: removeCharacter(){
     cout << "Type last name: ";
     string name;
     cin >> name;
-    bool searchsuccess = false;
 
-    for (unsigned int i = 0; i< characters.size(); i++) {
-        person pers = characters[i];
-        if (pers.getLastName() == name) {
-            searchsuccess = true;
-            characters.erase(characters.begin()+i);
-            cout << "Successfully removed: " << name << endl;
-        }
-    }
-    if(searchsuccess) {
-        OverWriteToFile(characters);
-    } else {
-        cout << "No person found with that name" << endl;
-    }
+    deleteCharacterWithName(name);
+
+
 }
 
 void List:: removeCharacterWithIndex(){
 
-    int max = characters.size();
+    int max = countDatabase();
 
     if(max > 0){
 
@@ -481,21 +469,46 @@ void List:: removeCharacterWithIndex(){
         cin >> removeIndex;
 
         if(removeIndex >= 1 && removeIndex <= max){
+            /*
             removeIndex--;
             string deletedPerson = characters.at(removeIndex).getLastName();
             characters.erase(characters.begin()+removeIndex);
             cout << "Successfully removed: " << deletedPerson << endl;
+            */
+            deleteRowAtIndex(removeIndex);
+            cout << "Successfully removed:" << endl;
+
+
         }
         else {
             cout << "No person found with that index" << endl;
         }
 
-        OverWriteToFile(characters);
     }
     else {
         cout << "Database is empty" << endl;
     }
 }
+
+void List:: deleteRowAtIndex(int rowNumber){
+
+    QSqlQuery query(db);
+    QString s;
+    s = ("DELETE FROM persons WHERE id = %1");
+    query.exec(s.arg(rowNumber));
+    qDebug()<< query.executedQuery();
+}
+
+void List:: deleteCharacterWithName(string lastname){
+
+    QSqlQuery query(db);
+    QString s;
+    s = ("DELETE FROM persons WHERE lastname = '%1'");
+    query.exec(s.arg(QString(lastname.c_str())));
+    qDebug()<< query.executedQuery();
+
+}
+
 
 void List:: OverWriteToFile(vector <person>& p){
 
