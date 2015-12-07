@@ -440,12 +440,7 @@ void List:: performSearchBasedOn(const char& selection){
                 int born = query.value(4).toUInt();
                 int died = query.value(5).toUInt();
 
-                person searchedPerson;
-                searchedPerson.setFirstName(first);
-                searchedPerson.setLastName(last);
-                searchedPerson.setSex(sex);
-                searchedPerson.setBorn(born);
-                searchedPerson.setDied(died);
+                person searchedPerson = returnNewPersonWith(first,last,sex,born,died);
                 sResult.push_back(searchedPerson);
 
         }
