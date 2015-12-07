@@ -14,7 +14,9 @@ List::List(){
 
 void List:: initialize(){
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString database = "C:\\hooper\\hooper.sqlite";
+   // QString database = "C:\\hooper\\hooper.sqlite";
+    QString database = "hooper.sqlite";
+
     db.setDatabaseName(database);
     bool db_ok = db.open();
     if(db_ok) {
@@ -361,12 +363,36 @@ ostream& operator<< (ostream& stream,const List& p){
 void List:: discoverAPioneer(){
 
     cout << "==== Discover ===="<<endl;
-    int sizeOfDatabase = characters.size();
-    srand(time(0));
-    int randomCharacter = (rand() % sizeOfDatabase);
 
-    person randPers = returnPersonAtIndex(randomCharacter);
-    cout << randPers<<endl;
+    QSqlQuery query(db);
+    QString s;
+    s = ("SELECT * FROM persons ORDER BY RANDOM() LIMIT 1");
+    query.exec(s);
+    query.first();
+
+    string first = query.value(1).toString().toStdString();
+    string last = query.value(2).toString().toStdString();
+    string sex = query.value(3).toString().toStdString();
+    int born = query.value(4).toUInt();
+    int died = query.value(5).toUInt();
+
+
+    person p = returnNewPersonWith(first,last,sex,born,died);
+    cout << p;
+
+
+}
+
+person List::returnNewPersonWith(string firstname,string lastname, string sex, int born, int died){
+
+    person p;
+    p.setFirstName(firstname);
+    p.setLastName(lastname);
+    p.setSex(sex);
+    p.setBorn(born);
+    p.setDied(died);
+
+    return p;
 
 }
 

@@ -42,6 +42,8 @@ public:
 
     char ask_again();
     person returnPersonAtIndex(int index);
+    person returnNewPersonWith(string firstname,string lastname, string sex, int born, int died);
+
     friend ostream& operator<< (ostream& stream,const List& p);
 
 private:
