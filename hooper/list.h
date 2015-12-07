@@ -39,6 +39,9 @@ public:
     void removeCharacter();
     void removeCharacterWithIndex();
     void tableBegin();
+    void deleteRowAtIndex(int rowNumber);
+    void deleteCharacterWithName(string lastname);
+
 
     int countDatabase();
     char ask_again();
