@@ -13,8 +13,8 @@ List::List(){
 
 void List:: initialize(){
     db = QSqlDatabase::addDatabase("QSQLITE");
-   // QString database = "C:\\hooper\\hooper.sqlite";
-    QString database = "hooper.sqlite";
+    QString database = "C:\\hooper\\hooper.sqlite";
+    //QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();
@@ -293,13 +293,8 @@ void List::orderbyNameA_Z(int format){
             int born = query.value(4).toUInt();
             int died = query.value(5).toUInt();
 
-            person orderedAZPerson;
-            orderedAZPerson.setFirstName(first);
-            orderedAZPerson.setLastName(last);
-            orderedAZPerson.setSex(sex);
-            orderedAZPerson.setBorn(born);
-            orderedAZPerson.setDied(died);
-            sResult.push_back(orderedAZPerson);
+            person orderedPerson = returnNewPersonWith(first,last,sex,born,died);
+            sResult.push_back(orderedPerson);
 
          }
          if(format == 0)
@@ -325,13 +320,8 @@ void List::orderbyNameZ_A(int format){
        int died = query.value(5).toUInt();
 
 
-       person orderedZAPerson;
-       orderedZAPerson.setFirstName(first);
-       orderedZAPerson.setLastName(last);
-       orderedZAPerson.setSex(sex);
-       orderedZAPerson.setBorn(born);
-       orderedZAPerson.setDied(died);
-       sResult.push_back(orderedZAPerson);
+       person orderedPerson = returnNewPersonWith(first,last,sex,born,died);
+       sResult.push_back(orderedPerson);
 
        }
     if(format == 0)
@@ -358,13 +348,8 @@ void List::orderbyBornASC(int format){
        int died = query.value(5).toUInt();
 
 
-       person orderedZAPerson;
-       orderedZAPerson.setFirstName(first);
-       orderedZAPerson.setLastName(last);
-       orderedZAPerson.setSex(sex);
-       orderedZAPerson.setBorn(born);
-       orderedZAPerson.setDied(died);
-       sResult.push_back(orderedZAPerson);
+       person orderedPerson = returnNewPersonWith(first,last,sex,born,died);
+       sResult.push_back(orderedPerson);
 
        }
     if(format == 0)
@@ -372,11 +357,6 @@ void List::orderbyBornASC(int format){
         else
             printTable(sResult);
 }
-
-/*void List::orderbyBornASC(vector <person>& p){
-    //use stable to preserve order of equivalents
-    stable_sort(p.begin(), p.end(),EntityComp(BORN, 0));
-}*/
 
 void List::orderbyBornDESC(int format){
 
@@ -396,12 +376,7 @@ void List::orderbyBornDESC(int format){
        int died = query.value(5).toUInt();
 
 
-       person orderedZAPerson;
-       orderedZAPerson.setFirstName(first);
-       orderedZAPerson.setLastName(last);
-       orderedZAPerson.setSex(sex);
-       orderedZAPerson.setBorn(born);
-       orderedZAPerson.setDied(died);
+       person orderedZAPerson = returnNewPersonWith(first,last,sex,born,died);
        sResult.push_back(orderedZAPerson);
 
        }
@@ -410,11 +385,6 @@ void List::orderbyBornDESC(int format){
         else
             printTable(sResult);
 }
-
-/*void List::orderbyBornDESC(vector <person>& p){
-
-    stable_sort(p.begin(), p.end(),EntityComp(BORN, 1));
-}*/
 
 void List::showOrdered(int column, int order, int format){
    vector<person> p = getChar();
