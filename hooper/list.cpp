@@ -27,12 +27,12 @@ void List:: initialize(){
 }
 
 vector<person> const List:: getChar(){
-
+    //delete our vector objects and refresh data
     characters.erase(characters.begin(),characters.end());
 
     QSqlQuery dataQuery(QString("SELECT * FROM persons"));
     dataQuery.exec();
-    qDebug()<<dataQuery.executedQuery();
+    //qDebug()<<dataQuery.executedQuery();
 
         while (dataQuery.next()) {
 
@@ -176,10 +176,14 @@ void List::printList(vector <person>& p){
 
 bool List::databaseEmpty() {
 
-    if(this->characters.size() == 0){
+
+   int count = countDatabase();
+
+    if(count == 0){
         cout << "Database empty - start by adding a pioneer."<< endl;
-        return false;
+        return true;
     }
+
     return false;
 }
 
@@ -360,6 +364,19 @@ ostream& operator<< (ostream& stream,const List& p){
    return stream;
 }
 
+int List:: countDatabase(){
+
+    QSqlQuery query(db);
+    QString s;
+    s = ("SELECT Count(*) FROM persons");
+    query.exec(s);
+    query.first();
+
+    return query.value(0).toInt();
+
+
+}
+
 void List:: discoverAPioneer(){
 
     cout << "==== Discover ===="<<endl;
@@ -376,10 +393,8 @@ void List:: discoverAPioneer(){
     int born = query.value(4).toUInt();
     int died = query.value(5).toUInt();
 
-
     person p = returnNewPersonWith(first,last,sex,born,died);
     cout << p;
-
 
 }
 
@@ -393,7 +408,6 @@ person List::returnNewPersonWith(string firstname,string lastname, string sex, i
     p.setDied(died);
 
     return p;
-
 }
 
 person List:: returnPersonAtIndex(int index){

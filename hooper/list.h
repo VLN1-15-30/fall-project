@@ -40,6 +40,7 @@ public:
     void removeCharacterWithIndex();
     void tableBegin();
 
+    int countDatabase();
     char ask_again();
     person returnPersonAtIndex(int index);
     person returnNewPersonWith(string firstname,string lastname, string sex, int born, int died);
