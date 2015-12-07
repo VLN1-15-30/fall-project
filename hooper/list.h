@@ -35,7 +35,7 @@ public:
     void printComputerTable(vector <computer>& c);
     bool databaseEmpty();
     bool computersDatabaseEmpty();
-    void showOrdered(int answer, int column, int order, int format);
+    void showOrdered(int choice, int column, int order, int format);
     void orderbyNameA_Z(int format);
     void orderbyNameZ_A(int format);
     void orderbyBornASC(int format);

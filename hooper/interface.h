@@ -13,14 +13,14 @@ public:
     void welcomeMessage();
     void actions();
     void view();
-    void order();
+    void order(int choice);
     void find();
     void add();
     void discover();
     void discoverComputer();
     void deleteComputer();
     void deleteCharacter();
-    void viewOptions();
+    void viewOptions(int choice);
 private:
     List ComputerScientists;
 

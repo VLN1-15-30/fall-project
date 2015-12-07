@@ -45,37 +45,56 @@ void Interface::actions(){
 void Interface::view(){
 
     //if(ComputerScientists.databaseEmpty()) return;
+    int choice;
+    cout << "Choose 1 to view pioneers \n"
+            "Choose 2 to view computers \n"
+            "Choose 3 to view connections between pioneers and computers" << endl;
+    cin >> choice;
     char answer;
     cout << "Do you wish to control the order of the data(y/n)? ";
     cin >> answer;
     switch(answer){
         case 'Y':
-        case 'y':order();
+        case 'y':order(choice);
         break;
         case 'N':
-        case 'n': viewOptions();
+        case 'n': viewOptions(choice);
         break;
     }
 }
 
-void Interface::viewOptions(){
+void Interface::viewOptions(int choice){
 
     vector<person> p = ComputerScientists.getChar();
+    vector<computer>c = ComputerScientists.getComputers();
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
-    if(view == 0)
-        ComputerScientists.printList(p);
-    else if(view == 1) {
-        ComputerScientists.printTable(p);
-     }
+    if(choice == 1){
+        if(view == 0){
+            ComputerScientists.printList(p);
+        }
+
+        else if(view == 1){
+            ComputerScientists.printTable(p);
+        }
+    }
+    else if(choice == 1){
+
+        if(view == 0){
+            ComputerScientists.printComputerList(c);
+        }
+
+        else if(view == 1){
+            ComputerScientists.printComputerTable(c);
+        }
+    }
+
 }
 
-void Interface::order(){
-    int column, order, answer;
-    cout << "Choose 1 to view pioneers, 2 to view computers and 3 to view connections between pioneers and computers" << endl;
-    cin >> answer;
-    switch(answer){
+void Interface::order(int choice){
+    int column, order;
+    switch(choice){
     case 1: cout << "Write 0 to order by last name, 1 to order by birth year" << endl;
             cin >> column;
     break;
@@ -88,7 +107,7 @@ void Interface::order(){
     int view;
     cin >> view;
 
-    ComputerScientists.showOrdered(answer, column, order, view);
+    ComputerScientists.showOrdered(choice, column, order, view);
 
 }
 void Interface::find(){

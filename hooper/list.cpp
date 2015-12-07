@@ -499,8 +499,8 @@ void List::orderbyComputerTypeZ_A(int format){
                  printComputerTable(sResult);
 }
 
-void List::showOrdered(int answer, int column, int order, int format){
-   if (answer == 1){
+void List::showOrdered(int choice, int column, int order, int format){
+   if (choice == 1){
         if(column == NAME) {
             if( order == 0) {
                 orderbyNameA_Z(format);
@@ -518,7 +518,7 @@ void List::showOrdered(int answer, int column, int order, int format){
             }
         }
    }
-   if(answer == 2){
+   if(choice == 2){
        if(column == 0){
            if( order == 0){
                orderbyComputerNameA_Z(format);
