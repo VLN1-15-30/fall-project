@@ -13,8 +13,8 @@ List::List(){
 
 void List:: initialize(){
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString database = "C:\\hooper\\hooper.sqlite";
-    //QString database = "hooper.sqlite";
+   // QString database = "C:\\hooper\\hooper.sqlite";
+    QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();
@@ -579,7 +579,8 @@ void List:: deleteRowAtIndex(int rowNumber){
 
     QSqlQuery query(db);
     QString s;
-    s = ("DELETE FROM persons WHERE id = %1");
+    s = ( "UPDATE persons SET deleted = 'YES' WHERE id = '%1'" );
+
     query.exec(s.arg(rowNumber));
     qDebug()<< query.executedQuery();
 }
@@ -588,12 +589,11 @@ void List:: deleteCharacterWithName(string lastname){
 
     QSqlQuery query(db);
     QString s;
-    s = ("DELETE FROM persons WHERE lastname = '%1'");
+    s = ( "UPDATE persons SET deleted = 'YES' WHERE lastname = '%1'" );
     query.exec(s.arg(QString(lastname.c_str())));
     qDebug()<< query.executedQuery();
 
 }
-
 
 void List:: OverWriteToFile(vector <person>& p){
 
