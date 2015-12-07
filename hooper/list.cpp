@@ -14,8 +14,8 @@ List::List(){
 
 void List:: initialize(){
     db = QSqlDatabase::addDatabase("QSQLITE");
-   // QString database = "C:\\hooper\\hooper.sqlite";
-    QString database = "hooper.sqlite";
+    QString database = "C:\\hooper\\hooper.sqlite";
+    //QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();
@@ -216,9 +216,40 @@ void List::printTable(vector <person>& p) {
      cout << endl;
 }
 
-void List::orderbyNameA_Z(vector <person>& p){
-    sort(p.begin(), p.end(),EntityComp(NAME, 0));
+void List::orderbyNameA_Z(){
+
+         vector <person> sResult;
+
+         QSqlQuery query(db);
+         QString s;
+         query.prepare("SELECT * FROM persons ORDER BY lastname ASC");
+         query.exec();
+         qDebug()<<query.executedQuery();
+         while (query.next()) {
+
+            string first = query.value(1).toString().toStdString();
+            string last = query.value(2).toString().toStdString();
+            string sex = query.value(3).toString().toStdString();
+            int born = query.value(4).toUInt();
+            int died = query.value(5).toUInt();
+
+            cout << last << endl;
+
+            person orderedAZPerson;
+            orderedAZPerson.setFirstName(first);
+            orderedAZPerson.setLastName(last);
+            orderedAZPerson.setSex(sex);
+            orderedAZPerson.setBorn(born);
+            orderedAZPerson.setDied(died);
+            sResult.push_back(orderedAZPerson);
+
+            }
+            printTable(sResult);
 }
+
+/*void List::orderbyNameA_Z(vector <person>& p){
+    sort(p.begin(), p.end(),EntityComp(NAME, 0));
+}*/
 
 void List::orderbyNameZ_A(vector <person>& p){
     sort(p.begin(), p.end(),EntityComp(NAME, 1));
@@ -238,7 +269,7 @@ void List::showOrdered(int column, int order, int format){
    vector<person> p = getChar();
    if(column == NAME) {
        if( order == 0) {
-           orderbyNameA_Z(p);
+           orderbyNameA_Z();
        } else {
            orderbyNameZ_A(p);
        }
@@ -341,7 +372,7 @@ void List:: performSearchBasedOn(const char& selection){
         cout <<endl;
         cout << "Found the following results: "<< endl;
 
-        orderbyNameA_Z(sResult);
+        orderbyNameA_Z();
         printTable(sResult);
     }
 
