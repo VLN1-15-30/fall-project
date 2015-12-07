@@ -279,20 +279,81 @@ void List::orderbyNameZ_A(int format){
             printTable(sResult);
 }
 
+void List::orderbyBornASC(int format){
 
-/*void List::orderbyNameZ_A(vector <person>& p){
-    sort(p.begin(), p.end(),EntityComp(NAME, 1));
-}*/
+    vector <person> sResult;
 
-void List::orderbyBornASC(vector <person>& p){
+    QSqlQuery query(db);
+    QString s;
+    query.prepare("SELECT * FROM persons ORDER BY born ASC");
+    query.exec();
+    qDebug()<<query.executedQuery();
+    while (query.next()) {
+
+       string first = query.value(1).toString().toStdString();
+       string last = query.value(2).toString().toStdString();
+       string sex = query.value(3).toString().toStdString();
+       int born = query.value(4).toUInt();
+       int died = query.value(5).toUInt();
+
+
+       person orderedZAPerson;
+       orderedZAPerson.setFirstName(first);
+       orderedZAPerson.setLastName(last);
+       orderedZAPerson.setSex(sex);
+       orderedZAPerson.setBorn(born);
+       orderedZAPerson.setDied(died);
+       sResult.push_back(orderedZAPerson);
+
+       }
+    if(format == 0)
+            printList(sResult);
+        else
+            printTable(sResult);
+}
+
+/*void List::orderbyBornASC(vector <person>& p){
     //use stable to preserve order of equivalents
     stable_sort(p.begin(), p.end(),EntityComp(BORN, 0));
+}*/
+
+void List::orderbyBornDESC(int format){
+
+    vector <person> sResult;
+
+    QSqlQuery query(db);
+    QString s;
+    query.prepare("SELECT * FROM persons ORDER BY born DESC");
+    query.exec();
+    qDebug()<<query.executedQuery();
+    while (query.next()) {
+
+       string first = query.value(1).toString().toStdString();
+       string last = query.value(2).toString().toStdString();
+       string sex = query.value(3).toString().toStdString();
+       int born = query.value(4).toUInt();
+       int died = query.value(5).toUInt();
+
+
+       person orderedZAPerson;
+       orderedZAPerson.setFirstName(first);
+       orderedZAPerson.setLastName(last);
+       orderedZAPerson.setSex(sex);
+       orderedZAPerson.setBorn(born);
+       orderedZAPerson.setDied(died);
+       sResult.push_back(orderedZAPerson);
+
+       }
+    if(format == 0)
+            printList(sResult);
+        else
+            printTable(sResult);
 }
 
-void List::orderbyBornDESC(vector <person>& p){
+/*void List::orderbyBornDESC(vector <person>& p){
 
     stable_sort(p.begin(), p.end(),EntityComp(BORN, 1));
-}
+}*/
 
 void List::showOrdered(int column, int order, int format){
    vector<person> p = getChar();
@@ -304,16 +365,12 @@ void List::showOrdered(int column, int order, int format){
        }
    } else if (column == BORN) {
        if( order == 0) {
-           orderbyBornASC(p);
+           orderbyBornASC(format);
        } else {
-           orderbyBornDESC(p);
+           orderbyBornDESC(format);
        }
    }
 
-   /*if(format == 0)
-        printList(p);
-    else
-        printTable(p);*/
 }
 
 char List:: ask_again(){
@@ -432,7 +489,6 @@ int List:: countDatabase(){
     query.first();
 
     return query.value(0).toInt();
-
 
 }
 
