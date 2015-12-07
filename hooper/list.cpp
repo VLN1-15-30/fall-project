@@ -25,6 +25,31 @@ void List:: initialize(){
     }
 }
 
+vector<computer> const List:: getComputers(){
+    //delete our vector objects and refresh data
+    computers.erase(computers.begin(),computers.end());
+
+    QSqlQuery dataQuery(QString("SELECT * FROM computers WHERE deleted = 'NO'"));
+    dataQuery.exec();
+    //qDebug()<<dataQuery.executedQuery();
+
+        while (dataQuery.next()) {
+
+            string first = dataQuery.value(1).toString().toStdString();
+            string type = dataQuery.value(2).toString().toStdString();
+            int year = dataQuery.value(3).toUInt();
+            bool made = dataQuery.value(4).toBool();
+
+            computer c = returnNewComputer(first,type,year,made);
+
+            computers.push_back(c);
+
+        }
+
+        return computers;
+
+}
+
 vector<person> const List:: getChar(){
     //delete our vector objects and refresh data
     characters.erase(characters.begin(),characters.end());
@@ -41,12 +66,8 @@ vector<person> const List:: getChar(){
                 int born = dataQuery.value(4).toUInt();
                 int died = dataQuery.value(5).toUInt();
 
-                person searchedPerson;
-                searchedPerson.setFirstName(first);
-                searchedPerson.setLastName(last);
-                searchedPerson.setSex(sex);
-                searchedPerson.setBorn(born);
-                searchedPerson.setDied(died);
+                person searchedPerson =  returnNewPersonWith(first,last,sex,born,died);
+
                 characters.push_back(searchedPerson);
 
         }
@@ -173,10 +194,23 @@ void List::printList(vector <person>& p){
     }
 }
 
+bool List:: computersDatabaseEmpty(){
+
+
+    int count = countDatabase(1);
+
+    if(count == 0){
+        cout << "Database empty - start by adding a computer."<< endl;
+        return true;
+    }
+
+    return false;
+}
+
 bool List::databaseEmpty() {
 
 
-   int count = countDatabase();
+   int count = countDatabase(0);
 
     if(count == 0){
         cout << "Database empty - start by adding a pioneer."<< endl;
@@ -184,6 +218,33 @@ bool List::databaseEmpty() {
     }
 
     return false;
+}
+
+void List:: printComputerTable(vector<computer> &c){
+
+    cout <<"==== COMPUTER DATABASE ===="<<endl;
+    computerTableBegin();
+
+    const char separator    = ' ';
+    const int nameWidth     = 15;
+    const int numWidth      = 15;
+
+    for (unsigned int i = 0; i< c.size(); i++) {
+
+          computer comp = c[i];
+
+          cout << left << setw(5) << setfill(separator) << i+1;
+          cout << left << setw(nameWidth) << setfill(separator) << comp.getName();
+          cout << left << setw(nameWidth) << setfill(separator) << comp.getType();
+          cout << left << setw(numWidth) << setfill(separator) << comp.getYearMade();
+          if(comp.getWasMade() == true)
+              cout << left << setw(numWidth) << setfill(separator) << "YES";
+          else
+              cout << left << setw(numWidth) << setfill(separator) << "NO";
+          cout << endl;
+     }
+
+     cout << endl;
 }
 
 void List::printTable(vector <person>& p) {
@@ -475,11 +536,18 @@ ostream& operator<< (ostream& stream,const List& p){
    return stream;
 }
 
-int List:: countDatabase(){
+int List:: countDatabase(int type){
 
     QSqlQuery query(db);
     QString s;
-    s = ("SELECT Count(*) FROM persons WHERE deleted = 'NO'");
+    if(type == 0){
+        s = ("SELECT Count(*) FROM persons WHERE deleted = 'NO'");
+
+    }
+    else if (type == 1){
+        s = ("SELECT Count(*) FROM computers WHERE deleted = 'NO'");
+
+    }
     query.exec(s);
     query.first();
 
@@ -487,25 +555,41 @@ int List:: countDatabase(){
 
 }
 
-void List:: discoverAPioneer(){
-
-    cout << "==== Discover ===="<<endl;
+void List:: discover(int type){
 
     QSqlQuery query(db);
     QString s;
-    s = ("SELECT * FROM persons WHERE deleted = 'NO' ORDER BY RANDOM() LIMIT 1");
-    query.exec(s);
-    query.first();
 
+    if(type == 0){
 
-    string first = query.value(1).toString().toStdString();
-    string last = query.value(2).toString().toStdString();
-    string sex = query.value(3).toString().toStdString();
-    int born = query.value(4).toUInt();
-    int died = query.value(5).toUInt();
+        s = ("SELECT * FROM persons WHERE deleted = 'NO' ORDER BY RANDOM() LIMIT 1");
+        query.exec(s);
+        query.first();
 
-    person p = returnNewPersonWith(first,last,sex,born,died);
-    cout << p;
+        string first = query.value(1).toString().toStdString();
+        string last = query.value(2).toString().toStdString();
+        string sex = query.value(3).toString().toStdString();
+        int born = query.value(4).toUInt();
+        int died = query.value(5).toUInt();
+
+        person p = returnNewPersonWith(first,last,sex,born,died);
+        cout << p;
+    }
+    else if (type == 1){
+
+        s = ("SELECT * FROM computers ORDER BY RANDOM() LIMIT 1");
+        query.exec(s);
+        query.first();
+
+        string first = query.value(1).toString().toStdString();
+        string type = query.value(2).toString().toStdString();
+        int year = query.value(3).toUInt();
+        bool made = query.value(4).toBool();
+
+        computer c = returnNewComputer(first,type,year,made);
+        cout << c;
+
+    }
 
 }
 
@@ -521,12 +605,34 @@ person List::returnNewPersonWith(string firstname,string lastname, string sex, i
     return p;
 }
 
+computer List:: returnNewComputer(string name, string type, int year, bool made){
+
+    computer c;
+    c.setName(name);
+    c.setType(type);
+    c.setYearMade(year);
+    c.setWasMade(made);
+
+    return c;
+
+}
+
+
 person List:: returnPersonAtIndex(int index){
 
     person p = characters[index];
     return p;
 }
 
+void List:: removeComputer(){
+
+    cout << "Type name of computer: ";
+    string name;
+    cin >> name;
+
+    deleteCharacterWithName(name,1);
+
+}
 
 void List:: removeCharacter(){
 
@@ -534,14 +640,14 @@ void List:: removeCharacter(){
     string name;
     cin >> name;
 
-    deleteCharacterWithName(name);
+    deleteCharacterWithName(name,0);
 
 
 }
 
 void List:: removeCharacterWithIndex(){
 
-    int max = countDatabase();
+    int max = countDatabase(0);
 
     if(max > 0){
 
@@ -556,7 +662,7 @@ void List:: removeCharacterWithIndex(){
             characters.erase(characters.begin()+removeIndex);
             cout << "Successfully removed: " << deletedPerson << endl;
             */
-            deleteRowAtIndex(removeIndex);
+            deleteRowAtIndex(removeIndex,0);
             cout << "Successfully removed:" << endl;
 
 
@@ -571,23 +677,73 @@ void List:: removeCharacterWithIndex(){
     }
 }
 
-void List:: deleteRowAtIndex(int rowNumber){
+void List:: removeComputerWithIndex(){
 
-    QSqlQuery query(db);
-    QString s;
-    s = ( "UPDATE persons SET deleted = 'YES' WHERE id = '%1'" );
+    int max = countDatabase(1);
 
-    query.exec(s.arg(rowNumber));
-    qDebug()<< query.executedQuery();
+    if(max > 0){
+
+        cout << "Type a number between 1 and " << max << ": ";
+        int removeIndex;
+        cin >> removeIndex;
+
+        if(removeIndex >= 1 && removeIndex <= max){
+
+            deleteRowAtIndex(removeIndex,1);
+            cout << "Successfully removed:" << endl;
+        }
+        else {
+            cout << "No computer found with that index" << endl;
+        }
+
+    }
+    else {
+        cout << "Database is empty" << endl;
+    }
+
+
 }
 
-void List:: deleteCharacterWithName(string lastname){
+void List:: deleteRowAtIndex(int rowNumber,int type){
 
     QSqlQuery query(db);
     QString s;
-    s = ( "UPDATE persons SET deleted = 'YES' WHERE lastname = '%1'" );
-    query.exec(s.arg(QString(lastname.c_str())));
-    qDebug()<< query.executedQuery();
+
+    if(type == 0){
+
+        s = ( "UPDATE persons SET deleted = 'YES' WHERE id = '%1'" );
+
+        query.exec(s.arg(rowNumber));
+        qDebug()<< query.executedQuery();
+    }
+    else if (type == 1){
+
+        s = ( "UPDATE computers SET deleted = 'YES' WHERE id = '%1'" );
+
+        query.exec(s.arg(rowNumber));
+        qDebug()<< query.executedQuery();
+    }
+
+}
+
+void List:: deleteCharacterWithName(string lastname, int type){
+
+    QSqlQuery query(db);
+    QString s;
+
+    if(type == 0){
+
+         s = ( "UPDATE persons SET deleted = 'YES' WHERE lastname = '%1'" );
+         query.exec(s.arg(QString(lastname.c_str())));
+         qDebug()<< query.executedQuery();
+
+    }
+    else if (type == 1){
+
+        s = ( "UPDATE computers SET deleted = 'YES' WHERE name = '%1'" );
+        query.exec(s.arg(QString(lastname.c_str())));
+        qDebug()<< query.executedQuery();
+    }
 
 }
 
@@ -633,6 +789,28 @@ void List:: tableBegin(){
     cout << left << setw(genderWidth) << setfill(separator) << "-----";
     cout << left << setw(numWidth) << setfill(separator) << "-------------";
     cout << left << setw(numWidth) << setfill(separator) << "-------------";
+    cout << endl;
+
+}
+
+void List:: computerTableBegin(){
+
+    const char separator    = ' ';
+    const int nameWidth     = 15;
+    const int numWidth      = 15;
+
+    cout << left << setw(5) << setfill(separator) << "Nr.";
+    cout << left << setw(nameWidth) << setfill(separator) << "Name";
+    cout << left << setw(nameWidth) << setfill(separator) << "Type";
+    cout << left << setw(numWidth) << setfill(separator) << "Year Made";
+    cout << left << setw(numWidth) << setfill(separator) << "Was Made";
+    cout << endl;
+
+    cout << left << setw(5) << setfill(separator) << "---";
+    cout << left << setw(nameWidth) << setfill(separator) << "----";
+    cout << left << setw(nameWidth) << setfill(separator) << "----";
+    cout << left << setw(numWidth) << setfill(separator) << "---------";
+    cout << left << setw(numWidth) << setfill(separator) << "--------";
     cout << endl;
 
 }

@@ -18,7 +18,9 @@ void Interface::actions(){
             "Choose 2 to search the database. \n"
             "Choose 3 to add to the database. \n"
             "Choose 4 to discover a random pioneer. \n"
-            "Choose 5 to remove a pioneer from the database."<< endl;
+            "Choose 5 to discover a random computer. \n"
+            "Choose 6 to remove a pioneer from the database. \n"
+            "Choose 7 to remove a computer from the database."<< endl;
 
 
     int action;
@@ -32,7 +34,11 @@ void Interface::actions(){
         break;
         case 4: discover();
         break;
-        case 5: deleteCharacter();
+        case 5: discoverComputer();
+        break;
+        case 6: deleteCharacter();
+        break;
+        case 7: deleteComputer();
         break;
     }
 }
@@ -172,9 +178,19 @@ void Interface::add(){
 
 }
 
-void Interface::discover(){
+void Interface::discoverComputer(){
+
+    cout << "==== Discover a Computer ===="<<endl;
+
     if(ComputerScientists.databaseEmpty()) return;
-    ComputerScientists.discoverAPioneer();
+    ComputerScientists.discover(1);
+}
+
+void Interface::discover(){
+
+    cout << "==== Discover ===="<<endl;
+    if(ComputerScientists.databaseEmpty()) return;
+    ComputerScientists.discover(0);
 }
 
 void Interface::deleteCharacter(){
@@ -189,4 +205,22 @@ void Interface::deleteCharacter(){
         ComputerScientists.removeCharacterWithIndex();
     else if (type == 1)
          ComputerScientists.removeCharacter();
+}
+
+void Interface:: deleteComputer(){
+
+    if(ComputerScientists.computersDatabaseEmpty()) return;
+
+    vector<computer> c = ComputerScientists.getComputers();
+    ComputerScientists.printComputerTable(c);
+    cout << "==== REMOVE COMPUTER ===="<<endl;
+    cout << "Write 0 to remove by index, 1 to remove by name"<<endl;
+    int type;
+    cin >> type;
+    if (type == 0)
+        ComputerScientists.removeComputerWithIndex();
+    else if (type == 1)
+         ComputerScientists.removeComputer();
+
+
 }

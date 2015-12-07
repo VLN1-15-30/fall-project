@@ -17,6 +17,8 @@ public:
     void find();
     void add();
     void discover();
+    void discoverComputer();
+    void deleteComputer();
     void deleteCharacter();
     void viewOptions();
 private:
