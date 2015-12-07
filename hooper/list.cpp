@@ -447,6 +447,58 @@ void List::orderbyComputerNameZ_A(int format){
                  printComputerTable(sResult);
 }
 
+void List::orderbyComputerTypeA_Z(int format){
+
+         vector <computer> sResult;
+
+         QSqlQuery query(db);
+         QString s;
+         query.prepare("SELECT * FROM computers ORDER BY type ASC");
+         query.exec();
+         qDebug()<<query.executedQuery();
+         while (query.next()) {
+
+            string name = query.value(1).toString().toStdString();
+            string type = query.value(2).toString().toStdString();
+            int year = query.value(3).toUInt();
+            bool made = query.value(4).toBool();
+
+            computer orderedComputer = returnNewComputer(name, type, year, made);
+            sResult.push_back(orderedComputer);
+
+         }
+         if(format == 0)
+                 printComputerList(sResult);
+             else
+                 printComputerTable(sResult);
+}
+
+void List::orderbyComputerTypeZ_A(int format){
+
+         vector <computer> sResult;
+
+         QSqlQuery query(db);
+         QString s;
+         query.prepare("SELECT * FROM computers ORDER BY type DESC");
+         query.exec();
+         qDebug()<<query.executedQuery();
+         while (query.next()) {
+
+            string name = query.value(1).toString().toStdString();
+            string type = query.value(2).toString().toStdString();
+            int year = query.value(3).toUInt();
+            bool made = query.value(4).toBool();
+
+            computer orderedComputer = returnNewComputer(name, type, year, made);
+            sResult.push_back(orderedComputer);
+
+         }
+         if(format == 0)
+                 printComputerList(sResult);
+             else
+                 printComputerTable(sResult);
+}
+
 void List::showOrdered(int answer, int column, int order, int format){
    if (answer == 1){
         if(column == NAME) {
@@ -467,7 +519,7 @@ void List::showOrdered(int answer, int column, int order, int format){
         }
    }
    if(answer == 2){
-       if(column == NAME){
+       if(column == 0){
            if( order == 0){
                orderbyComputerNameA_Z(format);
            }
@@ -475,6 +527,15 @@ void List::showOrdered(int answer, int column, int order, int format){
                orderbyComputerNameZ_A(format);
            }
        }
+       if(column == 1){
+           if(order == 0){
+               orderbyComputerTypeA_Z(format);
+           }
+           else{
+               orderbyComputerTypeZ_A(format);
+           }
+       }
+
    }
 
 }

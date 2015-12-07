@@ -42,6 +42,8 @@ public:
     void orderbyBornDESC(int format);
     void orderbyComputerNameA_Z(int format);
     void orderbyComputerNameZ_A(int format);
+    void orderbyComputerTypeA_Z(int format);
+    void orderbyComputerTypeZ_A(int format);
     void discover(int type);
     void removeCharacter();
     void removeComputer();
