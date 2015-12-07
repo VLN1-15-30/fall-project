@@ -29,7 +29,7 @@ vector<person> const List:: getChar(){
     //delete our vector objects and refresh data
     characters.erase(characters.begin(),characters.end());
 
-    QSqlQuery dataQuery(QString("SELECT * FROM persons"));
+    QSqlQuery dataQuery(QString("SELECT * FROM persons WHERE deleted = 'NO'"));
     dataQuery.exec();
     //qDebug()<<dataQuery.executedQuery();
 
@@ -221,7 +221,7 @@ void List::orderbyNameA_Z(int format){
 
          QSqlQuery query(db);
          QString s;
-         query.prepare("SELECT * FROM persons ORDER BY lastname ASC");
+         query.prepare("SELECT * FROM persons WHERE deleted = 'NO' ORDER BY lastname ASC");
          query.exec();
          qDebug()<<query.executedQuery();
          while (query.next()) {
@@ -252,7 +252,7 @@ void List::orderbyNameZ_A(int format){
 
     QSqlQuery query(db);
     QString s;
-    query.prepare("SELECT * FROM persons ORDER BY lastname DESC");
+    query.prepare("SELECT * FROM persons WHERE deleted = 'NO' ORDER BY lastname DESC");
     query.exec();
     qDebug()<<query.executedQuery();
     while (query.next()) {
@@ -371,7 +371,7 @@ void List:: performSearchBasedOn(const char& selection){
 
     QSqlQuery query(db);
     QString s;
-    s = ("SELECT * FROM persons WHERE %1 LIKE '%%2%' ORDER BY name ASC" );
+    s = ("SELECT * FROM persons WHERE %1 LIKE '%%2%', deleted = 'NO' ORDER BY name ASC" );
     query.exec(s.arg(by).arg(obj));
     qDebug()<<query.executedQuery();
 
@@ -427,7 +427,7 @@ int List:: countDatabase(){
 
     QSqlQuery query(db);
     QString s;
-    s = ("SELECT Count(*) FROM persons");
+    s = ("SELECT Count(*) FROM persons WHERE deleted = 'NO'");
     query.exec(s);
     query.first();
 
@@ -442,9 +442,10 @@ void List:: discoverAPioneer(){
 
     QSqlQuery query(db);
     QString s;
-    s = ("SELECT * FROM persons ORDER BY RANDOM() LIMIT 1");
+    s = ("SELECT * FROM persons WHERE deleted = 'NO' ORDER BY RANDOM() LIMIT 1");
     query.exec(s);
     query.first();
+
 
     string first = query.value(1).toString().toStdString();
     string last = query.value(2).toString().toStdString();
