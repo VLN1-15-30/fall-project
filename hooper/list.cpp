@@ -285,7 +285,7 @@ void List::orderbyBornASC(int format){
 
     QSqlQuery query(db);
     QString s;
-    query.prepare("SELECT * FROM persons ORDER BY born ASC");
+    query.prepare("SELECT * FROM persons  WHERE deleted = 'NO' ORDER BY born ASC");
     query.exec();
     qDebug()<<query.executedQuery();
     while (query.next()) {
@@ -323,7 +323,7 @@ void List::orderbyBornDESC(int format){
 
     QSqlQuery query(db);
     QString s;
-    query.prepare("SELECT * FROM persons ORDER BY born DESC");
+    query.prepare("SELECT * FROM persons  WHERE deleted = 'NO' ORDER BY born DESC");
     query.exec();
     qDebug()<<query.executedQuery();
     while (query.next()) {
@@ -428,7 +428,7 @@ void List:: performSearchBasedOn(const char& selection){
 
     QSqlQuery query(db);
     QString s;
-    s = ("SELECT * FROM persons WHERE %1 LIKE '%%2%', deleted = 'NO' ORDER BY name ASC" );
+    s = ("SELECT * FROM persons WHERE %1 LIKE '%%2%' AND deleted = 'NO' ORDER BY lastname ASC" );
     query.exec(s.arg(by).arg(obj));
     qDebug()<<query.executedQuery();
 
