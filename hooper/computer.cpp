@@ -59,7 +59,12 @@ ostream& operator << (ostream& stream,const computer& c){
     stream << "Computer name: " << c.name << endl;
     stream << "Computer type: " << c.type << endl;
     stream << "Year built: " << c.year << endl;
-    stream << "Was it made: " << c.made << endl;
+    if(c.made == true){
+         stream << "Was it made: YES" <<endl;
+    }
+    else{
+         stream << "Was it made: NO" <<endl;
+    }
 
     return stream;
 }

@@ -13,8 +13,8 @@ List::List(){
 
 void List:: initialize(){
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString database = "C:\\hooper\\hooper.sqlite";
-    //QString database = "hooper.sqlite";
+    //QString database = "C:\\hooper\\hooper.sqlite";
+    QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();
@@ -547,7 +547,7 @@ void List:: discover(int type){
     }
     else if (type == 1){
 
-        s = ("SELECT * FROM computers ORDER BY RANDOM() LIMIT 1");
+        s = ("SELECT * FROM computers WHERE deleted = 'NO' ORDER BY RANDOM() LIMIT 1");
         query.exec(s);
         query.first();
 
