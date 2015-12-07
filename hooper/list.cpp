@@ -215,7 +215,7 @@ void List::printTable(vector <person>& p) {
      cout << endl;
 }
 
-void List::orderbyNameA_Z(){
+void List::orderbyNameA_Z(int format){
 
          vector <person> sResult;
 
@@ -232,8 +232,6 @@ void List::orderbyNameA_Z(){
             int born = query.value(4).toUInt();
             int died = query.value(5).toUInt();
 
-            cout << last << endl;
-
             person orderedAZPerson;
             orderedAZPerson.setFirstName(first);
             orderedAZPerson.setLastName(last);
@@ -242,17 +240,49 @@ void List::orderbyNameA_Z(){
             orderedAZPerson.setDied(died);
             sResult.push_back(orderedAZPerson);
 
-            }
+         }
+         if(format == 0)
+                 printList(sResult);
+             else
+                 printTable(sResult);
+}
+void List::orderbyNameZ_A(int format){
+
+    vector <person> sResult;
+
+    QSqlQuery query(db);
+    QString s;
+    query.prepare("SELECT * FROM persons ORDER BY lastname DESC");
+    query.exec();
+    qDebug()<<query.executedQuery();
+    while (query.next()) {
+
+       string first = query.value(1).toString().toStdString();
+       string last = query.value(2).toString().toStdString();
+       string sex = query.value(3).toString().toStdString();
+       int born = query.value(4).toUInt();
+       int died = query.value(5).toUInt();
+
+
+       person orderedZAPerson;
+       orderedZAPerson.setFirstName(first);
+       orderedZAPerson.setLastName(last);
+       orderedZAPerson.setSex(sex);
+       orderedZAPerson.setBorn(born);
+       orderedZAPerson.setDied(died);
+       sResult.push_back(orderedZAPerson);
+
+       }
+    if(format == 0)
+            printList(sResult);
+        else
             printTable(sResult);
 }
 
-/*void List::orderbyNameA_Z(vector <person>& p){
-    sort(p.begin(), p.end(),EntityComp(NAME, 0));
-}*/
 
-void List::orderbyNameZ_A(vector <person>& p){
+/*void List::orderbyNameZ_A(vector <person>& p){
     sort(p.begin(), p.end(),EntityComp(NAME, 1));
-}
+}*/
 
 void List::orderbyBornASC(vector <person>& p){
     //use stable to preserve order of equivalents
@@ -268,9 +298,9 @@ void List::showOrdered(int column, int order, int format){
    vector<person> p = getChar();
    if(column == NAME) {
        if( order == 0) {
-           orderbyNameA_Z();
+           orderbyNameA_Z(format);
        } else {
-           orderbyNameZ_A(p);
+           orderbyNameZ_A(format);
        }
    } else if (column == BORN) {
        if( order == 0) {
@@ -280,10 +310,10 @@ void List::showOrdered(int column, int order, int format){
        }
    }
 
-   if(format == 0)
+   /*if(format == 0)
         printList(p);
     else
-        printTable(p);
+        printTable(p);*/
 }
 
 char List:: ask_again(){
@@ -341,7 +371,7 @@ void List:: performSearchBasedOn(const char& selection){
 
     QSqlQuery query(db);
     QString s;
-    s = ("SELECT * FROM persons WHERE %1 LIKE '%%2%'");
+    s = ("SELECT * FROM persons WHERE %1 LIKE '%%2%' ORDER BY name ASC" );
     query.exec(s.arg(by).arg(obj));
     qDebug()<<query.executedQuery();
 
@@ -371,7 +401,6 @@ void List:: performSearchBasedOn(const char& selection){
         cout <<endl;
         cout << "Found the following results: "<< endl;
 
-        orderbyNameA_Z();
         printTable(sResult);
     }
 

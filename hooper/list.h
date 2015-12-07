@@ -31,8 +31,8 @@ public:
     void printTable(vector <person>& p);
     bool databaseEmpty();
     void showOrdered(int column, int order, int format);
-    void orderbyNameA_Z();
-    void orderbyNameZ_A(vector <person>& p);
+    void orderbyNameA_Z(int format);
+    void orderbyNameZ_A(int format);
     void orderbyBornASC(vector <person>& p);
     void orderbyBornDESC(vector <person>& p);
     void discoverAPioneer();
