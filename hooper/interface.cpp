@@ -72,18 +72,23 @@ void Interface::viewOptions(){
 }
 
 void Interface::order(){
-    int column;
-    int order;
-    cout << "Write 0 to order by last name, 1 to order by birth year" << endl;
-    cin >> column;
+    int column, order, answer;
+    cout << "Choose 1 to view pioneers, 2 to view computers and 3 to view connections between pioneers and computers" << endl;
+    cin >> answer;
+    switch(answer){
+    case 1: cout << "Write 0 to order by last name, 1 to order by birth year" << endl;
+            cin >> column;
+    break;
+    case 2: cout << "Write 0 to order by computer name, 1 to order by computer type" << endl;
+            cin >> column;
+    }
     cout << "Write 0 for ascending order, 1 for descending order" << endl;
     cin >> order;
-
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
 
-    ComputerScientists.showOrdered(column, order, view);
+    ComputerScientists.showOrdered(answer, column, order, view);
 
 }
 void Interface::find(){

@@ -13,8 +13,8 @@ List::List(){
 
 void List:: initialize(){
     db = QSqlDatabase::addDatabase("QSQLITE");
-    //QString database = "C:\\hooper\\hooper.sqlite";
-    QString database = "hooper.sqlite";
+    QString database = "C:\\hooper\\hooper.sqlite";
+    //QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();
@@ -194,6 +194,14 @@ void List::printList(vector <person>& p){
     }
 }
 
+void List::printComputerList(vector <computer>& c){
+
+    cout <<"==== DATABASE ===="<<endl;
+    for (unsigned int i = 0; i < c.size(); i++){
+        cout << c.at(i) << endl;
+    }
+}
+
 bool List:: computersDatabaseEmpty(){
 
 
@@ -302,6 +310,7 @@ void List::orderbyNameA_Z(int format){
              else
                  printTable(sResult);
 }
+
 void List::orderbyNameZ_A(int format){
 
     vector <person> sResult;
@@ -386,19 +395,85 @@ void List::orderbyBornDESC(int format){
             printTable(sResult);
 }
 
-void List::showOrdered(int column, int order, int format){
-   vector<person> p = getChar();
-   if(column == NAME) {
-       if( order == 0) {
-           orderbyNameA_Z(format);
-       } else {
-           orderbyNameZ_A(format);
-       }
-   } else if (column == BORN) {
-       if( order == 0) {
-           orderbyBornASC(format);
-       } else {
-           orderbyBornDESC(format);
+void List::orderbyComputerNameA_Z(int format){
+
+         vector <computer> sResult;
+
+         QSqlQuery query(db);
+         QString s;
+         query.prepare("SELECT * FROM computers ORDER BY name ASC");
+         query.exec();
+         qDebug()<<query.executedQuery();
+         while (query.next()) {
+
+            string name = query.value(1).toString().toStdString();
+            string type = query.value(2).toString().toStdString();
+            int year = query.value(3).toUInt();
+            bool made = query.value(4).toBool();
+
+            computer orderedComputer = returnNewComputer(name, type, year, made);
+            sResult.push_back(orderedComputer);
+
+         }
+         if(format == 0)
+                 printComputerList(sResult);
+             else
+                 printComputerTable(sResult);
+}
+
+void List::orderbyComputerNameZ_A(int format){
+
+         vector <computer> sResult;
+
+         QSqlQuery query(db);
+         QString s;
+         query.prepare("SELECT * FROM computers ORDER BY name DESC");
+         query.exec();
+         qDebug()<<query.executedQuery();
+         while (query.next()) {
+
+            string name = query.value(1).toString().toStdString();
+            string type = query.value(2).toString().toStdString();
+            int year = query.value(3).toUInt();
+            bool made = query.value(4).toBool();
+
+            computer orderedComputer = returnNewComputer(name, type, year, made);
+            sResult.push_back(orderedComputer);
+
+         }
+         if(format == 0)
+                 printComputerList(sResult);
+             else
+                 printComputerTable(sResult);
+}
+
+void List::showOrdered(int answer, int column, int order, int format){
+   if (answer == 1){
+        if(column == NAME) {
+            if( order == 0) {
+                orderbyNameA_Z(format);
+            }
+            else {
+                orderbyNameZ_A(format);
+            }
+        }
+        else if (column == BORN){
+            if( order == 0){
+                orderbyBornASC(format);
+            }
+            else {
+                orderbyBornDESC(format);
+            }
+        }
+   }
+   if(answer == 2){
+       if(column == NAME){
+           if( order == 0){
+               orderbyComputerNameA_Z(format);
+           }
+           else{
+               orderbyComputerNameZ_A(format);
+           }
        }
    }
 
