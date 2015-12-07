@@ -33,8 +33,8 @@ public:
     void showOrdered(int column, int order, int format);
     void orderbyNameA_Z(int format);
     void orderbyNameZ_A(int format);
-    void orderbyBornASC(vector <person>& p);
-    void orderbyBornDESC(vector <person>& p);
+    void orderbyBornASC(int format);
+    void orderbyBornDESC(int format);
     void discoverAPioneer();
     void removeCharacter();
     void removeCharacterWithIndex();
