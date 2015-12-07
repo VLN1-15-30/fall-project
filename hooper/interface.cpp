@@ -65,21 +65,22 @@ void Interface::view(){
 
 void Interface::viewOptions(int choice){
 
-    vector<person> p = ComputerScientists.getChar();
-    vector<computer>c = ComputerScientists.getComputers();
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
+
     if(choice == 1){
+        vector<person> p = ComputerScientists.getChar();
+
         if(view == 0){
             ComputerScientists.printList(p);
         }
-
         else if(view == 1){
             ComputerScientists.printTable(p);
         }
     }
-    else if(choice == 1){
+    else if(choice == 2){
+        vector<computer>c = ComputerScientists.getComputers();
 
         if(view == 0){
             ComputerScientists.printComputerList(c);
