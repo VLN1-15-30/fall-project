@@ -74,8 +74,11 @@ void Interface::viewOptions(int choice){
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
+    cout << endl;
 
     if(choice == 1){
+        cout <<"==== Database ===="<<endl;
+
         vector<person> p = ComputerScientists.getChar();
 
         if(view == 0){
@@ -86,6 +89,8 @@ void Interface::viewOptions(int choice){
         }
     }
     else if(choice == 2){
+        cout <<"==== Computer database ===="<<endl;
+
         vector<computer>c = ComputerScientists.getComputers();
 
         if(view == 0){
@@ -126,6 +131,7 @@ void Interface::order(int choice){
 
 }
 void Interface::find(){
+
     if(ComputerScientists.databaseEmpty()) return;
 
     cout << endl;
@@ -134,20 +140,24 @@ void Interface::find(){
     cout << "b) Sex " << endl;
     cout << "c) Year of birth " << endl;
     cout << "d) Year of death " << endl;
-
     cout << "Search by: ";
+
     ComputerScientists.search();
 }
 void Interface::add(){
 
     int answer = 'y';
     int choice;
+    cout << endl;
     cout << "Choose an action: \n"
             "1) Add a pioneer.\n"
             "2) Add a computer.\n"
             "3) Add a connection.\n";
 
+    cout << "Your choice: ";
+
     cin >> choice;
+    cout << endl;
     switch(choice){
         case 1: cout << "===== Add a pioneer =====" << endl;
         while(answer == 'y' || answer == 'Y'){
@@ -227,6 +237,7 @@ void Interface::add(){
             ComputerScientists.addConnection(pid, cid);
             answer = ComputerScientists.ask_again();
         };
+        break;
     }
 
 
@@ -255,10 +266,16 @@ void Interface::deleteCharacter(){
     cout << "Write 0 to remove by index, 1 to remove by last name"<<endl;
     int type;
     cin >> type;
-    if (type == 0)
+    if (type == 0){
         ComputerScientists.removeCharacterWithIndex();
-    else if (type == 1)
-         ComputerScientists.removeCharacter();
+
+    }
+    else if (type == 1){
+        cout << "Type last name: ";
+        ComputerScientists.removeCharacter();
+
+    }
+
 }
 
 void Interface:: deleteComputer(){
@@ -271,10 +288,18 @@ void Interface:: deleteComputer(){
     cout << "Write 0 to remove by index, 1 to remove by name"<<endl;
     int type;
     cin >> type;
-    if (type == 0)
+
+    if (type == 0){
+
         ComputerScientists.removeComputerWithIndex();
-    else if (type == 1)
-         ComputerScientists.removeComputer();
+
+    }
+    else if (type == 1){
+
+        cout << "Type name of computer: ";
+        ComputerScientists.removeComputer();
+
+    }
 
 
 }

@@ -175,7 +175,6 @@ void List:: writeToFile(vector <person>& p){
 
 void List::printList(vector <person>& p){
 
-    cout <<"==== Database ===="<<endl;
     for (unsigned int i = 0; i < p.size(); i++){
         cout << p.at(i) << endl;
     }
@@ -183,14 +182,12 @@ void List::printList(vector <person>& p){
 
 void List::printComputerList(vector <computer>& c){
 
-    cout <<"==== Database ===="<<endl;
     for (unsigned int i = 0; i < c.size(); i++){
         cout << c.at(i) << endl;
     }
 }
 
 bool List:: computersDatabaseEmpty(){
-
 
     int count = countDatabase(1);
 
@@ -217,7 +214,6 @@ bool List::databaseEmpty() {
 
 void List:: printComputerTable(vector<computer> &c){
 
-    cout <<"==== Computer database ===="<<endl;
     computerTableBegin();
 
     const char separator    = ' ';
@@ -266,7 +262,6 @@ void List::printConnectionsTable(QSqlQuery q) {
 
 void List::printTable(vector <person>& p) {
 
-    cout <<"==== Database ===="<<endl;
     tableBegin();
 
     const char separator    = ' ';
@@ -743,7 +738,6 @@ person List:: returnPersonAtIndex(int index){
 
 void List:: removeComputer(){
 
-    cout << "Type name of computer: ";
     string name;
     cin >> name;
 
@@ -753,7 +747,6 @@ void List:: removeComputer(){
 
 void List:: removeCharacter(){
 
-    cout << "Type last name: ";
     string name;
     cin >> name;
 
@@ -773,15 +766,9 @@ void List:: removeCharacterWithIndex(){
         cin >> removeIndex;
 
         if(removeIndex >= 1 && removeIndex <= max){
-            /*
-            removeIndex--;
-            string deletedPerson = characters.at(removeIndex).getLastName();
-            characters.erase(characters.begin()+removeIndex);
-            cout << "Successfully removed: " << deletedPerson << endl;
-            */
+
             deleteRowAtIndex(removeIndex,0);
             cout << "Successfully removed:" << endl;
-
 
         }
         else {
