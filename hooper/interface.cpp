@@ -9,23 +9,24 @@ Interface::Interface(){
     ComputerScientists.initialize();
 }
 void Interface::welcomeMessage(){
-    cout << "Welcome to the Hooper database!\n"
-            "The database contains information about pioneers and computers in computer science." << endl;
+    cout << "Welcome to the Hooper database!\n"<<endl;
+
+        cout<<" -------------------------------------------- \n"
+              "| The database contains information about    | \n"
+              "| pioneers and computers in computer science.| \n"
+              " -------------------------------------------- \n"
+           << endl;
 }
 void Interface::actions(){
     cout << "Choose a number for your next action: \n"
-            "1) View the database. \n"
-            "2) Search the database. \n"
-            "3) Add to the database. \n"
-            "4) Discover a random pioneer. \n"
-            "5) Discover a random computer. \n"
-            "6) Remove a pioneer from the database. \n"
-            "7) Remove a computer from the database. \n"
-            "8) Update pioneers \n"
-            "9) Update computers\n"
-            "10) Remove a connection from the database. \n" << endl;
+            "1) View \n"
+            "2) Search \n"
+            "3) Add \n"
+            "4) Discover \n"
+            "5) Remove  \n"
+            "6) Update \n"<< endl;
 
-      cout << "Your choice: ";
+    cout << "Your choice: ";
 
     int action;
     cin >> action;
@@ -38,21 +39,38 @@ void Interface::actions(){
         break;
         case 4: discover();
         break;
-        case 5: discoverComputer();
+        case 5: askToDelete();
         break;
-        case 6: deleteCharacter();
+        case 6: update();
         break;
-        case 7: deleteComputer();
+        default:
         break;
-        case 8: updatePioneers();
-        break;
-        case 9: updateComputers();
-        break;
-        case 10: deleteConnection();
-        break;
+
     }
 }
 
+void Interface:: update(){
+
+    cout << endl;
+    cout << "Choose an action: \n"
+            "1) Update a pioneer \n"
+            "2) Update a computer \n"<<endl;
+
+    cout << "Your choice: ";
+
+    int choice;
+    cin >> choice;
+
+    switch (choice) {
+    case 1:updatePioneers();
+        break;
+    case 2:updateComputers();
+        break;
+    default:
+        break;
+    }
+
+}
 void Interface:: updateComputers(){
 
     cout <<endl;
@@ -190,9 +208,9 @@ void Interface::add(){
     int choice;
     cout << endl;
     cout << "Choose an action: \n"
-            "1) Add a pioneer.\n"
-            "2) Add a computer.\n"
-            "3) Add a connection.\n";
+            "1) Add a pioneer\n"
+            "2) Add a computer\n"
+            "3) Add a connection\n";
 
     cout << "Your choice: ";
 
@@ -287,38 +305,78 @@ void Interface::add(){
 
 }
 
+void Interface:: discover(){
+
+    cout <<endl;
+    cout << "Choose an action: \n"
+            "1) Discover a pioneer.\n"
+            "2) Discover a computer.\n"<<endl;
+
+    cout << "Your choice: ";
+    int choice;
+    cin >> choice;
+
+    switch (choice) {
+    case 1:discoverPioneer();
+        break;
+    case 2:discoverComputer();
+        break;
+    default:
+        break;
+    }
+
+}
+
 void Interface::discoverComputer(){
 
     cout << "==== Discover a Computer ===="<<endl;
-    if(ComputerScientists.databaseEmpty()) return;
+    if(ComputerScientists.computersDatabaseEmpty()) return;
     ComputerScientists.discover(1);
 }
 
-void Interface::discover(){
+void Interface::discoverPioneer(){
 
     cout << "==== Discover a pioneer ===="<<endl;
     if(ComputerScientists.databaseEmpty()) return;
     ComputerScientists.discover(0);
 }
 
+void Interface:: askToDelete(){
+
+    cout <<endl;
+    cout << "Choose an action: \n"
+            "1) Delete a pioneer\n"
+            "2) Delete a computer\n"
+            "3) Delete a connection\n"<<endl;
+
+
+    cout << "Your choice: ";
+    int choice;
+    cin >> choice;
+
+    switch (choice) {
+    case 1:deleteCharacter();
+        break;
+    case 2:deleteComputer();
+        break;
+    case 3:deleteConnection();
+        break;
+    default:
+        break;
+    }
+
+}
+
 void Interface::deleteCharacter(){
+
     if(ComputerScientists.databaseEmpty()) return;
-    QSqlQuery p = ComputerScientists.getPersons();
+
+    QSqlQuery p = ComputerScientists.getPersons(); 
     ComputerScientists.printTable(p);
+
     cout << "==== Remove a pioneer ===="<<endl;
-    cout << "Write 0 to remove by index, 1 to remove by last name"<<endl;
-    int type;
-    cin >> type;
-    if (type == 0){
-        ComputerScientists.removeCharacterWithIndex();
-
-    }
-    else if (type == 1){
-        cout << "Type last name: ";
-        ComputerScientists.removeCharacter();
-
-    }
-
+    cout << "Type last name: ";
+    ComputerScientists.removeCharacter();
 }
 
 void Interface:: deleteComputer(){
@@ -328,21 +386,11 @@ void Interface:: deleteComputer(){
     QSqlQuery c = ComputerScientists.getComputers();
     ComputerScientists.printComputerTable(c);
     cout << "==== Remove Computer ===="<<endl;
-    cout << "Write 0 to remove by index, 1 to remove by name"<<endl;
-    int type;
-    cin >> type;
 
-    if (type == 0){
+    cout << "Type name of computer: ";
+     ComputerScientists.removeComputer();
 
-        ComputerScientists.removeComputerWithIndex();
 
-    }
-    else if (type == 1){
-
-        cout << "Type name of computer: ";
-        ComputerScientists.removeComputer();
-
-    }
 }
 
 

@@ -18,8 +18,11 @@ public:
     void add();
     void discover();
     void discoverComputer();
+    void discoverPioneer();
+    void update();
     void updateComputers();
     void updatePioneers();
+    void askToDelete();
     void deleteComputer();
     void deleteCharacter();
     void deleteConnection();

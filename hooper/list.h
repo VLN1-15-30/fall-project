@@ -46,8 +46,6 @@ public:
     void removeCharacter();
     void removeComputer();
     void removeConnection(string firstname, string lastName, string computerName);
-    void removeComputerWithIndex();
-    void removeCharacterWithIndex();
 
     void tableBegin();
     void computerTableBegin();
