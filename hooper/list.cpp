@@ -390,20 +390,8 @@ ostream& operator<< (ostream& stream,const List& p){
 
 int List:: countDatabase(int type){
 
-    QSqlQuery query;
-    QString s;
-    if(type == 0){
-        s = ("SELECT Count(*) FROM persons WHERE deleted = 'NO'");
-
-    }
-    else if (type == 1){
-        s = ("SELECT Count(*) FROM computers WHERE deleted = 'NO'");
-
-    }
-    query.exec(s);
-    query.first();
-
-    return query.value(0).toInt();
+    int result = db.countDatabaseInput(type);
+    return result;
 
 }
 

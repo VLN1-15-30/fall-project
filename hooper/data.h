@@ -27,6 +27,7 @@ public:
     QSqlQuery getPersonsSorted(int sort, int column);
     int getComputerByID(QString computerName);
     int removeConnectionByID(int pid, int cid);
+    int countDatabaseInput(int type);
     void closeDBConnection();
 
 
