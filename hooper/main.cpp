@@ -16,6 +16,7 @@ int main()
         cout << "Press 1 to quit or 0 to choose more actions" << endl;
         cin >> exit;
     }
+    hooper.quit();
     return 0;
 }
 

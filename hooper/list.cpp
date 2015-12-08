@@ -50,21 +50,18 @@ void List::addData(person p){
 
 void List::addComp(computer c){
 
-    QString qcname(c.getName().c_str());
-    QString qctype(c.getType().c_str());
+    //initializing variables from user input
+    string name = c.getName();
+    string type = c.getType();
+    int year = c.getYearMade();
+    bool made = c.getWasMade();
 
-    QSqlQuery add;
-    QString query;
-
-    query = ("INSERT INTO computers VALUES(NULL, ?, ?, ?, ?)");
-    if(add.prepare(query)) {
-        cout << "success" << endl;
-        add.addBindValue(qcname);
-        add.addBindValue(qctype);
-        add.addBindValue(c.getYearMade());
-        add.addBindValue(c.getWasMade());
-        add.exec();
-
+    //Calling datalayer to add to database, returns false if unsuccessful
+    bool add = db.addNewComputer(name, type, year, made);
+    if(add) {
+        cout << "Succesfully added new computer" << endl;
+    } else {
+        cout << "Error in adding a computer" << endl;
     }
 }
 
@@ -400,33 +397,18 @@ ostream& operator<< (ostream& stream,const List& p){
 
 int List:: countDatabase(int type){
 
-    QSqlQuery query;
-    QString s;
-    if(type == 0){
-        s = ("SELECT Count(*) FROM persons WHERE deleted = 'NO'");
-
-    }
-    else if (type == 1){
-        s = ("SELECT Count(*) FROM computers WHERE deleted = 'NO'");
-
-    }
-    query.exec(s);
-    query.first();
-
-    return query.value(0).toInt();
+    int result = db.countDatabaseInput(type);
+    return result;
 
 }
 
 void List:: discover(int type){
 
     QSqlQuery query;
-    QString s;
 
     if(type == 0){
-
-        s = ("SELECT * FROM persons WHERE deleted = 'NO' ORDER BY RANDOM() LIMIT 1");
-        query.exec(s);
-        query.first();
+        //get random person
+        query = db.getRandom(type);
 
         string first = query.value(1).toString().toStdString();
         string last = query.value(2).toString().toStdString();
@@ -438,10 +420,8 @@ void List:: discover(int type){
         cout << p;
     }
     else if (type == 1){
-
-        s = ("SELECT * FROM computers WHERE deleted = 'NO' ORDER BY RANDOM() LIMIT 1");
-        query.exec(s);
-        query.first();
+        //get random computer
+        query = db.getRandom(type);
 
         string first = query.value(1).toString().toStdString();
         string type = query.value(2).toString().toStdString();
@@ -700,11 +680,9 @@ void List:: updateComputer(int row ,QSqlQuery& cquery){
 
         i++;
     }
-
-
-
-
-
+}
+void List::closeDatabase() {
+    db.closeDBConnection();
 }
 
 
