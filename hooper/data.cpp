@@ -307,23 +307,47 @@ int data::removeConnectionByID(int pid, int cid) {
      }
 }
 
-QSqlQuery data:: search(string table, string field, string obj){
+QSqlQuery data:: search(string field, string obj){
 
     QSqlQuery query;
     QString s;
-    s = ("SELECT * FROM %1 WHERE %2 LIKE '%%3%' AND deleted = 'NO' ORDER BY %4 ASC" );
+    s = ( "SELECT P.ID, P.firstname, P.lastname, P.sex, P.born, P.died "
+          "FROM persons P "
+          "WHERE %1 LIKE '%%2%' "
+          "AND P.Deleted = 'NO' "
+          "ORDER BY lastname ASC" );
+
 
     QString val = obj.c_str();
     QString by = field.c_str();
-    QString tablename = table.c_str();
 
-    query.exec(s.arg(tablename).arg(by).arg(val).arg(by));
+    query.exec(s.arg(by).arg(val));
 
     return query;
 
 
 }
 
+QSqlQuery data:: searchComputer(string field, string obj){
+
+    QSqlQuery query;
+    QString s;
+    s = ( "SELECT C.ID, C.name, C.type, C.yearMade, C.wasMade "
+          "FROM computers C "
+          "WHERE %1 LIKE '%%2%' "
+          "AND C.Deleted = 'NO' "
+          "ORDER BY name ASC" );
+
+
+    QString val = obj.c_str();
+    QString by = field.c_str();
+
+    query.exec(s.arg(by).arg(val));
+
+    return query;
+
+
+}
 int data::countDatabaseInput(int type){
 
     QSqlQuery query;

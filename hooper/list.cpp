@@ -238,8 +238,8 @@ void List::printTable(QSqlQuery q) {
         int died = q.value(5).toUInt();
 
         cout << left << setw(5) << setfill(separator) << ID;
-        cout << left << setw(nameWidth) << setfill(separator) << first;
         cout << left << setw(nameWidth) << setfill(separator) << last;
+        cout << left << setw(nameWidth) << setfill(separator) << first;
         cout << left << setw(genderWidth) << setfill(separator) << sex;
         cout << left << setw(numWidth) << setfill(separator) << born;
         if(died != 0)
@@ -312,10 +312,10 @@ void List::search(string table){
         performSearchBasedOn(ask,table);
 }
 
-void List:: performSearchBasedOn(const char& selection, string table){
+void List:: performSearchBasedOn(const char& selection, string& table){
 
     string searchby;
-    bool printPersons = true;
+    bool personquery = true;
 
     if(table == "persons"){
 
@@ -340,20 +340,20 @@ void List:: performSearchBasedOn(const char& selection, string table){
     }
     else if(table == "computers"){
 
-        printPersons = false;
+        personquery = false;
 
         switch(selection){
             case 'a': cout << "Enter name: ";
                       searchby = "name";
             break;
-            case 'b': cout << "ENter type: ";
+            case 'b': cout << "Enter type: ";
                       searchby = "type";
             break;
             case 'c': cout << "Enter year: ";
                       searchby = "yearMade";
 
             break;
-            case 'd': cout << "Enter yes/No: ";
+            case 'd': cout << "Enter 1/0: ";
                       searchby = "wasMade";
             break;
         }
@@ -364,23 +364,24 @@ void List:: performSearchBasedOn(const char& selection, string table){
     string target;
     cin >> target;
 
-    QSqlQuery query = db.search(table,searchby,target);
 
-    qDebug()<<query.executedQuery();
 
-    if(!query.first()){
-        cout << "No match found for "<<target << endl;
-    }
-    else{
+    if(personquery){
+        QSqlQuery query = db.search(searchby,target);
         cout <<endl;
         cout << "Found the following results: "<< endl;
+        qDebug()<<query.executedQuery();
+        printTable(query);
 
-        if(printPersons)
-            printTable(query);
-        else
-            printComputerTable(query);
     }
+    else{
+        QSqlQuery query = db.searchComputer(searchby,target);
+        cout <<endl;
+        qDebug()<<query.executedQuery();
 
+        cout << "Found the following results: "<< endl;
+        printComputerTable(query);
+    }
 
 }
 
@@ -756,7 +757,9 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
                     }
 
                     string obj;
-                    cin >> obj;
+                    cin.ignore(1);
+                    getline(cin,obj);
+
 
                     int identity = db.getPersonID(p.getLastName().c_str(),p.getFirstName().c_str());
                     cout <<"id = "<<identity<<endl;

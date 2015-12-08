@@ -226,7 +226,7 @@ void Interface::findComputers(){
         cout << "a) Name "<<endl;
         cout << "b) Type " << endl;
         cout << "c) Year built " << endl;
-        cout << "d) Was made (YES/NO) " << endl;
+        cout << "d) Was made (1/0) " << endl;
         cout << "Search by: ";
 
         ComputerScientists.search("computers");

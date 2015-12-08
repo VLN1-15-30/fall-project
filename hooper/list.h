@@ -32,7 +32,7 @@ public:
     void search(string table);
     void printList(QSqlQuery q);
     void printComputerList(QSqlQuery q);
-    void performSearchBasedOn(const char& selection, string table);
+    void performSearchBasedOn(const char& selection, string& table);
     void printTable(QSqlQuery q);
     void printComputerTable(QSqlQuery q);
     void printConnectionsTable(QSqlQuery q);
