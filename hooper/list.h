@@ -9,6 +9,7 @@
 #include <fstream>
 #include <algorithm>
 #include <QtSql>
+#include <data.h>
 
 using namespace std;
 
@@ -20,8 +21,10 @@ public:
     void writeToFile(vector <person>& p);
     void OverWriteToFile(vector <person>& p);
 
+
     vector<person> const getChar();
     vector<computer> const getComputers();
+    QSqlQuery getConnections();
 
     void setData();
     void addData(person p);
@@ -33,6 +36,7 @@ public:
     void performSearchBasedOn(const char& selection);
     void printTable(vector <person>& p);
     void printComputerTable(vector <computer>& c);
+    void printConnectionsTable(QSqlQuery q);
     bool databaseEmpty();
     bool computersDatabaseEmpty();
     void showOrdered(int choice, int column, int order, int format);
@@ -44,6 +48,7 @@ public:
     void orderbyComputerNameZ_A(int format);
     void orderbyComputerTypeA_Z(int format);
     void orderbyComputerTypeZ_A(int format);
+    void orderbyConnections(int sort, int column);
     void discover(int type);
     void removeCharacter();
     void removeComputer();
@@ -52,6 +57,7 @@ public:
 
     void tableBegin();
     void computerTableBegin();
+    void connectionsTableBegin();
 
     void deleteRowAtIndex(int rowNumber, int type);
     void deleteCharacterWithName(string lastname, int type);
@@ -69,7 +75,8 @@ private:
     vector<computer> computers;
     vector<person> characters;
     vector<person> newEntries;
-    QSqlDatabase db;
+    data db;
+    QSqlQuery q;
 
 };
 

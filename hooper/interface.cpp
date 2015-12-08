@@ -89,6 +89,10 @@ void Interface::viewOptions(int choice){
         else if(view == 1){
             ComputerScientists.printComputerTable(c);
         }
+    } else {
+        cout <<"==== Overview of connections ===="<<endl;
+        QSqlQuery q = ComputerScientists.getConnections();
+        ComputerScientists.printConnectionsTable(q);
     }
 
 }
@@ -100,6 +104,10 @@ void Interface::order(int choice){
             cin >> column;
     break;
     case 2: cout << "Write 0 to order by computer name, 1 to order by computer type" << endl;
+            cin >> column;
+    break;
+    case 3: cout << "Write 0 to order by inventor, 1 to order by computer," <<
+                   endl << " 2 to order by year invented" << endl;
             cin >> column;
     }
     cout << "Write 0 for ascending order, 1 for descending order" << endl;
@@ -186,6 +194,11 @@ void Interface::add(){
         break;
         case 3: cout << "===== ADD A CONNECTION =====" << endl;
         while(answer == 'y' || answer == 'Y'){
+            vector<computer> c = ComputerScientists.getComputers();
+            vector<person> p = ComputerScientists.getChar();
+
+            ComputerScientists.printTable(p);
+            ComputerScientists.printComputerTable(c);
 
             //CHECK IF ID'S exist
             int pid, cid;
