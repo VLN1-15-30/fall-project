@@ -23,8 +23,9 @@ public:
 
 
     vector<person> const getChar();
-    vector<computer> const getComputers();
+    vector<computer> const getComputer();
     QSqlQuery getConnections();
+    QSqlQuery getComputers();
 
     void setData();
     void addData(person p);
@@ -35,7 +36,7 @@ public:
     void printComputerList(vector <computer>& c);
     void performSearchBasedOn(const char& selection);
     void printTable(vector <person>& p);
-    void printComputerTable(vector <computer>& c);
+    void printComputerTable(QSqlQuery q);
     void printConnectionsTable(QSqlQuery q);
     bool databaseEmpty();
     bool computersDatabaseEmpty();
@@ -48,6 +49,7 @@ public:
     void orderbyComputerNameZ_A(int format);
     void orderbyComputerTypeA_Z(int format);
     void orderbyComputerTypeZ_A(int format);
+    void orderbyComputers(int sort, int column);
     void orderbyConnections(int sort, int column);
     void discover(int type);
     void removeCharacter();
@@ -61,6 +63,9 @@ public:
 
     void deleteRowAtIndex(int rowNumber, int type);
     void deleteCharacterWithName(string lastname, int type);
+
+    void updatePioneer(int row, person& p);
+    void updateComputer(int row, computer& p);
 
     int countDatabase(int type);
 

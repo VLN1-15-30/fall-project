@@ -16,29 +16,9 @@ void List:: initialize(){
     db.initialize();
 }
 
-vector<computer> const List:: getComputers(){
-    //delete our vector objects and refresh data
-    computers.erase(computers.begin(),computers.end());
 
-    QSqlQuery dataQuery(QString("SELECT * FROM computers WHERE Deleted = 'NO' "));
-    dataQuery.exec();
-    //qDebug()<<dataQuery.executedQuery();
-
-        while (dataQuery.next()) {
-
-            string first = dataQuery.value(1).toString().toStdString();
-            string type = dataQuery.value(2).toString().toStdString();
-            int year = dataQuery.value(3).toUInt();
-            bool made = dataQuery.value(4).toBool();
-
-            computer c = returnNewComputer(first,type,year,made);
-
-            computers.push_back(c);
-
-        }
-
-        return computers;
-
+QSqlQuery List:: getComputers(){
+         return db.getComputers();
 }
 
 QSqlQuery List::getConnections() {
@@ -47,6 +27,8 @@ QSqlQuery List::getConnections() {
 
 
 vector<person> const List:: getChar(){
+
+
     //delete our vector objects and refresh data
     characters.erase(characters.begin(),characters.end());
 
@@ -217,7 +199,7 @@ bool List::databaseEmpty() {
     return false;
 }
 
-void List:: printComputerTable(vector<computer> &c){
+void List:: printComputerTable(QSqlQuery q){
 
     computerTableBegin();
 
@@ -225,15 +207,18 @@ void List:: printComputerTable(vector<computer> &c){
     const int nameWidth     = 15;
     const int numWidth      = 15;
 
-    for (unsigned int i = 0; i< c.size(); i++) {
+    while (q.next()){
+        int ID = q.value(1).toUInt();
+        string name = q.value(2).toString().toStdString();
+        string type = q.value(3).toString().toStdString();
+        int year = q.value(4).toUInt();
+        bool made = q.value(5).toBool();
 
-          computer comp = c[i];
-
-          cout << left << setw(5) << setfill(separator) << i+1;
-          cout << left << setw(nameWidth) << setfill(separator) << comp.getName();
-          cout << left << setw(nameWidth) << setfill(separator) << comp.getType();
-          cout << left << setw(numWidth) << setfill(separator) << comp.getYearMade();
-          if(comp.getWasMade() == true)
+          cout << left << setw(numWidth) << setfill(separator) << ID;
+          cout << left << setw(nameWidth) << setfill(separator) << name;
+          cout << left << setw(nameWidth) << setfill(separator) << type;
+          cout << left << setw(numWidth) << setfill(separator) << year;
+          if(made == true)
               cout << left << setw(numWidth) << setfill(separator) << "YES";
           else
               cout << left << setw(numWidth) << setfill(separator) << "NO";
@@ -404,7 +389,7 @@ void List::orderbyBornDESC(int format){
             printTable(sResult);
 }
 
-void List::orderbyComputerNameA_Z(int format){
+/*void List::orderbyComputerNameA_Z(int format){
 
          vector <computer> sResult;
 
@@ -426,8 +411,8 @@ void List::orderbyComputerNameA_Z(int format){
          }
          if(format == 0)
                  printComputerList(sResult);
-             else
-                 printComputerTable(sResult);
+             //else
+                 //printComputerTable(sResult);
 }
 
 void List::orderbyComputerNameZ_A(int format){
@@ -451,9 +436,9 @@ void List::orderbyComputerNameZ_A(int format){
 
          }
          if(format == 0)
-                 printComputerList(sResult);
-             else
-                 printComputerTable(sResult);
+               printComputerList(sResult);
+            // else
+                 //printComputerTable(sResult);
 }
 
 void List::orderbyComputerTypeA_Z(int format){
@@ -478,8 +463,8 @@ void List::orderbyComputerTypeA_Z(int format){
          }
          if(format == 0)
                  printComputerList(sResult);
-             else
-                 printComputerTable(sResult);
+             //else
+                // printComputerTable(sResult);
 }
 
 void List::orderbyComputerTypeZ_A(int format){
@@ -504,8 +489,13 @@ void List::orderbyComputerTypeZ_A(int format){
          }
          if(format == 0)
                  printComputerList(sResult);
-             else
-                 printComputerTable(sResult);
+             //else
+                // printComputerTable(sResult);
+}*/
+
+void List::orderbyComputers(int sort, int column){
+    q = db.getComputersSorted(sort, column);
+    printComputerTable(q);
 }
 
 void List::orderbyConnections(int sort, int column){
@@ -537,7 +527,8 @@ void List::showOrdered(int choice, int column, int order, int format){
    }
    //order computer table
    if(choice == 2){
-       if(column == 0){
+      orderbyComputers(order, column);
+       /*if(column == 0){
            if( order == 0){
                orderbyComputerNameA_Z(format);
            }
@@ -551,8 +542,8 @@ void List::showOrdered(int choice, int column, int order, int format){
            }
            else{
                orderbyComputerTypeZ_A(format);
-           }
-       }
+           }*/
+
     //order connections table
    } else {
            orderbyConnections(order, column);
@@ -692,7 +683,7 @@ void List:: discover(int type){
         person p = returnNewPersonWith(first,last,sex,born,died);
         cout << p;
     }
-    else if (type == 1){
+    /*else if (type == 1){
 
         s = ("SELECT * FROM computers WHERE deleted = 'NO' ORDER BY RANDOM() LIMIT 1");
         query.exec(s);
@@ -703,10 +694,10 @@ void List:: discover(int type){
         int year = query.value(3).toUInt();
         bool made = query.value(4).toBool();
 
-        computer c = returnNewComputer(first,type,year,made);
-        cout << c;
+        //computer c = returnNewComputer(first,type,year,made);
+        //cout << c;
 
-    }
+    }*/
 
 }
 
@@ -722,8 +713,7 @@ person List::returnNewPersonWith(string firstname,string lastname, string sex, i
     return p;
 }
 
-computer List:: returnNewComputer(string name, string type, int year, bool made){
-
+/*computer List:: returnNewComputer(string name, string type, int year, bool made);
     computer c;
     c.setName(name);
     c.setType(type);
@@ -732,8 +722,7 @@ computer List:: returnNewComputer(string name, string type, int year, bool made)
 
     return c;
 
-}
-
+}*/
 
 person List:: returnPersonAtIndex(int index){
 
@@ -940,4 +929,137 @@ void List:: connectionsTableBegin(){
     cout << endl;
 }
 
+void List:: updateComputer(int row ,computer& c){
+
+    cout <<endl;
+    cout <<c;
+    cout <<endl;
+
+    char update = 'Y';
+
+    while (update == 'Y'|| update == 'y'){
+
+        cout << "Choose action: \n"
+                "1) New name. \n"
+                "2) New type. \n"
+                "3) New year made. \n"
+                "4) New was made. \n" << endl;
+
+        cout << "Your choice: ";
+        int option;
+        cin>> option;
+
+        string fieldName;
+
+        if(option >0 && option <5){
+
+            switch(option){
+
+            case 1:{
+                  cout << "new name: ";
+                  fieldName ="name";
+                     }
+            break;
+            case 2:{
+                cout << "new type: ";
+                fieldName ="type";
+            }
+            break;
+            case 3:{
+                cout << "new year made: ";
+                fieldName ="yearMade";
+            }
+            break;
+            case 4:{
+                cout << "new was made(YES/NO): ";
+                fieldName ="wasMade";
+            }
+            break;
+
+            }
+
+            string obj;
+            cin >> obj;
+
+            db.Update(row,fieldName,obj,"computers");
+        }
+
+        cout << "Update again(n/y):"<<endl;
+        cout << "Your choice: ";
+        cin >> update;
+        cout <<endl;
+
+
+    }
+}
+
+void List:: updatePioneer(int row, person& p){
+
+    cout <<endl;
+    cout <<p;
+    cout <<endl;
+
+    char update = 'Y';
+
+    while (update == 'Y'|| update == 'y'){
+
+        cout << "Choose action: \n"
+                "1) New first name. \n"
+                "2) New last name. \n"
+                "3) New sex. \n"
+                "4) New year born. \n"
+                "4) New year died. \n"<< endl;
+
+        cout << "Your choice: ";
+        int option;
+        cin>> option;
+
+        string fieldName;
+
+        if(option >0 && option <6){
+
+            switch(option){
+
+            case 1:{
+                  cout << "new first name: ";
+                  fieldName ="firstname";
+                     }
+            break;
+            case 2:{
+                cout << "new last name: ";
+                fieldName ="lastname";
+            }
+            break;
+            case 3:{
+                cout << "new sex(m/f): ";
+                fieldName ="sex";
+            }
+            break;
+            case 4:{
+                cout << "new year born: ";
+                fieldName ="born";
+            }
+            break;
+            case 5:{
+                cout << "new year died: ";
+                fieldName ="died";
+            }
+            break;
+
+
+            }
+
+            string obj;
+            cin >> obj;
+
+            db.Update(row,fieldName,obj,"persons");
+        }
+
+        cout << "Update again(n/y):"<<endl;
+        cout << "Your choice: ";
+        cin >> update;
+        cout <<endl;
+
+
+    }}
 

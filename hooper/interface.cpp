@@ -20,7 +20,9 @@ void Interface::actions(){
             "4) Discover a random pioneer. \n"
             "5) Discover a random computer. \n"
             "6) Remove a pioneer from the database. \n"
-            "7) Remove a computer from the database."<< endl;
+            "7) Remove a computer from the database. \n"
+            "8) Update pioneers \n"
+            "9) Update computers\n" << endl;
 
       cout << "Your choice: ";
 
@@ -41,8 +43,41 @@ void Interface::actions(){
         break;
         case 7: deleteComputer();
         break;
+        case 8: updatePioneers();
+        break;
+        case 9: updateComputers();
+        break;
     }
 }
+
+void Interface:: updateComputers(){
+
+    cout <<endl;
+    cout <<"==== Update computers ===="<<endl;
+
+    vector<computer>c = ComputerScientists.getComputers();
+    ComputerScientists.printComputerTable(c);
+    cout << "Enter row number: ";
+    int row;
+    cin >> row;
+    ComputerScientists.updateComputer(row,c[row-1]);
+
+}
+
+void Interface:: updatePioneers(){
+
+    cout <<endl;
+    cout <<"==== Update pioneers ===="<<endl;
+
+    vector<person> p = ComputerScientists.getChar();
+    ComputerScientists.printTable(p);
+    cout << "Enter row number: ";
+    int row;
+    cin >> row;
+    ComputerScientists.updatePioneer(row,p[row-1]);
+
+}
+
 void Interface::view(){
 
     //if(ComputerScientists.databaseEmpty()) return;
@@ -73,12 +108,17 @@ void Interface::viewOptions(int choice){
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
+<<<<<<< HEAD
+    QSqlQuery c = ComputerScientists.getComputers();
+=======
     cout << endl;
 
+>>>>>>> a059ddacf32288a7b65109bbe37c976d43a5754e
     if(choice == 1){
         cout <<"==== Database ===="<<endl;
 
         vector<person> p = ComputerScientists.getChar();
+
 
         if(view == 0){
             ComputerScientists.printList(p);
@@ -88,15 +128,18 @@ void Interface::viewOptions(int choice){
         }
     }
     else if(choice == 2){
+<<<<<<< HEAD
+=======
         cout <<"==== Computer database ===="<<endl;
 
         vector<computer>c = ComputerScientists.getComputers();
+>>>>>>> a059ddacf32288a7b65109bbe37c976d43a5754e
 
-        if(view == 0){
-            ComputerScientists.printComputerList(c);
-        }
+        /*if(view == 0){
+            ComputerScientists.printComputerList();
+        }*/
 
-        else if(view == 1){
+        if(view == 1){
             ComputerScientists.printComputerTable(c);
         }
     } else {
@@ -220,9 +263,8 @@ void Interface::add(){
         break;
         case 3: cout << "===== Add a connection =====" << endl;
         while(answer == 'y' || answer == 'Y'){
-            vector<computer> c = ComputerScientists.getComputers();
             vector<person> p = ComputerScientists.getChar();
-
+            QSqlQuery c = ComputerScientists.getComputers();
             ComputerScientists.printTable(p);
             ComputerScientists.printComputerTable(c);
 
@@ -285,7 +327,7 @@ void Interface:: deleteComputer(){
 
     if(ComputerScientists.computersDatabaseEmpty()) return;
 
-    vector<computer> c = ComputerScientists.getComputers();
+    QSqlQuery c = ComputerScientists.getComputers();
     ComputerScientists.printComputerTable(c);
     cout << "==== Remove Computer ===="<<endl;
     cout << "Write 0 to remove by index, 1 to remove by name"<<endl;

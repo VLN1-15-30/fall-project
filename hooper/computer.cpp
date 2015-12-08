@@ -9,8 +9,8 @@ computer::computer(){
     made = 0;
     name = "";
     type = "";
-}
 
+}
 string computer:: getName() const{
     return name;
 }
@@ -18,7 +18,6 @@ string computer:: getName() const{
 string computer:: getType() const{
     return type;
 }
-
 int computer:: getYearMade() const{
     return year;
 }
@@ -26,7 +25,6 @@ int computer:: getYearMade() const{
 bool computer:: getWasMade() const{
     return made;
 }
-
 void computer:: setName(string n){
     name = n;
 }

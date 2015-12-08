@@ -1,5 +1,7 @@
+#include <iostream>
 #include "data.h"
 
+using namespace std;
 
 data::data() {
 
@@ -7,8 +9,8 @@ data::data() {
 
 void data::initialize() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString database = "C:\\hooper\\hooper.sqlite";
-   // QString database = "hooper.sqlite";
+    //QString database = "C:\\hooper\\hooper.sqlite";
+    QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();
@@ -114,6 +116,70 @@ bool data::addNewConnection(int pid, int cid) {
     } else {
         qDebug() << q.lastError() << endl;
         return false;
+    }
+}
+
+void data::Update(int rowId, string fieldname, string value, string tableName){
+
+    QSqlQuery query;
+    QString s;
+
+    s = ( "UPDATE '%1' SET '%2' = '%3' WHERE id = '%4'" );
+
+    QString field = fieldname.c_str();
+    QString table = tableName.c_str();
+    QString change = value.c_str();
+
+    query.exec(s.arg(table).arg(field).arg(change).arg(rowId));
+    qDebug()<< query.executedQuery();
+
+
+}
+
+QSqlQuery data::getComputers(){
+
+    QSqlQuery q;
+    QString query = ("SELECT ID, name, type, yearMade, wasMade FROM computers");
+
+    if(q.prepare(query)){
+        q.exec();
+        return q;
+    }
+    else{
+        qDebug() << q.lastError() << endl;
+        return q;
+    }
+
+}
+
+QSqlQuery data::getComputersSorted(int sort, int column) {
+    QSqlQuery q;
+    QString orderby;
+    QString col;
+
+    if(column == 0){
+        col = "C.name";
+    }
+    else if(column == 1){
+        col = "C.type";
+    }
+
+    if( sort == 0) {
+       orderby = "ASC";
+    }
+    else{
+       orderby = "DESC";
+    }
+    QString query("SELECT C.ID C.name, C.type, C.yearMade, C.wasMade "
+                   "FROM computers C "
+                   "ORDER BY %1 %2");
+    if(q.prepare(query.arg(col).arg(orderby))) {
+        q.exec();
+        return q;
+        }
+    else {
+        qDebug() << q.lastError() << endl;
+        return q;
     }
 }
 
