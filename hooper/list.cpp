@@ -114,11 +114,28 @@ void List::addConnection(string firstName, string lastName, string computerName)
    }
 }
 
+void List::printList(QSqlQuery q){
 
-void List::printList(vector <person>& p){
+    int idCount = 0;
+    while (q.next()){
 
-    for (unsigned int i = 0; i < p.size(); i++){
-        cout << p.at(i) << endl;
+        int ID = ++idCount;
+        string first = q.value(1).toString().toStdString();
+        string last = q.value(2).toString().toStdString();
+        string sex = q.value(3).toString().toStdString();
+        int born = q.value(4).toUInt();
+        int died = q.value(5).toUInt();
+
+        cout << "ID: " << ID << endl;
+        cout << "First name: " << first << endl;
+        cout << "Last name: " << last << endl;
+        cout << "Sex: " << sex << endl;
+        cout << "Born: " << born << endl;
+        if(died != 0)
+            cout << "Died: " << died << endl;
+          else
+              cout << "-";
+          cout << endl;
     }
 }
 
