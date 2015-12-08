@@ -12,25 +12,31 @@ class data
 {
 public:
     data();
-    void initialize();
-    QSqlQuery getConnections();
-    QSqlQuery getConnectionsSorted(int sort, int column);
+
     void update(int rowId, string fieldname, string value,string tableName);
+    void deleteObj(int type, string name);
+    void closeDBConnection();
+    void initialize();
+
     bool addNewConnection(int pid, int cid);
     bool addNewComputer(string name, string type, int year, bool made);
     bool addNewPerson(string firstname, string lastname, string sex, int born, int died);
+
+    QSqlQuery getConnections();
+    QSqlQuery getConnectionsSorted(int sort, int column);
     QSqlQuery getComputers();
     QSqlQuery getComputersSorted(int sort, int column);
-    int getPersonID(QString lastName, QString firstName);
     QSqlQuery getPersons();
     QSqlQuery getPersonsSorted(int sort, int column);
     QSqlQuery search(string field, string obj);
     QSqlQuery searchComputer (string field, string obj);
+    QSqlQuery getRandom(int type);
+
     int getComputerByID(QString computerName);
     int removeConnectionByID(int pid, int cid);
     int countDatabaseInput(int type);
-    void closeDBConnection();
-    QSqlQuery getRandom(int type);
+    int getPersonID(QString lastName, QString firstName);
+
 
 private:
     QSqlDatabase db;

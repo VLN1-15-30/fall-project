@@ -17,15 +17,15 @@ class List
 {
 public:
     List();
-    void initialize();
-    vector<person> const getChar();
-    vector<computer> const getComputer();
+
     QSqlQuery getConnections();
     QSqlQuery getComputers();
     QSqlQuery getPersons();
+
     bool databaseEmpty();
     bool computersDatabaseEmpty();
 
+    void initialize();
     void setData();
     void addData(person p);
     void addComp (computer c);
@@ -50,22 +50,19 @@ public:
     void tableBegin();
     void computerTableBegin();
     void connectionsTableBegin();
-    void deleteRowAtIndex(int rowNumber, int type);
     void deleteCharacterWithName(string lastname, int type);
     void updatePioneer(int row,QSqlQuery pquery);
     void updateComputer(int row, QSqlQuery& cquery);
     int countDatabase(int type);
 
     char ask_again();
-    person returnPersonAtIndex(int index);
     computer returnNewComputer(string name, string type, int year, bool made);
+    person returnPersonAtIndex(int index);
     person returnNewPersonWith(string firstname,string lastname, string sex, int born, int died);
     friend ostream& operator<< (ostream& stream,const List& p);
 
 private:
-    vector<computer> computers;
     vector<person> characters;
-    vector<person> newEntries;
     data db;
     QSqlQuery q;
 

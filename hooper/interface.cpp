@@ -21,6 +21,7 @@ void Interface::welcomeMessage(){
 }
 
 void Interface::actions(){
+
     cout << "Choose a number for your next action: \n"
             "1) View \n"
             "2) Search \n"
@@ -33,6 +34,7 @@ void Interface::actions(){
 
     int action;
     cin >> action;
+
     switch(action){
         case 1: view();
         break;
@@ -108,7 +110,6 @@ void Interface::updatePioneers(){
 
 void Interface::view(){
 
-    //if(ComputerScientists.databaseEmpty()) return;
     int choice;
     cout << endl;
     cout << "Choose an action: \n"
@@ -144,7 +145,7 @@ void Interface::viewOptions(int choice){
     QSqlQuery q = ComputerScientists.getConnections();
 
     if(choice == 1){
-        cout <<"==== Database ===="<< endl;
+        cout <<"==== Pioneer database ===="<< endl;
         if(view == 0){
             ComputerScientists.printList(p);
         }
@@ -200,7 +201,7 @@ void Interface::order(int choice){
 
 }
 
-//Use 1,2 to give user option from list of options
+//Use 1,2 to give user option to search from database
 void Interface::find(){
 
     cout <<endl;
@@ -222,6 +223,7 @@ void Interface::find(){
     }
 }
 
+//Searching for computers. Searching while the condition is true
 void Interface::findComputers(){
 
     if(ComputerScientists.computersDatabaseEmpty()) return;
@@ -362,7 +364,9 @@ void Interface::addComputer(char answer){
 void Interface::addConnection(char answer){
 
     cout << "===== Add a connection =====" << endl;
+
     while(answer == 'y' || answer == 'Y'){
+
         QSqlQuery p = ComputerScientists.getPersons();
         QSqlQuery c = ComputerScientists.getComputers();
         ComputerScientists.printTable(p);
@@ -410,6 +414,7 @@ void Interface::discoverComputer(){
 
     cout << "==== Discover a Computer ===="<<endl;
     if(ComputerScientists.computersDatabaseEmpty()) return;
+
     ComputerScientists.discover(1);
 }
 
@@ -417,6 +422,7 @@ void Interface::discoverPioneer(){
 
     cout << "==== Discover a pioneer ===="<<endl;
     if(ComputerScientists.databaseEmpty()) return;
+
     ComputerScientists.discover(0);
 }
 

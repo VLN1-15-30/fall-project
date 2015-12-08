@@ -197,7 +197,6 @@ void data::update(int rowId, string fieldname, string value, string tableName){
     QString change = value.c_str();
 
     query.exec(s.arg(table).arg(field).arg(change).arg(rowId));
-    qDebug()<< query.executedQuery();
 }
 
 QSqlQuery data::getComputers(){
@@ -251,7 +250,7 @@ QSqlQuery data::getComputersSorted(int sort, int column){
 QSqlQuery data::getPersons(){
 
     QSqlQuery q;
-    QString query("SELECT ID, lastname, firstname, sex, born, died "
+    QString query("SELECT ID, firstname, lastname, sex, born, died "
                   "FROM persons "
                   "WHERE Deleted = 'NO' ");
     if(q.prepare(query)){
@@ -385,4 +384,24 @@ QSqlQuery data::getRandom(int type){
         qDebug() << q.lastError() << endl;
         return q;
     }
+}
+
+void data:: deleteObj(int type, string name){
+
+    QSqlQuery query;
+    QString s;
+
+    if(type == 0){
+
+         s = ( "UPDATE persons SET deleted = 'YES' WHERE lastname = '%1'" );
+         query.exec(s.arg(QString(name.c_str())));
+
+    }
+    else if (type == 1){
+
+        s = ( "UPDATE computers SET deleted = 'YES' WHERE name = '%1'" );
+        query.exec(s.arg(QString(name.c_str())));
+    }
+
+
 }

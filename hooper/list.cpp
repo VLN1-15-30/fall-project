@@ -184,7 +184,7 @@ void List:: printComputerTable(QSqlQuery q){
     computerTableBegin();
 
     const char separator    = ' ';
-    const int nameWidth     = 15;
+    const int nameWidth     = 30;
     const int numWidth      = 15;
 
     int idCount = 0;
@@ -198,7 +198,7 @@ void List:: printComputerTable(QSqlQuery q){
 
           cout << left << setw(5) << setfill(separator) << ID;
           cout << left << setw(nameWidth) << setfill(separator) << name;
-          cout << left << setw(nameWidth) << setfill(separator) << type;
+          cout << left << setw(nameWidth-10) << setfill(separator) << type;
           cout << left << setw(numWidth) << setfill(separator) << year;
           if(made == true)
               cout << left << setw(numWidth) << setfill(separator) << "YES";
@@ -384,15 +384,12 @@ void List:: performSearchBasedOn(const char& selection, string& table){
         QSqlQuery query = db.search(searchby,target);
         cout <<endl;
         cout << "Found the following results: "<< endl;
-        qDebug()<<query.executedQuery();
         printTable(query);
 
     }
     else{
         QSqlQuery query = db.searchComputer(searchby,target);
         cout <<endl;
-        qDebug()<<query.executedQuery();
-
         cout << "Found the following results: "<< endl;
         printComputerTable(query);
     }
@@ -473,11 +470,6 @@ computer List:: returnNewComputer(string name, string type, int year, bool made)
 
 }
 
-person List:: returnPersonAtIndex(int index){
-
-    person p = characters[index];
-    return p;
-}
 
 void List:: removeComputer(){
 
@@ -499,46 +491,9 @@ void List:: removeCharacter(){
 }
 
 
-void List:: deleteRowAtIndex(int rowNumber,int type){
-
-    QSqlQuery query;
-    QString s;
-
-    if(type == 0){
-
-        s = ( "UPDATE persons SET deleted = 'YES' WHERE id = '%1'" );
-
-        query.exec(s.arg(rowNumber));
-        qDebug()<< query.executedQuery();
-    }
-    else if (type == 1){
-
-        s = ( "UPDATE computers SET deleted = 'YES' WHERE id = '%1'" );
-
-        query.exec(s.arg(rowNumber));
-        qDebug()<< query.executedQuery();
-    }
-
-}
-
 void List:: deleteCharacterWithName(string lastname, int type){
 
-    QSqlQuery query;
-    QString s;
-
-    if(type == 0){
-
-         s = ( "UPDATE persons SET deleted = 'YES' WHERE lastname = '%1'" );
-         query.exec(s.arg(QString(lastname.c_str())));
-         qDebug()<< query.executedQuery();
-
-    }
-    else if (type == 1){
-
-        s = ( "UPDATE computers SET deleted = 'YES' WHERE name = '%1'" );
-        query.exec(s.arg(QString(lastname.c_str())));
-        qDebug()<< query.executedQuery();
-    }
+    db.deleteObj(type,lastname);
 
 }
 
@@ -571,19 +526,19 @@ void List:: tableBegin(){
 void List:: computerTableBegin(){
 
     const char separator    = ' ';
-    const int nameWidth     = 15;
+    const int nameWidth     = 30;
     const int numWidth      = 15;
 
     cout << left << setw(5) << setfill(separator) << "Nr.";
     cout << left << setw(nameWidth) << setfill(separator) << "Name";
-    cout << left << setw(nameWidth) << setfill(separator) << "Type";
+    cout << left << setw(nameWidth-10) << setfill(separator) << "Type";
     cout << left << setw(numWidth) << setfill(separator) << "Year Made";
     cout << left << setw(numWidth) << setfill(separator) << "Was Made";
     cout << endl;
 
     cout << left << setw(5) << setfill(separator) << "---";
     cout << left << setw(nameWidth) << setfill(separator) << "----";
-    cout << left << setw(nameWidth) << setfill(separator) << "----";
+    cout << left << setw(nameWidth-10) << setfill(separator) << "----";
     cout << left << setw(numWidth) << setfill(separator) << "---------";
     cout << left << setw(numWidth) << setfill(separator) << "--------";
     cout << endl;
