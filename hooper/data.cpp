@@ -28,8 +28,7 @@ QSqlQuery data::getConnections() {
                    "FROM invented I "
                    "    INNER JOIN persons P ON P.id = I.pID "
                    "    INNER JOIN computers C ON C.id = I.cID "
-                   "WHERE P.Deleted = 'NO' "
-                   "AND C.Deleted = 'NO' ");
+                   "WHERE I.Deleted = 'NO'");
     if(q.prepare(query)) {
         q.exec();
         return q;
@@ -62,6 +61,7 @@ QSqlQuery data::getConnectionsSorted(int sort, int column) {
                    "FROM invented I "
                    "    INNER JOIN persons P ON P.id = I.pID "
                    "    INNER JOIN computers C ON C.id = I.cID "
+                   "WHERE I.Deleted = 'NO' "
                    "ORDER BY %1 %2");
     if(q.prepare(query.arg(col).arg(orderby))) {
         q.exec();
