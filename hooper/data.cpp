@@ -41,6 +41,7 @@ QSqlQuery data::getConnections() {
     }
 }
 
+//sorting connections from database and returning query result to datalayer
 QSqlQuery data::getConnectionsSorted(int sort, int column) {
     QSqlQuery q;
     QString orderby;
@@ -163,7 +164,7 @@ bool data::addNewComputer(string name, string type, int year, bool made){
     }
     else {
         qDebug() << add.lastError() << endl;
-               return false;
+        return false;
     }
 }
 
@@ -180,7 +181,7 @@ bool data::addNewConnection(int pid, int cid) {
     }
 }
 
-void data::Update(int rowId, string fieldname, string value, string tableName){
+void data::update(int rowId, string fieldname, string value, string tableName){
 
     QSqlQuery query;
     QString s;
@@ -193,8 +194,6 @@ void data::Update(int rowId, string fieldname, string value, string tableName){
 
     query.exec(s.arg(table).arg(field).arg(change).arg(rowId));
     qDebug()<< query.executedQuery();
-
-
 }
 
 QSqlQuery data::getComputers(){
@@ -214,7 +213,7 @@ QSqlQuery data::getComputers(){
 
 }
 
-QSqlQuery data::getComputersSorted(int sort, int column) {
+QSqlQuery data::getComputersSorted(int sort, int column){
     QSqlQuery q;
     QString orderby;
     QString col;
@@ -225,7 +224,6 @@ QSqlQuery data::getComputersSorted(int sort, int column) {
     else if(column == 1){
         col = "C.type";
     }
-
     if( sort == 0) {
        orderby = "ASC";
     }
@@ -236,7 +234,7 @@ QSqlQuery data::getComputersSorted(int sort, int column) {
                    "FROM computers C "
                    "WHERE C.Deleted = 'NO' "
                    "ORDER BY %1 %2");
-    if(q.prepare(query.arg(col).arg(orderby))) {
+    if(q.prepare(query.arg(col).arg(orderby))){
         q.exec();
         return q;
         }
@@ -262,7 +260,7 @@ QSqlQuery data::getPersons(){
 
 }
 
-QSqlQuery data::getPersonsSorted(int sort, int column) {
+QSqlQuery data::getPersonsSorted(int sort, int column){
     QSqlQuery q;
     QString orderby;
     QString col;
@@ -307,7 +305,7 @@ int data::removeConnectionByID(int pid, int cid) {
      }
 }
 
-QSqlQuery data:: search(string field, string obj){
+QSqlQuery data::search(string field, string obj){
 
     QSqlQuery query;
     QString s;
@@ -317,18 +315,15 @@ QSqlQuery data:: search(string field, string obj){
           "AND P.Deleted = 'NO' "
           "ORDER BY lastname ASC" );
 
-
     QString val = obj.c_str();
     QString by = field.c_str();
 
     query.exec(s.arg(by).arg(val));
 
     return query;
-
-
 }
 
-QSqlQuery data:: searchComputer(string field, string obj){
+QSqlQuery data::searchComputer(string field, string obj){
 
     QSqlQuery query;
     QString s;
@@ -338,15 +333,12 @@ QSqlQuery data:: searchComputer(string field, string obj){
           "AND C.Deleted = 'NO' "
           "ORDER BY name ASC" );
 
-
     QString val = obj.c_str();
     QString by = field.c_str();
 
     query.exec(s.arg(by).arg(val));
 
     return query;
-
-
 }
 int data::countDatabaseInput(int type){
 
@@ -370,7 +362,7 @@ void data::closeDBConnection() {
     db.close();
 }
 
-QSqlQuery data::getRandom(int type) {
+QSqlQuery data::getRandom(int type){
     QSqlQuery q;
     QString col;
 
@@ -379,8 +371,7 @@ QSqlQuery data::getRandom(int type) {
     } else if(type == 1) {
         col = "computers";
     }
-
-   QString query("SELECT * FROM %1 "
+    QString query("SELECT * FROM %1 "
           "WHERE Deleted = 'NO' "
           "ORDER BY RANDOM() LIMIT 1");
     if(q.prepare(query.arg(col))) {
@@ -391,5 +382,4 @@ QSqlQuery data::getRandom(int type) {
         qDebug() << q.lastError() << endl;
         return q;
     }
-
 }

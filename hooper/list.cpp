@@ -674,7 +674,7 @@ void List:: updateComputer(int row ,QSqlQuery& cquery){
                     int identity = db.getComputerByID(c.getName().c_str());
                     cout <<"id = "<<identity<<endl;
 
-                    db.Update(identity,fieldName,obj,"computers");
+                    db.update(identity,fieldName,obj,"computers");
 
                     if(option == 1)
                         c.setName(obj);
@@ -786,7 +786,7 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
                         p.setLastName(obj);
 
 
-                    db.Update(identity,fieldName,obj,"persons");
+                    db.update(identity,fieldName,obj,"persons");
 
                 }
 

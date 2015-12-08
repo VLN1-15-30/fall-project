@@ -12,44 +12,43 @@ person::person(){
     sex = "";
 }
 
-string person:: getFirstName() const{
+string person::getFirstName() const{
     return firstname;
 }
 
-string person:: getLastName() const{
+string person::getLastName() const{
     return lastname;
 }
 
-
-int person:: getBorn() const{
+int person::getBorn() const{
     return born;
 }
 
-int person:: getDied() const{
+int person::getDied() const{
     return died;
 }
 
-string person:: getSex() const{
+string person::getSex() const{
     return sex;
 }
 
-void person:: setFirstName(string fn){
+void person::setFirstName(string fn){
     firstname = fn;
 }
 
-void person:: setLastName(string ln){
+void person::setLastName(string ln){
     lastname = ln;
 }
 
-void person:: setSex(string s){
+void person::setSex(string s){
     sex = s;
 }
 
-void person:: setBorn(int b){
+void person::setBorn(int b){
     born = b;
 }
 
-void person:: setDied(int d){
+void person::setDied(int d){
 
     died = d;
 }
@@ -73,7 +72,7 @@ void person::initialize(){
     cout << endl;
 }
 
-int person:: errorCheckNumber(int &number, int index){
+int person::errorCheckNumber(int &number, int index){
 
     int currentYear = 2015;
 
@@ -94,7 +93,7 @@ int person:: errorCheckNumber(int &number, int index){
 
 }
 
-string person:: errorCheckSex(string& sex){
+string person::errorCheckSex(string& sex){
 
     if(sex == "m" || sex == "f")
         return sex;
@@ -108,9 +107,7 @@ string person:: errorCheckSex(string& sex){
         if(sex == "m" || sex == "f")
             break;
     }
-
     return sex;
-
 }
 
 //bool operator <(const person& p1,const person& p2){
