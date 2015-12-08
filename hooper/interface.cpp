@@ -135,6 +135,7 @@ void Interface::viewOptions(int choice){
 
     QSqlQuery c = ComputerScientists.getComputers();
     QSqlQuery p = ComputerScientists.getPersons();
+    QSqlQuery q = ComputerScientists.getConnections();
     cout << endl;
 
     if(choice == 1){
@@ -158,10 +159,18 @@ void Interface::viewOptions(int choice){
             ComputerScientists.printComputerTable(c);
         }
 
-    } else {
+    }
+    else {
         cout <<"==== Overview of connections ===="<<endl;
-        QSqlQuery q = ComputerScientists.getConnections();
-        ComputerScientists.printConnectionsTable(q);
+
+        if(view == 0){
+            ComputerScientists.printConnectionsList(c);
+        }
+
+        else if(view == 1){
+            ComputerScientists.printConnectionsTable(q);
+        }
+
     }
 
 }
@@ -190,18 +199,82 @@ void Interface::order(int choice){
 }
 void Interface::find(){
 
+
+    cout <<endl;
+    cout << "Choose an action: \n"
+            "1) Find a pioneer\n"
+            "2) Find a computer\n"<<endl;
+
+    cout << "Your choice: ";
+
+    int choice;
+    cin >> choice;
+
+    switch (choice) {
+    case 1:findPioneers();
+        break;
+    case 2:findComputers();
+        break;
+    default:
+        break;
+    }
+
+
+}
+
+void Interface::findComputers(){
+
+
+    if(ComputerScientists.computersDatabaseEmpty()) return;
+
+    char again = 'y';
+    while(again == 'y'||again == 'Y'){
+
+        cout << endl;
+        cout <<"==== Search ===="<<endl;
+        cout << "a) Name "<<endl;
+        cout << "b) Type " << endl;
+        cout << "c) Year built " << endl;
+        cout << "d) Was made (YES/NO) " << endl;
+        cout << "Search by: ";
+
+        ComputerScientists.search("computers");
+
+        cout <<  "Search again ?(y/n): ";
+        cin >> again;
+
+    }
+
+
+
+}
+
+void Interface:: findPioneers(){
+
+
     if(ComputerScientists.databaseEmpty()) return;
 
-    cout << endl;
-    cout <<"==== Search ===="<<endl;
-    cout << "a) Last Name "<<endl;
-    cout << "b) Sex " << endl;
-    cout << "c) Year of birth " << endl;
-    cout << "d) Year of death " << endl;
-    cout << "Search by: ";
+    char again = 'y';
+    while(again == 'y'||again == 'Y'){
 
-    ComputerScientists.search();
+        cout << endl;
+        cout <<"==== Search ===="<<endl;
+        cout << "a) Last Name "<<endl;
+        cout << "b) Sex " << endl;
+        cout << "c) Year of birth " << endl;
+        cout << "d) Year of death " << endl;
+        cout << "Search by: ";
+
+        ComputerScientists.search("persons");
+
+        cout <<  "Search again ?(y/n): ";
+        cin >> again;
+
+    }
+
+
 }
+
 void Interface::add(){
 
     int answer = 'y';
@@ -238,14 +311,18 @@ void Interface::add(){
            // died = errorCheckNumber(died,1);
             cout << endl;
 
-            person pers;
-            pers.setFirstName(firstname);
-            pers.setLastName(lastname);
-            pers.setSex(sex);
-            pers.setBorn(born);
-            pers.setDied(died);
+            if(born <= died || died == 0) {
+                person pers;
+                pers.setFirstName(firstname);
+                pers.setLastName(lastname);
+                pers.setSex(sex);
+                pers.setBorn(born);
+                pers.setDied(died);
 
-            ComputerScientists.addData(pers);
+                ComputerScientists.addData(pers);
+            } else {
+                cout << "Invalid input: Birth year > death year" << endl;
+            }
             answer = ComputerScientists.ask_again();
         };
         break;
@@ -407,4 +484,16 @@ void Interface:: deleteConnection(){
     cout << "Computer name: ";
     getline(cin, computerName);
     ComputerScientists.removeConnection(firstName, lastName, computerName);
+}
+
+void Interface::showUsage() {
+    cout << "Hooper is currently storing information about " << endl;
+    cout << ComputerScientists.countDatabase(0) << " pioneers and ";
+    cout << ComputerScientists.countDatabase(1) << " computers." << endl;
+    cout << endl;
+
+}
+
+void Interface::quit() {
+    ComputerScientists.closeDatabase();
 }

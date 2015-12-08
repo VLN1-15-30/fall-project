@@ -15,6 +15,9 @@ public:
     void view();
     void order(int choice);
     void find();
+    void findComputers();
+    void findPioneers();
+
     void add();
     void discover();
     void discoverComputer();
@@ -27,6 +30,8 @@ public:
     void deleteCharacter();
     void deleteConnection();
     void viewOptions(int choice);
+    void showUsage();
+    void quit();
 private:
     List ComputerScientists;
 

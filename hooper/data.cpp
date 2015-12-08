@@ -9,8 +9,8 @@ data::data() {
 
 void data::initialize() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString database = "C:\\hooper\\hooper.sqlite";
-    //QString database = "hooper.sqlite";
+    //QString database = "C:\\hooper\\hooper.sqlite";
+    QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();
@@ -255,8 +255,7 @@ QSqlQuery data::getPersons(){
     if(q.prepare(query)){
         q.exec();
         return q;
-    }
-    else{
+    } else {
         qDebug() << q.lastError() << endl;
         return q;
     }
@@ -308,4 +307,65 @@ int data::removeConnectionByID(int pid, int cid) {
      }
 }
 
+QSqlQuery data:: search(string table, string field, string obj){
 
+    QSqlQuery query;
+    QString s;
+    s = ("SELECT * FROM %1 WHERE %2 LIKE '%%3%' AND deleted = 'NO' ORDER BY %4 ASC" );
+
+    QString val = obj.c_str();
+    QString by = field.c_str();
+    QString tablename = table.c_str();
+
+    query.exec(s.arg(tablename).arg(by).arg(val).arg(by));
+
+    return query;
+
+
+}
+
+int data::countDatabaseInput(int type){
+
+    QSqlQuery query;
+    QString s;
+    if(type == 0){
+        s = ("SELECT Count(*) FROM persons WHERE deleted = 'NO'");
+
+    }
+    else if (type == 1){
+        s = ("SELECT Count(*) FROM computers WHERE deleted = 'NO'");
+
+    }
+    query.exec(s);
+    query.first();
+
+    return query.value(0).toInt();
+}
+
+void data::closeDBConnection() {
+    db.close();
+}
+
+QSqlQuery data::getRandom(int type) {
+    QSqlQuery q;
+    QString col;
+
+    if(type == 0) {
+        col = "persons";
+    } else if(type == 1) {
+        col = "computers";
+    }
+
+   QString query("SELECT * FROM %1 "
+          "WHERE Deleted = 'NO' "
+          "ORDER BY RANDOM() LIMIT 1");
+    if(q.prepare(query.arg(col))) {
+        q.exec();
+        q.first();
+        return q;
+    } else {
+        qDebug() << q.lastError() << endl;
+        return q;
+    }
+
+}
