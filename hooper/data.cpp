@@ -71,6 +71,22 @@ QSqlQuery data::getConnectionsSorted(int sort, int column) {
     }
 }
 
+int data::getPersonID(QString lastName, QString firstName) {
+    QSqlQuery q;
+    QString query("SELECT P.ID FROM persons P "
+                  "WHERE P.lastname = '%1' "
+                  "AND P.firstname = '%2' "
+                  "AND P.Deleted = 'NO'");
+    if(q.prepare(query.arg(lastName).arg(firstName))) {
+       q.exec();
+       q.first();
+       return q.value(0).toInt();
+    } else {
+        return -1;
+    }
+}
+
+
 bool data::addNewConnection(int pid, int cid) {
     QSqlQuery q;
     QString query = "INSERT INTO invented VALUES(?, ?)";

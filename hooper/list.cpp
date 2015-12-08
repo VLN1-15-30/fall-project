@@ -112,18 +112,15 @@ void List::addComp(computer c){
     }
 }
 
-////gets ID of person with lastname
-//void List::getID(string lastname, string firstname) {
-//    QSqlQuery q;
-//    QString query = "SELECT ID FROM persons WHERE lastname = '?'' and firstname = '?'";
-//    if(q.prepare(query)) {
-//        cout << "ID success" << endl;
 
-//    }
-//}
+void List::addConnection(string firstName, string lastName, int computerID){
 
-
-void List::addConnection(int personID, int computerID){
+   int personID = db.getPersonID(lastName.c_str(), firstName.c_str());
+   cout << "This is personID " << personID << endl;
+   if( personID == -1) {
+       cout << "Person not in database" << endl;
+       return;
+   }
    bool add = db.addNewConnection(personID, computerID);
    if(add) {
        cout << "Succesfully added new connections" << endl;
@@ -156,7 +153,6 @@ void List:: writeToFile(vector <person>& p){
 
 void List::printList(vector <person>& p){
 
-    cout <<"==== DATABASE ===="<<endl;
     for (unsigned int i = 0; i < p.size(); i++){
         cout << p.at(i) << endl;
     }
@@ -164,14 +160,12 @@ void List::printList(vector <person>& p){
 
 void List::printComputerList(vector <computer>& c){
 
-    cout <<"==== DATABASE ===="<<endl;
     for (unsigned int i = 0; i < c.size(); i++){
         cout << c.at(i) << endl;
     }
 }
 
 bool List:: computersDatabaseEmpty(){
-
 
     int count = countDatabase(1);
 
@@ -198,7 +192,6 @@ bool List::databaseEmpty() {
 
 void List:: printComputerTable(QSqlQuery q){
 
-    cout <<"==== COMPUTER DATABASE ===="<<endl;
     computerTableBegin();
 
     const char separator    = ' ';
@@ -250,7 +243,6 @@ void List::printConnectionsTable(QSqlQuery q) {
 
 void List::printTable(vector <person>& p) {
 
-    cout <<"==== DATABASE ===="<<endl;
     tableBegin();
 
     const char separator    = ' ';
@@ -394,7 +386,7 @@ void List::orderbyBornDESC(int format){
 
          QSqlQuery query;
          QString s;
-         query.prepare("SELECT * FROM computers ORDER BY name ASC");
+         query.prepare("SELECT * FROM computers Deleted = 'NO' ORDER BY name ASC");
          query.exec();
          qDebug()<<query.executedQuery();
          while (query.next()) {
@@ -420,7 +412,7 @@ void List::orderbyComputerNameZ_A(int format){
 
          QSqlQuery query;
          QString s;
-         query.prepare("SELECT * FROM computers ORDER BY name DESC");
+         query.prepare("SELECT * FROM computers WHERE Deleted = 'NO' ORDER BY name DESC");
          query.exec();
          qDebug()<<query.executedQuery();
          while (query.next()) {
@@ -446,9 +438,9 @@ void List::orderbyComputerTypeA_Z(int format){
 
          QSqlQuery query;
          QString s;
-         query.prepare("SELECT * FROM computers ORDER BY type ASC");
+         query.prepare("SELECT * FROM computers WHERE Deleted = 'NO' ORDER BY type ASC");
          query.exec();
-         qDebug()<<query.executedQuery();
+         qDebug()<< query.executedQuery();
          while (query.next()) {
 
             string name = query.value(1).toString().toStdString();
@@ -472,7 +464,7 @@ void List::orderbyComputerTypeZ_A(int format){
 
          QSqlQuery query;
          QString s;
-         query.prepare("SELECT * FROM computers ORDER BY type DESC");
+         query.prepare("SELECT * FROM computers WHERE Deleted = 'NO' ORDER BY type DESC");
          query.exec();
          qDebug()<<query.executedQuery();
          while (query.next()) {
@@ -560,15 +552,6 @@ char List:: ask_again(){
 }
 
 void List::search(){
-
-    cout << endl;
-    cout <<"==== Search ===="<<endl;
-    cout <<"a: Last Name "<<endl;
-    cout << "b: Sex " << endl;
-    cout << "c: Year of birth " << endl;
-    cout << "d: Year of death " << endl;
-
-    cout << "Search by: ";
 
     char ask;
     cin >> ask;
@@ -740,7 +723,6 @@ person List:: returnPersonAtIndex(int index){
 
 void List:: removeComputer(){
 
-    cout << "Type name of computer: ";
     string name;
     cin >> name;
 
@@ -750,7 +732,6 @@ void List:: removeComputer(){
 
 void List:: removeCharacter(){
 
-    cout << "Type last name: ";
     string name;
     cin >> name;
 
@@ -770,15 +751,9 @@ void List:: removeCharacterWithIndex(){
         cin >> removeIndex;
 
         if(removeIndex >= 1 && removeIndex <= max){
-            /*
-            removeIndex--;
-            string deletedPerson = characters.at(removeIndex).getLastName();
-            characters.erase(characters.begin()+removeIndex);
-            cout << "Successfully removed: " << deletedPerson << endl;
-            */
+
             deleteRowAtIndex(removeIndex,0);
             cout << "Successfully removed:" << endl;
-
 
         }
         else {
