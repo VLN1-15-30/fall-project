@@ -18,14 +18,12 @@ class List
 public:
     List();
     void initialize();
-    void writeToFile(vector <person>& p);
-    void OverWriteToFile(vector <person>& p);
-
 
     vector<person> const getChar();
     vector<computer> const getComputer();
     QSqlQuery getConnections();
     QSqlQuery getComputers();
+    QSqlQuery getPersons();
 
     void setData();
     void addData(person p);
@@ -35,20 +33,13 @@ public:
     void printList(vector <person>& p);
     void printComputerList(vector <computer>& c);
     void performSearchBasedOn(const char& selection);
-    void printTable(vector <person>& p);
+    void printTable(QSqlQuery q);
     void printComputerTable(QSqlQuery q);
     void printConnectionsTable(QSqlQuery q);
     bool databaseEmpty();
     bool computersDatabaseEmpty();
-    void showOrdered(int choice, int column, int order, int format);
-    void orderbyNameA_Z(int format);
-    void orderbyNameZ_A(int format);
-    void orderbyBornASC(int format);
-    void orderbyBornDESC(int format);
-    void orderbyComputerNameA_Z(int format);
-    void orderbyComputerNameZ_A(int format);
-    void orderbyComputerTypeA_Z(int format);
-    void orderbyComputerTypeZ_A(int format);
+    void showOrdered(int choice, int column, int order);
+    void orderbyPersons(int sort, int column);
     void orderbyComputers(int sort, int column);
     void orderbyConnections(int sort, int column);
     void discover(int type);

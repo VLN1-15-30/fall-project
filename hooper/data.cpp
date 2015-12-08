@@ -134,7 +134,7 @@ QSqlQuery data::getComputersSorted(int sort, int column) {
     else{
        orderby = "DESC";
     }
-    QString query("SELECT C.ID C.name, C.type, C.yearMade, C.wasMade "
+    QString query("SELECT C.ID, C.name, C.type, C.yearMade, C.wasMade "
                    "FROM computers C "
                    "ORDER BY %1 %2");
     if(q.prepare(query.arg(col).arg(orderby))) {
@@ -147,5 +147,51 @@ QSqlQuery data::getComputersSorted(int sort, int column) {
     }
 }
 
+QSqlQuery data::getPersons(){
+
+    QSqlQuery q;
+    QString query = ("SELECT ID, firstname, lastname, sex, born, died FROM persons ");
+
+    if(q.prepare(query)){
+        q.exec();
+        return q;
+    }
+    else{
+        qDebug() << q.lastError() << endl;
+        return q;
+    }
+
+}
+
+QSqlQuery data::getPersonsSorted(int sort, int column) {
+    QSqlQuery q;
+    QString orderby;
+    QString col;
+
+    if(column == 0){
+        col = "P.lastname";
+    }
+    else if(column == 1){
+        col = "P.born";
+    }
+
+    if( sort == 0) {
+       orderby = "ASC";
+    }
+    else{
+       orderby = "DESC";
+    }
+    QString query("SELECT P.ID, P.firstname, P.lastname, P.sex, P.born, P.died "
+                   "FROM persons P "
+                   "ORDER BY %1 %2");
+    if(q.prepare(query.arg(col).arg(orderby))) {
+        q.exec();
+        return q;
+        }
+    else {
+        qDebug() << q.lastError() << endl;
+        return q;
+    }
+}
 
 

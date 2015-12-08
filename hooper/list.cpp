@@ -25,32 +25,8 @@ QSqlQuery List::getConnections() {
 }
 
 
-vector<person> const List:: getChar(){
-
-
-    //delete our vector objects and refresh data
-    characters.erase(characters.begin(),characters.end());
-
-    QSqlQuery dataQuery(QString("SELECT * FROM persons WHERE deleted = 'NO'"));
-    dataQuery.exec();
-    //qDebug()<<dataQuery.executedQuery();
-
-        while (dataQuery.next()) {
-
-                string first = dataQuery.value(1).toString().toStdString();
-                string last = dataQuery.value(2).toString().toStdString();
-                string sex = dataQuery.value(3).toString().toStdString();
-                int born = dataQuery.value(4).toUInt();
-                int died = dataQuery.value(5).toUInt();
-
-                person searchedPerson =  returnNewPersonWith(first,last,sex,born,died);
-
-                characters.push_back(searchedPerson);
-
-        }
-
-        return characters;
-
+QSqlQuery List:: getPersons(){
+    return db.getPersons();
 }
 
 void List::addData(person p){
@@ -129,27 +105,6 @@ void List::addConnection(string firstName, string lastName, int computerID){
    }
 }
 
-void List:: writeToFile(vector <person>& p){
-
-
-    ofstream out_stream;
-    out_stream.open("persons.txt", ios::app);
-    if (out_stream.fail( ))
-    {
-        cout << "Failed to write to database."<<endl;
-        return;
-    }
-
-    for (unsigned int i = 0; i< p.size(); i++) {
-        person pers = p[i];
-          out_stream << pers.getFirstName()<<" " << pers.getLastName() << " "
-                     << pers.getSex() <<" " << pers.getBorn()<<" "
-                     << pers.getDied() << endl;
-    }
-
-    out_stream.close( );
-
-}
 
 void List::printList(vector <person>& p){
 
@@ -198,14 +153,16 @@ void List:: printComputerTable(QSqlQuery q){
     const int nameWidth     = 15;
     const int numWidth      = 15;
 
+    int idCount = 0;
     while (q.next()){
-        int ID = q.value(1).toUInt();
+
+        int ID = ++idCount;
         string name = q.value(2).toString().toStdString();
         string type = q.value(3).toString().toStdString();
         int year = q.value(4).toUInt();
         bool made = q.value(5).toBool();
 
-          cout << left << setw(numWidth) << setfill(separator) << ID;
+          cout << left << setw(5) << setfill(separator) << ID;
           cout << left << setw(nameWidth) << setfill(separator) << name;
           cout << left << setw(nameWidth) << setfill(separator) << type;
           cout << left << setw(numWidth) << setfill(separator) << year;
@@ -241,7 +198,7 @@ void List::printConnectionsTable(QSqlQuery q) {
 
 
 
-void List::printTable(vector <person>& p) {
+void List::printTable(QSqlQuery q) {
 
     tableBegin();
 
@@ -250,239 +207,29 @@ void List::printTable(vector <person>& p) {
     const int numWidth      = 15;
     const int genderWidth   = 10;
 
-    for (unsigned int i = 0; i< p.size(); i++) {
+    int idCount = 0;
+    while (q.next()) {
 
-          person pers = p[i];
+        int ID = ++idCount;
+        string first = q.value(1).toString().toStdString();
+        string last = q.value(2).toString().toStdString();
+        string sex = q.value(3).toString().toStdString();
+        int born = q.value(4).toUInt();
+        int died = q.value(5).toUInt();
 
-          cout << left << setw(5) << setfill(separator) << i+1;
-          cout << left << setw(nameWidth) << setfill(separator) << pers.getLastName();
-          cout << left << setw(nameWidth) << setfill(separator) << pers.getFirstName();
-          cout << left << setw(genderWidth) << setfill(separator) << pers.getSex();
-          cout << left << setw(numWidth) << setfill(separator) << pers.getBorn();
-          if(pers.getDied() != 0)
-              cout << left << setw(numWidth) << setfill(separator) << pers.getDied();
-          else
-              cout << left << setw(numWidth) << setfill(separator) << " - ";
-          cout << endl;
+        cout << left << setw(5) << setfill(separator) << ID;
+        cout << left << setw(nameWidth) << setfill(separator) << first;
+        cout << left << setw(nameWidth) << setfill(separator) << last;
+        cout << left << setw(genderWidth) << setfill(separator) << sex;
+        cout << left << setw(numWidth) << setfill(separator) << born;
+        if(died != 0)
+            cout << left << setw(numWidth) << setfill(separator) << died;
+        else
+            cout << left << setw(numWidth) << setfill(separator) << " - ";
+        cout << endl;
      }
 
-     cout << endl;
 }
-
-void List::orderbyNameA_Z(int format){
-
-         vector <person> sResult;
-
-         QSqlQuery query;
-         QString s;
-         query.prepare("SELECT * FROM persons WHERE deleted = 'NO' ORDER BY lastname ASC");
-         query.exec();
-         qDebug()<<query.executedQuery();
-         while (query.next()) {
-
-            string first = query.value(1).toString().toStdString();
-            string last = query.value(2).toString().toStdString();
-            string sex = query.value(3).toString().toStdString();
-            int born = query.value(4).toUInt();
-            int died = query.value(5).toUInt();
-
-            person orderedPerson = returnNewPersonWith(first,last,sex,born,died);
-            sResult.push_back(orderedPerson);
-
-         }
-         if(format == 0)
-                 printList(sResult);
-             else
-                 printTable(sResult);
-}
-
-void List::orderbyNameZ_A(int format){
-
-    vector <person> sResult;
-
-    QSqlQuery query;
-    QString s;
-    query.prepare("SELECT * FROM persons WHERE deleted = 'NO' ORDER BY lastname DESC");
-    query.exec();
-    qDebug()<<query.executedQuery();
-    while (query.next()) {
-
-       string first = query.value(1).toString().toStdString();
-       string last = query.value(2).toString().toStdString();
-       string sex = query.value(3).toString().toStdString();
-       int born = query.value(4).toUInt();
-       int died = query.value(5).toUInt();
-
-
-       person orderedPerson = returnNewPersonWith(first,last,sex,born,died);
-       sResult.push_back(orderedPerson);
-
-       }
-    if(format == 0)
-            printList(sResult);
-        else
-            printTable(sResult);
-}
-
-void List::orderbyBornASC(int format){
-
-    vector <person> sResult;
-
-    QSqlQuery query;
-    QString s;
-    query.prepare("SELECT * FROM persons  WHERE deleted = 'NO' ORDER BY born ASC");
-    query.exec();
-    qDebug()<<query.executedQuery();
-    while (query.next()) {
-
-       string first = query.value(1).toString().toStdString();
-       string last = query.value(2).toString().toStdString();
-       string sex = query.value(3).toString().toStdString();
-       int born = query.value(4).toUInt();
-       int died = query.value(5).toUInt();
-
-
-       person orderedPerson = returnNewPersonWith(first,last,sex,born,died);
-       sResult.push_back(orderedPerson);
-
-       }
-    if(format == 0)
-            printList(sResult);
-        else
-            printTable(sResult);
-}
-
-void List::orderbyBornDESC(int format){
-
-    vector <person> sResult;
-
-    QSqlQuery query;
-    QString s;
-    query.prepare("SELECT * FROM persons  WHERE deleted = 'NO' ORDER BY born DESC");
-    query.exec();
-    qDebug()<<query.executedQuery();
-    while (query.next()) {
-
-       string first = query.value(1).toString().toStdString();
-       string last = query.value(2).toString().toStdString();
-       string sex = query.value(3).toString().toStdString();
-       int born = query.value(4).toUInt();
-       int died = query.value(5).toUInt();
-
-
-       person orderedZAPerson = returnNewPersonWith(first,last,sex,born,died);
-       sResult.push_back(orderedZAPerson);
-
-       }
-    if(format == 0)
-            printList(sResult);
-        else
-            printTable(sResult);
-}
-
-/*void List::orderbyComputerNameA_Z(int format){
-
-         vector <computer> sResult;
-
-         QSqlQuery query;
-         QString s;
-         query.prepare("SELECT * FROM computers Deleted = 'NO' ORDER BY name ASC");
-         query.exec();
-         qDebug()<<query.executedQuery();
-         while (query.next()) {
-
-            string name = query.value(1).toString().toStdString();
-            string type = query.value(2).toString().toStdString();
-            int year = query.value(3).toUInt();
-            bool made = query.value(4).toBool();
-
-            computer orderedComputer = returnNewComputer(name, type, year, made);
-            sResult.push_back(orderedComputer);
-
-         }
-         if(format == 0)
-                 printComputerList(sResult);
-             //else
-                 //printComputerTable(sResult);
-}
-
-void List::orderbyComputerNameZ_A(int format){
-
-         vector <computer> sResult;
-
-         QSqlQuery query;
-         QString s;
-         query.prepare("SELECT * FROM computers WHERE Deleted = 'NO' ORDER BY name DESC");
-         query.exec();
-         qDebug()<<query.executedQuery();
-         while (query.next()) {
-
-            string name = query.value(1).toString().toStdString();
-            string type = query.value(2).toString().toStdString();
-            int year = query.value(3).toUInt();
-            bool made = query.value(4).toBool();
-
-            computer orderedComputer = returnNewComputer(name, type, year, made);
-            sResult.push_back(orderedComputer);
-
-         }
-         if(format == 0)
-               printComputerList(sResult);
-            // else
-                 //printComputerTable(sResult);
-}
-
-void List::orderbyComputerTypeA_Z(int format){
-
-         vector <computer> sResult;
-
-         QSqlQuery query;
-         QString s;
-         query.prepare("SELECT * FROM computers WHERE Deleted = 'NO' ORDER BY type ASC");
-         query.exec();
-         qDebug()<< query.executedQuery();
-         while (query.next()) {
-
-            string name = query.value(1).toString().toStdString();
-            string type = query.value(2).toString().toStdString();
-            int year = query.value(3).toUInt();
-            bool made = query.value(4).toBool();
-
-            computer orderedComputer = returnNewComputer(name, type, year, made);
-            sResult.push_back(orderedComputer);
-
-         }
-         if(format == 0)
-                 printComputerList(sResult);
-             //else
-                // printComputerTable(sResult);
-}
-
-void List::orderbyComputerTypeZ_A(int format){
-
-         vector <computer> sResult;
-
-         QSqlQuery query;
-         QString s;
-         query.prepare("SELECT * FROM computers WHERE Deleted = 'NO' ORDER BY type DESC");
-         query.exec();
-         qDebug()<<query.executedQuery();
-         while (query.next()) {
-
-            string name = query.value(1).toString().toStdString();
-            string type = query.value(2).toString().toStdString();
-            int year = query.value(3).toUInt();
-            bool made = query.value(4).toBool();
-
-            computer orderedComputer = returnNewComputer(name, type, year, made);
-            sResult.push_back(orderedComputer);
-
-         }
-         if(format == 0)
-                 printComputerList(sResult);
-             //else
-                // printComputerTable(sResult);
-}*/
 
 void List::orderbyComputers(int sort, int column){
     q = db.getComputersSorted(sort, column);
@@ -494,49 +241,23 @@ void List::orderbyConnections(int sort, int column){
     printConnectionsTable(q);
 }
 
+void List::orderbyPersons(int sort, int column){
+    q = db.getPersonsSorted(sort, column);
+    printTable(q);
+}
 
-
-void List::showOrdered(int choice, int column, int order, int format){
+void List::showOrdered(int choice, int column, int order){
     //order person table
-    if (choice == 1){
-        if(column == NAME) {
-            if( order == 0) {
-                orderbyNameA_Z(format);
-            }
-            else {
-                orderbyNameZ_A(format);
-            }
-        }
-        else if (column == BORN){
-            if( order == 0){
-                orderbyBornASC(format);
-            }
-            else {
-                orderbyBornDESC(format);
-            }
-        }
+   if (choice == 1){
+        orderbyPersons(order, column);
    }
    //order computer table
-   if(choice == 2){
+   else if(choice == 2){
       orderbyComputers(order, column);
-       /*if(column == 0){
-           if( order == 0){
-               orderbyComputerNameA_Z(format);
-           }
-           else{
-               orderbyComputerNameZ_A(format);
-           }
-       }
-       if(column == 1){
-           if(order == 0){
-               orderbyComputerTypeA_Z(format);
-           }
-           else{
-               orderbyComputerTypeZ_A(format);
-           }*/
 
     //order connections table
-   } else {
+   }
+   else{
            orderbyConnections(order, column);
    }
 
@@ -613,7 +334,7 @@ void List:: performSearchBasedOn(const char& selection){
         cout <<endl;
         cout << "Found the following results: "<< endl;
 
-        printTable(sResult);
+        //printTable(sResult);
     }
 
     cout <<  "Search again ?(y/n): ";
@@ -836,26 +557,6 @@ void List:: deleteCharacterWithName(string lastname, int type){
 
 }
 
-void List:: OverWriteToFile(vector <person>& p){
-
-    ofstream out_stream;
-    out_stream.open("persons.txt");
-
-    if (out_stream.fail( )){
-        cout << "Failed to write to database."<<endl;
-        return;
-    }
-
-    for (unsigned int i = 0; i< p.size(); i++) {
-        person pers = p[i];
-          out_stream << pers.getFirstName()<<" " << pers.getLastName() << " "
-                     << pers.getSex() <<" " << pers.getBorn()<<" "
-                     << pers.getDied() << endl;
-    }
-
-    out_stream.close( );
-
-}
 
 void List:: tableBegin(){
 

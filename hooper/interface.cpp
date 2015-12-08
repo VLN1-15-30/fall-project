@@ -73,32 +73,25 @@ void Interface::viewOptions(int choice){
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
-<<<<<<< HEAD
-    QSqlQuery c = ComputerScientists.getComputers();
-=======
-    cout << endl;
 
->>>>>>> a059ddacf32288a7b65109bbe37c976d43a5754e
+    QSqlQuery c = ComputerScientists.getComputers();
+    QSqlQuery p = ComputerScientists.getPersons();
+    cout << endl;
     if(choice == 1){
         cout <<"==== Database ===="<<endl;
-
-        vector<person> p = ComputerScientists.getChar();
-
-
-        if(view == 0){
+        /*if(view == 0){
             ComputerScientists.printList(p);
-        }
-        else if(view == 1){
+        }*/
+        if(view == 1){
             ComputerScientists.printTable(p);
         }
     }
     else if(choice == 2){
-<<<<<<< HEAD
-=======
+
         cout <<"==== Computer database ===="<<endl;
 
-        vector<computer>c = ComputerScientists.getComputers();
->>>>>>> a059ddacf32288a7b65109bbe37c976d43a5754e
+        QSqlQuery c = ComputerScientists.getComputers();
+
 
         /*if(view == 0){
             ComputerScientists.printComputerList();
@@ -134,7 +127,7 @@ void Interface::order(int choice){
     int view;
     cin >> view;
 
-    ComputerScientists.showOrdered(choice, column, order, view);
+    ComputerScientists.showOrdered(choice, column, order);
 
 }
 void Interface::find(){
@@ -228,7 +221,7 @@ void Interface::add(){
         break;
         case 3: cout << "===== Add a connection =====" << endl;
         while(answer == 'y' || answer == 'Y'){
-            vector<person> p = ComputerScientists.getChar();
+            QSqlQuery p = ComputerScientists.getPersons();
             QSqlQuery c = ComputerScientists.getComputers();
             ComputerScientists.printTable(p);
             ComputerScientists.printComputerTable(c);
@@ -271,7 +264,7 @@ void Interface::discover(){
 
 void Interface::deleteCharacter(){
     if(ComputerScientists.databaseEmpty()) return;
-    vector<person> p = ComputerScientists.getChar();
+    QSqlQuery p = ComputerScientists.getPersons();
     ComputerScientists.printTable(p);
     cout << "==== Remove a pioneer ===="<<endl;
     cout << "Write 0 to remove by index, 1 to remove by last name"<<endl;

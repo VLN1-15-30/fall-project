@@ -15,12 +15,12 @@ public:
     QSqlQuery getConnections();
     QSqlQuery getConnectionsSorted(int sort, int column);
     bool addNewConnection(int pid, int cid);
-<<<<<<< HEAD
     QSqlQuery getComputers();
     QSqlQuery getComputersSorted(int sort, int column);
-=======
     int getPersonID(QString lastName, QString firstName);
->>>>>>> a059ddacf32288a7b65109bbe37c976d43a5754e
+    QSqlQuery getPersons();
+    QSqlQuery getPersonsSorted(int sort, int column);
+
 
 
 
