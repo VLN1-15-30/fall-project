@@ -166,10 +166,10 @@ void List:: printComputerTable(QSqlQuery q){
     while (q.next()){
 
         int ID = ++idCount;
-        string name = q.value(2).toString().toStdString();
-        string type = q.value(3).toString().toStdString();
-        int year = q.value(4).toUInt();
-        bool made = q.value(5).toBool();
+        string name = q.value(1).toString().toStdString();
+        string type = q.value(2).toString().toStdString();
+        int year = q.value(3).toUInt();
+        bool made = q.value(4).toBool();
 
           cout << left << setw(5) << setfill(separator) << ID;
           cout << left << setw(nameWidth) << setfill(separator) << name;
