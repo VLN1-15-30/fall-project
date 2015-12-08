@@ -9,8 +9,8 @@ data::data() {
 
 void data::initialize() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString database = "C:\\hooper\\hooper.sqlite";
-    //QString database = "hooper.sqlite";
+    //QString database = "C:\\hooper\\hooper.sqlite";
+    QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();
@@ -286,4 +286,18 @@ int data::removeConnectionByID(int pid, int cid) {
      }
 }
 
+QSqlQuery data:: search(string table, string field, string obj){
+
+    QSqlQuery query;
+    QString s;
+    s = ("SELECT * FROM %1 WHERE %2 LIKE '%%3%' AND deleted = 'NO' ORDER BY %4 ASC" );
+
+    QString val = obj.c_str();
+    QString by = field.c_str();
+    QString tablename = table.c_str();
+
+    query.exec(s.arg(tablename).arg(by).arg(val).arg(by));
+
+    return query;
+}
 
