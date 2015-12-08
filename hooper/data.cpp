@@ -186,7 +186,7 @@ QSqlQuery data::getComputersSorted(int sort, int column) {
 QSqlQuery data::getPersons(){
 
     QSqlQuery q;
-    QString query = ("SELECT ID, firstname, lastname, sex, born, died FROM persons ");
+    QString query = ("SELECT ID, lastname, firstname, sex, born, died FROM persons ");
 
     if(q.prepare(query)){
         q.exec();
@@ -217,7 +217,7 @@ QSqlQuery data::getPersonsSorted(int sort, int column) {
     else{
        orderby = "DESC";
     }
-    QString query("SELECT P.ID, P.firstname, P.lastname, P.sex, P.born, P.died "
+    QString query("SELECT P.ID, P.lastname, P.firstname, P.sex, P.born, P.died "
                    "FROM persons P "
                    "ORDER BY %1 %2");
     if(q.prepare(query.arg(col).arg(orderby))) {

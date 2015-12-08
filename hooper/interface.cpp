@@ -127,11 +127,11 @@ void Interface::viewOptions(int choice){
 
         cout <<"==== Computer database ===="<<endl;
 
-        /*(view == 0){
+        if(view == 0){
             ComputerScientists.printComputerList(c);
-        }*/
+        }
 
-        if(view == 1){
+        else if(view == 1){
             ComputerScientists.printComputerTable(c);
         }
 

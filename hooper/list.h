@@ -31,7 +31,7 @@ public:
     void addConnection(string firstName, string lastName, string computerName);
     void search();
     void printList(QSqlQuery q);
-    void printComputerList(vector <computer>& c);
+    void printComputerList(QSqlQuery q);
     void performSearchBasedOn(const char& selection);
     void printTable(QSqlQuery q);
     void printComputerTable(QSqlQuery q);
