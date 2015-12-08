@@ -39,31 +39,5 @@ private:
     string sex;
 
 };
-// sort person by certain column and order
-// based on tutorial http://www.walletfox.com/course/sortvectorofcustomobjects.php
-struct EntityComp{
-    int column;
-    int sort;
-    EntityComp(int column, int sort){
-        this->column = column;
-        this->sort = sort;
-    }
-    bool operator ()(const person& p1,const person& p2) const {
-        if(column == NAME){
-            if(sort == 0) {
-                return p1.getLastName() < p2.getLastName();
-            } else {
-                return p1.getLastName() > p2.getLastName();
-            }
-        } else{
-            if(sort == BORN) {
-                return p1.getBorn() > p2.getBorn();
-            } else {
-                return p1.getBorn() < p2.getBorn();
-            }
-        }
-    }
-};
-
 
 #endif // PERSON
