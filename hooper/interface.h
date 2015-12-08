@@ -15,6 +15,9 @@ public:
     void view();
     void order(int choice);
     void find();
+    void findComputers();
+    void findPioneers();
+
     void add();
     void discover();
     void discoverComputer();

@@ -29,11 +29,12 @@ public:
     void addData(person p);
     void addComp (computer c);
     void addConnection(string firstName, string lastName, string computerName);
-    void search();
+    void search(string table);
     void printList(QSqlQuery q);
     void printComputerList(QSqlQuery q);
+
     void printConnectionsList(QSqlQuery q);
-    void performSearchBasedOn(const char& selection);
+    void performSearchBasedOn(const char& selection, string table);
     void printTable(QSqlQuery q);
     void printComputerTable(QSqlQuery q);
     void printConnectionsTable(QSqlQuery q);
