@@ -94,13 +94,13 @@ void List::addConnection(string firstName, string lastName, string computerName)
    int personID = db.getPersonID(lastName.c_str(), firstName.c_str());
    cout << "This is personID " << personID << endl;
 
-   if( personID == -1) {
+   if( personID == -1 || personID == 0) {
        cout << "Person not in database" << endl;
        return;
    }
 
    int computerID = db.getComputerByID(computerName.c_str());
-   if( computerID == -1) {
+   if( computerID == -1 || personID == 0) {
        cout << "Computer not in database" << endl;
        return;
    }
@@ -450,7 +450,7 @@ void List:: discover(int type){
         person p = returnNewPersonWith(first,last,sex,born,died);
         cout << p;
     }
-    /*else if (type == 1){
+    else if (type == 1){
 
         s = ("SELECT * FROM computers WHERE deleted = 'NO' ORDER BY RANDOM() LIMIT 1");
         query.exec(s);
@@ -461,10 +461,10 @@ void List:: discover(int type){
         int year = query.value(3).toUInt();
         bool made = query.value(4).toBool();
 
-        //computer c = returnNewComputer(first,type,year,made);
-        //cout << c;
+        computer c = returnNewComputer(first,type,year,made);
+        cout << c;
 
-    }*/
+    }
 
 }
 
