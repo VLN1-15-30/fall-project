@@ -118,10 +118,10 @@ void Interface::viewOptions(int choice){
 
     if(choice == 1){
         cout <<"==== Database ===="<<endl;
-        /*if(view == 0){
+        if(view == 0){
             ComputerScientists.printList(p);
-        }*/
-        if(view == 1){
+        }
+        else if(view == 1){
             ComputerScientists.printTable(p);
         }
     }
@@ -129,15 +129,12 @@ void Interface::viewOptions(int choice){
 
         cout <<"==== Computer database ===="<<endl;
 
-        QSqlQuery dbquery = ComputerScientists.getComputers();
+        if(view == 0){
+            ComputerScientists.printComputerList(c);
+        }
 
-
-        /*if(view == 0){
-            ComputerScientists.printComputerList();
-        }*/
-
-        if(view == 1){
-            ComputerScientists.printComputerTable(dbquery);
+        else if(view == 1){
+            ComputerScientists.printComputerTable(c);
         }
 
     } else {

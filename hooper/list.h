@@ -30,8 +30,8 @@ public:
     void addComp (computer c);
     void addConnection(string firstName, string lastName, string computerName);
     void search();
-    void printList(vector <person>& p);
-    void printComputerList(vector <computer>& c);
+    void printList(QSqlQuery q);
+    void printComputerList(QSqlQuery q);
     void performSearchBasedOn(const char& selection);
     void printTable(QSqlQuery q);
     void printComputerTable(QSqlQuery q);

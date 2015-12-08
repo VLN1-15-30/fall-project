@@ -114,19 +114,54 @@ void List::addConnection(string firstName, string lastName, string computerName)
    }
 }
 
+void List::printList(QSqlQuery q){
 
-void List::printList(vector <person>& p){
+    int idCount = 0;
+    while (q.next()){
 
-    for (unsigned int i = 0; i < p.size(); i++){
-        cout << p.at(i) << endl;
+        int ID = ++idCount;
+        string first = q.value(1).toString().toStdString();
+        string last = q.value(2).toString().toStdString();
+        string sex = q.value(3).toString().toStdString();
+        int born = q.value(4).toUInt();
+        int died = q.value(5).toUInt();
+
+        cout << "ID: " << ID << endl;
+        cout << "First name: " << first << endl;
+        cout << "Last name: " << last << endl;
+        cout << "Sex: " << sex << endl;
+        cout << "Born: " << born << endl;
+        if(died != 0)
+            cout << "Died: " << died << endl;
+          else
+              cout << "-";
+          cout << endl << endl;
     }
 }
 
-void List::printComputerList(vector <computer>& c){
+void List::printComputerList(QSqlQuery q){
 
-    for (unsigned int i = 0; i < c.size(); i++){
-        cout << c.at(i) << endl;
+    int idCount = 0;
+    while (q.next()){
+
+        int ID = ++idCount;
+        string name = q.value(1).toString().toStdString();
+        string type = q.value(2).toString().toStdString();
+        int year = q.value(3).toUInt();
+        bool made = q.value(4).toBool();
+
+        cout << "ID: " << ID << endl;
+        cout << "Computer name: " << name << endl;
+        cout << "Computer type: " << type << endl;
+        cout << "Year made: " << year << endl;
+        if(made == true)
+            cout << "Was it made: Yes " << endl;
+          else
+              cout << "Was it made: No ";
+          cout << endl << endl;
     }
+
+
 }
 
 bool List:: computersDatabaseEmpty(){
