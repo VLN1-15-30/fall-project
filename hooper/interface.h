@@ -22,6 +22,7 @@ public:
     void updatePioneers();
     void deleteComputer();
     void deleteCharacter();
+    void deleteConnection();
     void viewOptions(int choice);
 private:
     List ComputerScientists;

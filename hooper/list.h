@@ -38,13 +38,14 @@ public:
     void printConnectionsTable(QSqlQuery q);
     bool databaseEmpty();
     bool computersDatabaseEmpty();
-    void showOrdered(int choice, int column, int order);
-    void orderbyPersons(int sort, int column);
-    void orderbyComputers(int sort, int column);
+    void showOrdered(int choice, int column, int order, int view);
+    void orderbyPersons(int sort, int column, int view);
+    void orderbyComputers(int sort, int column, int view);
     void orderbyConnections(int sort, int column);
     void discover(int type);
     void removeCharacter();
     void removeComputer();
+    void removeConnection(string firstname, string lastName, string computerName);
     void removeComputerWithIndex();
     void removeCharacterWithIndex();
 

@@ -66,7 +66,6 @@ void List::addData(person p){
         }
     }
 
-
 }
 
 void List::addComp(computer c){
@@ -275,9 +274,15 @@ void List::printTable(QSqlQuery q) {
 
 }
 
-void List::orderbyComputers(int sort, int column){
+void List::orderbyComputers(int sort, int column, int view){
     q = db.getComputersSorted(sort, column);
-    printComputerTable(q);
+    if(view == 0){
+        printComputerList(q);
+    }
+    else{
+        printComputerTable(q);
+    }
+
 }
 
 void List::orderbyConnections(int sort, int column){
@@ -285,19 +290,25 @@ void List::orderbyConnections(int sort, int column){
     printConnectionsTable(q);
 }
 
-void List::orderbyPersons(int sort, int column){
+void List::orderbyPersons(int sort, int column, int view){
     q = db.getPersonsSorted(sort, column);
-    printTable(q);
+    if(view == 0){
+        printList(q);
+    }
+    else{
+       printTable(q);
+    }
+
 }
 
-void List::showOrdered(int choice, int column, int order){
+void List::showOrdered(int choice, int column, int order, int view){
     //order person table
    if (choice == 1){
-        orderbyPersons(order, column);
+        orderbyPersons(order, column, view);
    }
    //order computer table
    else if(choice == 2){
-      orderbyComputers(order, column);
+      orderbyComputers(order, column, view);
 
     //order connections table
    }
@@ -861,3 +872,27 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
    }
 }
 
+void List::removeConnection(string firstName, string lastName, string computerName) {
+
+    int personID = db.getPersonID(lastName.c_str(), firstName.c_str());
+
+    if( personID == -1 || personID == 0) {
+        cout << "Person not in database" << endl;
+        return;
+    }
+
+    int computerID = db.getComputerByID(computerName.c_str());
+    if( computerID == -1 || computerID == 0) {
+        cout << "Computer not in database" << endl;
+        return;
+    }
+
+    bool remove = db.removeConnectionByID(personID, computerID);
+    if(remove) {
+        cout << "Succesfully removed connection" << endl;
+    } else {
+        cout << "ID's are not valid" << endl;
+    }
+
+
+}
