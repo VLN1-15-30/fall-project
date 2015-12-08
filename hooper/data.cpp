@@ -7,8 +7,8 @@ data::data() {
 
 void data::initialize() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString database = "C:\\hooper\\hooper.sqlite";
-   // QString database = "hooper.sqlite";
+    //QString database = "C:\\hooper\\hooper.sqlite";
+    QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();
@@ -82,5 +82,21 @@ bool data::addNewConnection(int pid, int cid) {
     }
 }
 
+void data::Update(int rowId, string fieldname, string value, string tableName){
+
+    QSqlQuery query;
+    QString s;
+
+    s = ( "UPDATE '%1' SET '%2' = '%3' WHERE id = '%4'" );
+
+    QString field = fieldname.c_str();
+    QString table = tableName.c_str();
+    QString change = value.c_str();
+
+    query.exec(s.arg(table).arg(field).arg(change).arg(rowId));
+    qDebug()<< query.executedQuery();
+
+
+}
 
 

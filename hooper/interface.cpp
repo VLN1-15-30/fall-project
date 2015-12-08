@@ -20,7 +20,9 @@ void Interface::actions(){
             "4) Discover a random pioneer. \n"
             "5) Discover a random computer. \n"
             "6) Remove a pioneer from the database. \n"
-            "7) Remove a computer from the database."<< endl;
+            "7) Remove a computer from the database. \n"
+            "8) Update pioneers \n"
+            "9) Update computers\n" << endl;
 
       cout << "Your choice: ";
 
@@ -42,8 +44,41 @@ void Interface::actions(){
         break;
         case 7: deleteComputer();
         break;
+        case 8: updatePioneers();
+        break;
+        case 9: updateComputers();
+        break;
     }
 }
+
+void Interface:: updateComputers(){
+
+    cout <<endl;
+    cout <<"==== Update computers ===="<<endl;
+
+    vector<computer>c = ComputerScientists.getComputers();
+    ComputerScientists.printComputerTable(c);
+    cout << "Enter row number: ";
+    int row;
+    cin >> row;
+    ComputerScientists.updateComputer(row,c[row-1]);
+
+}
+
+void Interface:: updatePioneers(){
+
+    cout <<endl;
+    cout <<"==== Update pioneers ===="<<endl;
+
+    vector<person> p = ComputerScientists.getChar();
+    ComputerScientists.printTable(p);
+    cout << "Enter row number: ";
+    int row;
+    cin >> row;
+    ComputerScientists.updatePioneer(row,p[row-1]);
+
+}
+
 void Interface::view(){
 
     //if(ComputerScientists.databaseEmpty()) return;

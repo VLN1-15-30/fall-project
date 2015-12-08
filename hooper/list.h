@@ -62,6 +62,9 @@ public:
     void deleteRowAtIndex(int rowNumber, int type);
     void deleteCharacterWithName(string lastname, int type);
 
+    void updatePioneer(int row, person& p);
+    void updateComputer(int row, computer& p);
+
     int countDatabase(int type);
 
     char ask_again();

@@ -935,4 +935,137 @@ void List:: connectionsTableBegin(){
     cout << endl;
 }
 
+void List:: updateComputer(int row ,computer& c){
+
+    cout <<endl;
+    cout <<c;
+    cout <<endl;
+
+    char update = 'Y';
+
+    while (update == 'Y'|| update == 'y'){
+
+        cout << "Choose action: \n"
+                "1) New name. \n"
+                "2) New type. \n"
+                "3) New year made. \n"
+                "4) New was made. \n" << endl;
+
+        cout << "Your choice: ";
+        int option;
+        cin>> option;
+
+        string fieldName;
+
+        if(option >0 && option <5){
+
+            switch(option){
+
+            case 1:{
+                  cout << "new name: ";
+                  fieldName ="name";
+                     }
+            break;
+            case 2:{
+                cout << "new type: ";
+                fieldName ="type";
+            }
+            break;
+            case 3:{
+                cout << "new year made: ";
+                fieldName ="yearMade";
+            }
+            break;
+            case 4:{
+                cout << "new was made(YES/NO): ";
+                fieldName ="wasMade";
+            }
+            break;
+
+            }
+
+            string obj;
+            cin >> obj;
+
+            db.Update(row,fieldName,obj,"computers");
+        }
+
+        cout << "Update again(n/y):"<<endl;
+        cout << "Your choice: ";
+        cin >> update;
+        cout <<endl;
+
+
+    }
+}
+
+void List:: updatePioneer(int row, person& p){
+
+    cout <<endl;
+    cout <<p;
+    cout <<endl;
+
+    char update = 'Y';
+
+    while (update == 'Y'|| update == 'y'){
+
+        cout << "Choose action: \n"
+                "1) New first name. \n"
+                "2) New last name. \n"
+                "3) New sex. \n"
+                "4) New year born. \n"
+                "4) New year died. \n"<< endl;
+
+        cout << "Your choice: ";
+        int option;
+        cin>> option;
+
+        string fieldName;
+
+        if(option >0 && option <6){
+
+            switch(option){
+
+            case 1:{
+                  cout << "new first name: ";
+                  fieldName ="firstname";
+                     }
+            break;
+            case 2:{
+                cout << "new last name: ";
+                fieldName ="lastname";
+            }
+            break;
+            case 3:{
+                cout << "new sex(m/f): ";
+                fieldName ="sex";
+            }
+            break;
+            case 4:{
+                cout << "new year born: ";
+                fieldName ="born";
+            }
+            break;
+            case 5:{
+                cout << "new year died: ";
+                fieldName ="died";
+            }
+            break;
+
+
+            }
+
+            string obj;
+            cin >> obj;
+
+            db.Update(row,fieldName,obj,"persons");
+        }
+
+        cout << "Update again(n/y):"<<endl;
+        cout << "Your choice: ";
+        cin >> update;
+        cout <<endl;
+
+
+    }}
 

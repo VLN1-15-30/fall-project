@@ -18,6 +18,8 @@ public:
     void add();
     void discover();
     void discoverComputer();
+    void updateComputers();
+    void updatePioneers();
     void deleteComputer();
     void deleteCharacter();
     void viewOptions(int choice);

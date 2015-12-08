@@ -13,6 +13,8 @@ public:
     void initialize();
     QSqlQuery getConnections();
     QSqlQuery getConnectionsSorted(int sort, int column);
+    void Update(int rowId, string fieldname, string value,string tableName);
+
     bool addNewConnection(int pid, int cid);
 
 
