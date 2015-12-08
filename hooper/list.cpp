@@ -66,7 +66,6 @@ void List::addData(person p){
         }
     }
 
-
 }
 
 void List::addComp(computer c){
@@ -851,3 +850,27 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
    }
 }
 
+void List::removeConnection(string firstName, string lastName, string computerName) {
+
+    int personID = db.getPersonID(lastName.c_str(), firstName.c_str());
+
+    if( personID == -1 || personID == 0) {
+        cout << "Person not in database" << endl;
+        return;
+    }
+
+    int computerID = db.getComputerByID(computerName.c_str());
+    if( computerID == -1 || computerID == 0) {
+        cout << "Computer not in database" << endl;
+        return;
+    }
+
+    bool remove = db.removeConnectionByID(personID, computerID);
+    if(remove) {
+        cout << "Succesfully removed connection" << endl;
+    } else {
+        cout << "ID's are not valid" << endl;
+    }
+
+
+}

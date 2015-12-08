@@ -79,7 +79,8 @@ int data::getPersonID(QString lastName, QString firstName) {
                   "WHERE P.lastname = '%1' "
                   "AND P.firstname = '%2' "
                   "AND P.Deleted = 'NO'");
-    if(q.prepare(query.arg(lastName).arg(firstName))) {
+    if(q.prepare(query.arg(lastName).arg(firstName)))
+    {
        q.exec();
        q.first();
        return q.value(0).toInt();
@@ -95,16 +96,12 @@ int data::getComputerByID(QString computerName) {
                   "AND C.Deleted = 'NO'");
     if(q.prepare(query.arg(computerName))) {
        q.exec();
-       if(q.size() == 1) {
-           return -1;
-       }
        q.first();
        return q.value(0).toInt();
     } else {
         return -1;
     }
 }
-
 
 bool data::addNewConnection(int pid, int cid) {
     QSqlQuery q;
@@ -230,4 +227,16 @@ QSqlQuery data::getPersonsSorted(int sort, int column) {
     }
 }
 
+int data::removeConnectionByID(int pid, int cid) {
+    QSqlQuery q;
+    QString query("UPDATE invented SET deleted = 'YES' "
+                  "WHERE pid = %1 AND cid = %2" );
+    if(q.prepare(query.arg(pid).arg(cid))){
+        q.exec();
+        return 1;
+     } else {
+        qDebug() << q.lastError() << endl;
+        return 0;
+     }
+}
 

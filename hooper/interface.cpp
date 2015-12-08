@@ -22,7 +22,8 @@ void Interface::actions(){
             "6) Remove a pioneer from the database. \n"
             "7) Remove a computer from the database. \n"
             "8) Update pioneers \n"
-            "9) Update computers\n" << endl;
+            "9) Update computers\n"
+            "10) Remove a connection from the database. \n" << endl;
 
       cout << "Your choice: ";
 
@@ -46,6 +47,8 @@ void Interface::actions(){
         case 8: updatePioneers();
         break;
         case 9: updateComputers();
+        break;
+        case 10: deleteConnection();
         break;
     }
 }
@@ -340,6 +343,20 @@ void Interface:: deleteComputer(){
         ComputerScientists.removeComputer();
 
     }
+}
 
 
+void Interface:: deleteConnection(){
+    cout << "==== Remove Connection ===="<<endl;
+    cout << "Write Inventors name and computer name"<<endl;
+    string firstName, lastName, computerName;
+
+    cin.ignore(1);
+    cout << "First name: ";
+    getline(cin,firstName);
+    cout << "Last name: ";
+    getline(cin,lastName);
+    cout << "Computer name: ";
+    getline(cin, computerName);
+    ComputerScientists.removeConnection(firstName, lastName, computerName);
 }

@@ -45,6 +45,7 @@ public:
     void discover(int type);
     void removeCharacter();
     void removeComputer();
+    void removeConnection(string firstname, string lastName, string computerName);
     void removeComputerWithIndex();
     void removeCharacterWithIndex();
 
