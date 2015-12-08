@@ -29,6 +29,7 @@ public:
     int removeConnectionByID(int pid, int cid);
     int countDatabaseInput(int type);
     void closeDBConnection();
+    QSqlQuery getRandom(int type);
 
 
 
