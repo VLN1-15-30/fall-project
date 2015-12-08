@@ -175,7 +175,7 @@ void List:: writeToFile(vector <person>& p){
 
 void List::printList(vector <person>& p){
 
-    cout <<"==== DATABASE ===="<<endl;
+    cout <<"==== Database ===="<<endl;
     for (unsigned int i = 0; i < p.size(); i++){
         cout << p.at(i) << endl;
     }
@@ -183,7 +183,7 @@ void List::printList(vector <person>& p){
 
 void List::printComputerList(vector <computer>& c){
 
-    cout <<"==== DATABASE ===="<<endl;
+    cout <<"==== Database ===="<<endl;
     for (unsigned int i = 0; i < c.size(); i++){
         cout << c.at(i) << endl;
     }
@@ -217,7 +217,7 @@ bool List::databaseEmpty() {
 
 void List:: printComputerTable(vector<computer> &c){
 
-    cout <<"==== COMPUTER DATABASE ===="<<endl;
+    cout <<"==== Computer database ===="<<endl;
     computerTableBegin();
 
     const char separator    = ' ';
@@ -266,7 +266,7 @@ void List::printConnectionsTable(QSqlQuery q) {
 
 void List::printTable(vector <person>& p) {
 
-    cout <<"==== DATABASE ===="<<endl;
+    cout <<"==== Database ===="<<endl;
     tableBegin();
 
     const char separator    = ' ';
@@ -570,15 +570,6 @@ char List:: ask_again(){
 }
 
 void List::search(){
-
-    cout << endl;
-    cout <<"==== Search ===="<<endl;
-    cout <<"a: Last Name "<<endl;
-    cout << "b: Sex " << endl;
-    cout << "c: Year of birth " << endl;
-    cout << "d: Year of death " << endl;
-
-    cout << "Search by: ";
 
     char ask;
     cin >> ask;
