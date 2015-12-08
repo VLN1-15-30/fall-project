@@ -9,8 +9,8 @@ data::data() {
 
 void data::initialize() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    //QString database = "C:\\hooper\\hooper.sqlite";
-    QString database = "hooper.sqlite";
+    QString database = "C:\\hooper\\hooper.sqlite";
+    //QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();
@@ -101,6 +101,44 @@ int data::getComputerByID(QString computerName) {
     } else {
         return -1;
     }
+}
+
+bool data::addNewPerson(string firstname, string lastname, string sex, int born, int died) {
+
+    QString qfirstname(firstname.c_str());
+    QString qlastname(lastname.c_str());
+    QString qsex(sex.c_str());
+
+    QSqlQuery add;
+    QString query;
+
+    //Death year becomes NULL if person still alive
+    if(died != 0) {
+        query = ("INSERT INTO persons VALUES(NULL, ?, ?, ?, ?, ?, 'NO')");
+        if(add.prepare(query)){
+            add.addBindValue(qfirstname);
+            add.addBindValue(qlastname);
+            add.addBindValue(qsex);
+            add.addBindValue(born);
+            add.addBindValue(died);
+            return add.exec();
+        }
+    }
+    else if(died == 0){
+        query = "INSERT INTO persons(ID, firstname, lastname, sex, born)" "VALUES(NULL, ?, ?, ?, ?)";
+        if(add.prepare(query)) {
+            add.addBindValue(qfirstname);
+            add.addBindValue(qlastname);
+            add.addBindValue(qsex);
+            add.addBindValue(born);
+            return add.exec();
+        }
+    }
+    else {
+        qDebug() << add.lastError() << endl;
+            return false;
+    }
+    return false;
 }
 
 bool data::addNewConnection(int pid, int cid) {
@@ -239,4 +277,5 @@ int data::removeConnectionByID(int pid, int cid) {
         return 0;
      }
 }
+
 
