@@ -255,8 +255,7 @@ QSqlQuery data::getPersons(){
     if(q.prepare(query)){
         q.exec();
         return q;
-    }
-    else{
+    } else {
         qDebug() << q.lastError() << endl;
         return q;
     }
@@ -312,3 +311,26 @@ void data::closeDBConnection() {
     db.close();
 }
 
+QSqlQuery data::getRandom(int type) {
+    QSqlQuery q;
+    QString col;
+
+    if(type == 0) {
+        col = "persons";
+    } else if(type == 1) {
+        col = "computers";
+    }
+
+   QString query("SELECT * FROM %1 "
+          "WHERE Deleted = 'NO' "
+          "ORDER BY RANDOM() LIMIT 1");
+    if(q.prepare(query.arg(col))) {
+        q.exec();
+        q.first();
+        return q;
+    } else {
+        qDebug() << q.lastError() << endl;
+        return q;
+    }
+
+}

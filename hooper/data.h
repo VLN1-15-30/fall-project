@@ -28,6 +28,7 @@ public:
     int getComputerByID(QString computerName);
     int removeConnectionByID(int pid, int cid);
     void closeDBConnection();
+    QSqlQuery getRandom(int type);
 
 
 

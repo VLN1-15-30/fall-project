@@ -410,13 +410,10 @@ int List:: countDatabase(int type){
 void List:: discover(int type){
 
     QSqlQuery query;
-    QString s;
 
     if(type == 0){
-
-        s = ("SELECT * FROM persons WHERE deleted = 'NO' ORDER BY RANDOM() LIMIT 1");
-        query.exec(s);
-        query.first();
+        //get random person
+        query = db.getRandom(type);
 
         string first = query.value(1).toString().toStdString();
         string last = query.value(2).toString().toStdString();
@@ -428,10 +425,8 @@ void List:: discover(int type){
         cout << p;
     }
     else if (type == 1){
-
-        s = ("SELECT * FROM computers WHERE deleted = 'NO' ORDER BY RANDOM() LIMIT 1");
-        query.exec(s);
-        query.first();
+        //get random computer
+        query = db.getRandom(type);
 
         string first = query.value(1).toString().toStdString();
         string type = query.value(2).toString().toStdString();
