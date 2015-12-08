@@ -60,23 +60,25 @@ void Interface:: updateComputers(){
     cout << "Enter row number: ";
     int row;
     cin >> row;
-    ComputerScientists.updateComputer(row,getq);
+    QSqlQuery updateQ = ComputerScientists.getComputers();
+    ComputerScientists.updateComputer(row,updateQ);
 
 }
 
 void Interface:: updatePioneers(){
 
-    /*
+
     cout <<endl;
     cout <<"==== Update pioneers ===="<<endl;
 
-    vector<person> p = ComputerScientists.getChar();
-    ComputerScientists.printTable(p);
+    QSqlQuery getq = ComputerScientists.getPersons();
+    ComputerScientists.printTable(getq);
     cout << "Enter row number: ";
     int row;
     cin >> row;
-    ComputerScientists.updatePioneer(row,p[row-1]);
-*/
+    QSqlQuery updateQ = ComputerScientists.getPersons();
+    ComputerScientists.updatePioneer(row,updateQ);
+
 }
 
 void Interface::view(){

@@ -55,8 +55,8 @@ public:
     void deleteRowAtIndex(int rowNumber, int type);
     void deleteCharacterWithName(string lastname, int type);
 
-    void updatePioneer(int row,QSqlQuery cquery);
-    void updateComputer(int row, QSqlQuery pquery);
+    void updatePioneer(int row,QSqlQuery pquery);
+    void updateComputer(int row, QSqlQuery& cquery);
 
     int countDatabase(int type);
 

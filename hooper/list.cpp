@@ -630,12 +630,13 @@ void List:: connectionsTableBegin(){
     cout << endl;
 }
 
-void List:: updateComputer(int row ,QSqlQuery cquery){
+void List:: updateComputer(int row ,QSqlQuery& cquery){
 
 
     int i = 0;
 
-    do{
+    while (cquery.next()) {
+
         if(i == row-1){
 
             string name = cquery.value(1).toString().toStdString();
@@ -693,9 +694,10 @@ void List:: updateComputer(int row ,QSqlQuery cquery){
 
                     string obj;
                     cin >> obj;
-                    int identity = db.getComputerByID(c.getName().c_str());
 
+                    int identity = db.getComputerByID(c.getName().c_str());
                     db.Update(identity,fieldName,obj,"computers");
+
                 }
 
                 cout << "Update again(n/y):"<<endl;
@@ -706,84 +708,111 @@ void List:: updateComputer(int row ,QSqlQuery cquery){
 
             }
 
+
+
         }
 
         i++;
+    }
 
-    }while(cquery.next()&& i != row-1);
+
+
 
 
 }
 
-/*
+
 void List:: updatePioneer(int row, QSqlQuery pquery){
 
-    cout <<endl;
-    cout <<p;
-    cout <<endl;
+    int i = 0;
 
-    char update = 'Y';
+    while (pquery.next()) {
 
-    while (update == 'Y'|| update == 'y'){
+        if(i == row-1){
 
-        cout << "Choose action: \n"
-                "1) New first name. \n"
-                "2) New last name. \n"
-                "3) New sex. \n"
-                "4) New year born. \n"
-                "4) New year died. \n"<< endl;
+            string first = pquery.value(1).toString().toStdString();
+            string last = pquery.value(2).toString().toStdString();
+            string sex = pquery.value(3).toString().toStdString();
+            int born = pquery.value(4).toUInt();
+            int died = pquery.value(5).toUInt();
 
-        cout << "Your choice: ";
-        int option;
-        cin>> option;
+            person p = returnNewPersonWith(first,last,sex,born,died);
 
-        string fieldName;
+            cout <<endl;
+            cout <<p;
+            cout <<endl;
 
-        if(option >0 && option <6){
+            char update = 'Y';
 
-            switch(option){
+            while (update == 'Y'|| update == 'y'){
 
-            case 1:{
-                  cout << "new first name: ";
-                  fieldName ="firstname";
-                     }
-            break;
-            case 2:{
-                cout << "new last name: ";
-                fieldName ="lastname";
+                cout << "Choose action: \n"
+                        "1) New first name. \n"
+                        "2) New last name. \n"
+                        "3) New sex. \n"
+                        "4) New born year. \n"
+                        "5) New died year. \n" << endl;
+
+                cout << "Your choice: ";
+                int option;
+                cin>> option;
+
+                string fieldName;
+
+                if(option >0 && option <6){
+
+                    switch(option){
+
+                    case 1:{
+                          cout << "new first name: ";
+                          fieldName ="firstname";
+                             }
+                    break;
+                    case 2:{
+                        cout << "new last name: ";
+                        fieldName ="lastname";
+                    }
+                    break;
+                    case 3:{
+                        cout << "new sex(m/f): ";
+                        fieldName ="sex";
+                    }
+                    break;
+                    case 4:{
+                        cout << "new born year";
+                        fieldName ="born";
+                    }
+                    break;
+                    case 5:{
+                        cout << "new died year";
+                        fieldName ="died";
+                    }
+                    break;
+
+                    }
+
+                    string obj;
+                    cin >> obj;
+
+                    int identity = db.getPersonID(p.getLastName().c_str(),p.getFirstName().c_str());
+                    cout <<"got id: "<<identity<<endl;
+                    db.Update(identity,fieldName,obj,"persons");
+
+                }
+
+                cout << "Update again(n/y):"<<endl;
+                cout << "Your choice: ";
+                cin >> update;
+                cout <<endl;
+
+
             }
-            break;
-            case 3:{
-                cout << "new sex(m/f): ";
-                fieldName ="sex";
-            }
-            break;
-            case 4:{
-                cout << "new year born: ";
-                fieldName ="born";
-            }
-            break;
-            case 5:{
-                cout << "new year died: ";
-                fieldName ="died";
-            }
-            break;
 
 
-            }
 
-            string obj;
-            cin >> obj;
-            int identity = db.getPersonID(p.getLastName().c_str(),p.getFirstName().c_str());
-            db.Update(identity,fieldName,obj,"persons");
         }
 
-        cout << "Update again(n/y):"<<endl;
-        cout << "Your choice: ";
-        cin >> update;
-        cout <<endl;
+        i++;
+   }
+}
 
-
-    }}
-
-*/
