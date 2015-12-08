@@ -161,8 +161,8 @@ void Interface::order(int choice){
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
-
-    ComputerScientists.showOrdered(choice, column, order);
+    cout <<"==== Database ===="<< endl;
+    ComputerScientists.showOrdered(choice, column, order, view);
 
 }
 void Interface::find(){
