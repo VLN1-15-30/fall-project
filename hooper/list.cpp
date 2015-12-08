@@ -16,29 +16,8 @@ void List:: initialize(){
     db.initialize();
 }
 
-vector<computer> const List:: getComputers(){
-    //delete our vector objects and refresh data
-    computers.erase(computers.begin(),computers.end());
-
-    QSqlQuery dataQuery(QString("SELECT * FROM computers"));
-    dataQuery.exec();
-    //qDebug()<<dataQuery.executedQuery();
-
-        while (dataQuery.next()) {
-
-            string first = dataQuery.value(1).toString().toStdString();
-            string type = dataQuery.value(2).toString().toStdString();
-            int year = dataQuery.value(3).toUInt();
-            bool made = dataQuery.value(4).toBool();
-
-            computer c = returnNewComputer(first,type,year,made);
-
-            computers.push_back(c);
-
-        }
-
-        return computers;
-
+QSqlQuery List:: getComputers(){
+         return db.getComputers();
 }
 
 QSqlQuery List::getConnections() {
@@ -47,6 +26,8 @@ QSqlQuery List::getConnections() {
 
 
 vector<person> const List:: getChar(){
+
+
     //delete our vector objects and refresh data
     characters.erase(characters.begin(),characters.end());
 
@@ -131,18 +112,15 @@ void List::addComp(computer c){
     }
 }
 
-////gets ID of person with lastname
-//void List::getID(string lastname, string firstname) {
-//    QSqlQuery q;
-//    QString query = "SELECT ID FROM persons WHERE lastname = '?'' and firstname = '?'";
-//    if(q.prepare(query)) {
-//        cout << "ID success" << endl;
 
-//    }
-//}
+void List::addConnection(string firstName, string lastName, int computerID){
 
-
-void List::addConnection(int personID, int computerID){
+   int personID = db.getPersonID(lastName.c_str(), firstName.c_str());
+   cout << "This is personID " << personID << endl;
+   if( personID == -1) {
+       cout << "Person not in database" << endl;
+       return;
+   }
    bool add = db.addNewConnection(personID, computerID);
    if(add) {
        cout << "Succesfully added new connections" << endl;
@@ -212,7 +190,7 @@ bool List::databaseEmpty() {
     return false;
 }
 
-void List:: printComputerTable(vector<computer> &c){
+void List:: printComputerTable(QSqlQuery q){
 
     computerTableBegin();
 
@@ -220,15 +198,18 @@ void List:: printComputerTable(vector<computer> &c){
     const int nameWidth     = 15;
     const int numWidth      = 15;
 
-    for (unsigned int i = 0; i< c.size(); i++) {
+    while (q.next()){
+        int ID = q.value(1).toUInt();
+        string name = q.value(2).toString().toStdString();
+        string type = q.value(3).toString().toStdString();
+        int year = q.value(4).toUInt();
+        bool made = q.value(5).toBool();
 
-          computer comp = c[i];
-
-          cout << left << setw(5) << setfill(separator) << i+1;
-          cout << left << setw(nameWidth) << setfill(separator) << comp.getName();
-          cout << left << setw(nameWidth) << setfill(separator) << comp.getType();
-          cout << left << setw(numWidth) << setfill(separator) << comp.getYearMade();
-          if(comp.getWasMade() == true)
+          cout << left << setw(numWidth) << setfill(separator) << ID;
+          cout << left << setw(nameWidth) << setfill(separator) << name;
+          cout << left << setw(nameWidth) << setfill(separator) << type;
+          cout << left << setw(numWidth) << setfill(separator) << year;
+          if(made == true)
               cout << left << setw(numWidth) << setfill(separator) << "YES";
           else
               cout << left << setw(numWidth) << setfill(separator) << "NO";
@@ -399,13 +380,13 @@ void List::orderbyBornDESC(int format){
             printTable(sResult);
 }
 
-void List::orderbyComputerNameA_Z(int format){
+/*void List::orderbyComputerNameA_Z(int format){
 
          vector <computer> sResult;
 
          QSqlQuery query;
          QString s;
-         query.prepare("SELECT * FROM computers ORDER BY name ASC");
+         query.prepare("SELECT * FROM computers Deleted = 'NO' ORDER BY name ASC");
          query.exec();
          qDebug()<<query.executedQuery();
          while (query.next()) {
@@ -421,8 +402,8 @@ void List::orderbyComputerNameA_Z(int format){
          }
          if(format == 0)
                  printComputerList(sResult);
-             else
-                 printComputerTable(sResult);
+             //else
+                 //printComputerTable(sResult);
 }
 
 void List::orderbyComputerNameZ_A(int format){
@@ -431,7 +412,7 @@ void List::orderbyComputerNameZ_A(int format){
 
          QSqlQuery query;
          QString s;
-         query.prepare("SELECT * FROM computers ORDER BY name DESC");
+         query.prepare("SELECT * FROM computers WHERE Deleted = 'NO' ORDER BY name DESC");
          query.exec();
          qDebug()<<query.executedQuery();
          while (query.next()) {
@@ -446,9 +427,9 @@ void List::orderbyComputerNameZ_A(int format){
 
          }
          if(format == 0)
-                 printComputerList(sResult);
-             else
-                 printComputerTable(sResult);
+               printComputerList(sResult);
+            // else
+                 //printComputerTable(sResult);
 }
 
 void List::orderbyComputerTypeA_Z(int format){
@@ -457,9 +438,9 @@ void List::orderbyComputerTypeA_Z(int format){
 
          QSqlQuery query;
          QString s;
-         query.prepare("SELECT * FROM computers ORDER BY type ASC");
+         query.prepare("SELECT * FROM computers WHERE Deleted = 'NO' ORDER BY type ASC");
          query.exec();
-         qDebug()<<query.executedQuery();
+         qDebug()<< query.executedQuery();
          while (query.next()) {
 
             string name = query.value(1).toString().toStdString();
@@ -473,8 +454,8 @@ void List::orderbyComputerTypeA_Z(int format){
          }
          if(format == 0)
                  printComputerList(sResult);
-             else
-                 printComputerTable(sResult);
+             //else
+                // printComputerTable(sResult);
 }
 
 void List::orderbyComputerTypeZ_A(int format){
@@ -483,7 +464,7 @@ void List::orderbyComputerTypeZ_A(int format){
 
          QSqlQuery query;
          QString s;
-         query.prepare("SELECT * FROM computers ORDER BY type DESC");
+         query.prepare("SELECT * FROM computers WHERE Deleted = 'NO' ORDER BY type DESC");
          query.exec();
          qDebug()<<query.executedQuery();
          while (query.next()) {
@@ -499,8 +480,13 @@ void List::orderbyComputerTypeZ_A(int format){
          }
          if(format == 0)
                  printComputerList(sResult);
-             else
-                 printComputerTable(sResult);
+             //else
+                // printComputerTable(sResult);
+}*/
+
+void List::orderbyComputers(int sort, int column){
+    q = db.getComputersSorted(sort, column);
+    printComputerTable(q);
 }
 
 void List::orderbyConnections(int sort, int column){
@@ -532,7 +518,8 @@ void List::showOrdered(int choice, int column, int order, int format){
    }
    //order computer table
    if(choice == 2){
-       if(column == 0){
+      orderbyComputers(order, column);
+       /*if(column == 0){
            if( order == 0){
                orderbyComputerNameA_Z(format);
            }
@@ -546,8 +533,8 @@ void List::showOrdered(int choice, int column, int order, int format){
            }
            else{
                orderbyComputerTypeZ_A(format);
-           }
-       }
+           }*/
+
     //order connections table
    } else {
            orderbyConnections(order, column);
@@ -687,7 +674,7 @@ void List:: discover(int type){
         person p = returnNewPersonWith(first,last,sex,born,died);
         cout << p;
     }
-    else if (type == 1){
+    /*else if (type == 1){
 
         s = ("SELECT * FROM computers WHERE deleted = 'NO' ORDER BY RANDOM() LIMIT 1");
         query.exec(s);
@@ -698,10 +685,10 @@ void List:: discover(int type){
         int year = query.value(3).toUInt();
         bool made = query.value(4).toBool();
 
-        computer c = returnNewComputer(first,type,year,made);
-        cout << c;
+        //computer c = returnNewComputer(first,type,year,made);
+        //cout << c;
 
-    }
+    }*/
 
 }
 
@@ -717,8 +704,7 @@ person List::returnNewPersonWith(string firstname,string lastname, string sex, i
     return p;
 }
 
-computer List:: returnNewComputer(string name, string type, int year, bool made){
-
+/*computer List:: returnNewComputer(string name, string type, int year, bool made);
     computer c;
     c.setName(name);
     c.setType(type);
@@ -727,8 +713,7 @@ computer List:: returnNewComputer(string name, string type, int year, bool made)
 
     return c;
 
-}
-
+}*/
 
 person List:: returnPersonAtIndex(int index){
 

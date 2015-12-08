@@ -1,5 +1,7 @@
+#include <iostream>
 #include "data.h"
 
+using namespace std;
 
 data::data() {
 
@@ -69,6 +71,22 @@ QSqlQuery data::getConnectionsSorted(int sort, int column) {
     }
 }
 
+int data::getPersonID(QString lastName, QString firstName) {
+    QSqlQuery q;
+    QString query("SELECT P.ID FROM persons P "
+                  "WHERE P.lastname = '%1' "
+                  "AND P.firstname = '%2' "
+                  "AND P.Deleted = 'NO'");
+    if(q.prepare(query.arg(lastName).arg(firstName))) {
+       q.exec();
+       q.first();
+       return q.value(0).toInt();
+    } else {
+        return -1;
+    }
+}
+
+
 bool data::addNewConnection(int pid, int cid) {
     QSqlQuery q;
     QString query = "INSERT INTO invented VALUES(?, ?)";
@@ -98,5 +116,53 @@ void data::Update(int rowId, string fieldname, string value, string tableName){
 
 
 }
+
+QSqlQuery data::getComputers(){
+
+    QSqlQuery q;
+    QString query = ("SELECT ID, name, type, yearMade, wasMade FROM computers");
+
+    if(q.prepare(query)){
+        q.exec();
+        return q;
+    }
+    else{
+        qDebug() << q.lastError() << endl;
+        return q;
+    }
+
+}
+
+QSqlQuery data::getComputersSorted(int sort, int column) {
+    QSqlQuery q;
+    QString orderby;
+    QString col;
+
+    if(column == 0){
+        col = "C.name";
+    }
+    else if(column == 1){
+        col = "C.type";
+    }
+
+    if( sort == 0) {
+       orderby = "ASC";
+    }
+    else{
+       orderby = "DESC";
+    }
+    QString query("SELECT C.ID C.name, C.type, C.yearMade, C.wasMade "
+                   "FROM computers C "
+                   "ORDER BY %1 %2");
+    if(q.prepare(query.arg(col).arg(orderby))) {
+        q.exec();
+        return q;
+        }
+    else {
+        qDebug() << q.lastError() << endl;
+        return q;
+    }
+}
+
 
 

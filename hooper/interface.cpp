@@ -26,7 +26,6 @@ void Interface::actions(){
 
       cout << "Your choice: ";
 
-
     int action;
     cin >> action;
     switch(action){
@@ -109,12 +108,17 @@ void Interface::viewOptions(int choice){
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
+<<<<<<< HEAD
+    QSqlQuery c = ComputerScientists.getComputers();
+=======
     cout << endl;
 
+>>>>>>> a059ddacf32288a7b65109bbe37c976d43a5754e
     if(choice == 1){
         cout <<"==== Database ===="<<endl;
 
         vector<person> p = ComputerScientists.getChar();
+
 
         if(view == 0){
             ComputerScientists.printList(p);
@@ -124,15 +128,18 @@ void Interface::viewOptions(int choice){
         }
     }
     else if(choice == 2){
+<<<<<<< HEAD
+=======
         cout <<"==== Computer database ===="<<endl;
 
         vector<computer>c = ComputerScientists.getComputers();
+>>>>>>> a059ddacf32288a7b65109bbe37c976d43a5754e
 
-        if(view == 0){
-            ComputerScientists.printComputerList(c);
-        }
+        /*if(view == 0){
+            ComputerScientists.printComputerList();
+        }*/
 
-        else if(view == 1){
+        if(view == 1){
             ComputerScientists.printComputerTable(c);
         }
     } else {
@@ -256,20 +263,24 @@ void Interface::add(){
         break;
         case 3: cout << "===== Add a connection =====" << endl;
         while(answer == 'y' || answer == 'Y'){
-            vector<computer> c = ComputerScientists.getComputers();
             vector<person> p = ComputerScientists.getChar();
-
+            QSqlQuery c = ComputerScientists.getComputers();
             ComputerScientists.printTable(p);
             ComputerScientists.printComputerTable(c);
 
             //CHECK IF ID'S exist
-            int pid, cid;
-            cout << "ID of person: ";
-            cin >> pid;
+            int cid;
+            string firstName, lastName;
+            cout << "Lastname of person: ";
+            cin.ignore(1);
+            getline(cin, lastName);
+            cout << "First name: ";
+            getline(cin, firstName);
+
             cout << "ID of cpu: ";
             cin >> cid;
 
-            ComputerScientists.addConnection(pid, cid);
+            ComputerScientists.addConnection(firstName, lastName, cid);
             answer = ComputerScientists.ask_again();
         };
         break;
@@ -317,7 +328,7 @@ void Interface:: deleteComputer(){
 
     if(ComputerScientists.computersDatabaseEmpty()) return;
 
-    vector<computer> c = ComputerScientists.getComputers();
+    QSqlQuery c = ComputerScientists.getComputers();
     ComputerScientists.printComputerTable(c);
     cout << "==== Remove Computer ===="<<endl;
     cout << "Write 0 to remove by index, 1 to remove by name"<<endl;
