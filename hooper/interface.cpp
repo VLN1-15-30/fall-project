@@ -55,17 +55,18 @@ void Interface:: updateComputers(){
     cout <<endl;
     cout <<"==== Update computers ===="<<endl;
 
-    vector<computer>c = ComputerScientists.getComputers();
-    ComputerScientists.printComputerTable(c);
+    QSqlQuery getq = ComputerScientists.getComputers();
+    ComputerScientists.printComputerTable(getq);
     cout << "Enter row number: ";
     int row;
     cin >> row;
-    ComputerScientists.updateComputer(row,c[row-1]);
+    ComputerScientists.updateComputer(row,getq);
 
 }
 
 void Interface:: updatePioneers(){
 
+    /*
     cout <<endl;
     cout <<"==== Update pioneers ===="<<endl;
 
@@ -75,7 +76,7 @@ void Interface:: updatePioneers(){
     int row;
     cin >> row;
     ComputerScientists.updatePioneer(row,p[row-1]);
-
+*/
 }
 
 void Interface::view(){
@@ -108,12 +109,9 @@ void Interface::viewOptions(int choice){
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
-<<<<<<< HEAD
     QSqlQuery c = ComputerScientists.getComputers();
-=======
     cout << endl;
 
->>>>>>> a059ddacf32288a7b65109bbe37c976d43a5754e
     if(choice == 1){
         cout <<"==== Database ===="<<endl;
 
@@ -128,20 +126,20 @@ void Interface::viewOptions(int choice){
         }
     }
     else if(choice == 2){
-<<<<<<< HEAD
-=======
         cout <<"==== Computer database ===="<<endl;
 
-        vector<computer>c = ComputerScientists.getComputers();
->>>>>>> a059ddacf32288a7b65109bbe37c976d43a5754e
+        /*
+        QSqlQuery dbquery = ComputerScientists.getComputers();
 
-        /*if(view == 0){
+        if(view == 0){
             ComputerScientists.printComputerList();
-        }*/
+        }
 
         if(view == 1){
-            ComputerScientists.printComputerTable(c);
+            ComputerScientists.printComputerTable(dbquery);
         }
+
+        */
     } else {
         cout <<"==== Overview of connections ===="<<endl;
         QSqlQuery q = ComputerScientists.getConnections();

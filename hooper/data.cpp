@@ -86,6 +86,24 @@ int data::getPersonID(QString lastName, QString firstName) {
     }
 }
 
+int data::getComputerByID(QString computerName) {
+    QSqlQuery q;
+    QString query("SELECT C.ID FROM computers C "
+                  "WHERE C.name = '%1' "
+                  "AND C.Deleted = 'NO'");
+    if(q.prepare(query.arg(computerName))) {
+       q.exec();
+       if(q.size() == 1) {
+           return -1;
+       }
+       q.first();
+       return q.value(0).toInt();
+    } else {
+        return -1;
+    }
+}
+
+
 
 bool data::addNewConnection(int pid, int cid) {
     QSqlQuery q;

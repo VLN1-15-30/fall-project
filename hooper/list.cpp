@@ -704,7 +704,7 @@ person List::returnNewPersonWith(string firstname,string lastname, string sex, i
     return p;
 }
 
-/*computer List:: returnNewComputer(string name, string type, int year, bool made);
+computer List:: returnNewComputer(string name, string type, int year, bool made){
     computer c;
     c.setName(name);
     c.setType(type);
@@ -713,7 +713,7 @@ person List::returnNewPersonWith(string firstname,string lastname, string sex, i
 
     return c;
 
-}*/
+}
 
 person List:: returnPersonAtIndex(int index){
 
@@ -920,71 +920,93 @@ void List:: connectionsTableBegin(){
     cout << endl;
 }
 
-void List:: updateComputer(int row ,computer& c){
+void List:: updateComputer(int row ,QSqlQuery cquery){
 
-    cout <<endl;
-    cout <<c;
-    cout <<endl;
 
-    char update = 'Y';
+    int i = 0;
 
-    while (update == 'Y'|| update == 'y'){
+    do{
+        if(i == row-1){
 
-        cout << "Choose action: \n"
-                "1) New name. \n"
-                "2) New type. \n"
-                "3) New year made. \n"
-                "4) New was made. \n" << endl;
+            string name = cquery.value(1).toString().toStdString();
+            string type = cquery.value(2).toString().toStdString();
+            int year = cquery.value(3).toUInt();
+            bool made = cquery.value(4).toBool();
 
-        cout << "Your choice: ";
-        int option;
-        cin>> option;
+            computer c = returnNewComputer(name, type, year, made);
+            cout <<endl;
+            cout <<c;
+            cout <<endl;
 
-        string fieldName;
+            char update = 'Y';
 
-        if(option >0 && option <5){
+            while (update == 'Y'|| update == 'y'){
 
-            switch(option){
+                cout << "Choose action: \n"
+                        "1) New name. \n"
+                        "2) New type. \n"
+                        "3) New year made. \n"
+                        "4) New was made. \n" << endl;
 
-            case 1:{
-                  cout << "new name: ";
-                  fieldName ="name";
-                     }
-            break;
-            case 2:{
-                cout << "new type: ";
-                fieldName ="type";
+                cout << "Your choice: ";
+                int option;
+                cin>> option;
+
+                string fieldName;
+
+                if(option >0 && option <5){
+
+                    switch(option){
+
+                    case 1:{
+                          cout << "new name: ";
+                          fieldName ="name";
+                             }
+                    break;
+                    case 2:{
+                        cout << "new type: ";
+                        fieldName ="type";
+                    }
+                    break;
+                    case 3:{
+                        cout << "new year made: ";
+                        fieldName ="yearMade";
+                    }
+                    break;
+                    case 4:{
+                        cout << "new was made(YES/NO): ";
+                        fieldName ="wasMade";
+                    }
+                    break;
+
+                    }
+
+                    string obj;
+                    cin >> obj;
+                    int identity = db.getComputerByID(c.getName().c_str());
+
+                    db.Update(identity,fieldName,obj,"computers");
+                }
+
+                cout << "Update again(n/y):"<<endl;
+                cout << "Your choice: ";
+                cin >> update;
+                cout <<endl;
+
+
             }
-            break;
-            case 3:{
-                cout << "new year made: ";
-                fieldName ="yearMade";
-            }
-            break;
-            case 4:{
-                cout << "new was made(YES/NO): ";
-                fieldName ="wasMade";
-            }
-            break;
 
-            }
-
-            string obj;
-            cin >> obj;
-
-            db.Update(row,fieldName,obj,"computers");
         }
 
-        cout << "Update again(n/y):"<<endl;
-        cout << "Your choice: ";
-        cin >> update;
-        cout <<endl;
+        i++;
+
+    }while(cquery.next()&& i != row-1);
 
 
-    }
 }
 
-void List:: updatePioneer(int row, person& p){
+/*
+void List:: updatePioneer(int row, QSqlQuery pquery){
 
     cout <<endl;
     cout <<p;
@@ -1042,8 +1064,8 @@ void List:: updatePioneer(int row, person& p){
 
             string obj;
             cin >> obj;
-
-            db.Update(row,fieldName,obj,"persons");
+            int identity = db.getPersonID(p.getLastName().c_str(),p.getFirstName().c_str());
+            db.Update(identity,fieldName,obj,"persons");
         }
 
         cout << "Update again(n/y):"<<endl;
@@ -1054,3 +1076,4 @@ void List:: updatePioneer(int row, person& p){
 
     }}
 
+*/

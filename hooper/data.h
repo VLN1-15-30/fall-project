@@ -17,12 +17,10 @@ public:
     void Update(int rowId, string fieldname, string value,string tableName);
 
     bool addNewConnection(int pid, int cid);
-<<<<<<< HEAD
     QSqlQuery getComputers();
     QSqlQuery getComputersSorted(int sort, int column);
-=======
     int getPersonID(QString lastName, QString firstName);
->>>>>>> a059ddacf32288a7b65109bbe37c976d43a5754e
+    int getComputerByID(QString computerName);
 
 
 
