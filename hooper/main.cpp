@@ -8,7 +8,6 @@ int main()
 {
     Interface hooper;
     hooper.welcomeMessage();
-    hooper.showUsage();
 
     int exit = 0;
 

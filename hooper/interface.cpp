@@ -16,6 +16,8 @@ void Interface::welcomeMessage(){
               "| pioneers and computers in computer science.| \n"
               " -------------------------------------------- \n"
            << endl;
+
+        showUsage();
 }
 void Interface::actions(){
     cout << "Choose a number for your next action: \n"
