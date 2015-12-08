@@ -140,6 +140,20 @@ void List::printComputerList(QSqlQuery q){
 
 }
 
+void List::printConnectionsList(QSqlQuery q){
+
+    while(q.next()){
+        string lastName = q.value(0).toString().toStdString();
+        string computerName = q.value(1).toString().toStdString();
+        int yearMade = q.value(2).toUInt();
+
+        cout << "Computer name: " << computerName << endl;
+        cout << "Pioneers last name: " << lastName << endl;
+        cout << "Year computer made: " << yearMade << endl;
+        cout << endl;
+    }
+}
+
 bool List:: computersDatabaseEmpty(){
 
     int count = countDatabase(1);

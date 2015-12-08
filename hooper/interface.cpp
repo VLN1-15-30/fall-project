@@ -135,6 +135,7 @@ void Interface::viewOptions(int choice){
 
     QSqlQuery c = ComputerScientists.getComputers();
     QSqlQuery p = ComputerScientists.getPersons();
+    QSqlQuery q = ComputerScientists.getConnections();
     cout << endl;
 
     if(choice == 1){
@@ -158,10 +159,18 @@ void Interface::viewOptions(int choice){
             ComputerScientists.printComputerTable(c);
         }
 
-    } else {
+    }
+    else {
         cout <<"==== Overview of connections ===="<<endl;
-        QSqlQuery q = ComputerScientists.getConnections();
-        ComputerScientists.printConnectionsTable(q);
+
+        if(view == 0){
+            ComputerScientists.printConnectionsList(c);
+        }
+
+        else if(view == 1){
+            ComputerScientists.printConnectionsTable(q);
+        }
+
     }
 
 }
