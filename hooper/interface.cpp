@@ -4,10 +4,10 @@
 
 using namespace std;
 
-
 Interface::Interface(){
     ComputerScientists.initialize();
 }
+
 void Interface::welcomeMessage(){
     cout << "Welcome to the Hooper database!\n"<<endl;
 
@@ -19,6 +19,7 @@ void Interface::welcomeMessage(){
 
         showUsage();
 }
+
 void Interface::actions(){
     cout << "Choose a number for your next action: \n"
             "1) View \n"
@@ -52,7 +53,7 @@ void Interface::actions(){
 }
 
 //User input options for choosing what to table
-void Interface:: update(){
+void Interface::update(){
 
     cout << endl;
     cout << "Choose an action: \n"
@@ -75,8 +76,8 @@ void Interface:: update(){
 
 }
 
-//sending infromation through servicelayer(list) to uptdate database
-void Interface:: updateComputers(){
+//sending information through servicelayer(list) to uptdate database
+void Interface::updateComputers(){
 
     cout <<endl;
     cout <<"==== Update computers ===="<<endl;
@@ -88,11 +89,9 @@ void Interface:: updateComputers(){
     cin >> row;
     QSqlQuery updateQ = ComputerScientists.getComputers();
     ComputerScientists.updateComputer(row,updateQ);
-
 }
 
-void Interface:: updatePioneers(){
-
+void Interface::updatePioneers(){
 
     cout <<endl;
     cout <<"==== Update pioneers ===="<<endl;
@@ -138,14 +137,14 @@ void Interface::viewOptions(int choice){
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
+    cout << endl;
 
     QSqlQuery c = ComputerScientists.getComputers();
     QSqlQuery p = ComputerScientists.getPersons();
     QSqlQuery q = ComputerScientists.getConnections();
-    cout << endl;
 
     if(choice == 1){
-        cout <<"==== Database ===="<<endl;
+        cout <<"==== Database ===="<< endl;
         if(view == 0){
             ComputerScientists.printList(p);
         }
@@ -154,21 +153,16 @@ void Interface::viewOptions(int choice){
         }
     }
     else if(choice == 2){
-
-        cout <<"==== Computer database ===="<<endl;
-
+        cout <<"==== Computer database ===="<< endl;
         if(view == 0){
             ComputerScientists.printComputerList(c);
         }
-
         else if(view == 1){
             ComputerScientists.printComputerTable(c);
         }
-
     }
-    else {
+    else{
         cout <<"==== Overview of connections ===="<<endl;
-
         if(view == 0){
             ComputerScientists.printConnectionsList(c);
         }
@@ -176,14 +170,14 @@ void Interface::viewOptions(int choice){
         else if(view == 1){
             ComputerScientists.printConnectionsTable(q);
         }
-
     }
-
 }
 
 //Using 0 and 1 to give user simple option choosing
 void Interface::order(int choice){
+
     int column, order;
+
     switch(choice){
     case 1: cout << "Write 0 to order by last name, 1 to order by birth year" << endl;
             cin >> column;
@@ -195,6 +189,7 @@ void Interface::order(int choice){
                    endl << " 2 to order by year invented" << endl;
             cin >> column;
     }
+
     cout << "Write 0 for ascending order, 1 for descending order" << endl;
     cin >> order;
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
@@ -208,14 +203,12 @@ void Interface::order(int choice){
 //Use 1,2 to give user option from list of options
 void Interface::find(){
 
-
     cout <<endl;
     cout << "Choose an action: \n"
             "1) Find a pioneer\n"
             "2) Find a computer\n"<<endl;
 
     cout << "Your choice: ";
-
     int choice;
     cin >> choice;
 
@@ -227,8 +220,6 @@ void Interface::find(){
     default:
         break;
     }
-
-
 }
 
 void Interface::findComputers(){
@@ -237,7 +228,6 @@ void Interface::findComputers(){
 
     char again = 'y';
     while(again == 'y'||again == 'Y'){
-
         cout << endl;
         cout <<"==== Search ===="<<endl;
         cout << "a) Name "<<endl;
@@ -248,19 +238,18 @@ void Interface::findComputers(){
 
         ComputerScientists.search("computers");
 
-        cout <<  "Search again ?(y/n): ";
+        cout << "Search again ?(y/n): ";
         cin >> again;
     }
 }
 
 //use a,b,c... for sublist of choices for user input
-void Interface:: findPioneers(){
+void Interface::findPioneers(){
 
     if(ComputerScientists.databaseEmpty()) return;
 
     char again = 'y';
     while(again == 'y'||again == 'Y'){
-
         cout << endl;
         cout <<"==== Search ===="<<endl;
         cout << "a) Last Name "<<endl;
@@ -276,7 +265,6 @@ void Interface:: findPioneers(){
     }
 }
 
-//
 void Interface::add(){
 
     char answer = 'y';
@@ -288,9 +276,9 @@ void Interface::add(){
             "3) Add a connection\n";
 
     cout << "Your choice: ";
-
     cin >> choice;
     cout << endl;
+
     switch(choice){
         case 1: addPioneer(answer);
         break;
@@ -302,6 +290,7 @@ void Interface::add(){
 }
 
 void Interface::addPioneer(char answer){
+
     cout << "===== Add a pioneer =====" << endl;
     while(answer == 'y' || answer == 'Y'){
         string firstname, lastname, sex;
@@ -373,29 +362,29 @@ void Interface::addComputer(char answer){
 void Interface::addConnection(char answer){
 
     cout << "===== Add a connection =====" << endl;
-            while(answer == 'y' || answer == 'Y'){
-                QSqlQuery p = ComputerScientists.getPersons();
-                QSqlQuery c = ComputerScientists.getComputers();
-                ComputerScientists.printTable(p);
-                ComputerScientists.printComputerTable(c);
+    while(answer == 'y' || answer == 'Y'){
+        QSqlQuery p = ComputerScientists.getPersons();
+        QSqlQuery c = ComputerScientists.getComputers();
+        ComputerScientists.printTable(p);
+        ComputerScientists.printComputerTable(c);
 
-                //CHECK IF ID'S exist
-                string firstName, lastName, computerName;
-                cout << "Lastname of person: ";
-                cin.ignore(1);
-                getline(cin, lastName);
-                cout << "First name: ";
-                getline(cin, firstName);
+        //CHECK IF ID'S exist
+        string firstName, lastName, computerName;
+        cout << "Lastname of person: ";
+        cin.ignore(1);
+        getline(cin, lastName);
+        cout << "First name: ";
+        getline(cin, firstName);
 
-                cout << "Name of cpu: ";
-                getline(cin, computerName);
+        cout << "Name of cpu: ";
+        getline(cin, computerName);
 
-                ComputerScientists.addConnection(firstName, lastName, computerName);
-                answer = ComputerScientists.ask_again();
-            };
+        ComputerScientists.addConnection(firstName, lastName, computerName);
+            answer = ComputerScientists.ask_again();
+        }
 }
 
-void Interface:: discover(){
+void Interface::discover(){
 
     cout <<endl;
     cout << "Choose an action: \n"
@@ -431,14 +420,13 @@ void Interface::discoverPioneer(){
     ComputerScientists.discover(0);
 }
 
-void Interface:: askToDelete(){
+void Interface::askToDelete(){
 
     cout <<endl;
     cout << "Choose an action: \n"
             "1) Delete a pioneer\n"
             "2) Delete a computer\n"
             "3) Delete a connection\n"<<endl;
-
 
     cout << "Your choice: ";
     int choice;
@@ -469,7 +457,7 @@ void Interface::deleteCharacter(){
     ComputerScientists.removeCharacter();
 }
 
-void Interface:: deleteComputer(){
+void Interface::deleteComputer(){
 
     if(ComputerScientists.computersDatabaseEmpty()) return;
 
@@ -478,13 +466,12 @@ void Interface:: deleteComputer(){
     cout << "==== Remove Computer ===="<<endl;
 
     cout << "Type name of computer: ";
-     ComputerScientists.removeComputer();
-
-
+        ComputerScientists.removeComputer();
 }
 
 
-void Interface:: deleteConnection(){
+void Interface::deleteConnection(){
+
     cout << "==== Remove Connection ===="<<endl;
     cout << "Write Inventors name and computer name"<<endl;
     string firstName, lastName, computerName;
@@ -500,11 +487,11 @@ void Interface:: deleteConnection(){
 }
 
 void Interface::showUsage() {
+
     cout << "Hooper is currently storing information about " << endl;
     cout << ComputerScientists.countDatabase(0) << " pioneers and ";
     cout << ComputerScientists.countDatabase(1) << " computers." << endl;
     cout << endl;
-
 }
 
 void Interface::quit() {
