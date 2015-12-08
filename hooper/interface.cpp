@@ -68,9 +68,10 @@ void Interface::viewOptions(int choice){
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
-
+    QSqlQuery c = ComputerScientists.getComputers();
     if(choice == 1){
         vector<person> p = ComputerScientists.getChar();
+
 
         if(view == 0){
             ComputerScientists.printList(p);
@@ -80,13 +81,12 @@ void Interface::viewOptions(int choice){
         }
     }
     else if(choice == 2){
-        vector<computer>c = ComputerScientists.getComputers();
 
-        if(view == 0){
-            ComputerScientists.printComputerList(c);
-        }
+        /*if(view == 0){
+            ComputerScientists.printComputerList();
+        }*/
 
-        else if(view == 1){
+        if(view == 1){
             ComputerScientists.printComputerTable(c);
         }
     } else {
@@ -194,9 +194,8 @@ void Interface::add(){
         break;
         case 3: cout << "===== ADD A CONNECTION =====" << endl;
         while(answer == 'y' || answer == 'Y'){
-            vector<computer> c = ComputerScientists.getComputers();
             vector<person> p = ComputerScientists.getChar();
-
+            QSqlQuery c = ComputerScientists.getComputers();
             ComputerScientists.printTable(p);
             ComputerScientists.printComputerTable(c);
 
@@ -249,7 +248,7 @@ void Interface:: deleteComputer(){
 
     if(ComputerScientists.computersDatabaseEmpty()) return;
 
-    vector<computer> c = ComputerScientists.getComputers();
+    QSqlQuery c = ComputerScientists.getComputers();
     ComputerScientists.printComputerTable(c);
     cout << "==== REMOVE COMPUTER ===="<<endl;
     cout << "Write 0 to remove by index, 1 to remove by name"<<endl;

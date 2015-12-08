@@ -3,6 +3,7 @@
 
 #include <QtSql>
 #include <iostream>
+#include <computer.h>
 
 using namespace std;
 
@@ -14,6 +15,9 @@ public:
     QSqlQuery getConnections();
     QSqlQuery getConnectionsSorted(int sort, int column);
     bool addNewConnection(int pid, int cid);
+    QSqlQuery getComputers();
+    QSqlQuery getComputersSorted(int sort, int column);
+
 
 
 private:
