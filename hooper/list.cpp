@@ -172,7 +172,6 @@ void List:: writeToFile(vector <person>& p){
 
 void List::printList(vector <person>& p){
 
-    cout <<"==== DATABASE ===="<<endl;
     for (unsigned int i = 0; i < p.size(); i++){
         cout << p.at(i) << endl;
     }
@@ -180,14 +179,12 @@ void List::printList(vector <person>& p){
 
 void List::printComputerList(vector <computer>& c){
 
-    cout <<"==== DATABASE ===="<<endl;
     for (unsigned int i = 0; i < c.size(); i++){
         cout << c.at(i) << endl;
     }
 }
 
 bool List:: computersDatabaseEmpty(){
-
 
     int count = countDatabase(1);
 
@@ -214,7 +211,6 @@ bool List::databaseEmpty() {
 
 void List:: printComputerTable(vector<computer> &c){
 
-    cout <<"==== COMPUTER DATABASE ===="<<endl;
     computerTableBegin();
 
     const char separator    = ' ';
@@ -263,7 +259,6 @@ void List::printConnectionsTable(QSqlQuery q) {
 
 void List::printTable(vector <person>& p) {
 
-    cout <<"==== DATABASE ===="<<endl;
     tableBegin();
 
     const char separator    = ' ';
@@ -568,15 +563,6 @@ char List:: ask_again(){
 
 void List::search(){
 
-    cout << endl;
-    cout <<"==== Search ===="<<endl;
-    cout <<"a: Last Name "<<endl;
-    cout << "b: Sex " << endl;
-    cout << "c: Year of birth " << endl;
-    cout << "d: Year of death " << endl;
-
-    cout << "Search by: ";
-
     char ask;
     cin >> ask;
     if(ask == 'a'||ask == 'b'||ask == 'c'||ask == 'd')
@@ -749,7 +735,6 @@ person List:: returnPersonAtIndex(int index){
 
 void List:: removeComputer(){
 
-    cout << "Type name of computer: ";
     string name;
     cin >> name;
 
@@ -759,7 +744,6 @@ void List:: removeComputer(){
 
 void List:: removeCharacter(){
 
-    cout << "Type last name: ";
     string name;
     cin >> name;
 
@@ -779,15 +763,9 @@ void List:: removeCharacterWithIndex(){
         cin >> removeIndex;
 
         if(removeIndex >= 1 && removeIndex <= max){
-            /*
-            removeIndex--;
-            string deletedPerson = characters.at(removeIndex).getLastName();
-            characters.erase(characters.begin()+removeIndex);
-            cout << "Successfully removed: " << deletedPerson << endl;
-            */
+
             deleteRowAtIndex(removeIndex,0);
             cout << "Successfully removed:" << endl;
-
 
         }
         else {

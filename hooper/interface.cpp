@@ -14,13 +14,15 @@ void Interface::welcomeMessage(){
 }
 void Interface::actions(){
     cout << "Choose a number for your next action: \n"
-            "Choose 1 to view the database. \n"
-            "Choose 2 to search the database. \n"
-            "Choose 3 to add to the database. \n"
-            "Choose 4 to discover a random pioneer. \n"
-            "Choose 5 to discover a random computer. \n"
-            "Choose 6 to remove a pioneer from the database. \n"
-            "Choose 7 to remove a computer from the database."<< endl;
+            "1) View the database. \n"
+            "2) Search the database. \n"
+            "3) Add to the database. \n"
+            "4) Discover a random pioneer. \n"
+            "5) Discover a random computer. \n"
+            "6) Remove a pioneer from the database. \n"
+            "7) Remove a computer from the database."<< endl;
+
+      cout << "Your choice: ";
 
     int action;
     cin >> action;
@@ -45,9 +47,13 @@ void Interface::view(){
 
     //if(ComputerScientists.databaseEmpty()) return;
     int choice;
-    cout << "Choose 1 to view pioneers \n"
-            "Choose 2 to view computers \n"
-            "Choose 3 to view connections between pioneers and computers" << endl;
+    cout << endl;
+    cout << "Choose an action: \n"
+            "1) View pioneers \n"
+            "2) View computers \n"
+            "3) View connections between pioneers and computers" << endl;
+    cout << "Your choice: ";
+
     cin >> choice;
     char answer;
     cout << "Do you wish to control the order of the data(y/n)? ";
@@ -67,8 +73,11 @@ void Interface::viewOptions(int choice){
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
     int view;
     cin >> view;
+    cout << endl;
 
     if(choice == 1){
+        cout <<"==== Database ===="<<endl;
+
         vector<person> p = ComputerScientists.getChar();
 
         if(view == 0){
@@ -79,6 +88,8 @@ void Interface::viewOptions(int choice){
         }
     }
     else if(choice == 2){
+        cout <<"==== Computer database ===="<<endl;
+
         vector<computer>c = ComputerScientists.getComputers();
 
         if(view == 0){
@@ -119,19 +130,35 @@ void Interface::order(int choice){
 
 }
 void Interface::find(){
+
     if(ComputerScientists.databaseEmpty()) return;
+
+    cout << endl;
+    cout <<"==== Search ===="<<endl;
+    cout << "a) Last Name "<<endl;
+    cout << "b) Sex " << endl;
+    cout << "c) Year of birth " << endl;
+    cout << "d) Year of death " << endl;
+    cout << "Search by: ";
+
     ComputerScientists.search();
 }
 void Interface::add(){
 
     int answer = 'y';
     int choice;
-    cout << "Choose 1 to add a pioneer.\n"
-            "Choose 2 to add a computer.\n"
-            "Choose 3 to add a connection.\n";
+    cout << endl;
+    cout << "Choose an action: \n"
+            "1) Add a pioneer.\n"
+            "2) Add a computer.\n"
+            "3) Add a connection.\n";
+
+    cout << "Your choice: ";
+
     cin >> choice;
+    cout << endl;
     switch(choice){
-        case 1: cout << "===== ADD A PIONEER =====" << endl;
+        case 1: cout << "===== Add a pioneer =====" << endl;
         while(answer == 'y' || answer == 'Y'){
 
             string firstname, lastname, sex;
@@ -163,7 +190,7 @@ void Interface::add(){
             answer = ComputerScientists.ask_again();
         };
         break;
-        case 2: cout << "===== ADD A COMPUTER =====" << endl;
+        case 2: cout << "===== Add a computer =====" << endl;
         while(answer == 'y' || answer == 'Y'){
 
             string name, type;
@@ -191,7 +218,7 @@ void Interface::add(){
             answer = ComputerScientists.ask_again();
         };
         break;
-        case 3: cout << "===== ADD A CONNECTION =====" << endl;
+        case 3: cout << "===== Add a connection =====" << endl;
         while(answer == 'y' || answer == 'Y'){
             vector<computer> c = ComputerScientists.getComputers();
             vector<person> p = ComputerScientists.getChar();
@@ -214,6 +241,7 @@ void Interface::add(){
             ComputerScientists.addConnection(firstName, lastName, cid);
             answer = ComputerScientists.ask_again();
         };
+        break;
     }
 
 
@@ -223,14 +251,13 @@ void Interface::add(){
 void Interface::discoverComputer(){
 
     cout << "==== Discover a Computer ===="<<endl;
-
     if(ComputerScientists.databaseEmpty()) return;
     ComputerScientists.discover(1);
 }
 
 void Interface::discover(){
 
-    cout << "==== Discover ===="<<endl;
+    cout << "==== Discover a pioneer ===="<<endl;
     if(ComputerScientists.databaseEmpty()) return;
     ComputerScientists.discover(0);
 }
@@ -239,14 +266,20 @@ void Interface::deleteCharacter(){
     if(ComputerScientists.databaseEmpty()) return;
     vector<person> p = ComputerScientists.getChar();
     ComputerScientists.printTable(p);
-    cout << "==== REMOVE ===="<<endl;
+    cout << "==== Remove a pioneer ===="<<endl;
     cout << "Write 0 to remove by index, 1 to remove by last name"<<endl;
     int type;
     cin >> type;
-    if (type == 0)
+    if (type == 0){
         ComputerScientists.removeCharacterWithIndex();
-    else if (type == 1)
-         ComputerScientists.removeCharacter();
+
+    }
+    else if (type == 1){
+        cout << "Type last name: ";
+        ComputerScientists.removeCharacter();
+
+    }
+
 }
 
 void Interface:: deleteComputer(){
@@ -255,14 +288,22 @@ void Interface:: deleteComputer(){
 
     vector<computer> c = ComputerScientists.getComputers();
     ComputerScientists.printComputerTable(c);
-    cout << "==== REMOVE COMPUTER ===="<<endl;
+    cout << "==== Remove Computer ===="<<endl;
     cout << "Write 0 to remove by index, 1 to remove by name"<<endl;
     int type;
     cin >> type;
-    if (type == 0)
+
+    if (type == 0){
+
         ComputerScientists.removeComputerWithIndex();
-    else if (type == 1)
-         ComputerScientists.removeComputer();
+
+    }
+    else if (type == 1){
+
+        cout << "Type name of computer: ";
+        ComputerScientists.removeComputer();
+
+    }
 
 
 }
