@@ -19,6 +19,9 @@ public:
     void findPioneers();
 
     void add();
+    void addPioneer(char answer);
+    void addComputer(char answer);
+    void addConnection(char answer);
     void discover();
     void discoverComputer();
     void discoverPioneer();

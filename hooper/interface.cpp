@@ -49,6 +49,7 @@ void Interface::actions(){
     }
 }
 
+//User input options for choosing what to table
 void Interface:: update(){
 
     cout << endl;
@@ -71,6 +72,8 @@ void Interface:: update(){
     }
 
 }
+
+//sending infromation through servicelayer(list) to uptdate database
 void Interface:: updateComputers(){
 
     cout <<endl;
@@ -127,6 +130,7 @@ void Interface::view(){
     }
 }
 
+//sending information to "list" to recieve information from database
 void Interface::viewOptions(int choice){
 
     cout << "Write 0 to view as list, 1 to view as Table" << endl;
@@ -175,6 +179,7 @@ void Interface::viewOptions(int choice){
 
 }
 
+//Using 0 and 1 to give user simple option choosing
 void Interface::order(int choice){
     int column, order;
     switch(choice){
@@ -197,6 +202,8 @@ void Interface::order(int choice){
     ComputerScientists.showOrdered(choice, column, order, view);
 
 }
+
+//Use 1,2 to give user option from list of options
 void Interface::find(){
 
 
@@ -224,7 +231,6 @@ void Interface::find(){
 
 void Interface::findComputers(){
 
-
     if(ComputerScientists.computersDatabaseEmpty()) return;
 
     char again = 'y';
@@ -242,15 +248,11 @@ void Interface::findComputers(){
 
         cout <<  "Search again ?(y/n): ";
         cin >> again;
-
     }
-
-
-
 }
 
+//use a,b,c... for sublist of choices for user input
 void Interface:: findPioneers(){
-
 
     if(ComputerScientists.databaseEmpty()) return;
 
@@ -269,15 +271,13 @@ void Interface:: findPioneers(){
 
         cout <<  "Search again ?(y/n): ";
         cin >> again;
-
     }
-
-
 }
 
+//
 void Interface::add(){
 
-    int answer = 'y';
+    char answer = 'y';
     int choice;
     cout << endl;
     cout << "Choose an action: \n"
@@ -290,59 +290,72 @@ void Interface::add(){
     cin >> choice;
     cout << endl;
     switch(choice){
-        case 1: cout << "===== Add a pioneer =====" << endl;
-        while(answer == 'y' || answer == 'Y'){
-
-            string firstname, lastname, sex;
-            int born, died;
-            cin.ignore(1);
-            cout << "First name: ";
-            getline(cin,firstname);
-            cout << "Last name: ";
-            getline(cin,lastname);
-            cout << "Sex(m/f): ";
-            getline(cin,sex);
-           // sex = errorCheckSex(sex);
-            cout << "Born: ";
-            cin >> born;
-           // born = errorCheckNumber(born,0);
-            cout << "Died(0 if alive): ";
-            cin >> died;
-           // died = errorCheckNumber(died,1);
-            cout << endl;
-
-            if(born <= died || died == 0) {
-                person pers;
-                pers.setFirstName(firstname);
-                pers.setLastName(lastname);
-                pers.setSex(sex);
-                pers.setBorn(born);
-                pers.setDied(died);
-
-                ComputerScientists.addData(pers);
-            } else {
-                cout << "Invalid input: Birth year > death year" << endl;
-            }
-            answer = ComputerScientists.ask_again();
-        };
+        case 1: addPioneer(answer);
         break;
-        case 2: cout << "===== Add a computer =====" << endl;
-        while(answer == 'y' || answer == 'Y'){
+        case 2: addComputer(answer);
+        break;
+        case 3: addConnection(answer);
+        break;
+    }
+}
 
-            string name, type;
-            int year;
-            bool made;
-            cin.ignore(1);
-            cout << "Computer name: ";
-            getline(cin, name);
-            cout << "Computer type: ";
-            getline(cin, type);
-            cout << "Year made(0 if not made): ";
-            cin >> year;
-            cout << "Was it made(0 if not made else 1): ";
-            cin >> made;
-           // died = errorCheckNumber(died,1);
-            cout << endl;
+void Interface::addPioneer(char answer){
+    cout << "===== Add a pioneer =====" << endl;
+    while(answer == 'y' || answer == 'Y'){
+        string firstname, lastname, sex;
+        int born, died;
+        cin.ignore(1);
+        cout << "First name: ";
+        getline(cin,firstname);
+        cout << "Last name: ";
+        getline(cin,lastname);
+        cout << "Sex(m/f): ";
+        getline(cin,sex);
+        // sex = errorCheckSex(sex);
+        cout << "Born: ";
+        cin >> born;
+        // born = errorCheckNumber(born,0);
+        cout << "Died(0 if alive): ";
+        cin >> died;
+        // died = errorCheckNumber(died,1);
+        cout << endl;
+
+        if(born <= died || died == 0) {
+
+            person pers;
+            pers.setFirstName(firstname);
+            pers.setLastName(lastname);
+            pers.setSex(sex);
+            pers.setBorn(born);
+            pers.setDied(died);
+
+            ComputerScientists.addData(pers);
+        }
+        else{
+            cout << "Invalid input: Birth year > death year" << endl;
+        }
+            answer = ComputerScientists.ask_again();
+        }
+}
+
+void Interface::addComputer(char answer){
+
+    cout << "===== Add a computer =====" << endl;
+    while(answer == 'y' || answer == 'Y'){
+        string name, type;
+        int year;
+        bool made;
+        cin.ignore(1);
+        cout << "Computer name: ";
+        getline(cin, name);
+        cout << "Computer type: ";
+        getline(cin, type);
+        cout << "Year made(0 if not made): ";
+        cin >> year;
+        cout << "Was it made(0 if not made else 1): ";
+        cin >> made;
+        // died = errorCheckNumber(died,1);
+        cout << endl;
 
             computer comp;
             comp.setName(name);
@@ -352,34 +365,32 @@ void Interface::add(){
 
             ComputerScientists.addComp(comp);
             answer = ComputerScientists.ask_again();
-        };
-        break;
-        case 3: cout << "===== Add a connection =====" << endl;
-        while(answer == 'y' || answer == 'Y'){
-            QSqlQuery p = ComputerScientists.getPersons();
-            QSqlQuery c = ComputerScientists.getComputers();
-            ComputerScientists.printTable(p);
-            ComputerScientists.printComputerTable(c);
-
-            //CHECK IF ID'S exist
-            string firstName, lastName, computerName;
-            cout << "Lastname of person: ";
-            cin.ignore(1);
-            getline(cin, lastName);
-            cout << "First name: ";
-            getline(cin, firstName);
-
-            cout << "Name of cpu: ";
-            getline(cin, computerName);
-
-            ComputerScientists.addConnection(firstName, lastName, computerName);
-            answer = ComputerScientists.ask_again();
-        };
-        break;
     }
+}
 
+void Interface::addConnection(char answer){
 
+    cout << "===== Add a connection =====" << endl;
+            while(answer == 'y' || answer == 'Y'){
+                QSqlQuery p = ComputerScientists.getPersons();
+                QSqlQuery c = ComputerScientists.getComputers();
+                ComputerScientists.printTable(p);
+                ComputerScientists.printComputerTable(c);
 
+                //CHECK IF ID'S exist
+                string firstName, lastName, computerName;
+                cout << "Lastname of person: ";
+                cin.ignore(1);
+                getline(cin, lastName);
+                cout << "First name: ";
+                getline(cin, firstName);
+
+                cout << "Name of cpu: ";
+                getline(cin, computerName);
+
+                ComputerScientists.addConnection(firstName, lastName, computerName);
+                answer = ComputerScientists.ask_again();
+            };
 }
 
 void Interface:: discover(){
