@@ -9,8 +9,8 @@ data::data() {
 
 void data::initialize() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString database = "C:\\hooper\\hooper.sqlite";
-    //QString database = "hooper.sqlite";
+    //QString database = "C:\\hooper\\hooper.sqlite";
+    QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();

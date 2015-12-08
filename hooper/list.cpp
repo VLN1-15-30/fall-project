@@ -733,6 +733,9 @@ void List:: updateComputer(int row ,QSqlQuery& cquery){
                     int identity = db.getComputerByID(c.getName().c_str());
                     db.Update(identity,fieldName,obj,"computers");
 
+                    if(option == 1)
+                        c.setName(obj);
+
                 }
 
                 cout << "Update again(n/y):"<<endl;
@@ -771,7 +774,7 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
             int born = pquery.value(4).toUInt();
             int died = pquery.value(5).toUInt();
 
-            person p = returnNewPersonWith(first,last,sex,born,died);
+            person p = returnNewPersonWith(last,first,sex,born,died);
 
             cout <<endl;
             cout <<p;
@@ -799,27 +802,27 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
                     switch(option){
 
                     case 1:{
-                          cout << "new first name: ";
+                          cout << "New first name: ";
                           fieldName ="firstname";
                              }
                     break;
                     case 2:{
-                        cout << "new last name: ";
+                        cout << "New last name: ";
                         fieldName ="lastname";
                     }
                     break;
                     case 3:{
-                        cout << "new sex(m/f): ";
+                        cout << "New sex(m/f): ";
                         fieldName ="sex";
                     }
                     break;
                     case 4:{
-                        cout << "new born year";
+                        cout << "New born year";
                         fieldName ="born";
                     }
                     break;
                     case 5:{
-                        cout << "new died year";
+                        cout << "New died year";
                         fieldName ="died";
                     }
                     break;
@@ -830,7 +833,14 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
                     cin >> obj;
 
                     int identity = db.getPersonID(p.getLastName().c_str(),p.getFirstName().c_str());
-                    cout <<"got id: "<<identity<<endl;
+
+
+                    if(option == 1)
+                        p.setFirstName(obj);
+                    else if(option == 2)
+                        p.setLastName(obj);
+
+
                     db.Update(identity,fieldName,obj,"persons");
 
                 }
