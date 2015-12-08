@@ -402,7 +402,7 @@ void List::orderbyComputerNameA_Z(int format){
 
          QSqlQuery query;
          QString s;
-         query.prepare("SELECT * FROM computers ORDER BY name ASC");
+         query.prepare("SELECT * FROM computers Deleted = 'NO' ORDER BY name ASC");
          query.exec();
          qDebug()<<query.executedQuery();
          while (query.next()) {
@@ -428,7 +428,7 @@ void List::orderbyComputerNameZ_A(int format){
 
          QSqlQuery query;
          QString s;
-         query.prepare("SELECT * FROM computers ORDER BY name DESC");
+         query.prepare("SELECT * FROM computers WHERE Deleted = 'NO' ORDER BY name DESC");
          query.exec();
          qDebug()<<query.executedQuery();
          while (query.next()) {
@@ -454,9 +454,9 @@ void List::orderbyComputerTypeA_Z(int format){
 
          QSqlQuery query;
          QString s;
-         query.prepare("SELECT * FROM computers ORDER BY type ASC");
+         query.prepare("SELECT * FROM computers WHERE Deleted = 'NO' ORDER BY type ASC");
          query.exec();
-         qDebug()<<query.executedQuery();
+         qDebug()<< query.executedQuery();
          while (query.next()) {
 
             string name = query.value(1).toString().toStdString();
@@ -480,7 +480,7 @@ void List::orderbyComputerTypeZ_A(int format){
 
          QSqlQuery query;
          QString s;
-         query.prepare("SELECT * FROM computers ORDER BY type DESC");
+         query.prepare("SELECT * FROM computers WHERE Deleted = 'NO' ORDER BY type DESC");
          query.exec();
          qDebug()<<query.executedQuery();
          while (query.next()) {
