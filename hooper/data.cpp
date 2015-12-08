@@ -15,7 +15,7 @@ void data::initialize() {
     db.setDatabaseName(database);
     bool db_ok = db.open();
     if(db_ok) {
-        cout << "Connection established" << endl;
+        //cout << "Connection established" << endl;
     } else {
         cout << "Connection failed" << endl;
     }

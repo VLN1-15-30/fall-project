@@ -493,58 +493,6 @@ void List:: removeCharacter(){
 
 }
 
-void List:: removeCharacterWithIndex(){
-
-    int max = countDatabase(0);
-
-    if(max > 0){
-
-        cout << "Type a number between 1 and " << max << ": ";
-        int removeIndex;
-        cin >> removeIndex;
-
-        if(removeIndex >= 1 && removeIndex <= max){
-
-            deleteRowAtIndex(removeIndex,0);
-            cout << "Successfully removed:" << endl;
-
-        }
-        else {
-            cout << "No person found with that index" << endl;
-        }
-
-    }
-    else {
-        cout << "Database is empty" << endl;
-    }
-}
-
-void List:: removeComputerWithIndex(){
-
-    int max = countDatabase(1);
-
-    if(max > 0){
-
-        cout << "Type a number between 1 and " << max << ": ";
-        int removeIndex;
-        cin >> removeIndex;
-
-        if(removeIndex >= 1 && removeIndex <= max){
-
-            deleteRowAtIndex(removeIndex,1);
-            cout << "Successfully removed:" << endl;
-        }
-        else {
-            cout << "No computer found with that index" << endl;
-        }
-
-    }
-    else {
-        cout << "Database is empty" << endl;
-    }
-
-
-}
 
 void List:: deleteRowAtIndex(int rowNumber,int type){
 
@@ -679,7 +627,7 @@ void List:: updateComputer(int row ,QSqlQuery& cquery){
                 cout << "Choose action: \n"
                         "1) New name. \n"
                         "2) New type. \n"
-                        "3) New year made. \n"
+                        "3) New year built. \n"
                         "4) New was made. \n" << endl;
 
                 cout << "Your choice: ";
@@ -693,22 +641,22 @@ void List:: updateComputer(int row ,QSqlQuery& cquery){
                     switch(option){
 
                     case 1:{
-                          cout << "new name: ";
+                          cout << "New name: ";
                           fieldName ="name";
                              }
                     break;
                     case 2:{
-                        cout << "new type: ";
+                        cout << "New type: ";
                         fieldName ="type";
                     }
                     break;
                     case 3:{
-                        cout << "new year made: ";
+                        cout << "New year invented: ";
                         fieldName ="yearMade";
                     }
                     break;
                     case 4:{
-                        cout << "new was made(YES/NO): ";
+                        cout << "New was made(YES/NO): ";
                         fieldName ="wasMade";
                     }
                     break;
@@ -719,6 +667,8 @@ void List:: updateComputer(int row ,QSqlQuery& cquery){
                     cin >> obj;
 
                     int identity = db.getComputerByID(c.getName().c_str());
+                    cout <<"id = "<<identity<<endl;
+
                     db.Update(identity,fieldName,obj,"computers");
 
                     if(option == 1)
@@ -821,7 +771,9 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
                     cin >> obj;
 
                     int identity = db.getPersonID(p.getLastName().c_str(),p.getFirstName().c_str());
-
+                    cout <<"id = "<<identity<<endl;
+                    cout <<"firstname = "<<p.getFirstName()<<endl;
+                    cout <<"latname = "<<p.getLastName()<<endl;
 
                     if(option == 1)
                         p.setFirstName(obj);
