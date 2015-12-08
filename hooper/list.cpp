@@ -690,11 +690,9 @@ void List:: updateComputer(int row ,QSqlQuery& cquery){
 
         i++;
     }
-
-
-
-
-
+}
+void List::closeDatabase() {
+    db.closeDBConnection();
 }
 
 

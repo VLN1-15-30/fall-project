@@ -27,6 +27,7 @@ public:
     void deleteCharacter();
     void deleteConnection();
     void viewOptions(int choice);
+    void quit();
 private:
     List ComputerScientists;
 

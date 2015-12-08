@@ -238,14 +238,18 @@ void Interface::add(){
            // died = errorCheckNumber(died,1);
             cout << endl;
 
-            person pers;
-            pers.setFirstName(firstname);
-            pers.setLastName(lastname);
-            pers.setSex(sex);
-            pers.setBorn(born);
-            pers.setDied(died);
+            if(born <= died) {
+                person pers;
+                pers.setFirstName(firstname);
+                pers.setLastName(lastname);
+                pers.setSex(sex);
+                pers.setBorn(born);
+                pers.setDied(died);
 
-            ComputerScientists.addData(pers);
+                ComputerScientists.addData(pers);
+            } else {
+                cout << "Invalid input: Birth year > death year" << endl;
+            }
             answer = ComputerScientists.ask_again();
         };
         break;
@@ -407,4 +411,8 @@ void Interface:: deleteConnection(){
     cout << "Computer name: ";
     getline(cin, computerName);
     ComputerScientists.removeConnection(firstName, lastName, computerName);
+}
+
+void Interface::quit() {
+    ComputerScientists.closeDatabase();
 }

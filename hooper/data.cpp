@@ -308,4 +308,7 @@ int data::removeConnectionByID(int pid, int cid) {
      }
 }
 
+void data::closeDBConnection() {
+    db.close();
+}
 

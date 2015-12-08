@@ -46,6 +46,7 @@ public:
     void removeCharacter();
     void removeComputer();
     void removeConnection(string firstname, string lastName, string computerName);
+    void closeDatabase();
 
     void tableBegin();
     void computerTableBegin();
