@@ -28,7 +28,7 @@ public:
     void setData();
     void addData(person p);
     void addComp (computer c);
-    void addConnection(string firstName, string lastName, int computerID);
+    void addConnection(string firstName, string lastName, string computerName);
     void search();
     void printList(vector <person>& p);
     void printComputerList(vector <computer>& c);
@@ -54,6 +54,9 @@ public:
 
     void deleteRowAtIndex(int rowNumber, int type);
     void deleteCharacterWithName(string lastname, int type);
+
+    void updatePioneer(int row,QSqlQuery cquery);
+    void updateComputer(int row, QSqlQuery pquery);
 
     int countDatabase(int type);
 

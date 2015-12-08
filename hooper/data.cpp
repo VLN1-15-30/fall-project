@@ -9,8 +9,8 @@ data::data() {
 
 void data::initialize() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString database = "C:\\hooper\\hooper.sqlite";
-   // QString database = "hooper.sqlite";
+    //QString database = "C:\\hooper\\hooper.sqlite";
+    QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();
@@ -27,7 +27,9 @@ QSqlQuery data::getConnections() {
     QString query("SELECT P.lastname, C.name, C.yearMade "
                    "FROM invented I "
                    "    INNER JOIN persons P ON P.id = I.pID "
-                   "    INNER JOIN computers C ON C.id = I.cID");
+                   "    INNER JOIN computers C ON C.id = I.cID "
+                   "WHERE P.Deleted = 'NO' "
+                   "AND C.Deleted = 'NO' ");
     if(q.prepare(query)) {
         q.exec();
         return q;
@@ -86,6 +88,23 @@ int data::getPersonID(QString lastName, QString firstName) {
     }
 }
 
+int data::getComputerByID(QString computerName) {
+    QSqlQuery q;
+    QString query("SELECT C.ID FROM computers C "
+                  "WHERE C.name = '%1' "
+                  "AND C.Deleted = 'NO'");
+    if(q.prepare(query.arg(computerName))) {
+       q.exec();
+       if(q.size() == 1) {
+           return -1;
+       }
+       q.first();
+       return q.value(0).toInt();
+    } else {
+        return -1;
+    }
+}
+
 
 bool data::addNewConnection(int pid, int cid) {
     QSqlQuery q;
@@ -98,6 +117,23 @@ bool data::addNewConnection(int pid, int cid) {
         qDebug() << q.lastError() << endl;
         return false;
     }
+}
+
+void data::Update(int rowId, string fieldname, string value, string tableName){
+
+    QSqlQuery query;
+    QString s;
+
+    s = ( "UPDATE '%1' SET '%2' = '%3' WHERE id = '%4'" );
+
+    QString field = fieldname.c_str();
+    QString table = tableName.c_str();
+    QString change = value.c_str();
+
+    query.exec(s.arg(table).arg(field).arg(change).arg(rowId));
+    qDebug()<< query.executedQuery();
+
+
 }
 
 QSqlQuery data::getComputers(){

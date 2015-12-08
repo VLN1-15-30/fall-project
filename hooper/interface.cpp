@@ -20,7 +20,9 @@ void Interface::actions(){
             "4) Discover a random pioneer. \n"
             "5) Discover a random computer. \n"
             "6) Remove a pioneer from the database. \n"
-            "7) Remove a computer from the database."<< endl;
+            "7) Remove a computer from the database. \n"
+            "8) Update pioneers \n"
+            "9) Update computers\n" << endl;
 
       cout << "Your choice: ";
 
@@ -41,8 +43,42 @@ void Interface::actions(){
         break;
         case 7: deleteComputer();
         break;
+        case 8: updatePioneers();
+        break;
+        case 9: updateComputers();
+        break;
     }
 }
+
+void Interface:: updateComputers(){
+
+    cout <<endl;
+    cout <<"==== Update computers ===="<<endl;
+
+    QSqlQuery getq = ComputerScientists.getComputers();
+    ComputerScientists.printComputerTable(getq);
+    cout << "Enter row number: ";
+    int row;
+    cin >> row;
+    ComputerScientists.updateComputer(row,getq);
+
+}
+
+void Interface:: updatePioneers(){
+
+    /*
+    cout <<endl;
+    cout <<"==== Update pioneers ===="<<endl;
+
+    vector<person> p = ComputerScientists.getChar();
+    ComputerScientists.printTable(p);
+    cout << "Enter row number: ";
+    int row;
+    cin >> row;
+    ComputerScientists.updatePioneer(row,p[row-1]);
+*/
+}
+
 void Interface::view(){
 
     //if(ComputerScientists.databaseEmpty()) return;
@@ -77,6 +113,7 @@ void Interface::viewOptions(int choice){
     QSqlQuery c = ComputerScientists.getComputers();
     QSqlQuery p = ComputerScientists.getPersons();
     cout << endl;
+
     if(choice == 1){
         cout <<"==== Database ===="<<endl;
         /*if(view == 0){
@@ -90,7 +127,7 @@ void Interface::viewOptions(int choice){
 
         cout <<"==== Computer database ===="<<endl;
 
-        QSqlQuery c = ComputerScientists.getComputers();
+        QSqlQuery dbquery = ComputerScientists.getComputers();
 
 
         /*if(view == 0){
@@ -98,8 +135,9 @@ void Interface::viewOptions(int choice){
         }*/
 
         if(view == 1){
-            ComputerScientists.printComputerTable(c);
+            ComputerScientists.printComputerTable(dbquery);
         }
+
     } else {
         cout <<"==== Overview of connections ===="<<endl;
         QSqlQuery q = ComputerScientists.getConnections();
@@ -227,18 +265,17 @@ void Interface::add(){
             ComputerScientists.printComputerTable(c);
 
             //CHECK IF ID'S exist
-            int cid;
-            string firstName, lastName;
+            string firstName, lastName, computerName;
             cout << "Lastname of person: ";
             cin.ignore(1);
             getline(cin, lastName);
             cout << "First name: ";
             getline(cin, firstName);
 
-            cout << "ID of cpu: ";
-            cin >> cid;
+            cout << "Name of cpu: ";
+            getline(cin, computerName);
 
-            ComputerScientists.addConnection(firstName, lastName, cid);
+            ComputerScientists.addConnection(firstName, lastName, computerName);
             answer = ComputerScientists.ask_again();
         };
         break;

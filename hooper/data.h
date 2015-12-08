@@ -14,13 +14,15 @@ public:
     void initialize();
     QSqlQuery getConnections();
     QSqlQuery getConnectionsSorted(int sort, int column);
+    void Update(int rowId, string fieldname, string value,string tableName);
+
     bool addNewConnection(int pid, int cid);
     QSqlQuery getComputers();
     QSqlQuery getComputersSorted(int sort, int column);
     int getPersonID(QString lastName, QString firstName);
     QSqlQuery getPersons();
     QSqlQuery getPersonsSorted(int sort, int column);
-
+    int getComputerByID(QString computerName);
 
 
 
