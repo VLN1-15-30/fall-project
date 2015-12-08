@@ -135,6 +135,7 @@ void Interface::viewOptions(int choice){
 
     QSqlQuery c = ComputerScientists.getComputers();
     QSqlQuery p = ComputerScientists.getPersons();
+    QSqlQuery q = ComputerScientists.getConnections();
     cout << endl;
 
     if(choice == 1){
@@ -158,10 +159,18 @@ void Interface::viewOptions(int choice){
             ComputerScientists.printComputerTable(c);
         }
 
-    } else {
+    }
+    else {
         cout <<"==== Overview of connections ===="<<endl;
-        QSqlQuery q = ComputerScientists.getConnections();
-        ComputerScientists.printConnectionsTable(q);
+
+        if(view == 0){
+            ComputerScientists.printConnectionsList(c);
+        }
+
+        else if(view == 1){
+            ComputerScientists.printConnectionsTable(q);
+        }
+
     }
 
 }
@@ -302,7 +311,7 @@ void Interface::add(){
            // died = errorCheckNumber(died,1);
             cout << endl;
 
-            if(born <= died) {
+            if(born <= died || died == 0) {
                 person pers;
                 pers.setFirstName(firstname);
                 pers.setLastName(lastname);
@@ -475,6 +484,14 @@ void Interface:: deleteConnection(){
     cout << "Computer name: ";
     getline(cin, computerName);
     ComputerScientists.removeConnection(firstName, lastName, computerName);
+}
+
+void Interface::showUsage() {
+    cout << "Hooper is currently storing information about " << endl;
+    cout << ComputerScientists.countDatabase(0) << " pioneers and ";
+    cout << ComputerScientists.countDatabase(1) << " computers." << endl;
+    cout << endl;
+
 }
 
 void Interface::quit() {
