@@ -27,7 +27,9 @@ QSqlQuery data::getConnections() {
     QString query("SELECT P.lastname, C.name, C.yearMade "
                    "FROM invented I "
                    "    INNER JOIN persons P ON P.id = I.pID "
-                   "    INNER JOIN computers C ON C.id = I.cID");
+                   "    INNER JOIN computers C ON C.id = I.cID "
+                   "WHERE P.Deleted = 'NO' "
+                   "AND C.Deleted = 'NO' ");
     if(q.prepare(query)) {
         q.exec();
         return q;
@@ -102,7 +104,6 @@ int data::getComputerByID(QString computerName) {
         return -1;
     }
 }
-
 
 
 bool data::addNewConnection(int pid, int cid) {

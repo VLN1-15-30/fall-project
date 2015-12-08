@@ -267,18 +267,17 @@ void Interface::add(){
             ComputerScientists.printComputerTable(c);
 
             //CHECK IF ID'S exist
-            int cid;
-            string firstName, lastName;
+            string firstName, lastName, computerName;
             cout << "Lastname of person: ";
             cin.ignore(1);
             getline(cin, lastName);
             cout << "First name: ";
             getline(cin, firstName);
 
-            cout << "ID of cpu: ";
-            cin >> cid;
+            cout << "Name of cpu: ";
+            getline(cin, computerName);
 
-            ComputerScientists.addConnection(firstName, lastName, cid);
+            ComputerScientists.addConnection(firstName, lastName, computerName);
             answer = ComputerScientists.ask_again();
         };
         break;
