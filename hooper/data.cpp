@@ -25,7 +25,9 @@ QSqlQuery data::getConnections() {
     QString query("SELECT P.lastname, C.name, C.yearMade "
                    "FROM invented I "
                    "    INNER JOIN persons P ON P.id = I.pID "
-                   "    INNER JOIN computers C ON C.id = I.cID");
+                   "    INNER JOIN computers C ON C.id = I.cID "
+                   "WHERE P.Deleted = 'NO' "
+                   "AND C.Deleted = 'NO' ");
     if(q.prepare(query)) {
         q.exec();
         return q;
@@ -77,6 +79,23 @@ int data::getPersonID(QString lastName, QString firstName) {
                   "AND P.Deleted = 'NO'");
     if(q.prepare(query.arg(lastName).arg(firstName))) {
        q.exec();
+       q.first();
+       return q.value(0).toInt();
+    } else {
+        return -1;
+    }
+}
+
+int data::getComputerByID(QString computerName) {
+    QSqlQuery q;
+    QString query("SELECT C.ID FROM computers C "
+                  "WHERE C.name = '%1' "
+                  "AND C.Deleted = 'NO'");
+    if(q.prepare(query.arg(computerName))) {
+       q.exec();
+       if(q.size() == 1) {
+           return -1;
+       }
        q.first();
        return q.value(0).toInt();
     } else {

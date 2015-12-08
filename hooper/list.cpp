@@ -20,7 +20,7 @@ vector<computer> const List:: getComputers(){
     //delete our vector objects and refresh data
     computers.erase(computers.begin(),computers.end());
 
-    QSqlQuery dataQuery(QString("SELECT * FROM computers"));
+    QSqlQuery dataQuery(QString("SELECT * FROM computers WHERE Deleted = 'NO' "));
     dataQuery.exec();
     //qDebug()<<dataQuery.executedQuery();
 
@@ -132,14 +132,22 @@ void List::addComp(computer c){
 }
 
 
-void List::addConnection(string firstName, string lastName, int computerID){
+void List::addConnection(string firstName, string lastName, string computerName){
 
    int personID = db.getPersonID(lastName.c_str(), firstName.c_str());
    cout << "This is personID " << personID << endl;
+
    if( personID == -1) {
        cout << "Person not in database" << endl;
        return;
    }
+
+   int computerID = db.getComputerByID(computerName.c_str());
+   if( computerID == -1) {
+       cout << "Computer not in database" << endl;
+       return;
+   }
+
    bool add = db.addNewConnection(personID, computerID);
    if(add) {
        cout << "Succesfully added new connections" << endl;
