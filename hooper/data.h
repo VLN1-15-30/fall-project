@@ -25,7 +25,9 @@ public:
     int getPersonID(QString lastName, QString firstName);
     QSqlQuery getPersons();
     QSqlQuery getPersonsSorted(int sort, int column);
-    QSqlQuery search(string table, string field, string obj);
+    QSqlQuery search(string field, string obj);
+    QSqlQuery searchComputer (string field, string obj);
+
 
     int getComputerByID(QString computerName);
     int removeConnectionByID(int pid, int cid);
