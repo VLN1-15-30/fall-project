@@ -50,21 +50,18 @@ void List::addData(person p){
 
 void List::addComp(computer c){
 
-    QString qcname(c.getName().c_str());
-    QString qctype(c.getType().c_str());
+    //initializing variables from user input
+    string name = c.getName();
+    string type = c.getType();
+    int year = c.getYearMade();
+    bool made = c.getWasMade();
 
-    QSqlQuery add;
-    QString query;
-
-    query = ("INSERT INTO computers VALUES(NULL, ?, ?, ?, ?)");
-    if(add.prepare(query)) {
-        cout << "success" << endl;
-        add.addBindValue(qcname);
-        add.addBindValue(qctype);
-        add.addBindValue(c.getYearMade());
-        add.addBindValue(c.getWasMade());
-        add.exec();
-
+    //Calling datalayer to add to database, returns false if unsuccessful
+    bool add = db.addNewComputer(name, type, year, made);
+    if(add) {
+        cout << "Succesfully added new computer" << endl;
+    } else {
+        cout << "Error in adding a computer" << endl;
     }
 }
 

@@ -18,6 +18,7 @@ public:
     void Update(int rowId, string fieldname, string value,string tableName);
 
     bool addNewConnection(int pid, int cid);
+    bool addNewComputer(string name, string type, int year, bool made);
     bool addNewPerson(string firstname, string lastname, string sex, int born, int died);
     QSqlQuery getComputers();
     QSqlQuery getComputersSorted(int sort, int column);

@@ -145,6 +145,28 @@ bool data::addNewPerson(string firstname, string lastname, string sex, int born,
     return false;
 }
 
+bool data::addNewComputer(string name, string type, int year, bool made){
+
+    QString qcname(name.c_str());
+    QString qctype(type.c_str());
+
+    QSqlQuery add;
+    QString query;
+
+    query = ("INSERT INTO computers VALUES(NULL, ?, ?, ?, ?, 'NO')");
+    if(add.prepare(query)) {
+        add.addBindValue(qcname);
+        add.addBindValue(qctype);
+        add.addBindValue(year);
+        add.addBindValue(made);
+        return add.exec();
+    }
+    else {
+        qDebug() << add.lastError() << endl;
+               return false;
+    }
+}
+
 bool data::addNewConnection(int pid, int cid) {
     QSqlQuery q;
     QString query = "INSERT INTO invented VALUES(?, ?, 'NO')";
