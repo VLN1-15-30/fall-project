@@ -16,7 +16,6 @@ public:
     int getYearMade() const;
     string getType() const;
     bool getWasMade() const;
-
     void setName(string n);
     void setYearMade(int ym);
     void setType(string t);

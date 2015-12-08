@@ -31,7 +31,6 @@ public:
     string errorCheckSex(string& sex);
     int errorCheckNumber(int& number, int index);
 
-
 private:
     int born;
     int died;

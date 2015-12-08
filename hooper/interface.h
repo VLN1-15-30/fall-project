@@ -17,7 +17,6 @@ public:
     void find();
     void findComputers();
     void findPioneers();
-
     void add();
     void addPioneer(char answer);
     void addComputer(char answer);
@@ -35,6 +34,7 @@ public:
     void viewOptions(int choice);
     void showUsage();
     void quit();
+
 private:
     List ComputerScientists;
 
