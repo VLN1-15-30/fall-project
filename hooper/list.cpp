@@ -131,18 +131,15 @@ void List::addComp(computer c){
     }
 }
 
-////gets ID of person with lastname
-//void List::getID(string lastname, string firstname) {
-//    QSqlQuery q;
-//    QString query = "SELECT ID FROM persons WHERE lastname = '?'' and firstname = '?'";
-//    if(q.prepare(query)) {
-//        cout << "ID success" << endl;
 
-//    }
-//}
+void List::addConnection(string firstName, string lastName, int computerID){
 
-
-void List::addConnection(int personID, int computerID){
+   int personID = db.getPersonID(lastName.c_str(), firstName.c_str());
+   cout << "This is personID " << personID << endl;
+   if( personID == -1) {
+       cout << "Person not in database" << endl;
+       return;
+   }
    bool add = db.addNewConnection(personID, computerID);
    if(add) {
        cout << "Succesfully added new connections" << endl;

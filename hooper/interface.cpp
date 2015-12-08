@@ -22,7 +22,6 @@ void Interface::actions(){
             "Choose 6 to remove a pioneer from the database. \n"
             "Choose 7 to remove a computer from the database."<< endl;
 
-
     int action;
     cin >> action;
     switch(action){
@@ -201,13 +200,18 @@ void Interface::add(){
             ComputerScientists.printComputerTable(c);
 
             //CHECK IF ID'S exist
-            int pid, cid;
-            cout << "ID of person: ";
-            cin >> pid;
+            int cid;
+            string firstName, lastName;
+            cout << "Lastname of person: ";
+            cin.ignore(1);
+            getline(cin, lastName);
+            cout << "First name: ";
+            getline(cin, firstName);
+
             cout << "ID of cpu: ";
             cin >> cid;
 
-            ComputerScientists.addConnection(pid, cid);
+            ComputerScientists.addConnection(firstName, lastName, cid);
             answer = ComputerScientists.ask_again();
         };
     }

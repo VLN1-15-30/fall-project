@@ -29,7 +29,7 @@ public:
     void setData();
     void addData(person p);
     void addComp (computer c);
-    void addConnection(int personID, int computerID);
+    void addConnection(string firstName, string lastName, int computerID);
     void search();
     void printList(vector <person>& p);
     void printComputerList(vector <computer>& c);

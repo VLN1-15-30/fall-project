@@ -14,6 +14,8 @@ public:
     QSqlQuery getConnections();
     QSqlQuery getConnectionsSorted(int sort, int column);
     bool addNewConnection(int pid, int cid);
+    int getPersonID(QString lastName, QString firstName);
+
 
 
 private:
