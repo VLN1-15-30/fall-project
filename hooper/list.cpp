@@ -32,40 +32,20 @@ QSqlQuery List:: getPersons(){
 
 void List::addData(person p){
 
-    QString qfirstname(p.getFirstName().c_str());
-    QString qlastname(p.getLastName().c_str());
-    QString qsex(p.getSex().c_str());
+    //initializing variables from user input
+    string firstname = p.getFirstName();
+    string lastname = p.getLastName();
+    string sex = p.getSex();
+    int born = p.getBorn();
+    int died = p.getDied();
 
-    QSqlQuery add;
-    QString query;
-
-    //Death year becomes NULL if person still alive
-    if(p.getDied() != 0) {
-        query = ("INSERT INTO persons VALUES(NULL, ?, ?, ?, ?, ?)");
-        if(add.prepare(query)) {
-            cout << "success" << endl;
-            add.addBindValue(qfirstname);
-            add.addBindValue(qlastname);
-            add.addBindValue(qsex);
-            add.addBindValue(p.getBorn());
-            add.addBindValue(p.getDied());
-            add.exec();
-        }
+    //Calling data layer to add to database, returns false if unsuccessful
+    bool add = db.addNewPerson(firstname, lastname, sex, born, died);
+    if(add) {
+        cout << "Succesfully added new pioneer" << endl;
     } else {
-        query = "INSERT INTO persons(ID, firstname, lastname, sex, born)" "VALUES(NULL, ?, ?, ?, ?)";
-        if(add.prepare(query)) {
-            add.addBindValue(qfirstname);
-            add.addBindValue(qlastname);
-            add.addBindValue(qsex);
-            add.addBindValue(p.getBorn());
-            add.exec();
-            cout << "Succss 0" << endl;
-        } else {
-            qDebug() << add.lastError() << endl;
-
-        }
+        cout << "Error in adding a pioneer" << endl;
     }
-
 }
 
 void List::addComp(computer c){
@@ -94,13 +74,13 @@ void List::addConnection(string firstName, string lastName, string computerName)
    int personID = db.getPersonID(lastName.c_str(), firstName.c_str());
    cout << "This is personID " << personID << endl;
 
-   if( personID == -1) {
+   if( personID == -1 || personID == 0) {
        cout << "Person not in database" << endl;
        return;
    }
 
    int computerID = db.getComputerByID(computerName.c_str());
-   if( computerID == -1) {
+   if( computerID == -1 || personID == 0) {
        cout << "Computer not in database" << endl;
        return;
    }

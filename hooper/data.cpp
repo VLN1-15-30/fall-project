@@ -9,8 +9,8 @@ data::data() {
 
 void data::initialize() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    //QString database = "C:\\hooper\\hooper.sqlite";
-    QString database = "hooper.sqlite";
+    QString database = "C:\\hooper\\hooper.sqlite";
+    //QString database = "hooper.sqlite";
 
     db.setDatabaseName(database);
     bool db_ok = db.open();
@@ -28,7 +28,9 @@ QSqlQuery data::getConnections() {
                    "FROM invented I "
                    "    INNER JOIN persons P ON P.id = I.pID "
                    "    INNER JOIN computers C ON C.id = I.cID "
-                   "WHERE I.Deleted = 'NO'");
+                   "WHERE I.Deleted = 'NO' "
+                   "AND P.Deleted = 'NO' "
+                   "AND C.Deleted = 'NO' ");
     if(q.prepare(query)) {
         q.exec();
         return q;
@@ -62,6 +64,8 @@ QSqlQuery data::getConnectionsSorted(int sort, int column) {
                    "    INNER JOIN persons P ON P.id = I.pID "
                    "    INNER JOIN computers C ON C.id = I.cID "
                    "WHERE I.Deleted = 'NO' "
+                   "AND P.Deleted = 'NO' "
+                   "AND C.Deleted = 'NO'"
                    "ORDER BY %1 %2");
     if(q.prepare(query.arg(col).arg(orderby))) {
         q.exec();
@@ -103,9 +107,47 @@ int data::getComputerByID(QString computerName) {
     }
 }
 
+bool data::addNewPerson(string firstname, string lastname, string sex, int born, int died) {
+
+    QString qfirstname(firstname.c_str());
+    QString qlastname(lastname.c_str());
+    QString qsex(sex.c_str());
+
+    QSqlQuery add;
+    QString query;
+
+    //Death year becomes NULL if person still alive
+    if(died != 0) {
+        query = ("INSERT INTO persons VALUES(NULL, ?, ?, ?, ?, ?, 'NO')");
+        if(add.prepare(query)){
+            add.addBindValue(qfirstname);
+            add.addBindValue(qlastname);
+            add.addBindValue(qsex);
+            add.addBindValue(born);
+            add.addBindValue(died);
+            return add.exec();
+        }
+    }
+    else if(died == 0){
+        query = "INSERT INTO persons(ID, firstname, lastname, sex, born)" "VALUES(NULL, ?, ?, ?, ?)";
+        if(add.prepare(query)) {
+            add.addBindValue(qfirstname);
+            add.addBindValue(qlastname);
+            add.addBindValue(qsex);
+            add.addBindValue(born);
+            return add.exec();
+        }
+    }
+    else {
+        qDebug() << add.lastError() << endl;
+            return false;
+    }
+    return false;
+}
+
 bool data::addNewConnection(int pid, int cid) {
     QSqlQuery q;
-    QString query = "INSERT INTO invented VALUES(?, ?)";
+    QString query = "INSERT INTO invented VALUES(?, ?, 'NO')";
     if(q.prepare(query)) {
         q.addBindValue(pid);
         q.addBindValue(cid);
@@ -136,8 +178,9 @@ void data::Update(int rowId, string fieldname, string value, string tableName){
 QSqlQuery data::getComputers(){
 
     QSqlQuery q;
-    QString query = ("SELECT ID, name, type, yearMade, wasMade FROM computers");
-
+    QString query = ("SELECT ID, name, type, yearMade, wasMade "
+                     "FROM computers "
+                     "WHERE Deleted = 'NO'");
     if(q.prepare(query)){
         q.exec();
         return q;
@@ -169,6 +212,7 @@ QSqlQuery data::getComputersSorted(int sort, int column) {
     }
     QString query("SELECT C.ID, C.name, C.type, C.yearMade, C.wasMade "
                    "FROM computers C "
+                   "WHERE C.Deleted = 'NO' "
                    "ORDER BY %1 %2");
     if(q.prepare(query.arg(col).arg(orderby))) {
         q.exec();
@@ -183,8 +227,9 @@ QSqlQuery data::getComputersSorted(int sort, int column) {
 QSqlQuery data::getPersons(){
 
     QSqlQuery q;
-    QString query = ("SELECT ID, lastname, firstname, sex, born, died FROM persons ");
-
+    QString query("SELECT ID, lastname, firstname, sex, born, died "
+                  "FROM persons "
+                  "WHERE Deleted = 'NO' ");
     if(q.prepare(query)){
         q.exec();
         return q;
@@ -216,6 +261,7 @@ QSqlQuery data::getPersonsSorted(int sort, int column) {
     }
     QString query("SELECT P.ID, P.lastname, P.firstname, P.sex, P.born, P.died "
                    "FROM persons P "
+                   "WHERE P.Deleted = 'NO' "
                    "ORDER BY %1 %2");
     if(q.prepare(query.arg(col).arg(orderby))) {
         q.exec();
@@ -239,4 +285,5 @@ int data::removeConnectionByID(int pid, int cid) {
         return 0;
      }
 }
+
 
