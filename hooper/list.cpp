@@ -140,6 +140,20 @@ void List::printComputerList(QSqlQuery q){
 
 }
 
+void List::printConnectionsList(QSqlQuery q){
+
+    while(q.next()){
+        string lastName = q.value(0).toString().toStdString();
+        string computerName = q.value(1).toString().toStdString();
+        int yearMade = q.value(2).toUInt();
+
+        cout << "Computer name: " << computerName << endl;
+        cout << "Pioneers last name: " << lastName << endl;
+        cout << "Year computer made: " << yearMade << endl;
+        cout << endl;
+    }
+}
+
 bool List:: computersDatabaseEmpty(){
 
     int count = countDatabase(1);
@@ -304,77 +318,84 @@ char List:: ask_again(){
     return answer;
 }
 
-void List::search(){
+void List::search(string table){
 
     char ask;
     cin >> ask;
     if(ask == 'a'||ask == 'b'||ask == 'c'||ask == 'd')
-        performSearchBasedOn(ask);
+        performSearchBasedOn(ask,table);
 }
 
-void List:: performSearchBasedOn(const char& selection){
+void List:: performSearchBasedOn(const char& selection, string table){
 
     string searchby;
-    switch(selection){
-        case 'a': cout << "Last name: ";
-                  searchby = "lastname";
-        break;
-        case 'b': cout << "m/f: ";
-                  searchby = "sex";
-        break;
-        case 'c': cout << "Enter year: ";
-                  searchby = "born";
+    bool printPersons = true;
 
-        break;
-        case 'd': cout << "Enter year: ";
-                  searchby = "died";
-        break;
+    if(table == "persons"){
+
+        switch(selection){
+            case 'a': cout << "Last name: ";
+                      searchby = "lastname";
+            break;
+            case 'b': cout << "m/f: ";
+                      searchby = "sex";
+            break;
+            case 'c': cout << "Enter year: ";
+                      searchby = "born";
+
+            break;
+            case 'd': cout << "Enter year: ";
+                      searchby = "died";
+            break;
+        }
+
+
+
     }
+    else if(table == "computers"){
+
+        printPersons = false;
+
+        switch(selection){
+            case 'a': cout << "Enter name: ";
+                      searchby = "name";
+            break;
+            case 'b': cout << "ENter type: ";
+                      searchby = "type";
+            break;
+            case 'c': cout << "Enter year: ";
+                      searchby = "yearMade";
+
+            break;
+            case 'd': cout << "Enter yes/No: ";
+                      searchby = "wasMade";
+            break;
+        }
+
+    }
+
 
     string target;
     cin >> target;
 
-    vector <person> sResult;
+    QSqlQuery query = db.search(table,searchby,target);
 
-    QString obj = target.c_str();
-    QString by = searchby.c_str();
-
-    QSqlQuery query;
-    QString s;
-    s = ("SELECT * FROM persons WHERE %1 LIKE '%%2%' AND deleted = 'NO' ORDER BY lastname ASC" );
-    query.exec(s.arg(by).arg(obj));
     qDebug()<<query.executedQuery();
 
-        while (query.next()) {
-
-                string first = query.value(1).toString().toStdString();
-                string last = query.value(2).toString().toStdString();
-                string sex = query.value(3).toString().toStdString();
-                int born = query.value(4).toUInt();
-                int died = query.value(5).toUInt();
-
-                person searchedPerson = returnNewPersonWith(first,last,sex,born,died);
-                sResult.push_back(searchedPerson);
-
-        }
-
-
-    if(sResult.size() == 0){
+    if(!query.first()){
         cout << "No match found for "<<target << endl;
     }
     else{
         cout <<endl;
         cout << "Found the following results: "<< endl;
 
-        //printTable(sResult);
+        if(printPersons)
+            printTable(query);
+        else
+            printComputerTable(query);
     }
 
-    cout <<  "Search again ?(y/n): ";
-    char again;
-    cin >> again;
 
-    if(again == 'y'|| again == 'Y')
-        search();
 }
 
 ostream& operator<< (ostream& stream,const List& p){
