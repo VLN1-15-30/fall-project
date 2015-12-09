@@ -19,5 +19,3 @@ int main()
     hooper.quit();
     return 0;
 }
-
-#
