@@ -215,7 +215,7 @@ void List::printConnectionsTable(QSqlQuery q) {
     connectionsTableBegin();
 
     const char separator    = ' ';
-    const int nameWidth     = 15;
+    const int nameWidth     = 30;
     const int numWidth      = 15;
 
     while(q.next()){
@@ -547,7 +547,7 @@ void List:: computerTableBegin(){
 
 void List:: connectionsTableBegin(){
     const char separator    = ' ';
-    const int nameWidth     = 15;
+    const int nameWidth     = 30;
     const int numWidth      = 15;
 
     cout << left << setw(nameWidth) << setfill(separator) << "Computer";
@@ -713,7 +713,7 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
                     }
                     break;
                     case 4:{
-                        cout << "New born year";
+                        cout << "New born year: ";
                         fieldName ="born";
                     }
                     break;
