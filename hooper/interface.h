@@ -27,6 +27,7 @@ public:
     void update();
     void updateComputers();
     void updatePioneers();
+    void updateConnections();
     void askToDelete();
     void deleteComputer();
     void deleteCharacter();

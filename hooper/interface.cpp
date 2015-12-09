@@ -60,7 +60,8 @@ void Interface::update(){
     cout << endl;
     cout << "Choose an action: \n"
             "1) Update a pioneer \n"
-            "2) Update a computer \n"<<endl;
+            "2) Update a computer \n"
+            "3) Update a connection \n"<<endl;
 
     cout << "Your choice: ";
 
@@ -72,6 +73,7 @@ void Interface::update(){
         break;
     case 2:updateComputers();
         break;
+    case 3:updateConnections();
     default:
         break;
     }
@@ -106,6 +108,25 @@ void Interface::updatePioneers(){
     QSqlQuery updateQ = ComputerScientists.getPersons();
     ComputerScientists.updatePioneer(row,updateQ);
 
+}
+
+void Interface::updateConnections(){
+    cout << endl;
+    cout <<"==== Update connections ===="<<endl;
+
+    string lastName, firstName, computerName;
+    QSqlQuery getq = ComputerScientists.getConnections();
+    ComputerScientists.printConnectionsTable(getq);
+
+    cout << "Please write the name of inventor and the computer." << endl;
+    cin.ignore(1);
+    cout << "First name: ";
+    getline(cin,firstName);
+    cout << "Last name: ";
+    getline(cin,lastName);
+    cout << "Computer name: ";
+    getline(cin, computerName);
+    ComputerScientists.updateConnections(firstName, lastName, computerName);
 }
 
 void Interface::view(){
@@ -343,7 +364,7 @@ void Interface::addComputer(char answer){
         getline(cin, name);
         cout << "Computer type: ";
         getline(cin, type);
-        cout << "Year made(0 if not made): ";
+        cout << "Year invented: ";
         cin >> year;
         cout << "Was it made(0 if not made else 1): ";
         cin >> made;
@@ -372,7 +393,6 @@ void Interface::addConnection(char answer){
         ComputerScientists.printTable(p);
         ComputerScientists.printComputerTable(c);
 
-        //CHECK IF ID'S exist
         string firstName, lastName, computerName;
         cout << "Lastname of person: ";
         cin.ignore(1);

@@ -16,16 +16,17 @@ void List:: initialize(){
     db.initialize();
 }
 
-
+//return unordered computer table
 QSqlQuery List:: getComputers(){
-         return db.getComputers();
+    return db.getComputers();
 }
 
+//returns unordered connections table
 QSqlQuery List::getConnections() {
     return db.getConnections();
 }
 
-
+//returns unordered person table
 QSqlQuery List:: getPersons(){
     return db.getPersons();
 }
@@ -69,7 +70,6 @@ void List::addComp(computer c){
 void List::addConnection(string firstName, string lastName, string computerName){
 
    int personID = db.getPersonID(lastName.c_str(), firstName.c_str());
-   cout << "This is personID " << personID << endl;
 
    if( personID == -1 || personID == 0) {
        cout << "Person not in database" << endl;
@@ -185,7 +185,7 @@ void List:: printComputerTable(QSqlQuery q){
 
     const char separator    = ' ';
     const int nameWidth     = 30;
-    const int numWidth      = 15;
+    const int numWidth      = 10;
 
     int idCount = 0;
     while (q.next()){
@@ -198,7 +198,7 @@ void List:: printComputerTable(QSqlQuery q){
 
           cout << left << setw(5) << setfill(separator) << ID;
           cout << left << setw(nameWidth) << setfill(separator) << name;
-          cout << left << setw(nameWidth-10) << setfill(separator) << type;
+          cout << left << setw(nameWidth-12) << setfill(separator) << type;
           cout << left << setw(numWidth) << setfill(separator) << year;
           if(made == true)
               cout << left << setw(numWidth) << setfill(separator) << "YES";
@@ -222,6 +222,7 @@ void List::printConnectionsTable(QSqlQuery q) {
         string lastName = q.value(0).toString().toStdString();
         string computerName = q.value(1).toString().toStdString();
         int yearMade = q.value(2).toUInt();
+
 
         cout << left << setw(nameWidth) << setfill(separator) << computerName;
         cout << left << setw(nameWidth) << setfill(separator) << lastName;
@@ -527,19 +528,19 @@ void List:: computerTableBegin(){
 
     const char separator    = ' ';
     const int nameWidth     = 30;
-    const int numWidth      = 15;
+    const int numWidth      = 10;
 
     cout << left << setw(5) << setfill(separator) << "Nr.";
     cout << left << setw(nameWidth) << setfill(separator) << "Name";
-    cout << left << setw(nameWidth-10) << setfill(separator) << "Type";
-    cout << left << setw(numWidth) << setfill(separator) << "Year Made";
+    cout << left << setw(nameWidth-12) << setfill(separator) << "Type";
+    cout << left << setw(numWidth) << setfill(separator) << "Year";
     cout << left << setw(numWidth) << setfill(separator) << "Was Made";
     cout << endl;
 
     cout << left << setw(5) << setfill(separator) << "---";
     cout << left << setw(nameWidth) << setfill(separator) << "----";
-    cout << left << setw(nameWidth-10) << setfill(separator) << "----";
-    cout << left << setw(numWidth) << setfill(separator) << "---------";
+    cout << left << setw(nameWidth-12) << setfill(separator) << "----";
+    cout << left << setw(numWidth) << setfill(separator) << "----";
     cout << left << setw(numWidth) << setfill(separator) << "--------";
     cout << endl;
 
@@ -633,19 +634,13 @@ void List:: updateComputer(int row ,QSqlQuery& cquery){
 
                     if(option == 1)
                         c.setName(obj);
-
                 }
 
                 cout << "Update again(n/y):"<<endl;
                 cout << "Your choice: ";
                 cin >> update;
                 cout <<endl;
-
-
             }
-
-
-
         }
 
         i++;
@@ -729,7 +724,6 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
                     cin.ignore(1);
                     getline(cin,obj);
 
-
                     int identity = db.getPersonID(p.getLastName().c_str(),p.getFirstName().c_str());
                     cout <<"id = "<<identity<<endl;
                     cout <<"firstname = "<<p.getFirstName()<<endl;
@@ -740,7 +734,6 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
                     else if(option == 2)
                         p.setLastName(obj);
 
-
                     db.update(identity,fieldName,obj,"persons");
 
                 }
@@ -749,16 +742,109 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
                 cout << "Your choice: ";
                 cin >> update;
                 cout <<endl;
-
-
             }
-
-
-
         }
 
         i++;
    }
+}
+
+void List::updateConnections(string firstName, string lastName, string computerName) {
+
+    int personID = getPersonID(lastName, firstName);
+
+    if( personID == -1 ) {
+        cout << "Person not in database" << endl;
+        return;
+    }
+    int computerID = getComputerID(computerName.c_str());
+    if( computerID == -1) {
+        cout << "Computer not in database" << endl;
+        return;
+    }
+
+    cout << "Choose action: \n"
+            "1) Update pioneer \n"
+            "2) Update computer \n" << endl;
+
+    cout << "Your choice: ";
+    int option;
+    cin>> option;
+    if(option >0 && option <3){
+
+        switch(option){
+
+        case 1:{
+            updateConnectionPerson(personID, computerID);
+        }
+        break;
+        case 2:{
+            updateConnectionComputer(personID, computerID);
+        }
+        break;
+        }
+    }
+    cout <<endl;
+
+}
+
+void List::updateConnectionComputer(int personID, int computerID){
+
+    string newComputerName, fieldName;
+    int newcID;
+    cin.ignore(1);
+    cout << "New computer name: ";
+    getline(cin, newComputerName);
+    fieldName ="cID";
+    newcID = getComputerID(newComputerName);
+    if(newcID == -1) {
+        return;
+    } else {
+      db.updateConnection(personID, computerID, fieldName, newcID);
+          cout << "Update successful" << endl;
+    }
+}
+
+
+void List::updateConnectionPerson(int personID, int computerID) {
+
+    string newLastName, newFirstName, fieldName;
+    int newpID;
+    cin.ignore(1);
+    cout << "New Last name: ";
+    getline(cin, newLastName);
+    cout << "New First name: ";
+    getline(cin, newFirstName);
+    fieldName = "pID";
+    newpID = getPersonID(newLastName, newFirstName);
+    //return if new Person not in database
+    if(newpID == -1) {
+       return;
+    } else {
+       db.updateConnection(personID, computerID, fieldName, newpID);
+           cout << "Update successful" << endl;
+    }
+}
+
+int List::getPersonID(string lastName, string firstName) {
+    int personID = db.getPersonID(lastName.c_str(), firstName.c_str());
+
+    if( personID == -1 || personID == 0) {
+        cout << "Person not in database" << endl;
+        return -1;
+    }
+    return personID;
+}
+
+//Use computername to get ID of cpu
+int List::getComputerID(string computerName){
+
+    int computerID = db.getComputerByID(computerName.c_str());
+    if( computerID == -1 || computerID == 0) {
+        cout << "Computer not in database" << endl;
+        return -1;
+    }
+    return computerID;
 }
 
 void List::removeConnection(string firstName, string lastName, string computerName) {
@@ -782,6 +868,4 @@ void List::removeConnection(string firstName, string lastName, string computerNa
     } else {
         cout << "ID's are not valid" << endl;
     }
-
-
 }

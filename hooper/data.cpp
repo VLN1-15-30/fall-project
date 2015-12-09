@@ -402,6 +402,17 @@ void data:: deleteObj(int type, string name){
         s = ( "UPDATE computers SET deleted = 'YES' WHERE name = '%1'" );
         query.exec(s.arg(QString(name.c_str())));
     }
+}
 
+void data::updateConnection(int personID, int computerID, string fieldName, int newID){
+    QSqlQuery q;
+    QString query("UPDATE invented SET %1 = %2 "
+                  "WHERE pID = %3 "
+                  "AND cID = %4 ");
+    if(q.prepare(query.arg(fieldName.c_str()).arg(newID).arg(personID).arg(computerID))) {
+        q.exec();
+        return;
+    } else {
 
+    }
 }

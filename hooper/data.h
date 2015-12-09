@@ -21,6 +21,7 @@ public:
     bool addNewConnection(int pid, int cid);
     bool addNewComputer(string name, string type, int year, bool made);
     bool addNewPerson(string firstname, string lastname, string sex, int born, int died);
+    void updateConnection(int personID, int computerID, string fieldName, int newID);
 
     QSqlQuery getConnections();
     QSqlQuery getConnectionsSorted(int sort, int column);

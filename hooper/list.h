@@ -53,7 +53,16 @@ public:
     void deleteCharacterWithName(string lastname, int type);
     void updatePioneer(int row,QSqlQuery pquery);
     void updateComputer(int row, QSqlQuery& cquery);
+    void updateConnectionPerson(int personID, int computerID);
+    void updateConnectionComputer(int personID, int computerID);
+    void updateConnections(string firstName, string lastName, string computerName);
     int countDatabase(int type);
+    int getPersonID(string lastName, string firstName);
+    int getComputerID(string computerName);
+
+
+
+
 
     char ask_again();
     computer returnNewComputer(string name, string type, int year, bool made);
