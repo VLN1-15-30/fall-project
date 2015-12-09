@@ -1,5 +1,4 @@
-QT += core
-QT -= gui
+QT = core gui sql
 
 TARGET = hooper
 CONFIG += console
@@ -10,10 +9,14 @@ TEMPLATE = app
 SOURCES += main.cpp \
     person.cpp \
     list.cpp \
-    interface.cpp
+    interface.cpp \
+    computer.cpp \
+    data.cpp
 
 HEADERS += \
     person.h \
     list.h \
-    interface.h
+    interface.h \
+    computer.h \
+    data.h
 
