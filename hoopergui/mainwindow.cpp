@@ -200,6 +200,8 @@ void MainWindow::trackHovers()
 void MainWindow::setUpHooper()
 {
 
+    ui->groupBox_hooper->setStyleSheet("QGroupBox { color: white;}");
+
     welcome_widget *welcome = new welcome_widget;
     view_widget *view_db = new view_widget;
     add_widget *add_db = new add_widget;
@@ -231,6 +233,7 @@ void MainWindow::setUpHooper()
     menuButtons->addButton(ui->button_about,6);
 
 
+
 }
 
 void MainWindow::setButtonClicked(int index)
@@ -255,7 +258,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_button_view_database_clicked()
 {
     qDebug()<<"should change";
-    ui->stack_widget->setCurrentIndex(1);
+    ui->stack_widget->setCurrentIndex(3);
     ui->button_view_database->setStyleSheet("QPushButton { color: white;}");
     selectedIndex = 1;
     setButtonClicked(selectedIndex);

@@ -13,7 +13,11 @@ class search_widget : public QWidget
 
 public:
     explicit search_widget(QWidget *parent = 0);
+    void setUpUi();
     ~search_widget();
+
+private slots:
+    void on_tab_search_tabBarClicked(int index);
 
 private:
     Ui::search_widget *ui;
