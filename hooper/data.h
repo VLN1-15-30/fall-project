@@ -7,6 +7,7 @@
 #include <string>
 #include <person.h>
 #include <sstream>
+#include <connection.h>
 
 using namespace std;
 
@@ -25,8 +26,8 @@ public:
     bool addNewPerson(string firstname, string lastname, string sex, int born, int died);
     void updateConnection(int personID, int computerID, string fieldName, int newID);
 
-    QSqlQuery getConnections();
-    QSqlQuery getConnectionsSorted(int sort, int column);
+    vector<connection> getConnections();
+    vector<connection> getConnectionsSorted(int sort, int column);
     vector<computer> getComputers();
     vector<computer> getComputersSorted(int sort, int column);
     vector<person> getPersons();
@@ -45,6 +46,7 @@ private:
     QSqlDatabase db;
     vector<person> queryPerson(QString sqlQuery);
     vector<computer> queryComputer(QString sqlQuery);
+    vector<connection> queryConnection(QString sqlQuery);
 
 };
 

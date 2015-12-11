@@ -11,12 +11,14 @@ SOURCES += main.cpp \
     list.cpp \
     interface.cpp \
     computer.cpp \
-    data.cpp
+    data.cpp \
+    connection.cpp
 
 HEADERS += \
     person.h \
     list.h \
     interface.h \
     computer.h \
-    data.h
+    data.h \
+    connection.h
 

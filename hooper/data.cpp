@@ -22,31 +22,23 @@ void data::initialize(){
 }
 
 //get all connections from database
-QSqlQuery data::getConnections(){
+vector<connection> data::getConnections(){
     QSqlQuery q;
-    QString query("SELECT P.lastname, C.name, C.yearMade "
+    QString query("SELECT P.firstname, P.lastname, C.name, C.yearMade "
                    "FROM invented I "
                    "    INNER JOIN persons P ON P.id = I.pID "
                    "    INNER JOIN computers C ON C.id = I.cID "
                    "WHERE I.Deleted = 'NO' "
                    "AND P.Deleted = 'NO' "
                    "AND C.Deleted = 'NO' ");
-    if(q.prepare(query)) {
-        q.exec();
-        return q;
-        }
-    else {
-        qDebug() << q.lastError() << endl;
-        return q;
-    }
+    return queryConnection(query);
 }
 
 //sorting connections from database and returning query result to datalayer
-QSqlQuery data::getConnectionsSorted(int sort, int column){
+vector<connection> data::getConnectionsSorted(int sort, int column){
 
-    QSqlQuery q;
-    QString orderby;
-    QString col;
+    string orderby;
+    string col;
 
     if(column == 0){
         col = "P.lastname";
@@ -64,22 +56,17 @@ QSqlQuery data::getConnectionsSorted(int sort, int column){
     else{
         orderby = "DESC";
     }
-    QString query("SELECT P.lastname, C.name, C.yearMade "
-                   "FROM invented I "
-                   "    INNER JOIN persons P ON P.id = I.pID "
-                   "    INNER JOIN computers C ON C.id = I.cID "
-                   "WHERE I.Deleted = 'NO' "
-                   "AND P.Deleted = 'NO' "
-                   "AND C.Deleted = 'NO'"
-                   "ORDER BY %1 %2");
-    if(q.prepare(query.arg(col).arg(orderby))){
-        q.exec();
-        return q;
-        }
-    else{
-        qDebug() << q.lastError() << endl;
-        return q;
-    }
+
+    stringstream query;
+    query << "SELECT P.firstname, P.lastname, C.name, C.yearMade ";
+    query << "FROM invented I ";
+    query << "    INNER JOIN persons P ON P.id = I.pID ";
+    query << "    INNER JOIN computers C ON C.id = I.cID ";
+    query << "WHERE I.Deleted = 'NO' AND P.Deleted = 'NO' ";
+    query << "AND C.Deleted = 'NO' ";
+    query << "ORDER BY " << col << " " << orderby;
+
+    return queryConnection(QString::fromStdString(query.str()));
 }
 
 int data::getPersonID(QString lastName, QString firstName){
@@ -156,6 +143,34 @@ vector<computer> data::queryComputer(QString sqlQuery) {
     }
 
     return computers;
+}
+
+vector<connection> data::queryConnection(QString sqlQuery)
+{
+    vector<connection> connections;
+    db.open();
+
+    if(!db.isOpen()) {
+        return connections;
+    }
+
+    QSqlQuery query(db);
+    if(!query.exec(sqlQuery)) {
+        qDebug() << query.executedQuery() << endl;
+        return connections;
+    }
+    qDebug() << query.executedQuery() << endl;
+
+    while(query.next()) {
+        string firstName = query.value(0).toString().toStdString();
+        string lastName = query.value(1).toString().toStdString();
+        string computerName = query.value(2).toString().toStdString();
+        int yearInvented = query.value(3).toUInt();
+
+        connections.push_back(connection(firstName, lastName, computerName, yearInvented));
+    }
+
+    return connections;
 }
 
 int data::getComputerByID(QString computerName){

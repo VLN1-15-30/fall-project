@@ -115,7 +115,7 @@ void Interface::updateConnections(){
     cout <<"==== Update connections ===="<<endl;
 
     string lastName, firstName, computerName;
-    QSqlQuery getq = ComputerScientists.getConnections();
+    vector<connection> getq = ComputerScientists.getConnections();
     ComputerScientists.printConnectionsTable(getq);
 
     cout << "Please write the name of inventor and the computer." << endl;
@@ -163,7 +163,7 @@ void Interface::viewOptions(int choice){
 
     vector<computer> c = ComputerScientists.getComputers();
     vector<person> p = ComputerScientists.getPersons();
-    QSqlQuery q = ComputerScientists.getConnections();
+    vector<connection> conn = ComputerScientists.getConnections();
 
     if(choice == 1){
         cout <<"==== Pioneer database ===="<< endl;
@@ -186,11 +186,11 @@ void Interface::viewOptions(int choice){
     else{
         cout <<"==== Overview of connections ===="<<endl;
         if(view == 0){
-            ComputerScientists.printConnectionsList(q);
+           // ComputerScientists.printConnectionsList(q);
         }
 
         else if(view == 1){
-            ComputerScientists.printConnectionsTable(q);
+            ComputerScientists.printConnectionsTable(conn);
         }
     }
 }

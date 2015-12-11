@@ -22,7 +22,7 @@ vector<computer> List:: getComputers(){
 }
 
 //returns unordered connections table
-QSqlQuery List::getConnections() {
+vector<connection> List::getConnections() {
     return db.getConnections();
 }
 
@@ -205,7 +205,7 @@ void List:: printComputerTable(vector<computer>& c){
      cout << endl;
 }
 
-void List::printConnectionsTable(QSqlQuery q) {
+void List::printConnectionsTable(vector<connection>& c) {
 
     connectionsTableBegin();
 
@@ -213,15 +213,13 @@ void List::printConnectionsTable(QSqlQuery q) {
     const int nameWidth     = 30;
     const int numWidth      = 15;
 
-    while(q.next()){
-        string lastName = q.value(0).toString().toStdString();
-        string computerName = q.value(1).toString().toStdString();
-        int yearMade = q.value(2).toUInt();
+    for(int i = 0; i < c.size(); i++){
 
+        connection conn = c[i];
 
-        cout << left << setw(nameWidth) << setfill(separator) << computerName;
-        cout << left << setw(nameWidth) << setfill(separator) << lastName;
-        cout << left << setw(numWidth) << setfill(separator) << yearMade;
+        cout << left << setw(nameWidth) << setfill(separator) << conn.getComputerName();
+        cout << left << setw(nameWidth) << setfill(separator) << conn.getLastName();
+        cout << left << setw(numWidth) << setfill(separator) << conn.getYearInvented();
         cout << endl;
     }
 }
@@ -268,8 +266,8 @@ void List::orderbyComputers(int sort, int column, int view){
 }
 
 void List::orderbyConnections(int sort, int column){
-    q = db.getConnectionsSorted(sort, column);
-    printConnectionsTable(q);
+    vector<connection> c = db.getConnectionsSorted(sort, column);
+    printConnectionsTable(c);
 }
 
 void List::orderbyPersons(int sort, int column, int view){

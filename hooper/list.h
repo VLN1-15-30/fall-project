@@ -18,7 +18,7 @@ class List
 public:
     List();
 
-    QSqlQuery getConnections();
+    vector<connection> getConnections();
     vector<computer> getComputers();
     vector<person> getPersons();
 
@@ -37,7 +37,7 @@ public:
     void performSearchBasedOn(const char& selection, string& table);
     void printTable(vector<person>& p);
     void printComputerTable(vector<computer>& c);
-    void printConnectionsTable(QSqlQuery q);
+    void printConnectionsTable(vector<connection>& c);
     void showOrdered(int choice, int column, int order, int view);
     void orderbyPersons(int sort, int column, int view);
     void orderbyComputers(int sort, int column, int view);
