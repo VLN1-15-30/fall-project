@@ -351,30 +351,26 @@ vector<person> data::searchPerson(string field, string obj){
 
     query << "SELECT P.ID, P.firstname, P.lastname, P.sex, P.born, P.died ";
     query << "FROM persons P ";
-    query << "WHERE "<< field << " LIKE '" << obj <<"' ";
+    query << "WHERE "<< field << " LIKE '%" << obj <<"%' ";
     query << "AND P.Deleted = 'NO' ";
-    query << "ORDER BY lastname ASC";
+    query << "ORDER BY P.lastname ASC";
 
     return  queryPerson(QString::fromStdString(query.str()));
 }
 
-QSqlQuery data::searchComputer(string field, string obj){
+vector<computer> data::searchComputer(string field, string obj){
 
-    QSqlQuery query;
-    QString s;
-    s = ( "SELECT C.ID, C.name, C.type, C.yearMade, C.wasMade "
-          "FROM computers C "
-          "WHERE %1 LIKE '%%2%' "
-          "AND C.Deleted = 'NO' "
-          "ORDER BY name ASC" );
+    stringstream query;
 
-    QString val = obj.c_str();
-    QString by = field.c_str();
+    query << "SELECT C.ID, C.name, C.type, C.yearMade, C.wasMade ";
+    query << "FROM computers C ";
+    query << "WHERE "<< field << " LIKE '%" << obj <<"%' ";
+    query << "AND C.Deleted = 'NO' ";
+    query << "ORDER BY C.name ASC";
 
-    query.exec(s.arg(by).arg(val));
-
-    return query;
+    return queryComputer(QString::fromStdString(query.str()));
 }
+
 int data::countDatabaseInput(int type){
 
     QSqlQuery query;

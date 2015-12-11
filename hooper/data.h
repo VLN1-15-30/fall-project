@@ -32,7 +32,7 @@ public:
     vector<person> getPersons();
     vector<person> getPersonsSorted(int sort, int column);
     vector<person> searchPerson(string field, string obj);
-    QSqlQuery searchComputer (string field, string obj);
+    vector<computer> searchComputer (string field, string obj);
     QSqlQuery getRandom(int type);
 
     int getComputerByID(QString computerName);

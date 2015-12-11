@@ -379,10 +379,10 @@ void List:: performSearchBasedOn(const char& selection, string& table){
 
     }
     else{
-//        vector<computer> c = db.searchComputer(searchby,target);
-//        cout <<endl;
-//        cout << "Found the following results: "<< endl;
-//        printComputerTable(c);
+        vector<computer> c = db.searchComputer(searchby,target);
+        cout <<endl;
+        cout << "Found the following results: "<< endl;
+        printComputerTable(c);
     }
 
 }
@@ -477,8 +477,6 @@ void List:: removeCharacter(){
     cin >> name;
 
     deleteCharacterWithName(name,0);
-
-
 }
 
 
