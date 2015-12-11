@@ -110,8 +110,10 @@ vector<person> data::queryPerson(QString sqlQuery)
 
     QSqlQuery query(db);
     if(!query.exec(sqlQuery)){
+        qDebug() << query.executedQuery() << endl;
         return persons;
     }
+    qDebug() << query.executedQuery() << endl;
     while(query.next())
     {
         int id = query.value(0).toUInt();
@@ -123,6 +125,7 @@ vector<person> data::queryPerson(QString sqlQuery)
 
         persons.push_back(person(firstName, lastName, sex, yearBorn, yearDied));
     }
+
     return persons;
 }
 
@@ -325,22 +328,17 @@ int data::removeConnectionByID(int pid, int cid){
      }
 }
 
-QSqlQuery data::search(string field, string obj){
+vector<person> data::searchPerson(string field, string obj){
 
-    QSqlQuery query;
-    QString s;
-    s = ( "SELECT P.ID, P.firstname, P.lastname, P.sex, P.born, P.died "
-          "FROM persons P "
-          "WHERE %1 LIKE '%%2%' "
-          "AND P.Deleted = 'NO' "
-          "ORDER BY lastname ASC" );
+    stringstream query;
 
-    QString val = obj.c_str();
-    QString by = field.c_str();
+    query << "SELECT P.ID, P.firstname, P.lastname, P.sex, P.born, P.died ";
+    query << "FROM persons P ";
+    query << "WHERE "<< field << " LIKE '" << obj <<"' ";
+    query << "AND P.Deleted = 'NO' ";
+    query << "ORDER BY lastname ASC";
 
-    query.exec(s.arg(by).arg(val));
-
-    return query;
+    return  queryPerson(QString::fromStdString(query.str()));
 }
 
 QSqlQuery data::searchComputer(string field, string obj){

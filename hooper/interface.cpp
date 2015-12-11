@@ -99,14 +99,14 @@ void Interface::updatePioneers(){
 
     cout <<endl;
     cout <<"==== Update pioneers ===="<<endl;
-//----------------------------------------------------------------------------------
-//    QSqlQuery getq = ComputerScientists.getPersons();
-//    ComputerScientists.printTable(getq);
-//    cout << "Enter row number: ";
-//    int row;
-//    cin >> row;
-//    QSqlQuery updateQ = ComputerScientists.getPersons();
-//    ComputerScientists.updatePioneer(row,updateQ);
+
+    vector<person> getq = ComputerScientists.getPersons();
+    ComputerScientists.printTable(getq);
+    cout << "Enter row number: ";
+    int row;
+    cin >> row;
+    vector<person> updateQ = ComputerScientists.getPersons();
+    ComputerScientists.updatePioneer(row,updateQ);
 
 }
 
@@ -473,14 +473,14 @@ void Interface::askToDelete(){
 
 void Interface::deleteCharacter(){
 
-//    if(ComputerScientists.databaseEmpty()) return; ------------------------
+   if(ComputerScientists.databaseEmpty()) return;
 
-//    QSqlQuery p = ComputerScientists.getPersons();
-//    ComputerScientists.printTable(p);
+    vector<person> p = ComputerScientists.getPersons();
+    ComputerScientists.printTable(p);
 
-//    cout << "==== Remove a pioneer ===="<<endl;
-//    cout << "Type last name: ";
-//    ComputerScientists.removeCharacter();
+   cout << "==== Remove a pioneer ===="<<endl;
+   cout << "Type last name: ";
+   ComputerScientists.removeCharacter();
 }
 
 void Interface::deleteComputer(){

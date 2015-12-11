@@ -377,10 +377,10 @@ void List:: performSearchBasedOn(const char& selection, string& table){
 
 
     if(personquery){
-        QSqlQuery query = db.search(searchby,target);
+        vector<person> p = db.searchPerson(searchby,target);
         cout <<endl;
         cout << "Found the following results: "<< endl;
-       // printTable(query); ----------------------------------------------------------
+        printTable(p);
 
     }
     else{
@@ -646,24 +646,15 @@ void List::closeDatabase() {
 }
 
 
-void List:: updatePioneer(int row, QSqlQuery pquery){
+void List:: updatePioneer(int row, vector<person> p){
 
-    int i = 0;
 
-    while (pquery.next()) {
+    for(int i = 0; i < p.size(); i++) {
 
         if(i == row-1){
 
-            string first = pquery.value(1).toString().toStdString();
-            string last = pquery.value(2).toString().toStdString();
-            string sex = pquery.value(3).toString().toStdString();
-            int born = pquery.value(4).toUInt();
-            int died = pquery.value(5).toUInt();
-
-            person p = returnNewPersonWith(last,first,sex,born,died);
-
             cout <<endl;
-            cout <<p;
+            cout << p[i];
             cout <<endl;
 
             char update = 'Y';
@@ -719,15 +710,15 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
                     cin.ignore(1);
                     getline(cin,obj);
 
-                    int identity = db.getPersonID(p.getLastName().c_str(),p.getFirstName().c_str());
+                    int identity = db.getPersonID(p[i].getLastName().c_str(),p[i].getFirstName().c_str());
                     cout <<"id = "<<identity<<endl;
-                    cout <<"firstname = "<<p.getFirstName()<<endl;
-                    cout <<"latname = "<<p.getLastName()<<endl;
+                    cout <<"firstname = "<<p[i].getFirstName()<<endl;
+                    cout <<"latname = "<<p[i].getLastName()<<endl;
 
                     if(option == 1)
-                        p.setFirstName(obj);
+                        p[i].setFirstName(obj);
                     else if(option == 2)
-                        p.setLastName(obj);
+                        p[i].setLastName(obj);
 
                     db.update(identity,fieldName,obj,"persons");
 
@@ -740,7 +731,6 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
             }
         }
 
-        i++;
    }
 }
 

@@ -31,7 +31,7 @@ public:
     QSqlQuery getComputersSorted(int sort, int column);
     vector<person> getPersons();
     vector<person> getPersonsSorted(int sort, int column);
-    QSqlQuery search(string field, string obj);
+    vector<person> searchPerson(string field, string obj);
     QSqlQuery searchComputer (string field, string obj);
     QSqlQuery getRandom(int type);
 

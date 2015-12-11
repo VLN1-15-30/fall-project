@@ -51,7 +51,7 @@ public:
     void computerTableBegin();
     void connectionsTableBegin();
     void deleteCharacterWithName(string lastname, int type);
-    void updatePioneer(int row,QSqlQuery pquery);
+    void updatePioneer(int row,vector<person> p);
     void updateComputer(int row, QSqlQuery& cquery);
     void updateConnectionPerson(int personID, int computerID);
     void updateConnectionComputer(int personID, int computerID);
