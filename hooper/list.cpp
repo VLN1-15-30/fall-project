@@ -553,23 +553,15 @@ void List:: connectionsTableBegin(){
     cout << endl;
 }
 
-void List:: updateComputer(int row ,QSqlQuery& cquery){
+void List:: updateComputer(int row ,vector<computer>& c){
 
 
-    int i = 0;
-
-    while (cquery.next()) {
+    for(int i = 0; i < c.size(); i++) {
 
         if(i == row-1){
 
-            string name = cquery.value(1).toString().toStdString();
-            string type = cquery.value(2).toString().toStdString();
-            int year = cquery.value(3).toUInt();
-            bool made = cquery.value(4).toBool();
-
-            computer c = returnNewComputer(name, type, year, made);
             cout <<endl;
-            cout <<c;
+            cout <<c[i];
             cout <<endl;
 
             char update = 'Y';
@@ -616,15 +608,17 @@ void List:: updateComputer(int row ,QSqlQuery& cquery){
                     }
 
                     string obj;
-                    cin >> obj;
+                    cin.ignore(1);
+                    getline(cin, obj);
 
-                    int identity = db.getComputerByID(c.getName().c_str());
+                    int identity = db.getComputerByID(c[i].getName().c_str());
                     cout <<"id = "<<identity<<endl;
+
+                    if(option == 1)
+                        c[i].setName(obj);
 
                     db.update(identity,fieldName,obj,"computers");
 
-                    if(option == 1)
-                        c.setName(obj);
                 }
 
                 cout << "Update again(n/y):"<<endl;
@@ -642,7 +636,7 @@ void List::closeDatabase() {
 }
 
 
-void List:: updatePioneer(int row, vector<person> p){
+void List:: updatePioneer(int row, vector<person>& p){
 
 
     for(int i = 0; i < p.size(); i++) {

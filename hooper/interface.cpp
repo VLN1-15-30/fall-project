@@ -83,16 +83,16 @@ void Interface::update(){
 //sending information through servicelayer(list) to uptdate database
 void Interface::updateComputers(){
 
-//    cout <<endl;
-//    cout <<"==== Update computers ===="<<endl;
+    cout <<endl;
+    cout <<"==== Update computers ===="<<endl;
 
-//    QSqlQuery getq = ComputerScientists.getComputers();
-//    ComputerScientists.printComputerTable(getq);
-//    cout << "Enter row number: ";
-//    int row;
-//    cin >> row;
-//    QSqlQuery updateQ = ComputerScientists.getComputers();
-//    ComputerScientists.updateComputer(row,updateQ);
+    vector<computer> c = ComputerScientists.getComputers();
+    ComputerScientists.printComputerTable(c);
+    cout << "Enter row number: ";
+    int row;
+    cin >> row;
+    vector<computer> updateC = ComputerScientists.getComputers();
+    ComputerScientists.updateComputer(row,updateC);
 }
 
 void Interface::updatePioneers(){
