@@ -99,7 +99,7 @@ vector<person> data::queryPerson(QString sqlQuery) {
     if(!query.exec(sqlQuery)){
         return persons;
     }
-    qDebug() << query.executedQuery() << endl;
+        //qDebug() << query.executedQuery() << endl;
     while(query.next())
     {
         int id = query.value(0).toUInt();
@@ -127,10 +127,10 @@ vector<computer> data::queryComputer(QString sqlQuery) {
 
     QSqlQuery query(db);
     if(!query.exec(sqlQuery)){
-        qDebug() << query.executedQuery() << endl;
+        //qDebug() << query.executedQuery() << endl;
         return computers;
     }
-    qDebug() << query.executedQuery() << endl;
+        //qDebug() << query.executedQuery() << endl;
     while(query.next())
     {
         int id = query.value(0).toUInt();
@@ -156,10 +156,10 @@ vector<connection> data::queryConnection(QString sqlQuery)
 
     QSqlQuery query(db);
     if(!query.exec(sqlQuery)) {
-        qDebug() << query.executedQuery() << endl;
+       // qDebug() << query.executedQuery() << endl;
         return connections;
     }
-    qDebug() << query.executedQuery() << endl;
+    //qDebug() << query.executedQuery() << endl;
 
     while(query.next()) {
         string firstName = query.value(0).toString().toStdString();
@@ -347,6 +347,7 @@ vector<person> data::getPersonsSorted(int sort, int column){
 }
 
 int data::removeConnectionByID(int pid, int cid){
+
     QSqlQuery q;
     QString query("UPDATE invented SET deleted = 'YES' "
                   "WHERE pid = %1 AND cid = %2" );

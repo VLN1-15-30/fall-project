@@ -499,6 +499,8 @@ void Interface::deleteComputer(){
 void Interface::deleteConnection(){
 
     cout << "==== Remove Connection ===="<<endl;
+    vector<connection> conn = ComputerScientists.getConnections();
+    ComputerScientists.printConnectionsTable(conn);
     cout << "Write Inventors name and computer name"<<endl;
     string firstName, lastName, computerName;
 
