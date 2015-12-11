@@ -10,6 +10,7 @@ class computer
 {
 public:
     computer();
+    computer(string name, string type, int yearMade, bool wasMade);
     void initialize();
     friend ostream& operator << (ostream& stream,const computer& c);
     string getName() const;

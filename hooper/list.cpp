@@ -17,7 +17,7 @@ void List:: initialize(){
 }
 
 //return unordered computer table
-QSqlQuery List:: getComputers(){
+vector<computer> List:: getComputers(){
     return db.getComputers();
 }
 
@@ -179,7 +179,7 @@ bool List::databaseEmpty() {
     return false;
 }
 
-void List:: printComputerTable(QSqlQuery q){
+void List:: printComputerTable(vector<computer>& c){
 
     computerTableBegin();
 
@@ -188,19 +188,15 @@ void List:: printComputerTable(QSqlQuery q){
     const int numWidth      = 10;
 
     int idCount = 0;
-    while (q.next()){
+    for(unsigned int i = 0; i < c.size(); i++ ){
 
-        int ID = ++idCount;
-        string name = q.value(1).toString().toStdString();
-        string type = q.value(2).toString().toStdString();
-        int year = q.value(3).toUInt();
-        bool made = q.value(4).toBool();
+          computer cpu = c[i];
 
-          cout << left << setw(5) << setfill(separator) << ID;
-          cout << left << setw(nameWidth) << setfill(separator) << name;
-          cout << left << setw(nameWidth-12) << setfill(separator) << type;
-          cout << left << setw(numWidth) << setfill(separator) << year;
-          if(made == true)
+          cout << left << setw(5) << setfill(separator) << i+1;
+          cout << left << setw(nameWidth) << setfill(separator) << cpu.getName();
+          cout << left << setw(nameWidth-12) << setfill(separator) << cpu.getType();
+          cout << left << setw(numWidth) << setfill(separator) <<cpu.getYearMade();
+          if(cpu.getWasMade() == true)
               cout << left << setw(numWidth) << setfill(separator) << "YES";
           else
               cout << left << setw(numWidth) << setfill(separator) << "NO";
@@ -262,12 +258,12 @@ void List::printTable(vector<person>& p) {
 }
 
 void List::orderbyComputers(int sort, int column, int view){
-    q = db.getComputersSorted(sort, column);
+    vector<computer> c = db.getComputersSorted(sort, column);
     if(view == 0){
-        printComputerList(q);
+        //printComputerList(q);
     }
     else{
-        printComputerTable(q);
+        printComputerTable(c);
     }
 
 }
@@ -384,10 +380,10 @@ void List:: performSearchBasedOn(const char& selection, string& table){
 
     }
     else{
-        QSqlQuery query = db.searchComputer(searchby,target);
-        cout <<endl;
-        cout << "Found the following results: "<< endl;
-        printComputerTable(query);
+//        vector<computer> c = db.searchComputer(searchby,target);
+//        cout <<endl;
+//        cout << "Found the following results: "<< endl;
+//        printComputerTable(c);
     }
 
 }

@@ -27,8 +27,8 @@ public:
 
     QSqlQuery getConnections();
     QSqlQuery getConnectionsSorted(int sort, int column);
-    QSqlQuery getComputers();
-    QSqlQuery getComputersSorted(int sort, int column);
+    vector<computer> getComputers();
+    vector<computer> getComputersSorted(int sort, int column);
     vector<person> getPersons();
     vector<person> getPersonsSorted(int sort, int column);
     vector<person> searchPerson(string field, string obj);
