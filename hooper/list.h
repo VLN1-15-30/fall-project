@@ -20,7 +20,7 @@ public:
 
     QSqlQuery getConnections();
     QSqlQuery getComputers();
-    QSqlQuery getPersons();
+    vector<person> getPersons();
 
     bool databaseEmpty();
     bool computersDatabaseEmpty();
@@ -35,7 +35,7 @@ public:
     void printComputerList(QSqlQuery q);
     void printConnectionsList(QSqlQuery q);
     void performSearchBasedOn(const char& selection, string& table);
-    void printTable(QSqlQuery q);
+    void printTable(vector<person>& p);
     void printComputerTable(QSqlQuery q);
     void printConnectionsTable(QSqlQuery q);
     void showOrdered(int choice, int column, int order, int view);

@@ -27,7 +27,7 @@ QSqlQuery List::getConnections() {
 }
 
 //returns unordered person table
-QSqlQuery List:: getPersons(){
+vector<person> List:: getPersons(){
     return db.getPersons();
 }
 
@@ -233,7 +233,7 @@ void List::printConnectionsTable(QSqlQuery q) {
 
 
 
-void List::printTable(QSqlQuery q) {
+void List::printTable(vector<person>& p) {
 
     tableBegin();
 
@@ -242,28 +242,23 @@ void List::printTable(QSqlQuery q) {
     const int numWidth      = 15;
     const int genderWidth   = 10;
 
-    int idCount = 0;
-    while (q.next()) {
+    for (unsigned int i = 0; i< p.size(); i++) {
 
-        int ID = ++idCount;
-        string first = q.value(1).toString().toStdString();
-        string last = q.value(2).toString().toStdString();
-        string sex = q.value(3).toString().toStdString();
-        int born = q.value(4).toUInt();
-        int died = q.value(5).toUInt();
+          person pers = p[i];
 
-        cout << left << setw(5) << setfill(separator) << ID;
-        cout << left << setw(nameWidth) << setfill(separator) << last;
-        cout << left << setw(nameWidth) << setfill(separator) << first;
-        cout << left << setw(genderWidth) << setfill(separator) << sex;
-        cout << left << setw(numWidth) << setfill(separator) << born;
-        if(died != 0)
-            cout << left << setw(numWidth) << setfill(separator) << died;
-        else
-            cout << left << setw(numWidth) << setfill(separator) << " - ";
-        cout << endl;
+          cout << left << setw(5) << setfill(separator) << i+1;
+          cout << left << setw(nameWidth) << setfill(separator) << pers.getLastName();
+          cout << left << setw(nameWidth) << setfill(separator) << pers.getFirstName();
+          cout << left << setw(genderWidth) << setfill(separator) << pers.getSex();
+          cout << left << setw(numWidth) << setfill(separator) << pers.getBorn();
+          if(pers.getDied() != 0)
+              cout << left << setw(numWidth) << setfill(separator) << pers.getDied();
+          else
+              cout << left << setw(numWidth) << setfill(separator) << " - ";
+          cout << endl;
      }
 
+         cout << endl;
 }
 
 void List::orderbyComputers(int sort, int column, int view){
@@ -283,12 +278,12 @@ void List::orderbyConnections(int sort, int column){
 }
 
 void List::orderbyPersons(int sort, int column, int view){
-    q = db.getPersonsSorted(sort, column);
+    vector<person> p = db.getPersonsSorted(sort, column);
     if(view == 0){
-        printList(q);
+       // printList(q);
     }
     else{
-       printTable(q);
+       printTable(p);
     }
 
 }
@@ -385,7 +380,7 @@ void List:: performSearchBasedOn(const char& selection, string& table){
         QSqlQuery query = db.search(searchby,target);
         cout <<endl;
         cout << "Found the following results: "<< endl;
-        printTable(query);
+       // printTable(query); ----------------------------------------------------------
 
     }
     else{

@@ -99,14 +99,14 @@ void Interface::updatePioneers(){
 
     cout <<endl;
     cout <<"==== Update pioneers ===="<<endl;
-
-    QSqlQuery getq = ComputerScientists.getPersons();
-    ComputerScientists.printTable(getq);
-    cout << "Enter row number: ";
-    int row;
-    cin >> row;
-    QSqlQuery updateQ = ComputerScientists.getPersons();
-    ComputerScientists.updatePioneer(row,updateQ);
+//----------------------------------------------------------------------------------
+//    QSqlQuery getq = ComputerScientists.getPersons();
+//    ComputerScientists.printTable(getq);
+//    cout << "Enter row number: ";
+//    int row;
+//    cin >> row;
+//    QSqlQuery updateQ = ComputerScientists.getPersons();
+//    ComputerScientists.updatePioneer(row,updateQ);
 
 }
 
@@ -162,13 +162,13 @@ void Interface::viewOptions(int choice){
     cout << endl;
 
     QSqlQuery c = ComputerScientists.getComputers();
-    QSqlQuery p = ComputerScientists.getPersons();
+    vector<person> p = ComputerScientists.getPersons();
     QSqlQuery q = ComputerScientists.getConnections();
 
     if(choice == 1){
         cout <<"==== Pioneer database ===="<< endl;
         if(view == 0){
-            ComputerScientists.printList(p);
+           // ComputerScientists.printList(p);
         }
         else if(view == 1){
             ComputerScientists.printTable(p);
@@ -388,7 +388,7 @@ void Interface::addConnection(char answer){
 
     while(answer == 'y' || answer == 'Y'){
 
-        QSqlQuery p = ComputerScientists.getPersons();
+        vector<person> p = ComputerScientists.getPersons();
         QSqlQuery c = ComputerScientists.getComputers();
         ComputerScientists.printTable(p);
         ComputerScientists.printComputerTable(c);
@@ -473,14 +473,14 @@ void Interface::askToDelete(){
 
 void Interface::deleteCharacter(){
 
-    if(ComputerScientists.databaseEmpty()) return;
+//    if(ComputerScientists.databaseEmpty()) return; ------------------------
 
-    QSqlQuery p = ComputerScientists.getPersons(); 
-    ComputerScientists.printTable(p);
+//    QSqlQuery p = ComputerScientists.getPersons();
+//    ComputerScientists.printTable(p);
 
-    cout << "==== Remove a pioneer ===="<<endl;
-    cout << "Type last name: ";
-    ComputerScientists.removeCharacter();
+//    cout << "==== Remove a pioneer ===="<<endl;
+//    cout << "Type last name: ";
+//    ComputerScientists.removeCharacter();
 }
 
 void Interface::deleteComputer(){

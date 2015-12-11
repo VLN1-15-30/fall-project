@@ -5,6 +5,8 @@
 #include <iostream>
 #include <computer.h>
 #include <string>
+#include <person.h>
+#include <sstream>
 
 using namespace std;
 
@@ -27,8 +29,8 @@ public:
     QSqlQuery getConnectionsSorted(int sort, int column);
     QSqlQuery getComputers();
     QSqlQuery getComputersSorted(int sort, int column);
-    QSqlQuery getPersons();
-    QSqlQuery getPersonsSorted(int sort, int column);
+    vector<person> getPersons();
+    vector<person> getPersonsSorted(int sort, int column);
     QSqlQuery search(string field, string obj);
     QSqlQuery searchComputer (string field, string obj);
     QSqlQuery getRandom(int type);
@@ -41,6 +43,8 @@ public:
 
 private:
     QSqlDatabase db;
+    vector<person> queryPerson(QString sqlQuery);
+    vector<computer> queryComputer(QString sqlQuery);
 
 };
 

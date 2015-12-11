@@ -98,6 +98,34 @@ int data::getPersonID(QString lastName, QString firstName){
     }
 }
 
+vector<person> data::queryPerson(QString sqlQuery)
+{
+    vector<person> persons;
+    db.open();
+
+    if (!db.isOpen())
+    {
+        return persons;
+    }
+
+    QSqlQuery query(db);
+    if(!query.exec(sqlQuery)){
+        return persons;
+    }
+    while(query.next())
+    {
+        int id = query.value(0).toUInt();
+        string firstName = query.value(1).toString().toStdString();
+        string lastName = query.value(2).toString().toStdString();
+        string sex = query.value(3).toString().toStdString();
+        int yearBorn = query.value(4).toInt();
+        int yearDied = query.value(5).toInt();
+
+        persons.push_back(person(firstName, lastName, sex, yearBorn, yearDied));
+    }
+    return persons;
+}
+
 int data::getComputerByID(QString computerName){
     QSqlQuery q;
     QString query("SELECT C.ID FROM computers C "
@@ -247,26 +275,18 @@ QSqlQuery data::getComputersSorted(int sort, int column){
     }
 }
 
-QSqlQuery data::getPersons(){
+vector<person> data::getPersons(){
 
-    QSqlQuery q;
     QString query("SELECT ID, firstname, lastname, sex, born, died "
                   "FROM persons "
                   "WHERE Deleted = 'NO' ");
-    if(q.prepare(query)){
-        q.exec();
-        return q;
-    }
-    else{
-        qDebug() << q.lastError() << endl;
-        return q;
-    }
+    return queryPerson(query);
 }
 
-QSqlQuery data::getPersonsSorted(int sort, int column){
-    QSqlQuery q;
-    QString orderby;
-    QString col;
+vector<person> data::getPersonsSorted(int sort, int column){
+
+    string orderby;
+    string col;
 
     if(column == 0){
         col = "P.lastname";
@@ -281,18 +301,14 @@ QSqlQuery data::getPersonsSorted(int sort, int column){
     else{
         orderby = "DESC";
     }
-    QString query("SELECT P.ID, P.lastname, P.firstname, P.sex, P.born, P.died "
-                   "FROM persons P "
-                   "WHERE P.Deleted = 'NO' "
-                   "ORDER BY %1 %2");
-    if(q.prepare(query.arg(col).arg(orderby))){
-        q.exec();
-        return q;
-    }
-    else{
-        qDebug() << q.lastError() << endl;
-        return q;
-    }
+
+    stringstream query;
+    query << "SELECT P.ID, P.lastname, P.firstname, P.sex, P.born, P.died ";
+    query << "FROM persons P ";
+    query << "WHERE P.Deleted = 'NO' ";
+    query << "ORDER BY " << col << " " << orderby;
+
+    return queryPerson(QString::fromStdString(query.str()));
 }
 
 int data::removeConnectionByID(int pid, int cid){
