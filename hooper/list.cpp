@@ -187,7 +187,6 @@ void List:: printComputerTable(vector<computer>& c){
     const int nameWidth     = 30;
     const int numWidth      = 10;
 
-    int idCount = 0;
     for(unsigned int i = 0; i < c.size(); i++ ){
 
           computer cpu = c[i];
@@ -631,6 +630,7 @@ void List:: updateComputer(int row ,vector<computer>& c){
         i++;
     }
 }
+
 void List::closeDatabase() {
     db.closeDBConnection();
 }

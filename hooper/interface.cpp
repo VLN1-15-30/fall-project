@@ -485,14 +485,14 @@ void Interface::deleteCharacter(){
 
 void Interface::deleteComputer(){
 
-//    if(ComputerScientists.computersDatabaseEmpty()) return;
+    if(ComputerScientists.computersDatabaseEmpty()) return;
 
-//    QSqlQuery c = ComputerScientists.getComputers();
-//    ComputerScientists.printComputerTable(c);
-//    cout << "==== Remove Computer ===="<<endl;
+    vector<computer> c = ComputerScientists.getComputers();
+    ComputerScientists.printComputerTable(c);
+    cout << "==== Remove Computer ===="<<endl;
 
-//    cout << "Type name of computer: ";
-//        ComputerScientists.removeComputer();
+    cout << "Type name of computer: ";
+        ComputerScientists.removeComputer();
 }
 
 
