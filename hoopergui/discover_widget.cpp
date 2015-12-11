@@ -6,7 +6,9 @@ discover_widget::discover_widget(QWidget *parent) :
     ui(new Ui::discover_widget)
 {
     ui->setupUi(this);
-    ui->label_discover->setStyleSheet("QLabel {color: white;}");
+    ui->label_info->setStyleSheet("QLabel {color: white;}");
+    ui->label_result->setStyleSheet("QLabel {color: white;}");
+    ui->pushButton_discover->setStyleSheet("QPushButton { color: purple;}");
 
 }
 

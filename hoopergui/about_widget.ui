@@ -83,7 +83,7 @@
    <item>
     <widget class="QLabel" name="label_authors">
      <property name="text">
-      <string>Emil, Gunnar, Rakel og Sverrir in VLN-1</string>
+      <string>Emil, Gunnar, Rakel and Sverrir in VLN-1</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
