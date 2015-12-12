@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-#include <list.h>
+#include "Services/list.h"
 
 using namespace std;
 
@@ -34,6 +34,22 @@ public:
     void deleteConnection();
     void viewOptions(int choice);
     void showUsage();
+    void personTableBegin();
+    void computerTableBegin();
+    void connectionsTableBegin();
+    void printComputerTable(vector<computer>& c);
+    void printPersonTable(vector<person>& p);
+    void printConnectionTable(vector<connection>& c);
+    void performSearchBasedOn(const char& selection, string& table);
+    void search(string table);
+    void removeComputer();
+    void removeCharacter();
+    void updatePioneer(int row, vector<person>& p);
+    void updateComputer(int row, vector<computer> &p);
+    void updateConnections(string firstName, string lastName, string computerName);
+    void updateConnectionComputer(int personID, int computerID);
+    void updateConnectionPerson(int personID, int computerID);
+    char ask_again();
     void quit();
 
 private:

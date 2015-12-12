@@ -12,6 +12,14 @@ person::person(){
     sex = "";
 }
 
+person::person(string firstName, string lastName, string sex, int yearBorn, int yearDied ){
+    this->firstname = firstName;
+    this->lastname = lastName;
+    this->sex = sex;
+    this->born = yearBorn;
+    this->died = yearDied;
+}
+
 string person::getFirstName() const{
     return firstname;
 }
