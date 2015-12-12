@@ -11,6 +11,14 @@ computer::computer(){
     type = "";
 }
 
+computer::computer(string name, string type, int yearMade, bool wasMade)
+{
+    this->name = name;
+    this->type = type;
+    this->year = yearMade;
+    this->made = wasMade;
+}
+
 string computer::getName() const{
     return name;
 }

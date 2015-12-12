@@ -13,6 +13,7 @@ class person
 {
 public:
     person();
+    person(string firstName, string lastName, string sex, int yearBorn, int yearDied );
     void initialize();
     friend ostream& operator<< (ostream& stream,const person& p);
     string getFirstName() const;

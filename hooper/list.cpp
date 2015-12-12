@@ -17,17 +17,17 @@ void List:: initialize(){
 }
 
 //return unordered computer table
-QSqlQuery List:: getComputers(){
+vector<computer> List:: getComputers(){
     return db.getComputers();
 }
 
 //returns unordered connections table
-QSqlQuery List::getConnections() {
+vector<connection> List::getConnections() {
     return db.getConnections();
 }
 
 //returns unordered person table
-QSqlQuery List:: getPersons(){
+vector<person> List:: getPersons(){
     return db.getPersons();
 }
 
@@ -179,7 +179,7 @@ bool List::databaseEmpty() {
     return false;
 }
 
-void List:: printComputerTable(QSqlQuery q){
+void List:: printComputerTable(vector<computer>& c){
 
     computerTableBegin();
 
@@ -187,20 +187,15 @@ void List:: printComputerTable(QSqlQuery q){
     const int nameWidth     = 30;
     const int numWidth      = 10;
 
-    int idCount = 0;
-    while (q.next()){
+    for(unsigned int i = 0; i < c.size(); i++ ){
 
-        int ID = ++idCount;
-        string name = q.value(1).toString().toStdString();
-        string type = q.value(2).toString().toStdString();
-        int year = q.value(3).toUInt();
-        bool made = q.value(4).toBool();
+          computer cpu = c[i];
 
-          cout << left << setw(5) << setfill(separator) << ID;
-          cout << left << setw(nameWidth) << setfill(separator) << name;
-          cout << left << setw(nameWidth-12) << setfill(separator) << type;
-          cout << left << setw(numWidth) << setfill(separator) << year;
-          if(made == true)
+          cout << left << setw(5) << setfill(separator) << i+1;
+          cout << left << setw(nameWidth) << setfill(separator) << cpu.getName();
+          cout << left << setw(nameWidth-12) << setfill(separator) << cpu.getType();
+          cout << left << setw(numWidth) << setfill(separator) <<cpu.getYearMade();
+          if(cpu.getWasMade() == true)
               cout << left << setw(numWidth) << setfill(separator) << "YES";
           else
               cout << left << setw(numWidth) << setfill(separator) << "NO";
@@ -210,7 +205,7 @@ void List:: printComputerTable(QSqlQuery q){
      cout << endl;
 }
 
-void List::printConnectionsTable(QSqlQuery q) {
+void List::printConnectionsTable(vector<connection>& c) {
 
     connectionsTableBegin();
 
@@ -218,22 +213,20 @@ void List::printConnectionsTable(QSqlQuery q) {
     const int nameWidth     = 30;
     const int numWidth      = 15;
 
-    while(q.next()){
-        string lastName = q.value(0).toString().toStdString();
-        string computerName = q.value(1).toString().toStdString();
-        int yearMade = q.value(2).toUInt();
+    for(int i = 0; i < c.size(); i++){
 
+        connection conn = c[i];
 
-        cout << left << setw(nameWidth) << setfill(separator) << computerName;
-        cout << left << setw(nameWidth) << setfill(separator) << lastName;
-        cout << left << setw(numWidth) << setfill(separator) << yearMade;
+        cout << left << setw(nameWidth) << setfill(separator) << conn.getComputerName();
+        cout << left << setw(nameWidth) << setfill(separator) << conn.getLastName();
+        cout << left << setw(numWidth) << setfill(separator) << conn.getYearInvented();
         cout << endl;
     }
 }
 
 
 
-void List::printTable(QSqlQuery q) {
+void List::printTable(vector<person>& p) {
 
     tableBegin();
 
@@ -242,53 +235,48 @@ void List::printTable(QSqlQuery q) {
     const int numWidth      = 15;
     const int genderWidth   = 10;
 
-    int idCount = 0;
-    while (q.next()) {
+    for (unsigned int i = 0; i< p.size(); i++) {
 
-        int ID = ++idCount;
-        string first = q.value(1).toString().toStdString();
-        string last = q.value(2).toString().toStdString();
-        string sex = q.value(3).toString().toStdString();
-        int born = q.value(4).toUInt();
-        int died = q.value(5).toUInt();
+          person pers = p[i];
 
-        cout << left << setw(5) << setfill(separator) << ID;
-        cout << left << setw(nameWidth) << setfill(separator) << last;
-        cout << left << setw(nameWidth) << setfill(separator) << first;
-        cout << left << setw(genderWidth) << setfill(separator) << sex;
-        cout << left << setw(numWidth) << setfill(separator) << born;
-        if(died != 0)
-            cout << left << setw(numWidth) << setfill(separator) << died;
-        else
-            cout << left << setw(numWidth) << setfill(separator) << " - ";
-        cout << endl;
+          cout << left << setw(5) << setfill(separator) << i+1;
+          cout << left << setw(nameWidth) << setfill(separator) << pers.getLastName();
+          cout << left << setw(nameWidth) << setfill(separator) << pers.getFirstName();
+          cout << left << setw(genderWidth) << setfill(separator) << pers.getSex();
+          cout << left << setw(numWidth) << setfill(separator) << pers.getBorn();
+          if(pers.getDied() != 0)
+              cout << left << setw(numWidth) << setfill(separator) << pers.getDied();
+          else
+              cout << left << setw(numWidth) << setfill(separator) << " - ";
+          cout << endl;
      }
 
+         cout << endl;
 }
 
 void List::orderbyComputers(int sort, int column, int view){
-    q = db.getComputersSorted(sort, column);
+    vector<computer> c = db.getComputersSorted(sort, column);
     if(view == 0){
-        printComputerList(q);
+        //printComputerList(q);
     }
     else{
-        printComputerTable(q);
+        printComputerTable(c);
     }
 
 }
 
 void List::orderbyConnections(int sort, int column){
-    q = db.getConnectionsSorted(sort, column);
-    printConnectionsTable(q);
+    vector<connection> c = db.getConnectionsSorted(sort, column);
+    printConnectionsTable(c);
 }
 
 void List::orderbyPersons(int sort, int column, int view){
-    q = db.getPersonsSorted(sort, column);
+    vector<person> p = db.getPersonsSorted(sort, column);
     if(view == 0){
-        printList(q);
+       // printList(q);
     }
     else{
-       printTable(q);
+       printTable(p);
     }
 
 }
@@ -382,17 +370,17 @@ void List:: performSearchBasedOn(const char& selection, string& table){
 
 
     if(personquery){
-        QSqlQuery query = db.search(searchby,target);
+        vector<person> p = db.searchPerson(searchby,target);
         cout <<endl;
         cout << "Found the following results: "<< endl;
-        printTable(query);
+        printTable(p);
 
     }
     else{
-        QSqlQuery query = db.searchComputer(searchby,target);
+        vector<computer> c = db.searchComputer(searchby,target);
         cout <<endl;
         cout << "Found the following results: "<< endl;
-        printComputerTable(query);
+        printComputerTable(c);
     }
 
 }
@@ -487,8 +475,6 @@ void List:: removeCharacter(){
     cin >> name;
 
     deleteCharacterWithName(name,0);
-
-
 }
 
 
@@ -562,23 +548,15 @@ void List:: connectionsTableBegin(){
     cout << endl;
 }
 
-void List:: updateComputer(int row ,QSqlQuery& cquery){
+void List:: updateComputer(int row ,vector<computer>& c){
 
 
-    int i = 0;
-
-    while (cquery.next()) {
+    for(int i = 0; i < c.size(); i++) {
 
         if(i == row-1){
 
-            string name = cquery.value(1).toString().toStdString();
-            string type = cquery.value(2).toString().toStdString();
-            int year = cquery.value(3).toUInt();
-            bool made = cquery.value(4).toBool();
-
-            computer c = returnNewComputer(name, type, year, made);
             cout <<endl;
-            cout <<c;
+            cout <<c[i];
             cout <<endl;
 
             char update = 'Y';
@@ -625,15 +603,17 @@ void List:: updateComputer(int row ,QSqlQuery& cquery){
                     }
 
                     string obj;
-                    cin >> obj;
+                    cin.ignore(1);
+                    getline(cin, obj);
 
-                    int identity = db.getComputerByID(c.getName().c_str());
+                    int identity = db.getComputerByID(c[i].getName().c_str());
                     cout <<"id = "<<identity<<endl;
+
+                    if(option == 1)
+                        c[i].setName(obj);
 
                     db.update(identity,fieldName,obj,"computers");
 
-                    if(option == 1)
-                        c.setName(obj);
                 }
 
                 cout << "Update again(n/y):"<<endl;
@@ -646,29 +626,21 @@ void List:: updateComputer(int row ,QSqlQuery& cquery){
         i++;
     }
 }
+
 void List::closeDatabase() {
     db.closeDBConnection();
 }
 
 
-void List:: updatePioneer(int row, QSqlQuery pquery){
+void List:: updatePioneer(int row, vector<person>& p){
 
-    int i = 0;
 
-    while (pquery.next()) {
+    for(int i = 0; i < p.size(); i++) {
 
         if(i == row-1){
 
-            string first = pquery.value(1).toString().toStdString();
-            string last = pquery.value(2).toString().toStdString();
-            string sex = pquery.value(3).toString().toStdString();
-            int born = pquery.value(4).toUInt();
-            int died = pquery.value(5).toUInt();
-
-            person p = returnNewPersonWith(last,first,sex,born,died);
-
             cout <<endl;
-            cout <<p;
+            cout << p[i];
             cout <<endl;
 
             char update = 'Y';
@@ -724,15 +696,15 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
                     cin.ignore(1);
                     getline(cin,obj);
 
-                    int identity = db.getPersonID(p.getLastName().c_str(),p.getFirstName().c_str());
+                    int identity = db.getPersonID(p[i].getLastName().c_str(),p[i].getFirstName().c_str());
                     cout <<"id = "<<identity<<endl;
-                    cout <<"firstname = "<<p.getFirstName()<<endl;
-                    cout <<"latname = "<<p.getLastName()<<endl;
+                    cout <<"firstname = "<<p[i].getFirstName()<<endl;
+                    cout <<"latname = "<<p[i].getLastName()<<endl;
 
                     if(option == 1)
-                        p.setFirstName(obj);
+                        p[i].setFirstName(obj);
                     else if(option == 2)
-                        p.setLastName(obj);
+                        p[i].setLastName(obj);
 
                     db.update(identity,fieldName,obj,"persons");
 
@@ -745,7 +717,6 @@ void List:: updatePioneer(int row, QSqlQuery pquery){
             }
         }
 
-        i++;
    }
 }
 

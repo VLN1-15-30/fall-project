@@ -18,9 +18,9 @@ class List
 public:
     List();
 
-    QSqlQuery getConnections();
-    QSqlQuery getComputers();
-    QSqlQuery getPersons();
+    vector<connection> getConnections();
+    vector<computer> getComputers();
+    vector<person> getPersons();
 
     bool databaseEmpty();
     bool computersDatabaseEmpty();
@@ -35,9 +35,9 @@ public:
     void printComputerList(QSqlQuery q);
     void printConnectionsList(QSqlQuery q);
     void performSearchBasedOn(const char& selection, string& table);
-    void printTable(QSqlQuery q);
-    void printComputerTable(QSqlQuery q);
-    void printConnectionsTable(QSqlQuery q);
+    void printTable(vector<person>& p);
+    void printComputerTable(vector<computer>& c);
+    void printConnectionsTable(vector<connection>& c);
     void showOrdered(int choice, int column, int order, int view);
     void orderbyPersons(int sort, int column, int view);
     void orderbyComputers(int sort, int column, int view);
@@ -51,8 +51,8 @@ public:
     void computerTableBegin();
     void connectionsTableBegin();
     void deleteCharacterWithName(string lastname, int type);
-    void updatePioneer(int row,QSqlQuery pquery);
-    void updateComputer(int row, QSqlQuery& cquery);
+    void updatePioneer(int row,vector<person>& p);
+    void updateComputer(int row, vector<computer>& c);
     void updateConnectionPerson(int personID, int computerID);
     void updateConnectionComputer(int personID, int computerID);
     void updateConnections(string firstName, string lastName, string computerName);
