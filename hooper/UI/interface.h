@@ -49,6 +49,7 @@ public:
     void updateConnections(string firstName, string lastName, string computerName);
     void updateConnectionComputer(int personID, int computerID);
     void updateConnectionPerson(int personID, int computerID);
+    char ask_again();
     void quit();
 
 private:

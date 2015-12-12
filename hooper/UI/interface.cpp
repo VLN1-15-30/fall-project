@@ -364,7 +364,7 @@ void Interface::addPioneer(char answer){
         else{
             cout << "Invalid input: Birth year > death year" << endl;
         }
-            answer = ComputerScientists.ask_again();
+            answer = ask_again();
     }
 }
 
@@ -400,7 +400,7 @@ void Interface::addComputer(char answer){
                 cout << "Failed to add" << endl;
             }
 
-            answer = ComputerScientists.ask_again();
+            answer = ask_again();
     }
 }
 
@@ -432,7 +432,7 @@ void Interface::addConnection(char answer){
         } else {
             cout << "Failed to add" << endl;
         }
-        answer = ComputerScientists.ask_again();
+        answer = ask_again();
         }
 }
 
@@ -1024,6 +1024,15 @@ void Interface::updateConnectionPerson(int personID, int computerID){
        ComputerScientists.updateConnection(personID, computerID, fieldName, newpID);
            cout << "Update successful" << endl;
     }
+}
+
+char Interface::ask_again(){
+
+    char answer;
+    cout << "Add another? (y/n)"<< endl;
+    cin >> answer;
+
+    return answer;
 }
 
 void Interface::quit() {
