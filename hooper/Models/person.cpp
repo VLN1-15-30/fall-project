@@ -20,7 +20,6 @@ person::person(string firstName, string lastName, string sex, int yearBorn, int 
     this->died = yearDied;
 }
 
-
 string person::getFirstName() const{
     return firstname;
 }

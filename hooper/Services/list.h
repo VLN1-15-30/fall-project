@@ -9,7 +9,11 @@
 #include <fstream>
 #include <algorithm>
 #include <QtSql>
-#include <data.h>
+#include "connectionrepo.h"
+#include "personrepo.h"
+#include "computerrepo.h"
+#include "Utilities/utils.h"
+
 
 using namespace std;
 
@@ -25,41 +29,30 @@ public:
     bool databaseEmpty();
     bool computersDatabaseEmpty();
 
-    void initialize();
-    void setData();
-    void addData(person p);
-    void addComp (computer c);
-    void addConnection(string firstName, string lastName, string computerName);
+    bool addPerson(person p);
+    bool addComp (computer c);
+    bool addConnection(string firstName, string lastName, string computerName);
+
     void search(string table);
     void printList(QSqlQuery q);
     void printComputerList(QSqlQuery q);
     void printConnectionsList(QSqlQuery q);
-    void performSearchBasedOn(const char& selection, string& table);
-    void printTable(vector<person>& p);
-    void printComputerTable(vector<computer>& c);
-    void printConnectionsTable(vector<connection>& c);
-    void showOrdered(int choice, int column, int order, int view);
-    void orderbyPersons(int sort, int column, int view);
-    void orderbyComputers(int sort, int column, int view);
-    void orderbyConnections(int sort, int column);
-    void discover(int type);
-    void removeCharacter();
-    void removeComputer();
+    vector<person> getSearchPerson(string column, string target);
+    vector<computer> getSearchComputer(string column, string target);
+    vector<person> orderbyPersons(int sort, int column);
+    vector<computer> orderbyComputers(int sort, int column);
+    vector<connection> orderbyConnections(int sort, int column);
+    person discoverPerson();
+    computer discoverComputer();
     void removeConnection(string firstname, string lastName, string computerName);
     void closeDatabase();
-    void tableBegin();
-    void computerTableBegin();
-    void connectionsTableBegin();
     void deleteCharacterWithName(string lastname, int type);
-    void updatePioneer(int row,vector<person>& p);
+    void update(int identiy,string fieldName, string value, string tableName);
     void updateComputer(int row, vector<computer>& c);
-    void updateConnectionPerson(int personID, int computerID);
-    void updateConnectionComputer(int personID, int computerID);
-    void updateConnections(string firstName, string lastName, string computerName);
+    void updateConnection(int personID, int computerID, string fieldName, int newID);
     int countDatabase(int type);
     int getPersonID(string lastName, string firstName);
     int getComputerID(string computerName);
-
 
 
 
@@ -70,9 +63,12 @@ public:
     person returnNewPersonWith(string firstname,string lastname, string sex, int born, int died);
     friend ostream& operator<< (ostream& stream,const List& p);
 
+
 private:
     vector<person> characters;
-    data db;
+    personRepo personR;
+    computerRepo computerR;
+    connectionRepo connectionR;
     QSqlQuery q;
 
 };
