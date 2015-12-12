@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/hooper/prefix1">
+        <file>hooper.png</file>
+    </qresource>
+</RCC>
