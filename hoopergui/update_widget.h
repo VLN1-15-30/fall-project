@@ -19,6 +19,9 @@ public:
     void displayPioneers();
     ~update_widget();
 
+private slots:
+    void on_updatePioneer_clicked();
+
 private:
     Ui::update_widget *ui;
     List hpList;

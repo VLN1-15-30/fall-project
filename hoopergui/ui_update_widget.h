@@ -38,8 +38,8 @@ public:
     QComboBox *updateOptionsPioneers;
     QLineEdit *replacePioneersInfo;
     QHBoxLayout *horizontalLayout_3;
-    QPushButton *updateAnotherPioneer;
     QPushButton *updatePioneer;
+    QPushButton *updateAnotherPioneer;
     QWidget *computers;
     QVBoxLayout *verticalLayout_3;
     QTableWidget *tableView_computers_2;
@@ -105,15 +105,15 @@ public:
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        updateAnotherPioneer = new QPushButton(pioneer);
-        updateAnotherPioneer->setObjectName(QStringLiteral("updateAnotherPioneer"));
-
-        horizontalLayout_3->addWidget(updateAnotherPioneer);
-
         updatePioneer = new QPushButton(pioneer);
         updatePioneer->setObjectName(QStringLiteral("updatePioneer"));
 
         horizontalLayout_3->addWidget(updatePioneer);
+
+        updateAnotherPioneer = new QPushButton(pioneer);
+        updateAnotherPioneer->setObjectName(QStringLiteral("updateAnotherPioneer"));
+
+        horizontalLayout_3->addWidget(updateAnotherPioneer);
 
 
         gridLayout_5->addLayout(horizontalLayout_3, 4, 0, 1, 1);
@@ -214,8 +214,8 @@ public:
          << QApplication::translate("update_widget", "Year died", 0)
         );
         replacePioneersInfo->setText(QApplication::translate("update_widget", "Replace with...", 0));
-        updateAnotherPioneer->setText(QApplication::translate("update_widget", "Continue updating", 0));
         updatePioneer->setText(QApplication::translate("update_widget", "Update", 0));
+        updateAnotherPioneer->setText(QApplication::translate("update_widget", "Continue updating", 0));
         updateTabs->setTabText(updateTabs->indexOf(pioneer), QApplication::translate("update_widget", "Pioneers", 0));
         updateOptionsComputers->clear();
         updateOptionsComputers->insertItems(0, QStringList()

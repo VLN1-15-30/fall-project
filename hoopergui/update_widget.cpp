@@ -11,6 +11,7 @@ update_widget::update_widget(QWidget *parent) :
     //ui->label_update->setStyleSheet("QLabel {color: white;}");
     qDebug()<<"running update widget";
     setUpUi();
+    displayPioneers();
 }
 
 void update_widget::setUpUi(){
@@ -43,9 +44,9 @@ void update_widget::displayPioneers()
 
         ui->tableView_pioneers_2->setItem(row, 0, new QTableWidgetItem(firstName));
         ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(lastName));
-        ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(sex));
-        ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(currentPioneer.getBorn()));
-        ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(currentPioneer.getDied()));
+        ui->tableView_pioneers_2->setItem(row, 2, new QTableWidgetItem(sex));
+        ui->tableView_pioneers_2->setItem(row, 3, new QTableWidgetItem(currentPioneer.getBorn()));
+        ui->tableView_pioneers_2->setItem(row, 4, new QTableWidgetItem(currentPioneer.getDied()));
     }
 
 }
@@ -53,4 +54,11 @@ void update_widget::displayPioneers()
 update_widget::~update_widget()
 {
     delete ui;
+}
+
+void update_widget::on_updatePioneer_clicked()
+{
+    //string choice = ui->updateOptionsPioneers->currentText().toStdString();
+    //vector<person> updateQ = ComputerScientists.getPersons();
+    //updatePioneer(row,updateQ);
 }
