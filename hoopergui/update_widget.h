@@ -16,7 +16,7 @@ class update_widget : public QWidget
 public:
     explicit update_widget(QWidget *parent = 0);
     void setUpUi();
-    void displayPioneers();
+    void populateTableAtIndex(int index);
     ~update_widget();
 
 private:
