@@ -18,8 +18,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //this->setStyleSheet("background-color: #2C2C2C;");
-    this->setStyleSheet("background-color: #34466E;");
+
+    utils::getDatabaseConnection();
+
+    setAutoFillBackground(true);
+
+    QPalette p = this->palette();
+    QColor linkColor("#34466E");
+    p.setColor(this->backgroundRole(),linkColor);
+    this->setPalette(p);
 
     setUpHooper();
     setButtonColors();
@@ -33,14 +40,12 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     if (obj == (QObject*)ui->button_add_database) {
            if (event->type() == QEvent::Enter)
            {
-               qDebug()<<"enter"<<endl;
                ui->button_add_database->setStyleSheet("QPushButton { color: white;}");
 
 
            }
            else if (event->type() == QEvent::Leave){
 
-               qDebug()<<"leave"<<endl;
                if(selectedIndex != 2)
                ui->button_add_database->setStyleSheet("QPushButton { color: #ACADB1;}");
 
@@ -53,14 +58,12 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     else if (obj == (QObject*)ui->button_view_database) {
            if (event->type() == QEvent::Enter)
            {
-               qDebug()<<"enter"<<endl;
                ui->button_view_database->setStyleSheet("QPushButton { color: white;}");
 
 
            }
            else if (event->type() == QEvent::Leave){
 
-               qDebug()<<"leave"<<endl;
                if(selectedIndex != 1)
                ui->button_view_database->setStyleSheet("QPushButton { color: #ACADB1;}");
 
@@ -73,14 +76,12 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     else if (obj == (QObject*)ui->button_search_database) {
            if (event->type() == QEvent::Enter)
            {
-               qDebug()<<"enter"<<endl;
                ui->button_search_database->setStyleSheet("QPushButton { color: white;}");
 
 
            }
            else if (event->type() == QEvent::Leave){
 
-               qDebug()<<"leave"<<endl;
                if(selectedIndex != 3)
                ui->button_search_database->setStyleSheet("QPushButton { color: #ACADB1;}");
 
@@ -92,13 +93,11 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     else if (obj == (QObject*)ui->button_removefrom_database) {
            if (event->type() == QEvent::Enter)
            {
-               qDebug()<<"enter"<<endl;
                ui->button_removefrom_database->setStyleSheet("QPushButton { color: white;}");
 
            }
            else if (event->type() == QEvent::Leave){
 
-               qDebug()<<"leave"<<endl;
                if(selectedIndex != 4)
                ui->button_removefrom_database->setStyleSheet("QPushButton { color: #ACADB1;}");
 
@@ -110,14 +109,11 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     else if (obj == (QObject*)ui->button_discover) {
            if (event->type() == QEvent::Enter)
            {
-               qDebug()<<"enter"<<endl;
                ui->button_discover->setStyleSheet("QPushButton { color: white;}");
-
 
            }
            else if (event->type() == QEvent::Leave){
 
-               qDebug()<<"leave"<<endl;
                if(selectedIndex != 5)
                ui->button_discover->setStyleSheet("QPushButton { color: #ACADB1;}");
 
@@ -130,14 +126,11 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     else if (obj == (QObject*)ui->button_about) {
            if (event->type() == QEvent::Enter)
            {
-               qDebug()<<"enter"<<endl;
                ui->button_about->setStyleSheet("QPushButton { color: white;}");
-
 
            }
            else if (event->type() == QEvent::Leave){
 
-               qDebug()<<"leave"<<endl;
                if(selectedIndex != 7)
                ui->button_about->setStyleSheet("QPushButton { color: #ACADB1;}");
 
@@ -148,14 +141,12 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     else if (obj == (QObject*)ui->button_update) {
            if (event->type() == QEvent::Enter)
            {
-               qDebug()<<"enter"<<endl;
                ui->button_update->setStyleSheet("QPushButton {color: white;}");
 
 
            }
            else if (event->type() == QEvent::Leave){
 
-               qDebug()<<"leave"<<endl;
                if(selectedIndex != 6)
                ui->button_update->setStyleSheet("QPushButton { color: #ACADB1;}");
 

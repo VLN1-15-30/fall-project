@@ -19,6 +19,8 @@ public:
 private slots:
     void on_tab_search_tabBarClicked(int index);
 
+    void on_comboBox_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::search_widget *ui;
 };

@@ -13,11 +13,13 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTableView>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -30,16 +32,22 @@ public:
     QTabWidget *tab_search;
     QWidget *pioneers;
     QGridLayout *gridLayout;
+    QHBoxLayout *horizontalLayout;
     QLineEdit *lineEdit_pioneers;
-    QTableView *tableView_pioneers;
+    QComboBox *comboBox_pioneers;
+    QTableWidget *table_pioneers;
     QWidget *computers;
     QVBoxLayout *verticalLayout_4;
+    QTableWidget *table_computers;
+    QHBoxLayout *horizontalLayout_2;
     QLineEdit *lineEdit_computers;
-    QTableView *tableView_computers;
+    QComboBox *comboBox_computers;
     QWidget *connections;
     QGridLayout *gridLayout_2;
+    QHBoxLayout *horizontalLayout_3;
     QLineEdit *lineEdit_connections;
-    QTableView *tableView_connections;
+    QComboBox *comboBox_connections;
+    QTableWidget *table_connections;
 
     void setupUi(QWidget *search_widget)
     {
@@ -57,51 +65,88 @@ public:
         pioneers->setObjectName(QStringLiteral("pioneers"));
         gridLayout = new QGridLayout(pioneers);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         lineEdit_pioneers = new QLineEdit(pioneers);
         lineEdit_pioneers->setObjectName(QStringLiteral("lineEdit_pioneers"));
         lineEdit_pioneers->setFrame(false);
 
-        gridLayout->addWidget(lineEdit_pioneers, 0, 0, 1, 1);
+        horizontalLayout->addWidget(lineEdit_pioneers);
 
-        tableView_pioneers = new QTableView(pioneers);
-        tableView_pioneers->setObjectName(QStringLiteral("tableView_pioneers"));
-        tableView_pioneers->setFrameShape(QFrame::NoFrame);
+        comboBox_pioneers = new QComboBox(pioneers);
+        comboBox_pioneers->setObjectName(QStringLiteral("comboBox_pioneers"));
 
-        gridLayout->addWidget(tableView_pioneers, 1, 0, 1, 1);
+        horizontalLayout->addWidget(comboBox_pioneers);
+
+
+        gridLayout->addLayout(horizontalLayout, 1, 0, 1, 1);
+
+        table_pioneers = new QTableWidget(pioneers);
+        if (table_pioneers->columnCount() < 3)
+            table_pioneers->setColumnCount(3);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        table_pioneers->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        table_pioneers->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        table_pioneers->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        table_pioneers->setObjectName(QStringLiteral("table_pioneers"));
+        table_pioneers->horizontalHeader()->setStretchLastSection(true);
+        table_pioneers->verticalHeader()->setStretchLastSection(true);
+
+        gridLayout->addWidget(table_pioneers, 0, 0, 1, 1);
 
         tab_search->addTab(pioneers, QString());
         computers = new QWidget();
         computers->setObjectName(QStringLiteral("computers"));
         verticalLayout_4 = new QVBoxLayout(computers);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        table_computers = new QTableWidget(computers);
+        table_computers->setObjectName(QStringLiteral("table_computers"));
+
+        verticalLayout_4->addWidget(table_computers);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         lineEdit_computers = new QLineEdit(computers);
         lineEdit_computers->setObjectName(QStringLiteral("lineEdit_computers"));
         lineEdit_computers->setFrame(false);
 
-        verticalLayout_4->addWidget(lineEdit_computers);
+        horizontalLayout_2->addWidget(lineEdit_computers);
 
-        tableView_computers = new QTableView(computers);
-        tableView_computers->setObjectName(QStringLiteral("tableView_computers"));
-        tableView_computers->setFrameShape(QFrame::NoFrame);
+        comboBox_computers = new QComboBox(computers);
+        comboBox_computers->setObjectName(QStringLiteral("comboBox_computers"));
 
-        verticalLayout_4->addWidget(tableView_computers);
+        horizontalLayout_2->addWidget(comboBox_computers);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_2);
 
         tab_search->addTab(computers, QString());
         connections = new QWidget();
         connections->setObjectName(QStringLiteral("connections"));
         gridLayout_2 = new QGridLayout(connections);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         lineEdit_connections = new QLineEdit(connections);
         lineEdit_connections->setObjectName(QStringLiteral("lineEdit_connections"));
         lineEdit_connections->setFrame(false);
 
-        gridLayout_2->addWidget(lineEdit_connections, 0, 0, 1, 1);
+        horizontalLayout_3->addWidget(lineEdit_connections);
 
-        tableView_connections = new QTableView(connections);
-        tableView_connections->setObjectName(QStringLiteral("tableView_connections"));
-        tableView_connections->setFrameShape(QFrame::NoFrame);
+        comboBox_connections = new QComboBox(connections);
+        comboBox_connections->setObjectName(QStringLiteral("comboBox_connections"));
 
-        gridLayout_2->addWidget(tableView_connections, 1, 0, 1, 1);
+        horizontalLayout_3->addWidget(comboBox_connections);
+
+
+        gridLayout_2->addLayout(horizontalLayout_3, 3, 0, 1, 1);
+
+        table_connections = new QTableWidget(connections);
+        table_connections->setObjectName(QStringLiteral("table_connections"));
+
+        gridLayout_2->addWidget(table_connections, 0, 0, 1, 1);
 
         tab_search->addTab(connections, QString());
 
@@ -110,7 +155,7 @@ public:
 
         retranslateUi(search_widget);
 
-        tab_search->setCurrentIndex(2);
+        tab_search->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(search_widget);
@@ -124,6 +169,12 @@ public:
 #endif // QT_NO_TOOLTIP
         lineEdit_pioneers->setText(QString());
         lineEdit_pioneers->setPlaceholderText(QApplication::translate("search_widget", "Search pioneers...", 0));
+        QTableWidgetItem *___qtablewidgetitem = table_pioneers->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("search_widget", "First name", 0));
+        QTableWidgetItem *___qtablewidgetitem1 = table_pioneers->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("search_widget", "Last name", 0));
+        QTableWidgetItem *___qtablewidgetitem2 = table_pioneers->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("search_widget", "Gender", 0));
         tab_search->setTabText(tab_search->indexOf(pioneers), QApplication::translate("search_widget", "Pioneers", 0));
         lineEdit_computers->setPlaceholderText(QApplication::translate("search_widget", "search computers...", 0));
         tab_search->setTabText(tab_search->indexOf(computers), QApplication::translate("search_widget", "Computers", 0));

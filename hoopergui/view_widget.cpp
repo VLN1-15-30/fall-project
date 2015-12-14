@@ -7,7 +7,6 @@ view_widget::view_widget(QWidget *parent) :
     ui(new Ui::view_widget)
 {
     ui->setupUi(this);
-    this->setStyleSheet("background-color: #34466E;");
     ui->label_view->setStyleSheet("QLabel {color: white;}");
 
     qDebug()<<"running view widget";

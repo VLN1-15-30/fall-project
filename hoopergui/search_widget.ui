@@ -36,7 +36,7 @@
        <string>Pioneers</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
+       <item row="1" column="0">
         <widget class="QLineEdit" name="lineEdit_pioneers">
          <property name="text">
           <string/>
@@ -49,12 +49,15 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="3" column="0">
         <widget class="QTableView" name="tableView_pioneers">
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
         </widget>
+       </item>
+       <item row="0" column="0" alignment="Qt::AlignLeft">
+        <widget class="QComboBox" name="comboBox_pioneers"/>
        </item>
       </layout>
      </widget>
@@ -63,6 +66,9 @@
        <string>Computers</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item alignment="Qt::AlignLeft">
+        <widget class="QComboBox" name="comboBox_computers"/>
+       </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_computers">
          <property name="frame">
@@ -87,7 +93,14 @@
        <string>Connections</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
+       <item row="2" column="0">
+        <widget class="QTableView" name="tableView_connections">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
         <widget class="QLineEdit" name="lineEdit_connections">
          <property name="frame">
           <bool>false</bool>
@@ -97,12 +110,8 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QTableView" name="tableView_connections">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-        </widget>
+       <item row="0" column="0" alignment="Qt::AlignLeft">
+        <widget class="QComboBox" name="comboBox_connections"/>
        </item>
       </layout>
      </widget>

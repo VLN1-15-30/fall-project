@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QButtonGroup>
+#include "Utilities/utils.h"
 namespace Ui {
 class MainWindow;
 }
