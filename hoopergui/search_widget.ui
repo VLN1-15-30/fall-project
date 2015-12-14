@@ -29,7 +29,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="pioneers">
       <attribute name="title">
@@ -37,27 +37,49 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="1" column="0">
-        <widget class="QLineEdit" name="lineEdit_pioneers">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="frame">
-          <bool>false</bool>
-         </property>
-         <property name="placeholderText">
-          <string>Search pioneers...</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_pioneers">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="frame">
+            <bool>false</bool>
+           </property>
+           <property name="placeholderText">
+            <string>Search pioneers...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_pioneers"/>
+         </item>
+        </layout>
        </item>
-       <item row="3" column="0">
-        <widget class="QTableView" name="tableView_pioneers">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
+       <item row="0" column="0">
+        <widget class="QTableWidget" name="table_pioneers">
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>First name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Last name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Gender</string>
+          </property>
+         </column>
         </widget>
-       </item>
-       <item row="0" column="0" alignment="Qt::AlignLeft">
-        <widget class="QComboBox" name="comboBox_pioneers"/>
        </item>
       </layout>
      </widget>
@@ -66,25 +88,25 @@
        <string>Computers</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item alignment="Qt::AlignLeft">
-        <widget class="QComboBox" name="comboBox_computers"/>
+       <item>
+        <widget class="QTableWidget" name="table_computers"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_computers">
-         <property name="frame">
-          <bool>false</bool>
-         </property>
-         <property name="placeholderText">
-          <string>search computers...</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTableView" name="tableView_computers">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_computers">
+           <property name="frame">
+            <bool>false</bool>
+           </property>
+           <property name="placeholderText">
+            <string>search computers...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_computers"/>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -93,25 +115,25 @@
        <string>Connections</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="2" column="0">
-        <widget class="QTableView" name="tableView_connections">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-        </widget>
+       <item row="3" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_connections">
+           <property name="frame">
+            <bool>false</bool>
+           </property>
+           <property name="placeholderText">
+            <string>Search connections...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_connections"/>
+         </item>
+        </layout>
        </item>
-       <item row="1" column="0">
-        <widget class="QLineEdit" name="lineEdit_connections">
-         <property name="frame">
-          <bool>false</bool>
-         </property>
-         <property name="placeholderText">
-          <string>Search connections...</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" alignment="Qt::AlignLeft">
-        <widget class="QComboBox" name="comboBox_connections"/>
+       <item row="0" column="0">
+        <widget class="QTableWidget" name="table_connections"/>
        </item>
       </layout>
      </widget>

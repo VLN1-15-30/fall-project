@@ -20,14 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     utils::getDatabaseConnection();
-
-    setAutoFillBackground(true);
-
-    QPalette p = this->palette();
-    QColor linkColor("#34466E");
-    p.setColor(this->backgroundRole(),linkColor);
-    this->setPalette(p);
-
     setUpHooper();
     setButtonColors();
     trackHovers();
@@ -190,6 +182,13 @@ void MainWindow::trackHovers()
 
 void MainWindow::setUpHooper()
 {
+
+    setAutoFillBackground(true);
+    QPalette p = this->palette();
+    QColor linkColor("#34466E");
+    p.setColor(this->backgroundRole(),linkColor);
+    this->setPalette(p);
+
 
     ui->groupBox_hooper->setStyleSheet("QGroupBox { color: white;}");
 
