@@ -29,10 +29,6 @@ private slots:
 
     void on_button_add_database_clicked();
 
-    void on_button_search_database_clicked();
-
-    void on_button_removefrom_database_clicked();
-
     void on_button_discover_clicked();
 
     void on_button_about_clicked();
