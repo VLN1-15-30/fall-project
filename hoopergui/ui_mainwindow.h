@@ -33,8 +33,6 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *button_view_database;
     QPushButton *button_add_database;
-    QPushButton *button_search_database;
-    QPushButton *button_removefrom_database;
     QPushButton *button_discover;
     QPushButton *button_update;
     QPushButton *button_about;
@@ -77,20 +75,6 @@ public:
         button_add_database->setFlat(true);
 
         verticalLayout->addWidget(button_add_database);
-
-        button_search_database = new QPushButton(groupBox_hooper);
-        button_search_database->setObjectName(QStringLiteral("button_search_database"));
-        button_search_database->setFont(font);
-        button_search_database->setFlat(true);
-
-        verticalLayout->addWidget(button_search_database);
-
-        button_removefrom_database = new QPushButton(groupBox_hooper);
-        button_removefrom_database->setObjectName(QStringLiteral("button_removefrom_database"));
-        button_removefrom_database->setFont(font);
-        button_removefrom_database->setFlat(true);
-
-        verticalLayout->addWidget(button_removefrom_database);
 
         button_discover = new QPushButton(groupBox_hooper);
         button_discover->setObjectName(QStringLiteral("button_discover"));
@@ -137,8 +121,6 @@ public:
         groupBox_hooper->setTitle(QApplication::translate("MainWindow", "Hooper   ", 0));
         button_view_database->setText(QApplication::translate("MainWindow", "View", 0));
         button_add_database->setText(QApplication::translate("MainWindow", "Add", 0));
-        button_search_database->setText(QApplication::translate("MainWindow", "Search", 0));
-        button_removefrom_database->setText(QApplication::translate("MainWindow", "Remove", 0));
         button_discover->setText(QApplication::translate("MainWindow", "Discover", 0));
         button_update->setText(QApplication::translate("MainWindow", "Update", 0));
         button_about->setText(QApplication::translate("MainWindow", "About", 0));

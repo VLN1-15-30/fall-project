@@ -56,36 +56,17 @@ void search_widget::populateTableAtIndex(int index)
             QString firstName = QString::fromStdString(currentP.getFirstName());
             QString lastname = QString::fromStdString(currentP.getLastName());
             QString gender = QString::fromStdString(currentP.getSex());
+            QString born = QString::number(currentP.getBorn());
+            QString died = QString::number(currentP.getDied());
 
             ui->table_pioneers->setItem(row,0,new QTableWidgetItem(firstName));
             ui->table_pioneers->setItem(row,1,new QTableWidgetItem(lastname));
             ui->table_pioneers->setItem(row,2,new QTableWidgetItem(gender));
-            ui->table_pioneers->setItem(row,3,new QTableWidgetItem(currentP.getBorn()));
-            ui->table_pioneers->setItem(row,4,new QTableWidgetItem(currentP.getDied()));
+            ui->table_pioneers->setItem(row,3,new QTableWidgetItem(born));
+            ui->table_pioneers->setItem(row,4,new QTableWidgetItem(died));
 
         }
 
-    }
-    case 2:  {
-
-        vector<computer> dbComputers = hpList.getComputers();
-
-        ui->table_computers->clearContents();
-        ui->table_computers->setRowCount(dbComputers.size());
-
-        cout << "persons: " << dbComputers.size()<<endl;
-
-        for (unsigned int row = 0; row < dbComputers.size(); row++){
-
-           computer currentC = dbComputers[row];
-           QString cname = QString::fromStdString(currentC.getName());
-           QString type = QString::fromStdString(currentC.getType());
-
-           ui->table_computers->setItem(row,0, new QTableWidgetItem(cname));
-           ui->table_computers->setItem(row,1, new QTableWidgetItem(type));
-           ui->table_computers->setItem(row,2, new QTableWidgetItem(currentC.getYearMade()));
-           ui->table_computers->setItem(row,3, new QTableWidgetItem(currentC.getWasMade()));
-        }
     }
         break;
     default:

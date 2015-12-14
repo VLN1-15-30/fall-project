@@ -1,7 +1,6 @@
 #include "update_widget.h"
 #include "ui_update_widget.h"
 #include <QDebug>
-#include "Services/list.h"
 
 update_widget::update_widget(QWidget *parent) :
     QWidget(parent),
@@ -11,6 +10,7 @@ update_widget::update_widget(QWidget *parent) :
     //ui->label_update->setStyleSheet("QLabel {color: white;}");
     qDebug()<<"running update widget";
     setUpUi();
+    populateTableAtIndex();
 }
 
 void update_widget::setUpUi(){
@@ -25,9 +25,9 @@ void update_widget::setUpUi(){
 
 }
 
-void update_widget::displayPioneers()
+void update_widget::populateTableAtIndex()
 {
-    vector<person> p = hpList.getPersons();
+    vector<person> p  = hpList.getPersons();
 
     ui->tableView_pioneers_2->clearContents();
 
@@ -35,19 +35,20 @@ void update_widget::displayPioneers()
 
     for (unsigned int row = 0; row < p.size(); row++)
     {
-        person currentPioneer = p.at(row);
+        person currentPioneer = p[row];
 
         QString firstName = QString::fromStdString(currentPioneer.getFirstName());
         QString lastName = QString::fromStdString(currentPioneer.getLastName());
         QString sex = QString::fromStdString(currentPioneer.getSex());
+        QString born = QString::number(currentPioneer.getBorn());
+        QString died = QString::number(currentPioneer.getDied());
 
         ui->tableView_pioneers_2->setItem(row, 0, new QTableWidgetItem(firstName));
         ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(lastName));
-        ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(sex));
-        ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(currentPioneer.getBorn()));
-        ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(currentPioneer.getDied()));
+        ui->tableView_pioneers_2->setItem(row, 2, new QTableWidgetItem(sex));
+        ui->tableView_pioneers_2->setItem(row, 3, new QTableWidgetItem(born));
+        ui->tableView_pioneers_2->setItem(row, 4, new QTableWidgetItem(died));
     }
-
 }
 
 update_widget::~update_widget()
