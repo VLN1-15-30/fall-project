@@ -13,6 +13,7 @@ class update_widget : public QWidget
 
 public:
     explicit update_widget(QWidget *parent = 0);
+    void setUpUi();
     ~update_widget();
 
 private:

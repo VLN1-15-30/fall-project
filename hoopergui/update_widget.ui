@@ -13,15 +13,195 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QLabel" name="label_update">
-     <property name="text">
-      <string>update</string>
+    <widget class="QTabWidget" name="updateTabs">
+     <property name="tabShape">
+      <enum>QTabWidget::Triangular</enum>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+     <property name="currentIndex">
+      <number>2</number>
      </property>
+     <widget class="QWidget" name="pioneer">
+      <attribute name="title">
+       <string>Pioneers</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QTableWidget" name="tableView_pioneers_2"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="updateOptionsPioneers">
+         <item>
+          <property name="text">
+           <string>Choose what to update</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>First name</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Last name</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Gender</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Year born</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Year died</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="replacePioneersInfo">
+         <property name="text">
+          <string>Replace with...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="updatePioneer">
+         <property name="text">
+          <string>Update</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="updateAnotherPioneer">
+         <property name="text">
+          <string>Continue updating</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="computers">
+      <attribute name="title">
+       <string>Computers</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QTableWidget" name="tableView_computers_2"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="updateOptionsComputers">
+         <item>
+          <property name="text">
+           <string>Choose what to update</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Computer name</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Computer type</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Year invented</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Was it built?</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="replaceComputersInfo">
+         <property name="text">
+          <string>Replace with...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="updateComputer">
+         <property name="text">
+          <string>Update</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="updateAnotherComputer">
+         <property name="text">
+          <string>Continu updating</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="connections">
+      <attribute name="title">
+       <string>Connections</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QTableWidget" name="tableView_connections_2"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="updateOptionsConnections">
+         <item>
+          <property name="text">
+           <string>Choose what to update</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Pioneer first name</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Pioneer last name</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Computer name</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="replaceConnectionsInfo">
+         <property name="text">
+          <string>Replace with...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="updateConnection">
+         <property name="text">
+          <string>Update</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="updateAnotherConnection">
+         <property name="text">
+          <string>Continue updating</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
