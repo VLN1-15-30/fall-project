@@ -18,8 +18,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //this->setStyleSheet("background-color: #2C2C2C;");
-    this->setStyleSheet("background-color: #34466E;");
+
+    setAutoFillBackground(true);
+
+    QPalette p = this->palette();
+    QColor linkColor("#34466E");
+    p.setColor(this->backgroundRole(),linkColor);
+    this->setPalette(p);
 
     setUpHooper();
     setButtonColors();
