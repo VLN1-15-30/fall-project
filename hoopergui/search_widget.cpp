@@ -39,6 +39,7 @@ void search_widget::setUpUi(){
 
 void search_widget::populateTableAtIndex(int index)
 {
+
     switch (index) {
     case 1:  {
 

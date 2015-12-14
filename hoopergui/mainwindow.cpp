@@ -11,6 +11,7 @@
 #include "about_widget.h"
 #include "search_widget.h"
 #include "update_widget.h"
+#include "Utilities/utils.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -18,8 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    utils::getDatabaseConnection();
     setUpHooper();
+
     setButtonColors();
     trackHovers();
 
