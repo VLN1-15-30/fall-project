@@ -6,7 +6,7 @@
 using namespace std;
 
 Interface::Interface(){
-    utils::getDatabaseConnection();
+   //utils::getDatabaseConnection();
 }
 
 void Interface::welcomeMessage(){

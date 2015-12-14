@@ -3,7 +3,7 @@
 
 computerRepo::computerRepo()
 {
-
+    utils::getDatabaseConnection();
 }
 
 

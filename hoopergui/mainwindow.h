@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QButtonGroup>
-#include "Utilities/utils.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -28,10 +28,6 @@ private slots:
     void on_button_view_database_clicked();
 
     void on_button_add_database_clicked();
-
-    void on_button_search_database_clicked();
-
-    void on_button_removefrom_database_clicked();
 
     void on_button_discover_clicked();
 
