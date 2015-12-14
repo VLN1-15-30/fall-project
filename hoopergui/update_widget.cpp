@@ -43,12 +43,14 @@ void update_widget::populateTableAtIndex(int index)
             QString firstName = QString::fromStdString(currentPioneer.getFirstName());
             QString lastName = QString::fromStdString(currentPioneer.getLastName());
             QString sex = QString::fromStdString(currentPioneer.getSex());
+            QString born = QString::number(currentPioneer.getBorn());
+            QString died = QString::number(currentPioneer.getDied());
 
             ui->tableView_pioneers_2->setItem(row, 0, new QTableWidgetItem(firstName));
             ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(lastName));
             ui->tableView_pioneers_2->setItem(row, 2, new QTableWidgetItem(sex));
-            ui->tableView_pioneers_2->setItem(row, 3, new QTableWidgetItem(currentPioneer.getBorn()));
-            ui->tableView_pioneers_2->setItem(row, 4, new QTableWidgetItem(currentPioneer.getDied()));
+            ui->tableView_pioneers_2->setItem(row, 3, new QTableWidgetItem(born));
+            ui->tableView_pioneers_2->setItem(row, 4, new QTableWidgetItem(died));
         }
     }
         break;
