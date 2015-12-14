@@ -12,6 +12,7 @@ update_widget::update_widget(QWidget *parent) :
     setUpUi();
     populateTablePioneers();
     populateTableComputers();
+    populateTableConnections();
 }
 
 void update_widget::setUpUi(){
@@ -80,6 +81,28 @@ void update_widget::populateTableComputers()
         ui->tableView_computers_2->setItem(row, 1, new QTableWidgetItem(type));
         ui->tableView_computers_2->setItem(row, 2, new QTableWidgetItem(year));
         ui->tableView_computers_2->setItem(row, 3, new QTableWidgetItem(wasMade));
+    }
+}
+
+void update_widget::populateTableConnections()
+{
+    vector<connection> conn  = hpList.getConnections();
+
+    ui->tableView_connections_2->clearContents();
+
+    ui->tableView_connections_2->setRowCount(conn.size());
+
+    for (unsigned int row = 0; row < conn.size(); row++)
+    {
+        connection currentConnection = conn[row];
+
+        QString comp = QString::fromStdString(currentConnection.getComputerName());
+        QString name = QString::fromStdString(currentConnection.getLastName());
+        QString year = QString::number(currentConnection.getYearInvented());
+
+        ui->tableView_connections_2->setItem(row, 0, new QTableWidgetItem(comp));
+        ui->tableView_connections_2->setItem(row, 1, new QTableWidgetItem(name));
+        ui->tableView_connections_2->setItem(row, 2, new QTableWidgetItem(year));
     }
 }
 

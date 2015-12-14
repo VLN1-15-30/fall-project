@@ -18,6 +18,7 @@ public:
     void setUpUi();
     void populateTablePioneers();
     void populateTableComputers();
+    void populateTableConnections();
     ~update_widget();
 
 private:

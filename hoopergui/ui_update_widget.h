@@ -179,7 +179,8 @@ public:
         tableView_connections_2->setObjectName(QStringLiteral("tableView_connections_2"));
         tableView_connections_2->setSortingEnabled(true);
         tableView_connections_2->horizontalHeader()->setStretchLastSection(true);
-        tableView_connections_2->verticalHeader()->setStretchLastSection(true);
+        tableView_connections_2->verticalHeader()->setProperty("showSortIndicator", QVariant(false));
+        tableView_connections_2->verticalHeader()->setStretchLastSection(false);
 
         verticalLayout_2->addWidget(tableView_connections_2);
 
@@ -210,7 +211,7 @@ public:
 
         retranslateUi(update_widget);
 
-        updateTabs->setCurrentIndex(1);
+        updateTabs->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(update_widget);
@@ -263,11 +264,11 @@ public:
         updateAnotherComputer->setText(QApplication::translate("update_widget", "Continu updating", 0));
         updateTabs->setTabText(updateTabs->indexOf(computers), QApplication::translate("update_widget", "Computers", 0));
         QTableWidgetItem *___qtablewidgetitem9 = tableView_connections_2->horizontalHeaderItem(0);
-        ___qtablewidgetitem9->setText(QApplication::translate("update_widget", "First name", 0));
+        ___qtablewidgetitem9->setText(QApplication::translate("update_widget", "Computer name", 0));
         QTableWidgetItem *___qtablewidgetitem10 = tableView_connections_2->horizontalHeaderItem(1);
         ___qtablewidgetitem10->setText(QApplication::translate("update_widget", "Last name", 0));
         QTableWidgetItem *___qtablewidgetitem11 = tableView_connections_2->horizontalHeaderItem(2);
-        ___qtablewidgetitem11->setText(QApplication::translate("update_widget", "Computer", 0));
+        ___qtablewidgetitem11->setText(QApplication::translate("update_widget", "Year invented", 0));
         updateOptionsConnections->clear();
         updateOptionsConnections->insertItems(0, QStringList()
          << QApplication::translate("update_widget", "Choose what to update", 0)
