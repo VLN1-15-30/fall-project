@@ -30,7 +30,6 @@ SOURCES += main.cpp\
     Repo/connectionrepo.cpp \
     Repo/personrepo.cpp \
     Services/list.cpp \
-    Services/personservice.cpp \
     UI/interface.cpp \
     Utilities/utils.cpp
 
@@ -50,7 +49,6 @@ HEADERS  += mainwindow.h \
     Repo/connectionrepo.h \
     Repo/personrepo.h \
     Services/list.h \
-    Services/personservice.h \
     UI/interface.h \
     Utilities/utils.h
 
