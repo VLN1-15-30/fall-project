@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
@@ -28,15 +29,17 @@ QT_BEGIN_NAMESPACE
 class Ui_update_widget
 {
 public:
-    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout_4;
     QTabWidget *updateTabs;
     QWidget *pioneer;
-    QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout_5;
     QTableWidget *tableView_pioneers_2;
+    QHBoxLayout *horizontalLayout_2;
     QComboBox *updateOptionsPioneers;
     QLineEdit *replacePioneersInfo;
-    QPushButton *updatePioneer;
+    QHBoxLayout *horizontalLayout_3;
     QPushButton *updateAnotherPioneer;
+    QPushButton *updatePioneer;
     QWidget *computers;
     QVBoxLayout *verticalLayout_3;
     QTableWidget *tableView_computers_2;
@@ -57,39 +60,63 @@ public:
         if (update_widget->objectName().isEmpty())
             update_widget->setObjectName(QStringLiteral("update_widget"));
         update_widget->resize(400, 300);
-        horizontalLayout = new QHBoxLayout(update_widget);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        gridLayout_4 = new QGridLayout(update_widget);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         updateTabs = new QTabWidget(update_widget);
         updateTabs->setObjectName(QStringLiteral("updateTabs"));
         updateTabs->setTabShape(QTabWidget::Triangular);
         pioneer = new QWidget();
         pioneer->setObjectName(QStringLiteral("pioneer"));
-        verticalLayout = new QVBoxLayout(pioneer);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        gridLayout_5 = new QGridLayout(pioneer);
+        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
         tableView_pioneers_2 = new QTableWidget(pioneer);
+        if (tableView_pioneers_2->columnCount() < 5)
+            tableView_pioneers_2->setColumnCount(5);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableView_pioneers_2->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableView_pioneers_2->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableView_pioneers_2->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        tableView_pioneers_2->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        tableView_pioneers_2->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         tableView_pioneers_2->setObjectName(QStringLiteral("tableView_pioneers_2"));
+        tableView_pioneers_2->horizontalHeader()->setStretchLastSection(true);
+        tableView_pioneers_2->verticalHeader()->setStretchLastSection(true);
 
-        verticalLayout->addWidget(tableView_pioneers_2);
+        gridLayout_5->addWidget(tableView_pioneers_2, 0, 0, 1, 1);
 
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         updateOptionsPioneers = new QComboBox(pioneer);
         updateOptionsPioneers->setObjectName(QStringLiteral("updateOptionsPioneers"));
 
-        verticalLayout->addWidget(updateOptionsPioneers);
+        horizontalLayout_2->addWidget(updateOptionsPioneers);
 
         replacePioneersInfo = new QLineEdit(pioneer);
         replacePioneersInfo->setObjectName(QStringLiteral("replacePioneersInfo"));
 
-        verticalLayout->addWidget(replacePioneersInfo);
+        horizontalLayout_2->addWidget(replacePioneersInfo);
+
+
+        gridLayout_5->addLayout(horizontalLayout_2, 2, 0, 1, 1);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        updateAnotherPioneer = new QPushButton(pioneer);
+        updateAnotherPioneer->setObjectName(QStringLiteral("updateAnotherPioneer"));
+
+        horizontalLayout_3->addWidget(updateAnotherPioneer);
 
         updatePioneer = new QPushButton(pioneer);
         updatePioneer->setObjectName(QStringLiteral("updatePioneer"));
 
-        verticalLayout->addWidget(updatePioneer);
+        horizontalLayout_3->addWidget(updatePioneer);
 
-        updateAnotherPioneer = new QPushButton(pioneer);
-        updateAnotherPioneer->setObjectName(QStringLiteral("updateAnotherPioneer"));
 
-        verticalLayout->addWidget(updateAnotherPioneer);
+        gridLayout_5->addLayout(horizontalLayout_3, 4, 0, 1, 1);
 
         updateTabs->addTab(pioneer, QString());
         computers = new QWidget();
@@ -153,12 +180,12 @@ public:
 
         updateTabs->addTab(connections, QString());
 
-        horizontalLayout->addWidget(updateTabs);
+        gridLayout_4->addWidget(updateTabs, 0, 0, 1, 1);
 
 
         retranslateUi(update_widget);
 
-        updateTabs->setCurrentIndex(2);
+        updateTabs->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(update_widget);
@@ -167,6 +194,16 @@ public:
     void retranslateUi(QWidget *update_widget)
     {
         update_widget->setWindowTitle(QApplication::translate("update_widget", "Form", 0));
+        QTableWidgetItem *___qtablewidgetitem = tableView_pioneers_2->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("update_widget", "First name", 0));
+        QTableWidgetItem *___qtablewidgetitem1 = tableView_pioneers_2->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("update_widget", "Last name", 0));
+        QTableWidgetItem *___qtablewidgetitem2 = tableView_pioneers_2->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("update_widget", "Gender", 0));
+        QTableWidgetItem *___qtablewidgetitem3 = tableView_pioneers_2->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("update_widget", "Year born", 0));
+        QTableWidgetItem *___qtablewidgetitem4 = tableView_pioneers_2->horizontalHeaderItem(4);
+        ___qtablewidgetitem4->setText(QApplication::translate("update_widget", "Year died", 0));
         updateOptionsPioneers->clear();
         updateOptionsPioneers->insertItems(0, QStringList()
          << QApplication::translate("update_widget", "Choose what to update", 0)
@@ -177,8 +214,8 @@ public:
          << QApplication::translate("update_widget", "Year died", 0)
         );
         replacePioneersInfo->setText(QApplication::translate("update_widget", "Replace with...", 0));
-        updatePioneer->setText(QApplication::translate("update_widget", "Update", 0));
         updateAnotherPioneer->setText(QApplication::translate("update_widget", "Continue updating", 0));
+        updatePioneer->setText(QApplication::translate("update_widget", "Update", 0));
         updateTabs->setTabText(updateTabs->indexOf(pioneer), QApplication::translate("update_widget", "Pioneers", 0));
         updateOptionsComputers->clear();
         updateOptionsComputers->insertItems(0, QStringList()

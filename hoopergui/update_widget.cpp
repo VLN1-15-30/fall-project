@@ -1,6 +1,7 @@
 #include "update_widget.h"
 #include "ui_update_widget.h"
 #include <QDebug>
+#include "Services/list.h"
 
 update_widget::update_widget(QWidget *parent) :
     QWidget(parent),
@@ -21,6 +22,31 @@ void update_widget::setUpUi(){
     ui->tableView_pioneers_2->setStyleSheet("QTableView{border : 1px solid white}");
     ui->tableView_computers_2->setStyleSheet("QTableView{border : 1px solid white}");
     ui->tableView_connections_2->setStyleSheet("QTableView{border : 1px solid white}");
+
+}
+
+void update_widget::displayPioneers()
+{
+    vector<person> p = hpList.getPersons();
+
+    ui->tableView_pioneers_2->clearContents();
+
+    ui->tableView_pioneers_2->setRowCount(p.size());
+
+    for (unsigned int row = 0; row < p.size(); row++)
+    {
+        person currentPioneer = p.at(row);
+
+        QString firstName = QString::fromStdString(currentPioneer.getFirstName());
+        QString lastName = QString::fromStdString(currentPioneer.getLastName());
+        QString sex = QString::fromStdString(currentPioneer.getSex());
+
+        ui->tableView_pioneers_2->setItem(row, 0, new QTableWidgetItem(firstName));
+        ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(lastName));
+        ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(sex));
+        ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(currentPioneer.getBorn()));
+        ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(currentPioneer.getDied()));
+    }
 
 }
 
