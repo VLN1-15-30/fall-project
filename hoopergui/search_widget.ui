@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>427</width>
-    <height>300</height>
+    <width>671</width>
+    <height>325</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,35 +29,18 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="pioneers">
       <attribute name="title">
        <string>Pioneers</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <widget class="QLineEdit" name="lineEdit_pioneers">
-           <property name="text">
-            <string/>
-           </property>
-           <property name="frame">
-            <bool>false</bool>
-           </property>
-           <property name="placeholderText">
-            <string>Search pioneers...</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox_pioneers"/>
-         </item>
-        </layout>
-       </item>
        <item row="0" column="0">
         <widget class="QTableWidget" name="table_pioneers">
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
          <attribute name="horizontalHeaderStretchLastSection">
           <bool>true</bool>
          </attribute>
@@ -79,7 +62,58 @@
            <string>Gender</string>
           </property>
          </column>
+         <column>
+          <property name="text">
+           <string>Year born</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Year died</string>
+          </property>
+         </column>
         </widget>
+       </item>
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_pioneers">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="frame">
+            <bool>false</bool>
+           </property>
+           <property name="placeholderText">
+            <string>Search pioneers...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_pioneers"/>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QPushButton" name="pushButton_remove_Pioneer">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Remove</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_removePioneer">
+           <property name="text">
+            <string>Select a row to remove a pionner from the database</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -89,7 +123,34 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="QTableWidget" name="table_computers"/>
+        <widget class="QTableWidget" name="table_computers">
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Type</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Year made</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Was made</string>
+          </property>
+         </column>
+        </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -108,6 +169,27 @@
          </item>
         </layout>
        </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QPushButton" name="pushButton_remove_computer">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Remove</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_remove_computer">
+           <property name="text">
+            <string>Select a row to remove a computer from the database</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="connections">
@@ -115,6 +197,31 @@
        <string>Connections</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QTableWidget" name="table_connections">
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>First name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Last name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Computer</string>
+          </property>
+         </column>
+        </widget>
+       </item>
        <item row="3" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
@@ -132,8 +239,26 @@
          </item>
         </layout>
        </item>
-       <item row="0" column="0">
-        <widget class="QTableWidget" name="table_connections"/>
+       <item row="4" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QPushButton" name="pushButton_remove_connection">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>PushButton</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_remove_conneciton">
+           <property name="text">
+            <string>Select a row to remove a connection from the database</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
