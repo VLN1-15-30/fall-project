@@ -4,7 +4,7 @@
 
 personRepo::personRepo()
 {
-
+    utils::getDatabaseConnection();
 }
 
 vector<person> personRepo::queryPerson(QString sqlQuery) {

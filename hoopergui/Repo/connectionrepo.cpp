@@ -3,7 +3,7 @@
 
 connectionRepo::connectionRepo()
 {
-
+    utils::getDatabaseConnection();
 }
 
 bool connectionRepo::addNewConnection(int pid, int cid) {
