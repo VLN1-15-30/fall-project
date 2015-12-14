@@ -29,7 +29,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="pioneers">
       <attribute name="title">
@@ -58,6 +58,9 @@
        </item>
        <item row="0" column="0">
         <widget class="QTableWidget" name="table_pioneers">
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
          <attribute name="horizontalHeaderStretchLastSection">
           <bool>true</bool>
          </attribute>
@@ -89,7 +92,34 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="QTableWidget" name="table_computers"/>
+        <widget class="QTableWidget" name="table_computers">
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Type</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Year made</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Was made</string>
+          </property>
+         </column>
+        </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -133,7 +163,29 @@
         </layout>
        </item>
        <item row="0" column="0">
-        <widget class="QTableWidget" name="table_connections"/>
+        <widget class="QTableWidget" name="table_connections">
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>First name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Last name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Computer</string>
+          </property>
+         </column>
+        </widget>
        </item>
       </layout>
      </widget>

@@ -23,15 +23,17 @@ void search_widget::setUpUi(){
     ui->comboBox_computers->setStyleSheet("QComboBox { border: 0; }}");
     ui->comboBox_connections->setStyleSheet("QComboBox { border: 0; }}");
 
-    ui ->comboBox_pioneers->addItem("Last name");
-    ui ->comboBox_pioneers->addItem("Gender");
-    ui ->comboBox_pioneers->addItem("Year born");
-    ui ->comboBox_pioneers->addItem("Year of death");
+    ui->comboBox_pioneers->addItem("Last name");
+    ui->comboBox_pioneers->addItem("Gender");
+    ui->comboBox_pioneers->addItem("Year born");
+    ui->comboBox_pioneers->addItem("Year of death");
 
-    ui ->comboBox_computers->addItem("Name");
-    ui ->comboBox_computers->addItem("Type");
-    ui ->comboBox_computers->addItem("Year made");
-    ui ->comboBox_computers->addItem("Was made");
+    ui->comboBox_computers->addItem("Name");
+    ui->comboBox_computers->addItem("Type");
+    ui->comboBox_computers->addItem("Year made");
+    ui->comboBox_computers->addItem("Was made");
+
+    ui->tab_search->setCurrentIndex(0);
 
 }
 
@@ -44,8 +46,8 @@ void search_widget::populateTableAtIndex(int index)
 
         ui->table_pioneers->clearContents();
         ui->table_pioneers->setRowCount(dbPersons.size());
-        cout <<"here!: "<<dbPersons.size()<<endl;
-        cout <<"here 2!: "<<hpList.getPersons().size()<<endl;
+
+        cout << "persons: " <<dbPersons.size()<<endl;
 
         for (unsigned int row = 0; row < dbPersons.size(); row++){
 
@@ -58,8 +60,6 @@ void search_widget::populateTableAtIndex(int index)
             ui->table_pioneers->setItem(row,0,new QTableWidgetItem(firstName));
             ui->table_pioneers->setItem(row,1,new QTableWidgetItem(lastname));
             ui->table_pioneers->setItem(row,2,new QTableWidgetItem(gender));
-
-
 
         }
 

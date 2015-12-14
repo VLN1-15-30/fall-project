@@ -19,11 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    utils::getDatabaseConnection();
     setUpHooper();
     setButtonColors();
     trackHovers();
-
 
 }
 
