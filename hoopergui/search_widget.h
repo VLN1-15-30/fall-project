@@ -29,6 +29,16 @@ private slots:
 
     void on_lineEdit_pioneers_textChanged(const QString &arg1);
 
+    void on_table_pioneers_clicked(const QModelIndex &index);
+
+    void on_table_computers_clicked(const QModelIndex &index);
+
+    void on_table_connections_clicked(const QModelIndex &index);
+
+    void on_lineEdit_computers_textChanged(const QString &arg1);
+
+    void on_lineEdit_connections_textChanged(const QString &arg1);
+
 private:
     Ui::search_widget *ui;
     List hpList;

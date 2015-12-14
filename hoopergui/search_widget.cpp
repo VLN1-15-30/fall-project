@@ -19,9 +19,6 @@ void search_widget::setUpUi(){
     ui->lineEdit_pioneers->setStyleSheet("QLineEdit { background: rgb(255, 255, 255); color: black; }");
     ui->tab_search->setStyleSheet("QTabWidget::pane { border: 0; }QTabBar::tab { background-color: #34466E; color: #ACADB1 }");
 
-    ui->comboBox_pioneers->setStyleSheet("QComboBox { border: 0; }}");
-    ui->comboBox_computers->setStyleSheet("QComboBox { border: 0; }}");
-    ui->comboBox_connections->setStyleSheet("QComboBox { border: 0; }}");
 
     ui->comboBox_pioneers->addItem("Last name");
     ui->comboBox_pioneers->addItem("Gender");
@@ -34,6 +31,9 @@ void search_widget::setUpUi(){
     ui->comboBox_computers->addItem("Was made");
 
     ui->tab_search->setCurrentIndex(0);
+    ui->label_removePioneer->setStyleSheet("QLabel { color: white;}");
+    ui->label_remove_computer->setStyleSheet("QLabel { color: white;}");
+    ui->label_remove_conneciton->setStyleSheet("QLabel { color: white;}");
 
 }
 
@@ -60,6 +60,8 @@ void search_widget::populateTableAtIndex(int index)
             ui->table_pioneers->setItem(row,0,new QTableWidgetItem(firstName));
             ui->table_pioneers->setItem(row,1,new QTableWidgetItem(lastname));
             ui->table_pioneers->setItem(row,2,new QTableWidgetItem(gender));
+            ui->table_pioneers->setItem(row,3,new QTableWidgetItem(currentP.getBorn()));
+            ui->table_pioneers->setItem(row,4,new QTableWidgetItem(currentP.getDied()));
 
         }
 
@@ -91,3 +93,34 @@ void search_widget::on_lineEdit_pioneers_textChanged(const QString &arg1)
     string currentText = ui->lineEdit_pioneers->text().toStdString();
 
 }
+
+void search_widget::on_lineEdit_computers_textChanged(const QString &arg1)
+{
+    string currentText = ui->lineEdit_computers->text().toStdString();
+
+}
+
+
+void search_widget::on_lineEdit_connections_textChanged(const QString &arg1)
+{
+    string currentText = ui->lineEdit_connections->text().toStdString();
+
+}
+void search_widget::on_table_pioneers_clicked(const QModelIndex &index)
+{
+    ui->pushButton_remove_Pioneer->setEnabled(true);
+}
+
+void search_widget::on_table_computers_clicked(const QModelIndex &index)
+{
+    ui->pushButton_remove_computer->setEnabled(true);
+
+}
+
+void search_widget::on_table_connections_clicked(const QModelIndex &index)
+{
+    ui->pushButton_remove_connection->setEnabled(true);
+
+}
+
+

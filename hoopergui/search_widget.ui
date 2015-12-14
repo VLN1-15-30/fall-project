@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>427</width>
-    <height>300</height>
+    <width>671</width>
+    <height>325</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,33 +29,13 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="pioneers">
       <attribute name="title">
        <string>Pioneers</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <widget class="QLineEdit" name="lineEdit_pioneers">
-           <property name="text">
-            <string/>
-           </property>
-           <property name="frame">
-            <bool>false</bool>
-           </property>
-           <property name="placeholderText">
-            <string>Search pioneers...</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox_pioneers"/>
-         </item>
-        </layout>
-       </item>
        <item row="0" column="0">
         <widget class="QTableWidget" name="table_pioneers">
          <property name="sortingEnabled">
@@ -82,7 +62,58 @@
            <string>Gender</string>
           </property>
          </column>
+         <column>
+          <property name="text">
+           <string>Year born</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Year died</string>
+          </property>
+         </column>
         </widget>
+       </item>
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_pioneers">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="frame">
+            <bool>false</bool>
+           </property>
+           <property name="placeholderText">
+            <string>Search pioneers...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_pioneers"/>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QPushButton" name="pushButton_remove_Pioneer">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Remove</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_removePioneer">
+           <property name="text">
+            <string>Select a row to remove a pionner from the database</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -138,6 +169,27 @@
          </item>
         </layout>
        </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QPushButton" name="pushButton_remove_computer">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Remove</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_remove_computer">
+           <property name="text">
+            <string>Select a row to remove a computer from the database</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="connections">
@@ -145,23 +197,6 @@
        <string>Connections</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="3" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QLineEdit" name="lineEdit_connections">
-           <property name="frame">
-            <bool>false</bool>
-           </property>
-           <property name="placeholderText">
-            <string>Search connections...</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox_connections"/>
-         </item>
-        </layout>
-       </item>
        <item row="0" column="0">
         <widget class="QTableWidget" name="table_connections">
          <attribute name="horizontalHeaderStretchLastSection">
@@ -186,6 +221,44 @@
           </property>
          </column>
         </widget>
+       </item>
+       <item row="3" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_connections">
+           <property name="frame">
+            <bool>false</bool>
+           </property>
+           <property name="placeholderText">
+            <string>Search connections...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_connections"/>
+         </item>
+        </layout>
+       </item>
+       <item row="4" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QPushButton" name="pushButton_remove_connection">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>PushButton</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_remove_conneciton">
+           <property name="text">
+            <string>Select a row to remove a connection from the database</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
