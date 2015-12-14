@@ -10,7 +10,8 @@ update_widget::update_widget(QWidget *parent) :
     //ui->label_update->setStyleSheet("QLabel {color: white;}");
     qDebug()<<"running update widget";
     setUpUi();
-    populateTableAtIndex();
+    populateTablePioneers();
+    populateTableComputers();
 }
 
 void update_widget::setUpUi(){
@@ -25,7 +26,7 @@ void update_widget::setUpUi(){
 
 }
 
-void update_widget::populateTableAtIndex()
+void update_widget::populateTablePioneers()
 {
     vector<person> p  = hpList.getPersons();
 
@@ -48,6 +49,37 @@ void update_widget::populateTableAtIndex()
         ui->tableView_pioneers_2->setItem(row, 2, new QTableWidgetItem(sex));
         ui->tableView_pioneers_2->setItem(row, 3, new QTableWidgetItem(born));
         ui->tableView_pioneers_2->setItem(row, 4, new QTableWidgetItem(died));
+    }
+}
+
+void update_widget::populateTableComputers()
+{
+    vector<computer> c  = hpList.getComputers();
+
+    ui->tableView_computers_2->clearContents();
+
+    ui->tableView_computers_2->setRowCount(c.size());
+
+    for (unsigned int row = 0; row < c.size(); row++)
+    {
+        computer currentComputer = c[row];
+
+        QString name = QString::fromStdString(currentComputer.getName());
+        QString type = QString::fromStdString(currentComputer.getType());
+        QString year = QString::number(currentComputer.getYearMade());
+        QString made = QString::number(currentComputer.getWasMade());
+        QString wasMade;
+        if(made == 0){
+            wasMade = "No";
+        }
+        else{
+            wasMade = "Yes";
+        }
+
+        ui->tableView_computers_2->setItem(row, 0, new QTableWidgetItem(name));
+        ui->tableView_computers_2->setItem(row, 1, new QTableWidgetItem(type));
+        ui->tableView_computers_2->setItem(row, 2, new QTableWidgetItem(year));
+        ui->tableView_computers_2->setItem(row, 3, new QTableWidgetItem(wasMade));
     }
 }
 
