@@ -21,8 +21,15 @@ void update_widget::setUpUi(){
     ui->tableView_pioneers_2->setStyleSheet("QTableView{border : 1px solid white}");
     ui->tableView_computers_2->setStyleSheet("QTableView{border : 1px solid white}");
     ui->tableView_connections_2->setStyleSheet("QTableView{border : 1px solid white}");
-    ui->label_info_update->setStyleSheet("QLabel{color :white}");
+    ui->label_info_update_pioneers->setStyleSheet("QLabel{color :white}");
+    ui->label_info_update_computers->setStyleSheet("QLabel{color :white}");
+    ui->label_info_update_connection->setStyleSheet("QLabel{color :white}");
+    ui->label_connection_instr->setStyleSheet("QLabel{color :white}");
+    ui->label_connection_c_name->setStyleSheet("QLabel{color :white}");
+    ui->label_connection_p_first->setStyleSheet("QLabel{color :white}");
+    ui->label_connection_p_last->setStyleSheet("QLabel{color :white}");
 
+    ui->updateTabs->setCurrentIndex(0);
 }
 
 void update_widget::populateTablePioneers()
@@ -171,19 +178,14 @@ void update_widget::on_tableView_computers_2_cellChanged(int row, int column)
 void update_widget::on_updateComputer_clicked()
 {
     string compName = ui->computerName->text().toStdString();
-    int rowNum;
-    for(int s=0; s < ui->tableView_connections_2->rowCount(); s++)
-    {
-       if(ui->tableView_connections_2->item(s,0)->isSelected())
-          {
-             rowNum = s;
-          }
-    }
+    int rowNum = ui->tableView_connections_2->currentRow();
     int pid = ui->tableView_connections_2->item(rowNum, 0)->text().toInt();
     int cid = ui->tableView_connections_2->item(rowNum, 1)->text().toInt();
     int newID = hpList.getComputerID(compName);
 
     hpList.updateConnection(pid, cid, "cID", newID);
+
+    ui->computerName->clear();
 
     populateTableConnections();
 }
@@ -194,19 +196,15 @@ void update_widget::on_updateConnection_clicked()
 {
     string firstName = ui->firstName->text().toStdString();
     string lastName = ui->lastName->text().toStdString();
-    int rowNum;
-    for(int s=0; s < ui->tableView_connections_2->rowCount(); s++)
-    {
-       if(ui->tableView_connections_2->item(s,0)->isSelected())
-          {
-             rowNum = s;
-          }
-    }
+    int rowNum = ui->tableView_connections_2->currentRow();
     int pid = ui->tableView_connections_2->item(rowNum, 0)->text().toInt();
     int cid = ui->tableView_connections_2->item(rowNum, 1)->text().toInt();
     int newID = hpList.getPersonID(lastName, firstName);
 
     hpList.updateConnection(pid, cid, "pID", newID);
+
+    ui->firstName->clear();
+    ui->lastName->clear();
 
     populateTableConnections();
 }

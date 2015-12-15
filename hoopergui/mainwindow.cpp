@@ -151,8 +151,7 @@ void MainWindow::setUpHooper()
     p.setColor(this->backgroundRole(),linkColor);
     this->setPalette(p);
 
-
-    ui->groupBox_hooper->setStyleSheet("QGroupBox { color: white;}");
+    ui->groupBox_hooper->setStyleSheet("QGroupBox { color: white;border: 0px;background-color:#414870}");
 
     welcome_widget *welcome = new welcome_widget;
     search_widget *view_db = new search_widget;

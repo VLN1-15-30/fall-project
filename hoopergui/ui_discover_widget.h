@@ -27,6 +27,7 @@ class Ui_discover_widget
 {
 public:
     QVBoxLayout *verticalLayout;
+    QSpacerItem *verticalSpacer;
     QLabel *label;
     QLabel *label_info;
     QPushButton *pushButton_discover;
@@ -34,10 +35,9 @@ public:
     QHBoxLayout *horizontalLayout;
     QLabel *label_define_1;
     QLabel *label_target_1;
-    QSpacerItem *horizontalSpacer_4;
+    QSpacerItem *horizontalSpacer_3;
     QLabel *label_define_2;
     QLabel *label_target_2;
-    QSpacerItem *horizontalSpacer_3;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_define_3;
     QLabel *label_target_3;
@@ -57,6 +57,10 @@ public:
         discover_widget->resize(696, 474);
         verticalLayout = new QVBoxLayout(discover_widget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalSpacer = new QSpacerItem(20, 35, QSizePolicy::Minimum, QSizePolicy::Fixed);
+
+        verticalLayout->addItem(verticalSpacer);
+
         label = new QLabel(discover_widget);
         label->setObjectName(QStringLiteral("label"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -111,16 +115,17 @@ public:
 
         label_target_1 = new QLabel(discover_widget);
         label_target_1->setObjectName(QStringLiteral("label_target_1"));
-        label_target_1->setMaximumSize(QSize(115, 16777215));
+        label_target_1->setMinimumSize(QSize(205, 0));
+        label_target_1->setMaximumSize(QSize(16777215, 16777215));
         QFont font2;
         font2.setPointSize(18);
         label_target_1->setFont(font2);
 
         horizontalLayout->addWidget(label_target_1);
 
-        horizontalSpacer_4 = new QSpacerItem(100, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+        horizontalSpacer_3 = new QSpacerItem(35, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
-        horizontalLayout->addItem(horizontalSpacer_4);
+        horizontalLayout->addItem(horizontalSpacer_3);
 
         label_define_2 = new QLabel(discover_widget);
         label_define_2->setObjectName(QStringLiteral("label_define_2"));
@@ -130,13 +135,11 @@ public:
 
         label_target_2 = new QLabel(discover_widget);
         label_target_2->setObjectName(QStringLiteral("label_target_2"));
+        label_target_2->setMinimumSize(QSize(205, 0));
+        label_target_2->setMaximumSize(QSize(16777215, 16777215));
         label_target_2->setFont(font2);
 
         horizontalLayout->addWidget(label_target_2);
-
-        horizontalSpacer_3 = new QSpacerItem(50, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer_3);
 
 
         verticalLayout->addLayout(horizontalLayout);

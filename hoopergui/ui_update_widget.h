@@ -35,20 +35,20 @@ public:
     QGridLayout *gridLayout_5;
     QHBoxLayout *horizontalLayout_3;
     QTableWidget *tableView_pioneers_2;
-    QLabel *label_2;
+    QLabel *label_info_update_pioneers;
     QWidget *computers;
     QVBoxLayout *verticalLayout_3;
-    QLabel *label;
+    QLabel *label_info_update_computers;
     QTableWidget *tableView_computers_2;
     QWidget *connections;
     QVBoxLayout *verticalLayout_2;
-    QLabel *label_3;
+    QLabel *label_info_update_connection;
     QTableWidget *tableView_connections_2;
-    QLabel *label_7;
+    QLabel *label_connection_instr;
     QHBoxLayout *horizontalLayout_2;
-    QLabel *label_6;
-    QLabel *label_5;
-    QLabel *label_4;
+    QLabel *label_connection_c_name;
+    QLabel *label_connection_p_first;
+    QLabel *label_connection_p_last;
     QHBoxLayout *horizontalLayout;
     QLineEdit *computerName;
     QLineEdit *firstName;
@@ -98,20 +98,20 @@ public:
 
         gridLayout_5->addWidget(tableView_pioneers_2, 1, 0, 1, 1);
 
-        label_2 = new QLabel(pioneer);
-        label_2->setObjectName(QStringLiteral("label_2"));
+        label_info_update_pioneers = new QLabel(pioneer);
+        label_info_update_pioneers->setObjectName(QStringLiteral("label_info_update_pioneers"));
 
-        gridLayout_5->addWidget(label_2, 0, 0, 1, 1);
+        gridLayout_5->addWidget(label_info_update_pioneers, 0, 0, 1, 1);
 
         updateTabs->addTab(pioneer, QString());
         computers = new QWidget();
         computers->setObjectName(QStringLiteral("computers"));
         verticalLayout_3 = new QVBoxLayout(computers);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        label = new QLabel(computers);
-        label->setObjectName(QStringLiteral("label"));
+        label_info_update_computers = new QLabel(computers);
+        label_info_update_computers->setObjectName(QStringLiteral("label_info_update_computers"));
 
-        verticalLayout_3->addWidget(label);
+        verticalLayout_3->addWidget(label_info_update_computers);
 
         tableView_computers_2 = new QTableWidget(computers);
         if (tableView_computers_2->columnCount() < 5)
@@ -138,10 +138,10 @@ public:
         connections->setObjectName(QStringLiteral("connections"));
         verticalLayout_2 = new QVBoxLayout(connections);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        label_3 = new QLabel(connections);
-        label_3->setObjectName(QStringLiteral("label_3"));
+        label_info_update_connection = new QLabel(connections);
+        label_info_update_connection->setObjectName(QStringLiteral("label_info_update_connection"));
 
-        verticalLayout_2->addWidget(label_3);
+        verticalLayout_2->addWidget(label_info_update_connection);
 
         tableView_connections_2 = new QTableWidget(connections);
         if (tableView_connections_2->columnCount() < 6)
@@ -167,27 +167,27 @@ public:
 
         verticalLayout_2->addWidget(tableView_connections_2);
 
-        label_7 = new QLabel(connections);
-        label_7->setObjectName(QStringLiteral("label_7"));
+        label_connection_instr = new QLabel(connections);
+        label_connection_instr->setObjectName(QStringLiteral("label_connection_instr"));
 
-        verticalLayout_2->addWidget(label_7);
+        verticalLayout_2->addWidget(label_connection_instr);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        label_6 = new QLabel(connections);
-        label_6->setObjectName(QStringLiteral("label_6"));
+        label_connection_c_name = new QLabel(connections);
+        label_connection_c_name->setObjectName(QStringLiteral("label_connection_c_name"));
 
-        horizontalLayout_2->addWidget(label_6);
+        horizontalLayout_2->addWidget(label_connection_c_name);
 
-        label_5 = new QLabel(connections);
-        label_5->setObjectName(QStringLiteral("label_5"));
+        label_connection_p_first = new QLabel(connections);
+        label_connection_p_first->setObjectName(QStringLiteral("label_connection_p_first"));
 
-        horizontalLayout_2->addWidget(label_5);
+        horizontalLayout_2->addWidget(label_connection_p_first);
 
-        label_4 = new QLabel(connections);
-        label_4->setObjectName(QStringLiteral("label_4"));
+        label_connection_p_last = new QLabel(connections);
+        label_connection_p_last->setObjectName(QStringLiteral("label_connection_p_last"));
 
-        horizontalLayout_2->addWidget(label_4);
+        horizontalLayout_2->addWidget(label_connection_p_last);
 
 
         verticalLayout_2->addLayout(horizontalLayout_2);
@@ -255,9 +255,9 @@ public:
         ___qtablewidgetitem4->setText(QApplication::translate("update_widget", "Year born", 0));
         QTableWidgetItem *___qtablewidgetitem5 = tableView_pioneers_2->horizontalHeaderItem(5);
         ___qtablewidgetitem5->setText(QApplication::translate("update_widget", "Year died", 0));
-        label_2->setText(QApplication::translate("update_widget", "Double click cell to update", 0));
+        label_info_update_pioneers->setText(QApplication::translate("update_widget", "Double click cell to update", 0));
         updateTabs->setTabText(updateTabs->indexOf(pioneer), QApplication::translate("update_widget", "Pioneers", 0));
-        label->setText(QApplication::translate("update_widget", "Double click cell to update", 0));
+        label_info_update_computers->setText(QApplication::translate("update_widget", "Double click cell to update", 0));
         QTableWidgetItem *___qtablewidgetitem6 = tableView_computers_2->horizontalHeaderItem(0);
         ___qtablewidgetitem6->setText(QApplication::translate("update_widget", "ID", 0));
         QTableWidgetItem *___qtablewidgetitem7 = tableView_computers_2->horizontalHeaderItem(1);
@@ -269,7 +269,7 @@ public:
         QTableWidgetItem *___qtablewidgetitem10 = tableView_computers_2->horizontalHeaderItem(4);
         ___qtablewidgetitem10->setText(QApplication::translate("update_widget", "Was it built?", 0));
         updateTabs->setTabText(updateTabs->indexOf(computers), QApplication::translate("update_widget", "Computers", 0));
-        label_3->setText(QApplication::translate("update_widget", "Select row to update", 0));
+        label_info_update_connection->setText(QApplication::translate("update_widget", "Select row to update", 0));
         QTableWidgetItem *___qtablewidgetitem11 = tableView_connections_2->horizontalHeaderItem(0);
         ___qtablewidgetitem11->setText(QApplication::translate("update_widget", "PID", 0));
         QTableWidgetItem *___qtablewidgetitem12 = tableView_connections_2->horizontalHeaderItem(1);
@@ -282,10 +282,10 @@ public:
         ___qtablewidgetitem15->setText(QApplication::translate("update_widget", "Last name", 0));
         QTableWidgetItem *___qtablewidgetitem16 = tableView_connections_2->horizontalHeaderItem(5);
         ___qtablewidgetitem16->setText(QApplication::translate("update_widget", "Year invented", 0));
-        label_7->setText(QApplication::translate("update_widget", "Enter either computer name or first and last name of pioneer", 0));
-        label_6->setText(QApplication::translate("update_widget", "Computer name", 0));
-        label_5->setText(QApplication::translate("update_widget", "Pioneers first name", 0));
-        label_4->setText(QApplication::translate("update_widget", "Pioneers last name", 0));
+        label_connection_instr->setText(QApplication::translate("update_widget", "Enter either computer name or first and last name of pioneer", 0));
+        label_connection_c_name->setText(QApplication::translate("update_widget", "Computer name", 0));
+        label_connection_p_first->setText(QApplication::translate("update_widget", "Pioneer first name", 0));
+        label_connection_p_last->setText(QApplication::translate("update_widget", "Pioneer last name", 0));
         updateComputer->setText(QApplication::translate("update_widget", "Update computer", 0));
         updateConnection->setText(QApplication::translate("update_widget", "Update pioneer", 0));
         updateTabs->setTabText(updateTabs->indexOf(connections), QApplication::translate("update_widget", "Connections", 0));

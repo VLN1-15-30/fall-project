@@ -34,6 +34,7 @@ public:
     void search(string table);
     vector<person> getSearchPerson(string column, string target);
     vector<computer> getSearchComputer(string column, string target);
+    vector<connection> getSearchConnection(string column, string target);
     vector<person> orderbyPersons(int sort, int column);
     vector<computer> orderbyComputers(int sort, int column);
     vector<connection> orderbyConnections(int sort, int column);
@@ -49,6 +50,7 @@ public:
     int countDatabase(int type);
     int getPersonID(string lastName, string firstName);
     int getComputerID(string computerName);
+
 
 
 

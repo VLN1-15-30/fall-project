@@ -28,7 +28,7 @@ class Ui_add_widget
 public:
     QVBoxLayout *verticalLayout;
     QTabWidget *label_computer_error;
-    QWidget *tab;
+    QWidget *tab_add;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_3;
     QLineEdit *input_firstname;
@@ -65,11 +65,11 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label_computer_error = new QTabWidget(add_widget);
         label_computer_error->setObjectName(QStringLiteral("label_computer_error"));
-        tab = new QWidget();
-        tab->setObjectName(QStringLiteral("tab"));
-        verticalLayout_3 = new QVBoxLayout(tab);
+        tab_add = new QWidget();
+        tab_add->setObjectName(QStringLiteral("tab_add"));
+        verticalLayout_3 = new QVBoxLayout(tab_add);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        label_3 = new QLabel(tab);
+        label_3 = new QLabel(tab_add);
         label_3->setObjectName(QStringLiteral("label_3"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
@@ -83,42 +83,42 @@ public:
 
         verticalLayout_3->addWidget(label_3, 0, Qt::AlignHCenter);
 
-        input_firstname = new QLineEdit(tab);
+        input_firstname = new QLineEdit(tab_add);
         input_firstname->setObjectName(QStringLiteral("input_firstname"));
 
         verticalLayout_3->addWidget(input_firstname);
 
-        input_lastname = new QLineEdit(tab);
+        input_lastname = new QLineEdit(tab_add);
         input_lastname->setObjectName(QStringLiteral("input_lastname"));
 
         verticalLayout_3->addWidget(input_lastname);
 
-        input_gender = new QLineEdit(tab);
+        input_gender = new QLineEdit(tab_add);
         input_gender->setObjectName(QStringLiteral("input_gender"));
 
         verticalLayout_3->addWidget(input_gender);
 
-        input__yearOfBirth = new QLineEdit(tab);
+        input__yearOfBirth = new QLineEdit(tab_add);
         input__yearOfBirth->setObjectName(QStringLiteral("input__yearOfBirth"));
 
         verticalLayout_3->addWidget(input__yearOfBirth);
 
-        input_yearOfDeath = new QLineEdit(tab);
+        input_yearOfDeath = new QLineEdit(tab_add);
         input_yearOfDeath->setObjectName(QStringLiteral("input_yearOfDeath"));
 
         verticalLayout_3->addWidget(input_yearOfDeath);
 
-        pushButton_add_pioneer = new QPushButton(tab);
+        pushButton_add_pioneer = new QPushButton(tab_add);
         pushButton_add_pioneer->setObjectName(QStringLiteral("pushButton_add_pioneer"));
 
         verticalLayout_3->addWidget(pushButton_add_pioneer);
 
-        label_pioneer_error = new QLabel(tab);
+        label_pioneer_error = new QLabel(tab_add);
         label_pioneer_error->setObjectName(QStringLiteral("label_pioneer_error"));
 
         verticalLayout_3->addWidget(label_pioneer_error);
 
-        label_computer_error->addTab(tab, QString());
+        label_computer_error->addTab(tab_add, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
         verticalLayout_2 = new QVBoxLayout(tab_2);
@@ -209,7 +209,7 @@ public:
 
         retranslateUi(add_widget);
 
-        label_computer_error->setCurrentIndex(1);
+        label_computer_error->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(add_widget);
@@ -226,7 +226,7 @@ public:
         input_yearOfDeath->setPlaceholderText(QApplication::translate("add_widget", "Year of death", 0));
         pushButton_add_pioneer->setText(QApplication::translate("add_widget", "Add", 0));
         label_pioneer_error->setText(QString());
-        label_computer_error->setTabText(label_computer_error->indexOf(tab), QApplication::translate("add_widget", "Pioneer", 0));
+        label_computer_error->setTabText(label_computer_error->indexOf(tab_add), QApplication::translate("add_widget", "Pioneer", 0));
         label_2->setText(QString());
         input_computer_name->setPlaceholderText(QApplication::translate("add_widget", "Name", 0));
         input_type->setPlaceholderText(QApplication::translate("add_widget", "type", 0));

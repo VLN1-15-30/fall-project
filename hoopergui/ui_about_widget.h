@@ -29,6 +29,7 @@ public:
     QLabel *label_logo;
     QLabel *label_about;
     QLabel *label_authors;
+    QLabel *label_version;
     QSpacerItem *verticalSpacer;
 
     void setupUi(QWidget *about_widget)
@@ -71,6 +72,11 @@ public:
 
         verticalLayout->addWidget(label_authors);
 
+        label_version = new QLabel(about_widget);
+        label_version->setObjectName(QStringLiteral("label_version"));
+
+        verticalLayout->addWidget(label_version, 0, Qt::AlignHCenter);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer);
@@ -87,6 +93,7 @@ public:
         label_logo->setText(QString());
         label_about->setText(QApplication::translate("about_widget", "Hooper was created by:", 0));
         label_authors->setText(QApplication::translate("about_widget", "Emil, Gunnar, Rakel and Sverrir in VLN-1", 0));
+        label_version->setText(QApplication::translate("about_widget", "Version: 1.0 <3", 0));
     } // retranslateUi
 
 };

@@ -14,9 +14,11 @@ public:
     void updateConnection(int personID, int computerID, string fieldName, int newID);
     int removeConnectionByID(int pid, int cid);
 
+    vector<connection> searchConnection(string field, string obj);
     vector<connection> getConnections();
     vector<connection> getConnectionsSorted(int sort, int column);
     connection getRandomConnection();
+
 
 
 private:

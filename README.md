@@ -1,4 +1,6 @@
 
-# fall-project version 2.0 with SQL lite database
+# fall-project version 3.0 with SQL lite database and GUI
 
-Program assumes hooper.sqlite is located in C:\hooper\
+
+
+

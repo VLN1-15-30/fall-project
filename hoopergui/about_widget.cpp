@@ -8,6 +8,7 @@ about_widget::about_widget(QWidget *parent) :
     ui->setupUi(this);
     ui->label_about->setStyleSheet("QLabel {color: white;}");
     ui->label_authors->setStyleSheet("QLabel {color: white;}");
+    ui->label_version->setStyleSheet("QLabel {color: white;}");
 
 }
 

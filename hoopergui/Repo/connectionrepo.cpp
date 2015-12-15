@@ -126,6 +126,22 @@ connection connectionRepo::getRandomConnection()
     }
 }
 
+vector<connection> connectionRepo::searchConnection(string field, string obj)
+{
+    stringstream query;
+
+    query << "SELECT P.firstname, P.lastname, C.name, C.yearMade ";
+    query << "FROM invented I ";
+    query << "    INNER JOIN persons P ON P.id = I.pID ";
+    query << "    INNER JOIN computers C ON C.id = I.cID ";
+    query << "WHERE "<< field << " LIKE '%" << obj <<"%' ";
+    query << "AND I.Deleted = 'NO' AND P.Deleted = 'NO' ";
+    query << "AND C.Deleted = 'NO' ";
+    query << "ORDER BY C.name ASC";
+
+    return queryConnection(QString::fromStdString(query.str()));
+}
+
 vector<connection> connectionRepo::queryConnection(QString sqlQuery){
 
     vector<connection> connections;
