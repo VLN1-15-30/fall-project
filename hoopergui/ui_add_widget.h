@@ -37,6 +37,7 @@ public:
     QLineEdit *input__yearOfBirth;
     QLineEdit *input_yearOfDeath;
     QPushButton *pushButton_add_pioneer;
+    QLabel *label_pioneer_error;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_2;
@@ -57,7 +58,7 @@ public:
     {
         if (add_widget->objectName().isEmpty())
             add_widget->setObjectName(QStringLiteral("add_widget"));
-        add_widget->resize(438, 362);
+        add_widget->resize(438, 383);
         verticalLayout = new QVBoxLayout(add_widget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         tab_add = new QTabWidget(add_widget);
@@ -109,6 +110,11 @@ public:
         pushButton_add_pioneer->setObjectName(QStringLiteral("pushButton_add_pioneer"));
 
         verticalLayout_3->addWidget(pushButton_add_pioneer);
+
+        label_pioneer_error = new QLabel(tab);
+        label_pioneer_error->setObjectName(QStringLiteral("label_pioneer_error"));
+
+        verticalLayout_3->addWidget(label_pioneer_error, 0, Qt::AlignHCenter);
 
         tab_add->addTab(tab, QString());
         tab_2 = new QWidget();
@@ -190,7 +196,7 @@ public:
 
         retranslateUi(add_widget);
 
-        tab_add->setCurrentIndex(2);
+        tab_add->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(add_widget);
@@ -205,20 +211,21 @@ public:
         input_gender->setPlaceholderText(QApplication::translate("add_widget", "Gender", 0));
         input__yearOfBirth->setPlaceholderText(QApplication::translate("add_widget", "Year of birth", 0));
         input_yearOfDeath->setPlaceholderText(QApplication::translate("add_widget", "Year of death", 0));
-        pushButton_add_pioneer->setText(QApplication::translate("add_widget", "Submit", 0));
+        pushButton_add_pioneer->setText(QApplication::translate("add_widget", "Add", 0));
+        label_pioneer_error->setText(QString());
         tab_add->setTabText(tab_add->indexOf(tab), QApplication::translate("add_widget", "Pioneer", 0));
         label_2->setText(QString());
         input_computer_name->setPlaceholderText(QApplication::translate("add_widget", "Name", 0));
         input_type->setPlaceholderText(QApplication::translate("add_widget", "type", 0));
         input_yearBuilt->setPlaceholderText(QApplication::translate("add_widget", "Built(0 if not built", 0));
         input_ifMade->setPlaceholderText(QApplication::translate("add_widget", "made(0 if made, else 1)", 0));
-        pushButton_add_computer->setText(QApplication::translate("add_widget", "Submit", 0));
+        pushButton_add_computer->setText(QApplication::translate("add_widget", "Add", 0));
         tab_add->setTabText(tab_add->indexOf(tab_2), QApplication::translate("add_widget", "Computer", 0));
         label->setText(QString());
         input_connect_lastname->setPlaceholderText(QApplication::translate("add_widget", "Lastname", 0));
         input_connect_firstname->setPlaceholderText(QApplication::translate("add_widget", "Firstname", 0));
         Input_connect_computer_name->setPlaceholderText(QApplication::translate("add_widget", "Name of computer", 0));
-        pushButton_add_connection->setText(QApplication::translate("add_widget", "Submit", 0));
+        pushButton_add_connection->setText(QApplication::translate("add_widget", "Add", 0));
         tab_add->setTabText(tab_add->indexOf(tab_3), QApplication::translate("add_widget", "Connection", 0));
     } // retranslateUi
 

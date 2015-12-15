@@ -52,6 +52,8 @@ private slots:
 
     void on_pushButton_remove_computer_clicked();
 
+    void on_pushButton_remove_connection_clicked();
+
 private:
     Ui::search_widget *ui;
     List hpList;

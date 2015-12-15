@@ -54,12 +54,15 @@ public:
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         groupBox_hooper = new QGroupBox(centralWidget);
         groupBox_hooper->setObjectName(QStringLiteral("groupBox_hooper"));
+        groupBox_hooper->setMaximumSize(QSize(16777215, 800));
         groupBox_hooper->setAlignment(Qt::AlignCenter);
         groupBox_hooper->setFlat(false);
         verticalLayout = new QVBoxLayout(groupBox_hooper);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
         button_view_database = new QPushButton(groupBox_hooper);
         button_view_database->setObjectName(QStringLiteral("button_view_database"));
         QFont font;

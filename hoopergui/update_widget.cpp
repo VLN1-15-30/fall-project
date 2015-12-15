@@ -21,8 +21,15 @@ void update_widget::setUpUi(){
     ui->tableView_pioneers_2->setStyleSheet("QTableView{border : 1px solid white}");
     ui->tableView_computers_2->setStyleSheet("QTableView{border : 1px solid white}");
     ui->tableView_connections_2->setStyleSheet("QTableView{border : 1px solid white}");
-    //ui->label_info_update->setStyleSheet("QLabel{color :white}");
+    ui->label_info_update_pioneers->setStyleSheet("QLabel{color :white}");
+    ui->label_info_update_computers->setStyleSheet("QLabel{color :white}");
+    ui->label_info_update_connection->setStyleSheet("QLabel{color :white}");
+    ui->label_connection_instr->setStyleSheet("QLabel{color :white}");
+    ui->label_connection_c_name->setStyleSheet("QLabel{color :white}");
+    ui->label_connection_p_first->setStyleSheet("QLabel{color :white}");
+    ui->label_connection_p_last->setStyleSheet("QLabel{color :white}");
 
+    ui->updateTabs->setCurrentIndex(0);
 }
 
 void update_widget::populateTablePioneers()

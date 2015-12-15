@@ -93,6 +93,7 @@ public:
         table_pioneers->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         table_pioneers->setObjectName(QStringLiteral("table_pioneers"));
         table_pioneers->setEditTriggers(QAbstractItemView::AnyKeyPressed|QAbstractItemView::EditKeyPressed);
+        table_pioneers->setSelectionBehavior(QAbstractItemView::SelectRows);
         table_pioneers->setSortingEnabled(false);
         table_pioneers->horizontalHeader()->setStretchLastSection(true);
         table_pioneers->verticalHeader()->setStretchLastSection(false);
@@ -158,6 +159,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
         table_computers->setHorizontalHeaderItem(3, __qtablewidgetitem8);
         table_computers->setObjectName(QStringLiteral("table_computers"));
+        table_computers->setSelectionBehavior(QAbstractItemView::SelectRows);
         table_computers->horizontalHeader()->setStretchLastSection(true);
         table_computers->verticalHeader()->setStretchLastSection(false);
 
@@ -210,6 +212,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
         table_connections->setHorizontalHeaderItem(2, __qtablewidgetitem11);
         table_connections->setObjectName(QStringLiteral("table_connections"));
+        table_connections->setSelectionBehavior(QAbstractItemView::SelectRows);
         table_connections->horizontalHeader()->setStretchLastSection(true);
         table_connections->verticalHeader()->setStretchLastSection(true);
 
@@ -254,7 +257,7 @@ public:
 
         retranslateUi(search_widget);
 
-        tab_search->setCurrentIndex(0);
+        tab_search->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(search_widget);
