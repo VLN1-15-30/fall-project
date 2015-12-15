@@ -66,15 +66,13 @@ void search_widget::populateTableAtIndex(int index, int order, int col)
         if( order == -1 ) {
             dbPersons = hpList.getPersons();
         } else if(order == -2) {
-            cout << "seearc" << endl;
+
         } else {
             dbPersons = hpList.orderbyPersons(order, col);
         }
 
         ui->table_pioneers->clearContents();
         ui->table_pioneers->setRowCount(dbPersons.size());
-
-        cout << "persons: " <<dbPersons.size()<<endl;
 
         for (unsigned int row = 0; row < dbPersons.size(); row++){
 

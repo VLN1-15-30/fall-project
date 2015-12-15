@@ -97,7 +97,6 @@ bool add_widget::computerErrorCheck()
   }
 
 
-
   return true;
 }
 

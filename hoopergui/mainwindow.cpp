@@ -3,14 +3,7 @@
 #include <QtDebug>
 #include <QPropertyAnimation>
 #include <QStackedWidget>
-#include "welcome_widget.h"
-#include "view_widget.h"
-#include "remove_widget.h"
-#include "discover_widget.h"
-#include "add_widget.h"
-#include "about_widget.h"
-#include "search_widget.h"
-#include "update_widget.h"
+
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -153,12 +146,12 @@ void MainWindow::setUpHooper()
 
     ui->groupBox_hooper->setStyleSheet("QGroupBox { color: white;border: 0px;background-color:#414870}");
 
-    welcome_widget *welcome = new welcome_widget;
-    search_widget *view_db = new search_widget;
-    add_widget *add_db = new add_widget;
-    discover_widget *discover_db = new discover_widget;
-    about_widget *about_db = new about_widget;
-    update_widget *update_db = new update_widget;
+    welcome = new welcome_widget;
+    view_db = new search_widget;
+    add_db = new add_widget;
+    discover_db = new discover_widget;
+    about_db = new about_widget;
+    update_db = new update_widget;
 
     ui->stack_widget->addWidget(welcome);
     ui->stack_widget->addWidget(view_db);
@@ -209,6 +202,10 @@ void MainWindow::on_button_view_database_clicked()
     selectedIndex = 1;
     setButtonClicked(selectedIndex);
 
+    view_db->populateTableAtIndex(1,-1,0);
+    view_db->populateTableAtIndex(2,-1,0);
+    view_db->populateTableAtIndex(3,-1,0);
+
 }
 
 void MainWindow::on_button_add_database_clicked()
@@ -246,5 +243,10 @@ void MainWindow::on_button_update_clicked()
     ui->button_update->setStyleSheet("QPushButton { color: white;}");
     selectedIndex = 4;
     setButtonClicked(selectedIndex);
+
+    update_db->populateTablePioneers();
+    update_db->populateTableConnections();
+    update_db->populateTableComputers();
+
 
 }

@@ -76,21 +76,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="button_add_database">
-         <property name="font">
-          <font>
-           <pointsize>16</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Add</string>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="button_update">
          <property name="font">
           <font>
@@ -99,6 +84,21 @@
          </property>
          <property name="text">
           <string>Update</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_add_database">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Add</string>
          </property>
          <property name="flat">
           <bool>true</bool>
