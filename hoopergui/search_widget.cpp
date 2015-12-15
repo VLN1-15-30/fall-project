@@ -46,12 +46,13 @@ void search_widget::populateTableAtIndex(int index, int order, int col)
 {
     switch (index) {
     case 1:  {
-        vector<person>dbPersons;
 
         if( order == -1 ) {
             dbPersons = hpList.getPersons();
+        } else if(order == -2) {
+            cout << "seearc" << endl;
         } else {
-            dbPersons = hpList.orderbyPersons(order,col);
+            dbPersons = hpList.orderbyPersons(order, col);
         }
 
         ui->table_pioneers->clearContents();
@@ -94,15 +95,31 @@ void search_widget::on_tab_search_tabBarClicked(int index)
 }
 
 
-void search_widget::on_comboBox_pioneers_currentIndexChanged(const QString &arg1)
+void search_widget::on_comboBox_pioneers_currentIndexChanged(int index)
 {
-    string currentSelection = ui->comboBox_pioneers->currentText().toStdString();
+    switch(index){
+    case 0:
+        searchColumn = "lastname";
+        break;
+    case 1:
+        searchColumn = "sex";
+        break;
+    case 2:
+        searchColumn = "born";
+        break;
+    case 3:
+        searchColumn = "died";
+        break;
+    default:
+        break;
+
+    }
 }
 
 void search_widget::on_lineEdit_pioneers_textChanged(const QString &arg1)
 {
     string currentText = ui->lineEdit_pioneers->text().toStdString();
-
+    searchPeople(currentText);
 }
 
 void search_widget::on_lineEdit_computers_textChanged(const QString &arg1)
@@ -134,7 +151,11 @@ void search_widget::on_table_connections_clicked(const QModelIndex &index)
 
 }
 
+void search_widget::searchPeople(string search){
 
+    dbPersons = hpList.getSearchPerson(searchColumn, search);
+    populateTableAtIndex(1,-2,0);
+}
 
 void search_widget::on_comboBox_Order_currentIndexChanged(int index)
 {
