@@ -1,5 +1,6 @@
 #include "discover_widget.h"
 #include "ui_discover_widget.h"
+#include <cstdlib>
 
 discover_widget::discover_widget(QWidget *parent) :
     QWidget(parent),
@@ -25,7 +26,7 @@ discover_widget::discover_widget(QWidget *parent) :
 
 void discover_widget::discover()
 {
-    int i = arc4random()%3;
+    int i = rand() % 3 + 1;
     switch (i) {
     case 1:{
         ui->label_target->setText("Pioneer");

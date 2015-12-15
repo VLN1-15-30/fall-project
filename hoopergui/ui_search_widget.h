@@ -99,7 +99,7 @@ public:
         table_pioneers->setEditTriggers(QAbstractItemView::AnyKeyPressed|QAbstractItemView::EditKeyPressed);
         table_pioneers->setSortingEnabled(false);
         table_pioneers->horizontalHeader()->setStretchLastSection(true);
-        table_pioneers->verticalHeader()->setStretchLastSection(true);
+        table_pioneers->verticalHeader()->setStretchLastSection(false);
 
         gridLayout->addWidget(table_pioneers, 0, 0, 1, 1);
 

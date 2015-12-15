@@ -22,10 +22,11 @@ public:
     void populateTableAtIndex(int index, int order, int col);
     ~search_widget();
 
+    void searchPeople(string search);
 private slots:
     void on_tab_search_tabBarClicked(int index);
 
-    void on_comboBox_pioneers_currentIndexChanged(const QString &arg1);
+    void on_comboBox_pioneers_currentIndexChanged(int index);
 
     void on_lineEdit_pioneers_textChanged(const QString &arg1);
 
@@ -44,6 +45,8 @@ private slots:
 private:
     Ui::search_widget *ui;
     List hpList;
+    vector<person>dbPersons;
+    string searchColumn;
 };
 
 #endif // SEARCH_WIDGET_H
