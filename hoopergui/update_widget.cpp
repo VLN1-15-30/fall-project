@@ -21,6 +21,7 @@ void update_widget::setUpUi(){
     ui->tableView_pioneers_2->setStyleSheet("QTableView{border : 1px solid white}");
     ui->tableView_computers_2->setStyleSheet("QTableView{border : 1px solid white}");
     ui->tableView_connections_2->setStyleSheet("QTableView{border : 1px solid white}");
+    ui->label_info_update->setStyleSheet("QLabel{color :white}");
 
 }
 

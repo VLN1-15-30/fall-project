@@ -16,7 +16,7 @@ public:
 
     vector<connection> getConnections();
     vector<connection> getConnectionsSorted(int sort, int column);
-
+    connection getRandomConnection();
 
 
 private:

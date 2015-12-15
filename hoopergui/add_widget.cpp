@@ -10,6 +10,56 @@ add_widget::add_widget(QWidget *parent) :
     ui->setupUi(this);
     ui->tab_add->setStyleSheet("QTabWidget::pane { border: 0; }QTabBar::tab { background-color: #34466E; color: #ACADB1 }");
     ui->tab_add->setCurrentIndex(0);
+    ui->label_pioneer_error->setStyleSheet("QLabel { color: red;}");
+
+}
+
+bool add_widget::errorCheck()
+{
+
+    if(ui->input_firstname->text().isEmpty()) {
+        currentError = "Missing first name";
+        return false;
+    }
+
+    if(ui->input_lastname->text().isEmpty()) {
+        currentError = "Missing last name";
+
+        return false;
+    }
+
+    if(ui->input_gender->text().isEmpty()) {
+        currentError = "Missing gender (m/f)";
+
+        return false;
+    }
+
+    if(ui->input_yearOfDeath->text().isEmpty()) {
+        currentError = "Missing year of death (0 if still alive)";
+
+        return false;
+    }
+
+    if(ui->input__yearOfBirth->text().isEmpty()) {
+        currentError = "Missing year of birth";
+
+        return false;
+    }
+
+    return true;
+
+}
+
+void add_widget::clearContents(int index)
+{
+    if(index == 1){
+        ui->input_firstname->setText("");
+        ui->input_lastname->setText("");
+        ui->input_gender->setText("");
+        ui->input_yearOfDeath->setText("");
+        ui->input__yearOfBirth->setText("");
+
+    }
 }
 
 add_widget::~add_widget()
@@ -19,45 +69,39 @@ add_widget::~add_widget()
 
 void add_widget::on_pushButton_add_pioneer_clicked()
 {
-    string firstName = ui->input_firstname->text().toStdString();
-    string lastName = ui->input_lastname->text().toStdString();
-    string sex = ui->input_gender->text().toStdString();
-    int yearBorn = ui->input__yearOfBirth->text().toInt();
-    int yearDied = ui->input_yearOfDeath->text().toInt();
 
-    /*
-    if(firstName.isEmpty()) {
+    bool allOk = errorCheck();
 
-        return;
+    if(allOk){
+
+        string firstName = ui->input_firstname->text().toStdString();
+        string lastName = ui->input_lastname->text().toStdString();
+        string sex = ui->input_gender->text().toStdString();
+        int yearBorn = ui->input__yearOfBirth->text().toInt();
+        int yearDied = ui->input_yearOfDeath->text().toInt();
+
+        person p;
+        p.setFirstName(firstName);
+        p.setLastName(lastName);
+        p.setSex(sex);
+        p.setBorn(yearBorn);
+        p.setDied(yearDied);
+
+        bool check = ComputerScientist.addPerson(p);
+        if(check) {
+            cout << "Successfully added" << endl;
+            clearContents(1);
+        }
+            else{
+            cout << "Failed to add" << endl;
+        }
+
+    }
+    else{
+
+        ui->label_pioneer_error->setText(QString::fromStdString(currentError));
     }
 
-    if(lastName.isEmpty()) {
-        return;
-    }
-
-    if(sex.isEmpty()) {
-       return;
-    }
-
-    if(yearDied.isEmpty()) {
-        return;
-    }
-    */
-
-    person p;
-    p.setFirstName(firstName);
-    p.setLastName(lastName);
-    p.setSex(sex);
-    p.setBorn(yearBorn);
-    p.setDied(yearDied);
-
-    bool check = ComputerScientist.addPerson(p);
-    if(check) {
-        cout << "Successfully added" << endl;
-    }
-        else{
-        cout << "Failed to add" << endl;
-    }
 
 }
 

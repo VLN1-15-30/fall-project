@@ -72,7 +72,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
            }
            else if (event->type() == QEvent::Leave){
 
-               if(selectedIndex != 5)
+               if(selectedIndex != 3)
                ui->button_discover->setStyleSheet("QPushButton { color: #ACADB1;}");
 
            }
@@ -89,7 +89,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
            }
            else if (event->type() == QEvent::Leave){
 
-               if(selectedIndex != 7)
+               if(selectedIndex != 5)
                ui->button_about->setStyleSheet("QPushButton { color: #ACADB1;}");
 
            }
@@ -105,7 +105,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
            }
            else if (event->type() == QEvent::Leave){
 
-               if(selectedIndex != 6)
+               if(selectedIndex != 4)
                ui->button_update->setStyleSheet("QPushButton { color: #ACADB1;}");
 
            }
@@ -177,6 +177,7 @@ void MainWindow::setUpHooper()
     menuButtons->addButton(ui->button_discover,2);
     menuButtons->addButton(ui->button_update,3);
     menuButtons->addButton(ui->button_about,4);
+
 
 
 

@@ -40,6 +40,7 @@ public:
     person returnPersonAtIndex(int index);
     person discoverPerson();
     computer discoverComputer();
+    connection discoverConnection();
     void removeConnection(string firstname, string lastName, string computerName);
     void closeDatabase();
     void deleteCharacterWithName(string lastname, int type);
