@@ -45,7 +45,6 @@ public:
     void closeDatabase();
     void deleteCharacterWithName(string lastname, int type);
     void update(int identiy,string fieldName, string value, string tableName);
-    void updateComputer(int row, vector<computer>& c);
     void updateConnection(int personID, int computerID, string fieldName, int newID);
     int countDatabase(int type);
     int getPersonID(string lastName, string firstName);

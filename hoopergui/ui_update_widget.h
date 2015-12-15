@@ -38,7 +38,7 @@ public:
     QLabel *label_2;
     QWidget *computers;
     QVBoxLayout *verticalLayout_3;
-    QLabel *label;
+    QLabel *label_info_update;
     QTableWidget *tableView_computers_2;
     QWidget *connections;
     QVBoxLayout *verticalLayout_2;
@@ -94,7 +94,7 @@ public:
         tableView_pioneers_2->setObjectName(QStringLiteral("tableView_pioneers_2"));
         tableView_pioneers_2->setSortingEnabled(true);
         tableView_pioneers_2->horizontalHeader()->setStretchLastSection(true);
-        tableView_pioneers_2->verticalHeader()->setStretchLastSection(true);
+        tableView_pioneers_2->verticalHeader()->setStretchLastSection(false);
 
         gridLayout_5->addWidget(tableView_pioneers_2, 1, 0, 1, 1);
 
@@ -108,10 +108,10 @@ public:
         computers->setObjectName(QStringLiteral("computers"));
         verticalLayout_3 = new QVBoxLayout(computers);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        label = new QLabel(computers);
-        label->setObjectName(QStringLiteral("label"));
+        label_info_update = new QLabel(computers);
+        label_info_update->setObjectName(QStringLiteral("label_info_update"));
 
-        verticalLayout_3->addWidget(label);
+        verticalLayout_3->addWidget(label_info_update);
 
         tableView_computers_2 = new QTableWidget(computers);
         if (tableView_computers_2->columnCount() < 5)
@@ -129,7 +129,7 @@ public:
         tableView_computers_2->setObjectName(QStringLiteral("tableView_computers_2"));
         tableView_computers_2->setSortingEnabled(true);
         tableView_computers_2->horizontalHeader()->setStretchLastSection(true);
-        tableView_computers_2->verticalHeader()->setStretchLastSection(true);
+        tableView_computers_2->verticalHeader()->setStretchLastSection(false);
 
         verticalLayout_3->addWidget(tableView_computers_2);
 
@@ -257,7 +257,7 @@ public:
         ___qtablewidgetitem5->setText(QApplication::translate("update_widget", "Year died", 0));
         label_2->setText(QApplication::translate("update_widget", "Double click cell to update", 0));
         updateTabs->setTabText(updateTabs->indexOf(pioneer), QApplication::translate("update_widget", "Pioneers", 0));
-        label->setText(QApplication::translate("update_widget", "Double click cell to update", 0));
+        label_info_update->setText(QApplication::translate("update_widget", "Double click cell to update", 0));
         QTableWidgetItem *___qtablewidgetitem6 = tableView_computers_2->horizontalHeaderItem(0);
         ___qtablewidgetitem6->setText(QApplication::translate("update_widget", "ID", 0));
         QTableWidgetItem *___qtablewidgetitem7 = tableView_computers_2->horizontalHeaderItem(1);
