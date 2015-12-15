@@ -2,4 +2,9 @@
     <qresource prefix="/hooper/prefix1">
         <file>hooper.png</file>
     </qresource>
+    <qresource prefix="/hooper/prefix2">
+        <file>peopleIcon.png</file>
+        <file>connected-256.png</file>
+        <file>computer-xxl.png</file>
+    </qresource>
 </RCC>

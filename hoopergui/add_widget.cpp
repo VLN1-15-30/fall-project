@@ -8,8 +8,8 @@ add_widget::add_widget(QWidget *parent) :
     ui(new Ui::add_widget)
 {
     ui->setupUi(this);
-    //ui->->setStyleSheet("QLabel {color: white;}");
-
+    ui->tab_add->setStyleSheet("QTabWidget::pane { border: 0; }QTabBar::tab { background-color: #34466E; color: #ACADB1 }");
+    ui->tab_add->setCurrentIndex(0);
 }
 
 add_widget::~add_widget()
