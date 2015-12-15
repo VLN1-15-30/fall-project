@@ -71,6 +71,7 @@ void update_widget::populateTableComputers()
     {
         computer currentComputer = c[row];
 
+        QString id = QString::number(hpList.getComputerID(currentComputer.getName()));
         QString name = QString::fromStdString(currentComputer.getName());
         QString type = QString::fromStdString(currentComputer.getType());
         QString year = QString::number(currentComputer.getYearMade());
@@ -83,10 +84,13 @@ void update_widget::populateTableComputers()
             wasMade = "Yes";
         }
 
-        ui->tableView_computers_2->setItem(row, 0, new QTableWidgetItem(name));
-        ui->tableView_computers_2->setItem(row, 1, new QTableWidgetItem(type));
-        ui->tableView_computers_2->setItem(row, 2, new QTableWidgetItem(year));
-        ui->tableView_computers_2->setItem(row, 3, new QTableWidgetItem(wasMade));
+        ui->tableView_computers_2->setItem(row, 0, new QTableWidgetItem(id));
+        ui->tableView_computers_2->setItem(row, 1, new QTableWidgetItem(name));
+        ui->tableView_computers_2->setItem(row, 2, new QTableWidgetItem(type));
+        ui->tableView_computers_2->setItem(row, 3, new QTableWidgetItem(year));
+        ui->tableView_computers_2->setItem(row, 4, new QTableWidgetItem(wasMade));
+
+        ui->tableView_computers_2->hideColumn(0);
     }
 }
 
@@ -132,6 +136,25 @@ void update_widget::on_tableView_pioneers_2_cellChanged(int row, int column)
     case 4: hpList.update(id, "born", value, "persons");
         break;
     case 5: hpList.update(id, "died", value, "persons");
+        break;
+    default:
+        break;
+    }
+}
+
+void update_widget::on_tableView_computers_2_cellChanged(int row, int column)
+{
+    if(loading) return;
+    int id = ui->tableView_computers_2->item(row,0)->text().toInt();
+    string value = ui->tableView_computers_2->item(row,column)->text().toStdString();
+    switch(column){
+    case 1: hpList.update(id, "name", value, "computers");
+        break;
+    case 2: hpList.update(id, "type", value, "computers");
+        break;
+    case 3: hpList.update(id, "yearMade", value, "computers");
+        break;
+    case 4: hpList.update(id, "wasMade", value, "computers");
         break;
     default:
         break;
