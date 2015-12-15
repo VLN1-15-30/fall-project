@@ -94,7 +94,7 @@ public:
         tableView_pioneers_2->setObjectName(QStringLiteral("tableView_pioneers_2"));
         tableView_pioneers_2->setSortingEnabled(true);
         tableView_pioneers_2->horizontalHeader()->setStretchLastSection(true);
-        tableView_pioneers_2->verticalHeader()->setStretchLastSection(true);
+        tableView_pioneers_2->verticalHeader()->setStretchLastSection(false);
 
         gridLayout_5->addWidget(tableView_pioneers_2, 1, 0, 1, 1);
 
@@ -129,7 +129,7 @@ public:
         tableView_computers_2->setObjectName(QStringLiteral("tableView_computers_2"));
         tableView_computers_2->setSortingEnabled(true);
         tableView_computers_2->horizontalHeader()->setStretchLastSection(true);
-        tableView_computers_2->verticalHeader()->setStretchLastSection(true);
+        tableView_computers_2->verticalHeader()->setStretchLastSection(false);
 
         verticalLayout_3->addWidget(tableView_computers_2);
 

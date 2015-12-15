@@ -31,7 +31,6 @@ class Ui_search_widget
 {
 public:
     QVBoxLayout *verticalLayout;
-    QComboBox *comboBox_Order;
     QTabWidget *tab_search;
     QWidget *pioneers;
     QGridLayout *gridLayout;
@@ -42,8 +41,10 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QPushButton *pushButton_remove_Pioneer;
     QLabel *label_removePioneer;
+    QComboBox *comboBox_OrderPerson;
     QWidget *computers;
     QVBoxLayout *verticalLayout_4;
+    QComboBox *comboBox_OrderComputers;
     QTableWidget *table_computers;
     QHBoxLayout *horizontalLayout_2;
     QLineEdit *lineEdit_computers;
@@ -68,11 +69,6 @@ public:
         search_widget->resize(671, 325);
         verticalLayout = new QVBoxLayout(search_widget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        comboBox_Order = new QComboBox(search_widget);
-        comboBox_Order->setObjectName(QStringLiteral("comboBox_Order"));
-
-        verticalLayout->addWidget(comboBox_Order, 0, Qt::AlignRight);
-
         tab_search = new QTabWidget(search_widget);
         tab_search->setObjectName(QStringLiteral("tab_search"));
         tab_search->setFocusPolicy(Qt::TabFocus);
@@ -101,7 +97,7 @@ public:
         table_pioneers->horizontalHeader()->setStretchLastSection(true);
         table_pioneers->verticalHeader()->setStretchLastSection(false);
 
-        gridLayout->addWidget(table_pioneers, 0, 0, 1, 1);
+        gridLayout->addWidget(table_pioneers, 1, 0, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -117,7 +113,7 @@ public:
         horizontalLayout->addWidget(comboBox_pioneers);
 
 
-        gridLayout->addLayout(horizontalLayout, 1, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout, 2, 0, 1, 1);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
@@ -133,13 +129,23 @@ public:
         horizontalLayout_4->addWidget(label_removePioneer);
 
 
-        gridLayout->addLayout(horizontalLayout_4, 3, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_4, 4, 0, 1, 1);
+
+        comboBox_OrderPerson = new QComboBox(pioneers);
+        comboBox_OrderPerson->setObjectName(QStringLiteral("comboBox_OrderPerson"));
+
+        gridLayout->addWidget(comboBox_OrderPerson, 0, 0, 1, 1, Qt::AlignRight);
 
         tab_search->addTab(pioneers, QString());
         computers = new QWidget();
         computers->setObjectName(QStringLiteral("computers"));
         verticalLayout_4 = new QVBoxLayout(computers);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        comboBox_OrderComputers = new QComboBox(computers);
+        comboBox_OrderComputers->setObjectName(QStringLiteral("comboBox_OrderComputers"));
+
+        verticalLayout_4->addWidget(comboBox_OrderComputers, 0, Qt::AlignRight);
+
         table_computers = new QTableWidget(computers);
         if (table_computers->columnCount() < 4)
             table_computers->setColumnCount(4);
@@ -153,7 +159,7 @@ public:
         table_computers->setHorizontalHeaderItem(3, __qtablewidgetitem8);
         table_computers->setObjectName(QStringLiteral("table_computers"));
         table_computers->horizontalHeader()->setStretchLastSection(true);
-        table_computers->verticalHeader()->setStretchLastSection(true);
+        table_computers->verticalHeader()->setStretchLastSection(false);
 
         verticalLayout_4->addWidget(table_computers);
 
