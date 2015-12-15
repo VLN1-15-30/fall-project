@@ -192,7 +192,6 @@ public:
 
         tab_add->setCurrentIndex(2);
 
-
         QMetaObject::connectSlotsByName(add_widget);
     } // setupUi
 
