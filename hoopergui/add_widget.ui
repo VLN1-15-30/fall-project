@@ -15,9 +15,9 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QTabWidget" name="tab_add">
+    <widget class="QTabWidget" name="label_computer_error">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -97,7 +97,7 @@
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignHCenter">
+       <item>
         <widget class="QLabel" name="label_pioneer_error">
          <property name="text">
           <string/>
@@ -171,6 +171,19 @@
          </property>
         </widget>
        </item>
+       <item alignment="Qt::AlignHCenter">
+        <widget class="QLabel" name="label_computer_error_2">
+         <property name="minimumSize">
+          <size>
+           <width>55</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_3">
@@ -228,6 +241,13 @@
         <widget class="QPushButton" name="pushButton_add_connection">
          <property name="text">
           <string>Add</string>
+         </property>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignHCenter">
+        <widget class="QLabel" name="label_connection_error">
+         <property name="text">
+          <string/>
          </property>
         </widget>
        </item>

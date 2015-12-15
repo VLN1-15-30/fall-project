@@ -8,13 +8,14 @@ add_widget::add_widget(QWidget *parent) :
     ui(new Ui::add_widget)
 {
     ui->setupUi(this);
-    ui->tab_add->setStyleSheet("QTabWidget::pane { border: 0; }QTabBar::tab { background-color: #34466E; color: #ACADB1 }");
-    ui->tab_add->setCurrentIndex(0);
+    //ui->tab_add->setStyleSheet("QTabWidget::pane { border: 0; }QTabBar::tab { background-color: #34466E; color: #ACADB1 }");
+    //ui->tab_add->setCurrentIndex(0);
     ui->label_pioneer_error->setStyleSheet("QLabel { color: red;}");
-
+    ui->label_computer_error_2->setStyleSheet("QLabel {color: red;}");
+    ui->label_connection_error->setStyleSheet("QLabel {color: red;}");
 }
 
-bool add_widget::errorCheck()
+bool add_widget::pioneerErrorCheck()
 {
 
     if(ui->input_firstname->text().isEmpty()) {
@@ -50,6 +51,44 @@ bool add_widget::errorCheck()
 
 }
 
+bool add_widget::computerErrorCheck()
+{
+  if(ui->input_computer_name->text().isEmpty()) {
+      currentError = "Missing computer name";
+      return false;
+  }
+  if(ui->input_type->text().isEmpty()) {
+      currentError = "Missing computer type";
+      return false;
+  }
+  if(ui->input_yearBuilt->text().isEmpty()) {
+      currentError = "Missing year made" ;
+      return false;
+  }
+  if(ui->input_ifMade->text().isEmpty()) {
+      currentError = "missing if made(0 if made, else 1";
+      return false;
+  }
+
+  return true;
+}
+
+bool add_widget::connectionErrorCheck() {
+    if(ui->input_connect_firstname->text().isEmpty()) {
+        currentError = "Missing firstname";
+        return false;
+    }
+    if(ui->input_connect_lastname->text().isEmpty()) {
+        currentError = "Missing lastname";
+        return false;
+    }
+    if(ui->Input_connect_computer_name->text().isEmpty()) {
+        currentError = "missing computer name";
+        return false;
+    }
+    return true;
+}
+
 void add_widget::clearContents(int index)
 {
     if(index == 1){
@@ -60,6 +99,18 @@ void add_widget::clearContents(int index)
         ui->input__yearOfBirth->setText("");
 
     }
+    if(index == 2){
+        ui->input_computer_name->setText("");
+        ui->input_type->setText("");
+        ui->input_yearBuilt->setText("");
+        ui->input_ifMade->setText("");
+    }
+    if(index == 3) {
+        ui->input_connect_firstname->setText("");
+        ui->input_connect_lastname->setText("");
+        ui->Input_connect_computer_name->setText("");
+    }
+
 }
 
 add_widget::~add_widget()
@@ -70,7 +121,7 @@ add_widget::~add_widget()
 void add_widget::on_pushButton_add_pioneer_clicked()
 {
 
-    bool allOk = errorCheck();
+    bool allOk = pioneerErrorCheck();
 
     if(allOk){
 
@@ -108,6 +159,9 @@ void add_widget::on_pushButton_add_pioneer_clicked()
 
 void add_widget::on_pushButton_add_computer_clicked()
 {
+    bool AllOk = computerErrorCheck();
+
+    if(AllOk) {
 
     string computerName = ui->input_computer_name->text().toStdString();
     string computerType = ui->input_type->text().toStdString();
@@ -121,17 +175,27 @@ void add_widget::on_pushButton_add_computer_clicked()
     c.setWasMade(wasMade);
 
     bool check = ComputerScientist.addComp(c);
-    if(check) {
+        if(check) {
         cout << "Successfully added" << endl;
-    }
-        else {
+        clearContents(2);
+        }
+            else {
         cout << "Failed to add" << endl;
+            }
+    }
+
+    else{
+
+        ui->label_computer_error_2->setText(QString::fromStdString(currentError));
     }
 
 }
 
 void add_widget::on_pushButton_add_connection_clicked()
 {
+    bool AllOk = connectionErrorCheck();
+
+    if(AllOk) {
      vector<person> p = ComputerScientist.getPersons();
      vector<computer> c = ComputerScientist.getComputers();
 
@@ -141,11 +205,16 @@ void add_widget::on_pushButton_add_connection_clicked()
 
 
     bool check = ComputerScientist.addConnection(connectFirstName, connectLastName, connectCompName);
-    if(check) {
+        if(check) {
         cout << "Successfully added a new connection" << endl;
-    }
-        else {
+        clearContents(3);
+        }
+            else {
         cout << "Failed to add" << endl;
+            }
+    }
+    else {
+        ui->label_connection_error->setText(QString::fromStdString(currentError));
     }
 }
 
