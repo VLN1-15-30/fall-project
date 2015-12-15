@@ -29,6 +29,7 @@ void update_widget::setUpUi(){
 
 void update_widget::populateTablePioneers()
 {
+    loading = true;
     vector<person> p  = hpList.getPersons();
 
     ui->tableView_pioneers_2->clearContents();
@@ -39,18 +40,23 @@ void update_widget::populateTablePioneers()
     {
         person currentPioneer = p[row];
 
+        QString id = QString::number(hpList.getPersonID(currentPioneer.getLastName(),currentPioneer.getFirstName()));
         QString firstName = QString::fromStdString(currentPioneer.getFirstName());
         QString lastName = QString::fromStdString(currentPioneer.getLastName());
         QString sex = QString::fromStdString(currentPioneer.getSex());
         QString born = QString::number(currentPioneer.getBorn());
         QString died = QString::number(currentPioneer.getDied());
 
-        ui->tableView_pioneers_2->setItem(row, 0, new QTableWidgetItem(firstName));
-        ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(lastName));
-        ui->tableView_pioneers_2->setItem(row, 2, new QTableWidgetItem(sex));
-        ui->tableView_pioneers_2->setItem(row, 3, new QTableWidgetItem(born));
-        ui->tableView_pioneers_2->setItem(row, 4, new QTableWidgetItem(died));
+        ui->tableView_pioneers_2->setItem(row, 0, new QTableWidgetItem(id));
+        ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(firstName));
+        ui->tableView_pioneers_2->setItem(row, 2, new QTableWidgetItem(lastName));
+        ui->tableView_pioneers_2->setItem(row, 3, new QTableWidgetItem(sex));
+        ui->tableView_pioneers_2->setItem(row, 4, new QTableWidgetItem(born));
+        ui->tableView_pioneers_2->setItem(row, 5, new QTableWidgetItem(died));
+
+        ui->tableView_pioneers_2->hideColumn(0);
     }
+    loading = false;
 }
 
 void update_widget::populateTableComputers()
@@ -109,4 +115,25 @@ void update_widget::populateTableConnections()
 update_widget::~update_widget()
 {
     delete ui;
+}
+
+void update_widget::on_tableView_pioneers_2_cellChanged(int row, int column)
+{
+    if(loading) return;
+    int id = ui->tableView_pioneers_2->item(row,0)->text().toInt();
+    string value = ui->tableView_pioneers_2->item(row,column)->text().toStdString();
+    switch(column){
+    case 1: hpList.update(id, "firstname", value, "persons");
+        break;
+    case 2: hpList.update(id, "lastname", value, "persons");
+        break;
+    case 3: hpList.update(id, "sex", value, "persons");
+        break;
+    case 4: hpList.update(id, "born", value, "persons");
+        break;
+    case 5: hpList.update(id, "died", value, "persons");
+        break;
+    default:
+        break;
+    }
 }
