@@ -34,12 +34,11 @@ public:
     QTabWidget *tab_search;
     QWidget *pioneers;
     QGridLayout *gridLayout;
+    QComboBox *comboBox_OrderPerson;
     QTableWidget *table_pioneers;
     QHBoxLayout *horizontalLayout;
     QLineEdit *lineEdit_pioneers;
     QComboBox *comboBox_pioneers;
-    QComboBox *comboBox_OrderPerson;
-    QHBoxLayout *horizontalLayout_11;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *pushButton_remove_Pioneer;
     QLabel *label_removePioneer;
@@ -69,7 +68,7 @@ public:
     {
         if (search_widget->objectName().isEmpty())
             search_widget->setObjectName(QStringLiteral("search_widget"));
-        search_widget->resize(671, 325);
+        search_widget->resize(672, 325);
         verticalLayout = new QVBoxLayout(search_widget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         tab_search = new QTabWidget(search_widget);
@@ -81,6 +80,11 @@ public:
         pioneers->setObjectName(QStringLiteral("pioneers"));
         gridLayout = new QGridLayout(pioneers);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        comboBox_OrderPerson = new QComboBox(pioneers);
+        comboBox_OrderPerson->setObjectName(QStringLiteral("comboBox_OrderPerson"));
+
+        gridLayout->addWidget(comboBox_OrderPerson, 0, 0, 1, 1, Qt::AlignRight);
+
         table_pioneers = new QTableWidget(pioneers);
         if (table_pioneers->columnCount() < 5)
             table_pioneers->setColumnCount(5);
@@ -101,7 +105,7 @@ public:
         table_pioneers->horizontalHeader()->setStretchLastSection(true);
         table_pioneers->verticalHeader()->setStretchLastSection(false);
 
-        gridLayout->addWidget(table_pioneers, 3, 0, 1, 1);
+        gridLayout->addWidget(table_pioneers, 2, 0, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -117,17 +121,7 @@ public:
         horizontalLayout->addWidget(comboBox_pioneers);
 
 
-        gridLayout->addLayout(horizontalLayout, 4, 0, 1, 1);
-
-        comboBox_OrderPerson = new QComboBox(pioneers);
-        comboBox_OrderPerson->setObjectName(QStringLiteral("comboBox_OrderPerson"));
-
-        gridLayout->addWidget(comboBox_OrderPerson, 0, 0, 1, 1, Qt::AlignRight);
-
-        horizontalLayout_11 = new QHBoxLayout();
-        horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
-
-        gridLayout->addLayout(horizontalLayout_11, 1, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout, 3, 0, 1, 1);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
@@ -150,7 +144,7 @@ public:
         horizontalLayout_4->addWidget(pushButton_printDbPerson, 0, Qt::AlignRight);
 
 
-        gridLayout->addLayout(horizontalLayout_4, 6, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_4, 5, 0, 1, 1);
 
         tab_search->addTab(pioneers, QString());
         computers = new QWidget();
