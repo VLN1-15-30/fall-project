@@ -26,7 +26,9 @@ private slots:
 
     void on_tableView_computers_2_cellChanged(int row, int column);
 
-    //void on_tableView_connections_2_cellChanged(int row, int column);
+    void on_updateComputer_clicked();
+
+    void on_updateConnection_clicked();
 
 private:
     Ui::update_widget *ui;

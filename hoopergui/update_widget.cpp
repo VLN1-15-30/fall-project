@@ -17,7 +17,6 @@ update_widget::update_widget(QWidget *parent) :
 
 void update_widget::setUpUi(){
 
-    ui->replaceConnectionsInfo->setStyleSheet("QLineEdit { background: rgb(255, 255, 255); color: black; }");
     ui->updateTabs->setStyleSheet("QTabWidget::pane { border: 0; }QTabBar::tab { background-color: #34466E; color: #ACADB1 }");
     ui->tableView_pioneers_2->setStyleSheet("QTableView{border : 1px solid white}");
     ui->tableView_computers_2->setStyleSheet("QTableView{border : 1px solid white}");
@@ -168,26 +167,45 @@ void update_widget::on_tableView_computers_2_cellChanged(int row, int column)
     }
 }
 
-/*void update_widget::on_tableView_connections_2_cellChanged(int row, int column)
+void update_widget::on_updateComputer_clicked()
 {
-    if(loading) return;
-
-    int pid = ui->tableView_connections_2->item(row,0)->text().toInt();
-    int cid = ui->tableView_connections_2->item(row,1)->text().toInt();
-    string value = ui->tableView_connections_2->item(row,column)->text().toStdString();
-
-    switch(column){
-    case 2: newID = hpList.getComputerID(value);
-        hpList.updateConnection(pid, cid, "pID", newID);
-        break;
-    case 3: newID = hpList.getPersonID()
-        hpList.update(id, "type", value, "computers");
-        break;
-    case 3: hpList.update(id, "yearMade", value, "computers");
-        break;
-    case 4: hpList.update(id, "wasMade", value, "computers");
-        break;
-    default:
-        break;
+    string compName = ui->computerName->text().toStdString();
+    int rowNum;
+    for(int s=0; s < ui->tableView_connections_2->rowCount(); s++)
+    {
+       if(ui->tableView_connections_2->item(s,0)->isSelected())
+          {
+             rowNum = s;
+          }
     }
-}*/
+    int pid = ui->tableView_connections_2->item(rowNum, 0)->text().toInt();
+    int cid = ui->tableView_connections_2->item(rowNum, 1)->text().toInt();
+    int newID = hpList.getComputerID(compName);
+
+    hpList.updateConnection(pid, cid, "cID", newID);
+
+    populateTableConnections();
+}
+
+
+
+void update_widget::on_updateConnection_clicked()
+{
+    string firstName = ui->firstName->text().toStdString();
+    string lastName = ui->lastName->text().toStdString();
+    int rowNum;
+    for(int s=0; s < ui->tableView_connections_2->rowCount(); s++)
+    {
+       if(ui->tableView_connections_2->item(s,0)->isSelected())
+          {
+             rowNum = s;
+          }
+    }
+    int pid = ui->tableView_connections_2->item(rowNum, 0)->text().toInt();
+    int cid = ui->tableView_connections_2->item(rowNum, 1)->text().toInt();
+    int newID = hpList.getPersonID(lastName, firstName);
+
+    hpList.updateConnection(pid, cid, "pID", newID);
+
+    populateTableConnections();
+}
