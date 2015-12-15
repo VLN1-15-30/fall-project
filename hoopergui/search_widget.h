@@ -25,6 +25,7 @@ public:
 
     void searchPeople(string search);
     void searchComputer(string search);
+    void searchConnection(string search);
 private slots:
     void on_tab_search_tabBarClicked(int index);
 
@@ -54,13 +55,19 @@ private slots:
 
     void on_pushButton_remove_connection_clicked();
 
+    void on_comboBox_OrderConnection_currentIndexChanged(int index);
+
+    void on_comboBox_connections_currentIndexChanged(int index);
+
 private:
     Ui::search_widget *ui;
     List hpList;
     vector<person>dbPersons;
     vector<computer> dbComputers;
+    vector<connection> dbConnection;
     string searchColumn;
     string searchComputerColumn;
+    string searchConnectionColumn;
 };
 
 #endif // SEARCH_WIDGET_H

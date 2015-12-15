@@ -133,6 +133,10 @@ vector<computer> List::getSearchComputer(string column, string target){
     return computerR.searchComputer(column, target);
 }
 
+vector<connection> List::getSearchConnection(string column, string target)
+{
+    return connectionR.searchConnection(column, target);
+}
 
 int List:: countDatabase(int type){
 

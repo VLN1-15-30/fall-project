@@ -55,12 +55,13 @@ public:
     QWidget *connections;
     QGridLayout *gridLayout_2;
     QTableWidget *table_connections;
-    QHBoxLayout *horizontalLayout_3;
-    QLineEdit *lineEdit_connections;
-    QComboBox *comboBox_connections;
     QHBoxLayout *horizontalLayout_6;
     QPushButton *pushButton_remove_connection;
     QLabel *label_remove_conneciton;
+    QHBoxLayout *horizontalLayout_3;
+    QLineEdit *lineEdit_connections;
+    QComboBox *comboBox_connections;
+    QComboBox *comboBox_OrderConnection;
 
     void setupUi(QWidget *search_widget)
     {
@@ -203,36 +204,24 @@ public:
         gridLayout_2 = new QGridLayout(connections);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         table_connections = new QTableWidget(connections);
-        if (table_connections->columnCount() < 3)
-            table_connections->setColumnCount(3);
+        if (table_connections->columnCount() < 4)
+            table_connections->setColumnCount(4);
         QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
         table_connections->setHorizontalHeaderItem(0, __qtablewidgetitem9);
         QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
         table_connections->setHorizontalHeaderItem(1, __qtablewidgetitem10);
         QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
         table_connections->setHorizontalHeaderItem(2, __qtablewidgetitem11);
+        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
+        table_connections->setHorizontalHeaderItem(3, __qtablewidgetitem12);
         table_connections->setObjectName(QStringLiteral("table_connections"));
+
+        table_connections->setEditTriggers(QAbstractItemView::AnyKeyPressed|QAbstractItemView::EditKeyPressed);
         table_connections->setSelectionBehavior(QAbstractItemView::SelectRows);
         table_connections->horizontalHeader()->setStretchLastSection(true);
-        table_connections->verticalHeader()->setStretchLastSection(true);
+        table_connections->verticalHeader()->setStretchLastSection(false);
 
-        gridLayout_2->addWidget(table_connections, 0, 0, 1, 1);
-
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        lineEdit_connections = new QLineEdit(connections);
-        lineEdit_connections->setObjectName(QStringLiteral("lineEdit_connections"));
-        lineEdit_connections->setFrame(false);
-
-        horizontalLayout_3->addWidget(lineEdit_connections);
-
-        comboBox_connections = new QComboBox(connections);
-        comboBox_connections->setObjectName(QStringLiteral("comboBox_connections"));
-
-        horizontalLayout_3->addWidget(comboBox_connections);
-
-
-        gridLayout_2->addLayout(horizontalLayout_3, 3, 0, 1, 1);
+        gridLayout_2->addWidget(table_connections, 1, 0, 1, 1);
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
@@ -248,7 +237,28 @@ public:
         horizontalLayout_6->addWidget(label_remove_conneciton);
 
 
-        gridLayout_2->addLayout(horizontalLayout_6, 4, 0, 1, 1);
+        gridLayout_2->addLayout(horizontalLayout_6, 5, 0, 1, 1);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        lineEdit_connections = new QLineEdit(connections);
+        lineEdit_connections->setObjectName(QStringLiteral("lineEdit_connections"));
+        lineEdit_connections->setFrame(false);
+
+        horizontalLayout_3->addWidget(lineEdit_connections);
+
+        comboBox_connections = new QComboBox(connections);
+        comboBox_connections->setObjectName(QStringLiteral("comboBox_connections"));
+
+        horizontalLayout_3->addWidget(comboBox_connections);
+
+
+        gridLayout_2->addLayout(horizontalLayout_3, 4, 0, 1, 1);
+
+        comboBox_OrderConnection = new QComboBox(connections);
+        comboBox_OrderConnection->setObjectName(QStringLiteral("comboBox_OrderConnection"));
+
+        gridLayout_2->addWidget(comboBox_OrderConnection, 0, 0, 1, 1, Qt::AlignRight);
 
         tab_search->addTab(connections, QString());
 
@@ -302,9 +312,11 @@ public:
         ___qtablewidgetitem10->setText(QApplication::translate("search_widget", "Last name", 0));
         QTableWidgetItem *___qtablewidgetitem11 = table_connections->horizontalHeaderItem(2);
         ___qtablewidgetitem11->setText(QApplication::translate("search_widget", "Computer", 0));
-        lineEdit_connections->setPlaceholderText(QApplication::translate("search_widget", "Search connections...", 0));
+        QTableWidgetItem *___qtablewidgetitem12 = table_connections->horizontalHeaderItem(3);
+        ___qtablewidgetitem12->setText(QApplication::translate("search_widget", "Year Invented", 0));
         pushButton_remove_connection->setText(QApplication::translate("search_widget", "PushButton", 0));
         label_remove_conneciton->setText(QApplication::translate("search_widget", "Select a row to remove a connection from the database", 0));
+        lineEdit_connections->setPlaceholderText(QApplication::translate("search_widget", "Search connections...", 0));
         tab_search->setTabText(tab_search->indexOf(connections), QApplication::translate("search_widget", "Connections", 0));
     } // retranslateUi
 
