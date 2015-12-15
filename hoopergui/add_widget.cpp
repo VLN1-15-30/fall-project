@@ -8,8 +8,8 @@ add_widget::add_widget(QWidget *parent) :
     ui(new Ui::add_widget)
 {
     ui->setupUi(this);
-    //ui->tab_add->setStyleSheet("QTabWidget::pane { border: 0; }QTabBar::tab { background-color: #34466E; color: #ACADB1 }");
-    //ui->tab_add->setCurrentIndex(0);
+    ui->tab_add->setStyleSheet("QTabWidget::pane { border: 0; }QTabBar::tab { background-color: #34466E; color: #ACADB1 }");
+    ui->tab_add->setCurrentIndex(0);
     ui->label_pioneer_error->setStyleSheet("QLabel { color: red;}");
     ui->label_computer_error_2->setStyleSheet("QLabel {color: red;}");
     ui->label_connection_error->setStyleSheet("QLabel {color: red;}");
@@ -35,9 +35,10 @@ bool add_widget::pioneerErrorCheck()
         return false;
     }
 
-    if(ui->input_yearOfDeath->text().isEmpty()) {
-        currentError = "Missing year of death (0 if still alive)";
-
+    if((ui->input_gender->text().toStdString() == "m") || (ui->input_gender->text().toStdString() == "f")) {
+    }
+    else{
+        currentError = "Please type only m/f";
         return false;
     }
 
@@ -46,6 +47,20 @@ bool add_widget::pioneerErrorCheck()
 
         return false;
     }
+
+
+    if(ui->input_yearOfDeath->text().isEmpty()) {
+        currentError = "Missing year of death (0 if still alive)";
+
+        return false;
+    }
+
+    if(ui->input_yearOfDeath->text().toInt() < ui->input__yearOfBirth->text().toInt()) {
+        currentError = "Year of death is smaller than year of birth";
+
+        return false;
+    }
+
 
     return true;
 
@@ -66,20 +81,33 @@ bool add_widget::computerErrorCheck()
       return false;
   }
   if(ui->input_ifMade->text().isEmpty()) {
-      currentError = "missing if made(0 if made, else 1";
+      currentError = "Missing if made(0 if made, else 1)";
       return false;
   }
+
+  if((ui->input_ifMade->text().toStdString() == "0") || (ui->input_ifMade->text().toStdString() == "1")) {
+  }
+  else{
+      currentError = "Please type 0 if made, else 1";
+      return false;
+  }
+  if(isdigit(ui->input_yearBuilt->text().toInt()) &&ui->input_yearBuilt->text().length() <= 4 ){
+      currentError = "Please type only a valid year";
+      return false;
+  }
+
+
 
   return true;
 }
 
 bool add_widget::connectionErrorCheck() {
     if(ui->input_connect_firstname->text().isEmpty()) {
-        currentError = "Missing firstname";
+        currentError = "Missing first name";
         return false;
     }
     if(ui->input_connect_lastname->text().isEmpty()) {
-        currentError = "Missing lastname";
+        currentError = "Missing last name";
         return false;
     }
     if(ui->Input_connect_computer_name->text().isEmpty()) {
@@ -92,6 +120,7 @@ bool add_widget::connectionErrorCheck() {
 void add_widget::clearContents(int index)
 {
     if(index == 1){
+        ui->label_pioneer_error->setText("");
         ui->input_firstname->setText("");
         ui->input_lastname->setText("");
         ui->input_gender->setText("");
@@ -100,12 +129,14 @@ void add_widget::clearContents(int index)
 
     }
     if(index == 2){
+        ui->label_computer_error_2->setText("");
         ui->input_computer_name->setText("");
         ui->input_type->setText("");
         ui->input_yearBuilt->setText("");
         ui->input_ifMade->setText("");
     }
     if(index == 3) {
+        ui->label_connection_error->setText("");
         ui->input_connect_firstname->setText("");
         ui->input_connect_lastname->setText("");
         ui->Input_connect_computer_name->setText("");
