@@ -54,7 +54,7 @@ public:
         label_logo->setMaximumSize(QSize(100, 100));
         label_logo->setLayoutDirection(Qt::LeftToRight);
         label_logo->setPixmap(QPixmap(QString::fromUtf8(":/hooper/prefix1/hooper.png")));
-        label_logo->setScaledContents(false);
+        label_logo->setScaledContents(true);
         label_logo->setAlignment(Qt::AlignCenter);
         label_logo->setWordWrap(false);
 

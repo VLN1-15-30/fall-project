@@ -60,7 +60,7 @@
       <pixmap resource="hooper_resource.qrc">:/hooper/prefix1/hooper.png</pixmap>
      </property>
      <property name="scaledContents">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
