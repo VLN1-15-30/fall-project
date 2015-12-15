@@ -27,10 +27,10 @@ class Ui_add_widget
 {
 public:
     QVBoxLayout *verticalLayout;
-    QTabWidget *tabWidget;
+    QTabWidget *tab_add;
     QWidget *tab;
     QVBoxLayout *verticalLayout_3;
-    QLabel *label_2;
+    QLabel *label_3;
     QLineEdit *input_firstname;
     QLineEdit *input_lastname;
     QLineEdit *input_gender;
@@ -39,7 +39,7 @@ public:
     QPushButton *pushButton_add_pioneer;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_2;
-    QLabel *label;
+    QLabel *label_2;
     QLineEdit *input_computer_name;
     QLineEdit *input_type;
     QLineEdit *input_yearBuilt;
@@ -47,7 +47,7 @@ public:
     QPushButton *pushButton_add_computer;
     QWidget *tab_3;
     QVBoxLayout *verticalLayout_4;
-    QLabel *label_3;
+    QLabel *label;
     QLineEdit *input_connect_lastname;
     QLineEdit *input_connect_firstname;
     QLineEdit *Input_connect_computer_name;
@@ -60,16 +60,25 @@ public:
         add_widget->resize(438, 362);
         verticalLayout = new QVBoxLayout(add_widget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        tabWidget = new QTabWidget(add_widget);
-        tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tab_add = new QTabWidget(add_widget);
+        tab_add->setObjectName(QStringLiteral("tab_add"));
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         verticalLayout_3 = new QVBoxLayout(tab);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        label_2 = new QLabel(tab);
-        label_2->setObjectName(QStringLiteral("label_2"));
+        label_3 = new QLabel(tab);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy);
+        label_3->setMinimumSize(QSize(100, 100));
+        label_3->setMaximumSize(QSize(100, 100));
+        label_3->setPixmap(QPixmap(QString::fromUtf8(":/hooper/prefix2/peopleIcon.png")));
+        label_3->setScaledContents(true);
 
-        verticalLayout_3->addWidget(label_2);
+        verticalLayout_3->addWidget(label_3, 0, Qt::AlignHCenter);
 
         input_firstname = new QLineEdit(tab);
         input_firstname->setObjectName(QStringLiteral("input_firstname"));
@@ -101,15 +110,19 @@ public:
 
         verticalLayout_3->addWidget(pushButton_add_pioneer);
 
-        tabWidget->addTab(tab, QString());
+        tab_add->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
         verticalLayout_2 = new QVBoxLayout(tab_2);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        label = new QLabel(tab_2);
-        label->setObjectName(QStringLiteral("label"));
+        label_2 = new QLabel(tab_2);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setMinimumSize(QSize(100, 100));
+        label_2->setMaximumSize(QSize(100, 100));
+        label_2->setPixmap(QPixmap(QString::fromUtf8(":/hooper/prefix2/computer-xxl.png")));
+        label_2->setScaledContents(true);
 
-        verticalLayout_2->addWidget(label);
+        verticalLayout_2->addWidget(label_2, 0, Qt::AlignHCenter);
 
         input_computer_name = new QLineEdit(tab_2);
         input_computer_name->setObjectName(QStringLiteral("input_computer_name"));
@@ -136,15 +149,19 @@ public:
 
         verticalLayout_2->addWidget(pushButton_add_computer);
 
-        tabWidget->addTab(tab_2, QString());
+        tab_add->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QStringLiteral("tab_3"));
         verticalLayout_4 = new QVBoxLayout(tab_3);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
-        label_3 = new QLabel(tab_3);
-        label_3->setObjectName(QStringLiteral("label_3"));
+        label = new QLabel(tab_3);
+        label->setObjectName(QStringLiteral("label"));
+        label->setMinimumSize(QSize(100, 100));
+        label->setMaximumSize(QSize(100, 100));
+        label->setPixmap(QPixmap(QString::fromUtf8(":/hooper/prefix2/connected-256.png")));
+        label->setScaledContents(true);
 
-        verticalLayout_4->addWidget(label_3);
+        verticalLayout_4->addWidget(label, 0, Qt::AlignHCenter);
 
         input_connect_lastname = new QLineEdit(tab_3);
         input_connect_lastname->setObjectName(QStringLiteral("input_connect_lastname"));
@@ -166,14 +183,14 @@ public:
 
         verticalLayout_4->addWidget(pushButton_add_connection);
 
-        tabWidget->addTab(tab_3, QString());
+        tab_add->addTab(tab_3, QString());
 
-        verticalLayout->addWidget(tabWidget);
+        verticalLayout->addWidget(tab_add);
 
 
         retranslateUi(add_widget);
 
-        tabWidget->setCurrentIndex(0);
+        tab_add->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(add_widget);
@@ -182,27 +199,27 @@ public:
     void retranslateUi(QWidget *add_widget)
     {
         add_widget->setWindowTitle(QApplication::translate("add_widget", "Form", 0));
-        label_2->setText(QApplication::translate("add_widget", "                              Add a Pioneer", 0));
+        label_3->setText(QString());
         input_firstname->setPlaceholderText(QApplication::translate("add_widget", "Firstname", 0));
         input_lastname->setPlaceholderText(QApplication::translate("add_widget", "Lastname", 0));
         input_gender->setPlaceholderText(QApplication::translate("add_widget", "Gender", 0));
         input__yearOfBirth->setPlaceholderText(QApplication::translate("add_widget", "Year of birth", 0));
         input_yearOfDeath->setPlaceholderText(QApplication::translate("add_widget", "Year of death", 0));
         pushButton_add_pioneer->setText(QApplication::translate("add_widget", "Submit", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("add_widget", "Tab 1", 0));
-        label->setText(QApplication::translate("add_widget", "Add a Computer", 0));
+        tab_add->setTabText(tab_add->indexOf(tab), QApplication::translate("add_widget", "Pioneer", 0));
+        label_2->setText(QString());
         input_computer_name->setPlaceholderText(QApplication::translate("add_widget", "Name", 0));
         input_type->setPlaceholderText(QApplication::translate("add_widget", "type", 0));
         input_yearBuilt->setPlaceholderText(QApplication::translate("add_widget", "Built(0 if not built", 0));
         input_ifMade->setPlaceholderText(QApplication::translate("add_widget", "made(0 if made, else 1)", 0));
         pushButton_add_computer->setText(QApplication::translate("add_widget", "Submit", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("add_widget", "Tab 2", 0));
-        label_3->setText(QApplication::translate("add_widget", "Add a Connection", 0));
+        tab_add->setTabText(tab_add->indexOf(tab_2), QApplication::translate("add_widget", "Computer", 0));
+        label->setText(QString());
         input_connect_lastname->setPlaceholderText(QApplication::translate("add_widget", "Lastname", 0));
         input_connect_firstname->setPlaceholderText(QApplication::translate("add_widget", "Firstname", 0));
         Input_connect_computer_name->setPlaceholderText(QApplication::translate("add_widget", "Name of computer", 0));
         pushButton_add_connection->setText(QApplication::translate("add_widget", "Submit", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("add_widget", "Page", 0));
+        tab_add->setTabText(tab_add->indexOf(tab_3), QApplication::translate("add_widget", "Connection", 0));
     } // retranslateUi
 
 };

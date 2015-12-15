@@ -127,8 +127,8 @@ public:
         verticalLayout_3 = new QVBoxLayout(computers);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         tableView_computers_2 = new QTableWidget(computers);
-        if (tableView_computers_2->columnCount() < 4)
-            tableView_computers_2->setColumnCount(4);
+        if (tableView_computers_2->columnCount() < 5)
+            tableView_computers_2->setColumnCount(5);
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
         tableView_computers_2->setHorizontalHeaderItem(0, __qtablewidgetitem6);
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
@@ -137,6 +137,8 @@ public:
         tableView_computers_2->setHorizontalHeaderItem(2, __qtablewidgetitem8);
         QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
         tableView_computers_2->setHorizontalHeaderItem(3, __qtablewidgetitem9);
+        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
+        tableView_computers_2->setHorizontalHeaderItem(4, __qtablewidgetitem10);
         tableView_computers_2->setObjectName(QStringLiteral("tableView_computers_2"));
         tableView_computers_2->setSortingEnabled(true);
         tableView_computers_2->horizontalHeader()->setStretchLastSection(true);
@@ -172,12 +174,12 @@ public:
         tableView_connections_2 = new QTableWidget(connections);
         if (tableView_connections_2->columnCount() < 3)
             tableView_connections_2->setColumnCount(3);
-        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
-        tableView_connections_2->setHorizontalHeaderItem(0, __qtablewidgetitem10);
         QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
-        tableView_connections_2->setHorizontalHeaderItem(1, __qtablewidgetitem11);
+        tableView_connections_2->setHorizontalHeaderItem(0, __qtablewidgetitem11);
         QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
-        tableView_connections_2->setHorizontalHeaderItem(2, __qtablewidgetitem12);
+        tableView_connections_2->setHorizontalHeaderItem(1, __qtablewidgetitem12);
+        QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
+        tableView_connections_2->setHorizontalHeaderItem(2, __qtablewidgetitem13);
         tableView_connections_2->setObjectName(QStringLiteral("tableView_connections_2"));
         tableView_connections_2->setSortingEnabled(true);
         tableView_connections_2->horizontalHeader()->setStretchLastSection(true);
@@ -213,7 +215,7 @@ public:
 
         retranslateUi(update_widget);
 
-        updateTabs->setCurrentIndex(0);
+        updateTabs->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(update_widget);
@@ -248,13 +250,15 @@ public:
         ___qtablewidgetitem5->setText(QApplication::translate("update_widget", "Year died", 0));
         updateTabs->setTabText(updateTabs->indexOf(pioneer), QApplication::translate("update_widget", "Pioneers", 0));
         QTableWidgetItem *___qtablewidgetitem6 = tableView_computers_2->horizontalHeaderItem(0);
-        ___qtablewidgetitem6->setText(QApplication::translate("update_widget", "Computer name", 0));
+        ___qtablewidgetitem6->setText(QApplication::translate("update_widget", "ID", 0));
         QTableWidgetItem *___qtablewidgetitem7 = tableView_computers_2->horizontalHeaderItem(1);
-        ___qtablewidgetitem7->setText(QApplication::translate("update_widget", "Computer type", 0));
+        ___qtablewidgetitem7->setText(QApplication::translate("update_widget", "Computer name", 0));
         QTableWidgetItem *___qtablewidgetitem8 = tableView_computers_2->horizontalHeaderItem(2);
-        ___qtablewidgetitem8->setText(QApplication::translate("update_widget", "Year invented", 0));
+        ___qtablewidgetitem8->setText(QApplication::translate("update_widget", "Computer type", 0));
         QTableWidgetItem *___qtablewidgetitem9 = tableView_computers_2->horizontalHeaderItem(3);
-        ___qtablewidgetitem9->setText(QApplication::translate("update_widget", "Was it built?", 0));
+        ___qtablewidgetitem9->setText(QApplication::translate("update_widget", "Year invented", 0));
+        QTableWidgetItem *___qtablewidgetitem10 = tableView_computers_2->horizontalHeaderItem(4);
+        ___qtablewidgetitem10->setText(QApplication::translate("update_widget", "Was it built?", 0));
         updateOptionsComputers->clear();
         updateOptionsComputers->insertItems(0, QStringList()
          << QApplication::translate("update_widget", "Choose what to update", 0)
@@ -267,12 +271,12 @@ public:
         updateComputer->setText(QApplication::translate("update_widget", "Update", 0));
         updateAnotherComputer->setText(QApplication::translate("update_widget", "Continu updating", 0));
         updateTabs->setTabText(updateTabs->indexOf(computers), QApplication::translate("update_widget", "Computers", 0));
-        QTableWidgetItem *___qtablewidgetitem10 = tableView_connections_2->horizontalHeaderItem(0);
-        ___qtablewidgetitem10->setText(QApplication::translate("update_widget", "Computer name", 0));
-        QTableWidgetItem *___qtablewidgetitem11 = tableView_connections_2->horizontalHeaderItem(1);
-        ___qtablewidgetitem11->setText(QApplication::translate("update_widget", "Last name", 0));
-        QTableWidgetItem *___qtablewidgetitem12 = tableView_connections_2->horizontalHeaderItem(2);
-        ___qtablewidgetitem12->setText(QApplication::translate("update_widget", "Year invented", 0));
+        QTableWidgetItem *___qtablewidgetitem11 = tableView_connections_2->horizontalHeaderItem(0);
+        ___qtablewidgetitem11->setText(QApplication::translate("update_widget", "Computer name", 0));
+        QTableWidgetItem *___qtablewidgetitem12 = tableView_connections_2->horizontalHeaderItem(1);
+        ___qtablewidgetitem12->setText(QApplication::translate("update_widget", "Last name", 0));
+        QTableWidgetItem *___qtablewidgetitem13 = tableView_connections_2->horizontalHeaderItem(2);
+        ___qtablewidgetitem13->setText(QApplication::translate("update_widget", "Year invented", 0));
         updateOptionsConnections->clear();
         updateOptionsConnections->insertItems(0, QStringList()
          << QApplication::translate("update_widget", "Choose what to update", 0)
