@@ -19,7 +19,7 @@ class search_widget : public QWidget
 public:
     explicit search_widget(QWidget *parent = 0);
     void setUpUi();
-    void populateTableAtIndex(int index);
+    void populateTableAtIndex(int index, int order, int col);
     ~search_widget();
 
 private slots:
@@ -38,6 +38,8 @@ private slots:
     void on_lineEdit_computers_textChanged(const QString &arg1);
 
     void on_lineEdit_connections_textChanged(const QString &arg1);
+
+    void on_comboBox_Order_currentIndexChanged(int index);
 
 private:
     Ui::search_widget *ui;
