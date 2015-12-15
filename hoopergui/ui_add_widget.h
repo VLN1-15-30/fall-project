@@ -27,7 +27,7 @@ class Ui_add_widget
 {
 public:
     QVBoxLayout *verticalLayout;
-    QTabWidget *tab_add;
+    QTabWidget *label_computer_error;
     QWidget *tab;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_3;
@@ -37,6 +37,7 @@ public:
     QLineEdit *input__yearOfBirth;
     QLineEdit *input_yearOfDeath;
     QPushButton *pushButton_add_pioneer;
+    QLabel *label_pioneer_error;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_2;
@@ -45,6 +46,7 @@ public:
     QLineEdit *input_yearBuilt;
     QLineEdit *input_ifMade;
     QPushButton *pushButton_add_computer;
+    QLabel *label_computer_error_2;
     QWidget *tab_3;
     QVBoxLayout *verticalLayout_4;
     QLabel *label;
@@ -52,16 +54,17 @@ public:
     QLineEdit *input_connect_firstname;
     QLineEdit *Input_connect_computer_name;
     QPushButton *pushButton_add_connection;
+    QLabel *label_connection_error;
 
     void setupUi(QWidget *add_widget)
     {
         if (add_widget->objectName().isEmpty())
             add_widget->setObjectName(QStringLiteral("add_widget"));
-        add_widget->resize(438, 362);
+        add_widget->resize(438, 383);
         verticalLayout = new QVBoxLayout(add_widget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        tab_add = new QTabWidget(add_widget);
-        tab_add->setObjectName(QStringLiteral("tab_add"));
+        label_computer_error = new QTabWidget(add_widget);
+        label_computer_error->setObjectName(QStringLiteral("label_computer_error"));
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         verticalLayout_3 = new QVBoxLayout(tab);
@@ -110,7 +113,12 @@ public:
 
         verticalLayout_3->addWidget(pushButton_add_pioneer);
 
-        tab_add->addTab(tab, QString());
+        label_pioneer_error = new QLabel(tab);
+        label_pioneer_error->setObjectName(QStringLiteral("label_pioneer_error"));
+
+        verticalLayout_3->addWidget(label_pioneer_error);
+
+        label_computer_error->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
         verticalLayout_2 = new QVBoxLayout(tab_2);
@@ -149,7 +157,13 @@ public:
 
         verticalLayout_2->addWidget(pushButton_add_computer);
 
-        tab_add->addTab(tab_2, QString());
+        label_computer_error_2 = new QLabel(tab_2);
+        label_computer_error_2->setObjectName(QStringLiteral("label_computer_error_2"));
+        label_computer_error_2->setMinimumSize(QSize(55, 23));
+
+        verticalLayout_2->addWidget(label_computer_error_2, 0, Qt::AlignHCenter);
+
+        label_computer_error->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QStringLiteral("tab_3"));
         verticalLayout_4 = new QVBoxLayout(tab_3);
@@ -183,14 +197,19 @@ public:
 
         verticalLayout_4->addWidget(pushButton_add_connection);
 
-        tab_add->addTab(tab_3, QString());
+        label_connection_error = new QLabel(tab_3);
+        label_connection_error->setObjectName(QStringLiteral("label_connection_error"));
 
-        verticalLayout->addWidget(tab_add);
+        verticalLayout_4->addWidget(label_connection_error, 0, Qt::AlignHCenter);
+
+        label_computer_error->addTab(tab_3, QString());
+
+        verticalLayout->addWidget(label_computer_error);
 
 
         retranslateUi(add_widget);
 
-        tab_add->setCurrentIndex(2);
+        label_computer_error->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(add_widget);
@@ -205,21 +224,24 @@ public:
         input_gender->setPlaceholderText(QApplication::translate("add_widget", "Gender", 0));
         input__yearOfBirth->setPlaceholderText(QApplication::translate("add_widget", "Year of birth", 0));
         input_yearOfDeath->setPlaceholderText(QApplication::translate("add_widget", "Year of death", 0));
-        pushButton_add_pioneer->setText(QApplication::translate("add_widget", "Submit", 0));
-        tab_add->setTabText(tab_add->indexOf(tab), QApplication::translate("add_widget", "Pioneer", 0));
+        pushButton_add_pioneer->setText(QApplication::translate("add_widget", "Add", 0));
+        label_pioneer_error->setText(QString());
+        label_computer_error->setTabText(label_computer_error->indexOf(tab), QApplication::translate("add_widget", "Pioneer", 0));
         label_2->setText(QString());
         input_computer_name->setPlaceholderText(QApplication::translate("add_widget", "Name", 0));
         input_type->setPlaceholderText(QApplication::translate("add_widget", "type", 0));
         input_yearBuilt->setPlaceholderText(QApplication::translate("add_widget", "Built(0 if not built", 0));
         input_ifMade->setPlaceholderText(QApplication::translate("add_widget", "made(0 if made, else 1)", 0));
-        pushButton_add_computer->setText(QApplication::translate("add_widget", "Submit", 0));
-        tab_add->setTabText(tab_add->indexOf(tab_2), QApplication::translate("add_widget", "Computer", 0));
+        pushButton_add_computer->setText(QApplication::translate("add_widget", "Add", 0));
+        label_computer_error_2->setText(QString());
+        label_computer_error->setTabText(label_computer_error->indexOf(tab_2), QApplication::translate("add_widget", "Computer", 0));
         label->setText(QString());
         input_connect_lastname->setPlaceholderText(QApplication::translate("add_widget", "Lastname", 0));
         input_connect_firstname->setPlaceholderText(QApplication::translate("add_widget", "Firstname", 0));
         Input_connect_computer_name->setPlaceholderText(QApplication::translate("add_widget", "Name of computer", 0));
-        pushButton_add_connection->setText(QApplication::translate("add_widget", "Submit", 0));
-        tab_add->setTabText(tab_add->indexOf(tab_3), QApplication::translate("add_widget", "Connection", 0));
+        pushButton_add_connection->setText(QApplication::translate("add_widget", "Add", 0));
+        label_connection_error->setText(QString());
+        label_computer_error->setTabText(label_computer_error->indexOf(tab_3), QApplication::translate("add_widget", "Connection", 0));
     } // retranslateUi
 
 };
