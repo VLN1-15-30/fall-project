@@ -49,13 +49,26 @@ bool add_widget::pioneerErrorCheck()
     }
 
 
+
+    if(ui->input__yearOfBirth->text().toInt() == 0 && ui->input__yearOfBirth->text() != "0"){
+        currentError ="You must type a valid number for year born";
+
+        return false;
+    }
+
+
     if(ui->input_yearOfDeath->text().isEmpty()) {
         currentError = "Missing year of death (0 if still alive)";
 
         return false;
     }
+    if(ui->input_yearOfDeath->text().toInt() == 0 && ui->input_yearOfDeath->text() != "0"){
+        currentError = "You must type a valid number for year died";
 
-    if(ui->input_yearOfDeath->text().toInt() < ui->input__yearOfBirth->text().toInt()) {
+        return false;
+    }
+
+    if(ui->input_yearOfDeath->text().toInt() < ui->input__yearOfBirth->text().toInt() && !(ui->input_yearOfDeath->text().toInt() == 0)) {
         currentError = "Year of death is smaller than year of birth";
 
         return false;

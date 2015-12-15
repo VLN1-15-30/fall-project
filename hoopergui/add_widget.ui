@@ -132,7 +132,7 @@
           </size>
          </property>
          <property name="placeholderText">
-          <string>Year of death</string>
+          <string>Year of death (0 if alive)</string>
          </property>
         </widget>
        </item>

@@ -29,6 +29,10 @@ void update_widget::setUpUi(){
     ui->label_connection_p_first->setStyleSheet("QLabel{color :white}");
     ui->label_connection_p_last->setStyleSheet("QLabel{color :white}");
 
+    ui->error_computer->setStyleSheet("QLabel{color :red}");
+    ui->error_connection->setStyleSheet("QLabel{color :red}");
+    ui->error_pioneer->setStyleSheet("QLabel{color :red}");
+
     ui->updateTabs->setCurrentIndex(0);
 }
 
@@ -66,6 +70,8 @@ void update_widget::populateTablePioneers()
 
 void update_widget::populateTableComputers()
 {
+    loading = true;
+
     vector<computer> c  = hpList.getComputers();
 
     ui->tableView_computers_2->clearContents();
@@ -97,6 +103,8 @@ void update_widget::populateTableComputers()
 
         ui->tableView_computers_2->hideColumn(0);
     }
+    loading = false;
+
 }
 
 void update_widget::populateTableConnections()
@@ -138,8 +146,59 @@ update_widget::~update_widget()
 void update_widget::on_tableView_pioneers_2_cellChanged(int row, int column)
 {
     if(loading) return;
+
     int id = ui->tableView_pioneers_2->item(row,0)->text().toInt();
     string value = ui->tableView_pioneers_2->item(row,column)->text().toStdString();
+
+    if(value.length() == 0){
+        ui->error_pioneer->setText("You must type something");
+        populateTablePioneers();
+        return;
+    }
+
+    if(column == 3){
+        if(value == "m"||value == "f"){
+            //donothing
+        }
+        else
+        {
+            ui->error_pioneer->setText("Please type m/f");
+            populateTablePioneers();
+
+            return;
+        }
+
+    }
+
+    else if (column == 4){
+        int born = ui->tableView_pioneers_2->item(row,column)->text().toInt();
+        int invalidInput = 0;
+
+        if(born == invalidInput && value != "0"){
+            ui->error_pioneer->setText("You must type a valid number for year born");
+            populateTablePioneers();
+
+            return;
+        }
+    }
+    else if (column == 5){
+
+        int died = ui->tableView_pioneers_2->item(row,column)->text().toInt();
+        int born = ui->tableView_pioneers_2->item(row,column-1)->text().toInt();
+        int invalidInput = 0;
+
+        if(died < born){
+            ui->error_pioneer->setText("Year died can not be less than year of birth");
+            populateTablePioneers();
+        }
+        else if(died == invalidInput && value != "0"){
+            ui->error_pioneer->setText("You must type a valid number for year died");
+            populateTablePioneers();
+
+            return;
+        }
+
+    }
     switch(column){
     case 1: hpList.update(id, "firstname", value, "persons");
         break;
@@ -154,13 +213,45 @@ void update_widget::on_tableView_pioneers_2_cellChanged(int row, int column)
     default:
         break;
     }
+    ui->error_pioneer->setText("");
+
 }
 
 void update_widget::on_tableView_computers_2_cellChanged(int row, int column)
 {
     if(loading) return;
+
+
     int id = ui->tableView_computers_2->item(row,0)->text().toInt();
     string value = ui->tableView_computers_2->item(row,column)->text().toStdString();
+
+    if(value.length() == 0){
+        ui->error_computer->setText("You must type something");
+        populateTableComputers();
+        return;
+    }
+
+    if (column == 3){
+        int year = ui->tableView_computers_2->item(row,column)->text().toInt();
+        int invalidInput = 0;
+        if(year == invalidInput){
+            ui->error_computer->setText("You must type a valid number for year invented");
+            return;
+        }
+    }
+    else if(column == 4){
+        if(value == "NO"||value == "Yes"){
+            //donothing
+        }
+        else{
+            ui->error_computer->setText("Please specify YES or NO");
+            populateTableComputers();
+        }
+    }
+
+    ui->error_computer->setText("");
+
+
     switch(column){
     case 1: hpList.update(id, "name", value, "computers");
         break;
@@ -177,11 +268,28 @@ void update_widget::on_tableView_computers_2_cellChanged(int row, int column)
 
 void update_widget::on_updateComputer_clicked()
 {
+    ui->error_connection->setText("");
     string compName = ui->computerName->text().toStdString();
+
+    if(compName.length() == 0){
+        ui->error_connection->setText("You must type computer name");
+        populateTableConnections();
+        return;
+    }
+    if (! (ui->tableView_connections_2->selectionModel()->isSelected(ui->tableView_connections_2->currentIndex()))  ) {
+        ui->error_connection->setText("You must select a row");
+        return;
+    }
+
     int rowNum = ui->tableView_connections_2->currentRow();
     int pid = ui->tableView_connections_2->item(rowNum, 0)->text().toInt();
     int cid = ui->tableView_connections_2->item(rowNum, 1)->text().toInt();
     int newID = hpList.getComputerID(compName);
+
+    if(newID == -1){
+        ui->error_connection->setText("Invalid computer selected. Please try again");
+        return;
+    }
 
     hpList.updateConnection(pid, cid, "cID", newID);
 
@@ -194,12 +302,33 @@ void update_widget::on_updateComputer_clicked()
 
 void update_widget::on_updateConnection_clicked()
 {
+    ui->error_connection->setText("");
+
     string firstName = ui->firstName->text().toStdString();
     string lastName = ui->lastName->text().toStdString();
+
+    if(firstName.length() == 0 || lastName.length() == 0){
+        ui->error_connection->setText("You must type first name and last name");
+        populateTableConnections();
+        return;
+
+    }
+
+    if (! (ui->tableView_connections_2->selectionModel()->isSelected(ui->tableView_connections_2->currentIndex()))  ) {
+        ui->error_connection->setText("You must select a row");
+        return;
+    }
+
     int rowNum = ui->tableView_connections_2->currentRow();
     int pid = ui->tableView_connections_2->item(rowNum, 0)->text().toInt();
     int cid = ui->tableView_connections_2->item(rowNum, 1)->text().toInt();
     int newID = hpList.getPersonID(lastName, firstName);
+    if(newID == -1){
+        ui->error_connection->setText("Invalid pioneer selected. Please try again");
+        return;
+    }
+
+
 
     hpList.updateConnection(pid, cid, "pID", newID);
 
@@ -207,4 +336,12 @@ void update_widget::on_updateConnection_clicked()
     ui->lastName->clear();
 
     populateTableConnections();
+}
+
+void update_widget::on_updateTabs_currentChanged(int index)
+{
+    ui->error_connection->setText("");
+    ui->error_computer->setText("");
+    ui->error_pioneer->setText("");
+
 }

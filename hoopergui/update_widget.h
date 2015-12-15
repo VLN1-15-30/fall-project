@@ -30,6 +30,8 @@ private slots:
 
     void on_updateConnection_clicked();
 
+    void on_updateTabs_currentChanged(int index);
+
 private:
     Ui::update_widget *ui;
     List hpList;

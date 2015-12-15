@@ -33,16 +33,22 @@ public:
     QTabWidget *updateTabs;
     QWidget *pioneer;
     QGridLayout *gridLayout_5;
-    QHBoxLayout *horizontalLayout_3;
     QTableWidget *tableView_pioneers_2;
+    QHBoxLayout *horizontalLayout_3;
+    QHBoxLayout *horizontalLayout_6;
     QLabel *label_info_update_pioneers;
+    QLabel *error_pioneer;
     QWidget *computers;
     QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_5;
     QLabel *label_info_update_computers;
+    QLabel *error_computer;
     QTableWidget *tableView_computers_2;
     QWidget *connections;
     QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_7;
     QLabel *label_info_update_connection;
+    QLabel *error_connection;
     QTableWidget *tableView_connections_2;
     QLabel *label_connection_instr;
     QHBoxLayout *horizontalLayout_2;
@@ -71,11 +77,6 @@ public:
         pioneer->setObjectName(QStringLiteral("pioneer"));
         gridLayout_5 = new QGridLayout(pioneer);
         gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-
-        gridLayout_5->addLayout(horizontalLayout_3, 4, 0, 1, 1);
-
         tableView_pioneers_2 = new QTableWidget(pioneer);
         if (tableView_pioneers_2->columnCount() < 6)
             tableView_pioneers_2->setColumnCount(6);
@@ -96,22 +97,47 @@ public:
         tableView_pioneers_2->horizontalHeader()->setStretchLastSection(true);
         tableView_pioneers_2->verticalHeader()->setStretchLastSection(false);
 
-        gridLayout_5->addWidget(tableView_pioneers_2, 1, 0, 1, 1);
+        gridLayout_5->addWidget(tableView_pioneers_2, 2, 0, 1, 1);
 
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+
+        gridLayout_5->addLayout(horizontalLayout_3, 5, 0, 1, 1);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
         label_info_update_pioneers = new QLabel(pioneer);
         label_info_update_pioneers->setObjectName(QStringLiteral("label_info_update_pioneers"));
 
-        gridLayout_5->addWidget(label_info_update_pioneers, 0, 0, 1, 1);
+        horizontalLayout_6->addWidget(label_info_update_pioneers);
+
+        error_pioneer = new QLabel(pioneer);
+        error_pioneer->setObjectName(QStringLiteral("error_pioneer"));
+
+        horizontalLayout_6->addWidget(error_pioneer);
+
+
+        gridLayout_5->addLayout(horizontalLayout_6, 0, 0, 1, 1);
 
         updateTabs->addTab(pioneer, QString());
         computers = new QWidget();
         computers->setObjectName(QStringLiteral("computers"));
         verticalLayout_3 = new QVBoxLayout(computers);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         label_info_update_computers = new QLabel(computers);
         label_info_update_computers->setObjectName(QStringLiteral("label_info_update_computers"));
 
-        verticalLayout_3->addWidget(label_info_update_computers);
+        horizontalLayout_5->addWidget(label_info_update_computers);
+
+        error_computer = new QLabel(computers);
+        error_computer->setObjectName(QStringLiteral("error_computer"));
+
+        horizontalLayout_5->addWidget(error_computer);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_5);
 
         tableView_computers_2 = new QTableWidget(computers);
         if (tableView_computers_2->columnCount() < 5)
@@ -138,10 +164,20 @@ public:
         connections->setObjectName(QStringLiteral("connections"));
         verticalLayout_2 = new QVBoxLayout(connections);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         label_info_update_connection = new QLabel(connections);
         label_info_update_connection->setObjectName(QStringLiteral("label_info_update_connection"));
 
-        verticalLayout_2->addWidget(label_info_update_connection);
+        horizontalLayout_7->addWidget(label_info_update_connection);
+
+        error_connection = new QLabel(connections);
+        error_connection->setObjectName(QStringLiteral("error_connection"));
+
+        horizontalLayout_7->addWidget(error_connection);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_7);
 
         tableView_connections_2 = new QTableWidget(connections);
         if (tableView_connections_2->columnCount() < 6)
@@ -234,7 +270,7 @@ public:
 
         retranslateUi(update_widget);
 
-        updateTabs->setCurrentIndex(1);
+        updateTabs->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(update_widget);
@@ -256,8 +292,10 @@ public:
         QTableWidgetItem *___qtablewidgetitem5 = tableView_pioneers_2->horizontalHeaderItem(5);
         ___qtablewidgetitem5->setText(QApplication::translate("update_widget", "Year died", 0));
         label_info_update_pioneers->setText(QApplication::translate("update_widget", "Double click cell to update", 0));
+        error_pioneer->setText(QString());
         updateTabs->setTabText(updateTabs->indexOf(pioneer), QApplication::translate("update_widget", "Pioneers", 0));
         label_info_update_computers->setText(QApplication::translate("update_widget", "Double click cell to update", 0));
+        error_computer->setText(QString());
         QTableWidgetItem *___qtablewidgetitem6 = tableView_computers_2->horizontalHeaderItem(0);
         ___qtablewidgetitem6->setText(QApplication::translate("update_widget", "ID", 0));
         QTableWidgetItem *___qtablewidgetitem7 = tableView_computers_2->horizontalHeaderItem(1);
@@ -270,6 +308,7 @@ public:
         ___qtablewidgetitem10->setText(QApplication::translate("update_widget", "Was it built?", 0));
         updateTabs->setTabText(updateTabs->indexOf(computers), QApplication::translate("update_widget", "Computers", 0));
         label_info_update_connection->setText(QApplication::translate("update_widget", "Select row to update", 0));
+        error_connection->setText(QString());
         QTableWidgetItem *___qtablewidgetitem11 = tableView_connections_2->horizontalHeaderItem(0);
         ___qtablewidgetitem11->setText(QApplication::translate("update_widget", "PID", 0));
         QTableWidgetItem *___qtablewidgetitem12 = tableView_connections_2->horizontalHeaderItem(1);

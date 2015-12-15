@@ -252,7 +252,7 @@ public:
         input_lastname->setPlaceholderText(QApplication::translate("add_widget", "Lastname", 0));
         input_gender->setPlaceholderText(QApplication::translate("add_widget", "Gender", 0));
         input__yearOfBirth->setPlaceholderText(QApplication::translate("add_widget", "Year of birth", 0));
-        input_yearOfDeath->setPlaceholderText(QApplication::translate("add_widget", "Year of death", 0));
+        input_yearOfDeath->setPlaceholderText(QApplication::translate("add_widget", "Year of death (0 if alive)", 0));
         pushButton_add_pioneer->setText(QApplication::translate("add_widget", "Add", 0));
         label_pioneer_error->setText(QString());
         tab_add->setTabText(tab_add->indexOf(tab), QApplication::translate("add_widget", "Pioneer", 0));
