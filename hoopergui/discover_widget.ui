@@ -61,7 +61,7 @@
      </property>
     </widget>
    </item>
-   <item>
+   <item alignment="Qt::AlignHCenter">
     <widget class="QPushButton" name="pushButton_discover">
      <property name="styleSheet">
       <string notr="true">background {rgb(131, 58, 255)}</string>
@@ -70,7 +70,7 @@
       <string>Discover</string>
      </property>
      <property name="autoDefault">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="default">
       <bool>false</bool>
