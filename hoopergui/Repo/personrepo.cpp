@@ -142,7 +142,7 @@ vector<person> personRepo::getPersonsSorted(int sort, int column){
     }
 
     stringstream query;
-    query << "SELECT P.ID, P.lastname, P.firstname, P.sex, P.born, P.died ";
+    query << "SELECT P.ID, P.firstname, P.lastname, P.sex, P.born, P.died ";
     query << "FROM persons P ";
     query << "WHERE P.Deleted = 'NO' ";
     query << "ORDER BY " << col << " " << orderby;

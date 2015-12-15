@@ -8,7 +8,7 @@ search_widget::search_widget(QWidget *parent) :
 {
     ui->setupUi(this);
     setUpUi();
-    populateTableAtIndex(1);
+    populateTableAtIndex(1,-1,0);
 
 }
 
@@ -19,6 +19,11 @@ void search_widget::setUpUi(){
     ui->lineEdit_pioneers->setStyleSheet("QLineEdit { background: rgb(255, 255, 255); color: black; }");
     ui->tab_search->setStyleSheet("QTabWidget::pane { border: 0; }QTabBar::tab { background-color: #34466E; color: #ACADB1 }");
 
+    ui->comboBox_Order->addItem("Order by");
+    ui->comboBox_Order->addItem("Last name - ASC");
+    ui->comboBox_Order->addItem("Last name - DESC");
+    ui->comboBox_Order->addItem("Born - ASC");
+    ui->comboBox_Order->addItem("Born - DESC");
 
     ui->comboBox_pioneers->addItem("Last name");
     ui->comboBox_pioneers->addItem("Gender");
@@ -37,12 +42,17 @@ void search_widget::setUpUi(){
 
 }
 
-void search_widget::populateTableAtIndex(int index)
+void search_widget::populateTableAtIndex(int index, int order, int col)
 {
     switch (index) {
     case 1:  {
+        vector<person>dbPersons;
 
-        vector<person>dbPersons = hpList.getPersons();
+        if( order == -1 ) {
+            dbPersons = hpList.getPersons();
+        } else {
+            dbPersons = hpList.orderbyPersons(order,col);
+        }
 
         ui->table_pioneers->clearContents();
         ui->table_pioneers->setRowCount(dbPersons.size());
@@ -64,7 +74,6 @@ void search_widget::populateTableAtIndex(int index)
             ui->table_pioneers->setItem(row,2,new QTableWidgetItem(gender));
             ui->table_pioneers->setItem(row,3,new QTableWidgetItem(born));
             ui->table_pioneers->setItem(row,4,new QTableWidgetItem(died));
-
         }
 
     }
@@ -81,7 +90,7 @@ search_widget::~search_widget()
 
 void search_widget::on_tab_search_tabBarClicked(int index)
 {
-
+    populateTableAtIndex(index+1,-1,0);
 }
 
 
@@ -126,3 +135,24 @@ void search_widget::on_table_connections_clicked(const QModelIndex &index)
 }
 
 
+
+void search_widget::on_comboBox_Order_currentIndexChanged(int index)
+{
+    switch(index){
+    case 1:
+        populateTableAtIndex(1,0,0);
+        break;
+    case 2:
+        populateTableAtIndex(1,1,0);
+        break;
+    case 3:
+        populateTableAtIndex(1,0,1);
+        break;
+    case 4:
+        populateTableAtIndex(1,1,1);
+        break;
+    default:
+        break;
+
+    }
+}

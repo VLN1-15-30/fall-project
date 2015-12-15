@@ -31,6 +31,7 @@ class Ui_search_widget
 {
 public:
     QVBoxLayout *verticalLayout;
+    QComboBox *comboBox_Order;
     QTabWidget *tab_search;
     QWidget *pioneers;
     QGridLayout *gridLayout;
@@ -67,6 +68,11 @@ public:
         search_widget->resize(671, 325);
         verticalLayout = new QVBoxLayout(search_widget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        comboBox_Order = new QComboBox(search_widget);
+        comboBox_Order->setObjectName(QStringLiteral("comboBox_Order"));
+
+        verticalLayout->addWidget(comboBox_Order, 0, Qt::AlignRight);
+
         tab_search = new QTabWidget(search_widget);
         tab_search->setObjectName(QStringLiteral("tab_search"));
         tab_search->setFocusPolicy(Qt::TabFocus);
@@ -90,7 +96,8 @@ public:
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
         table_pioneers->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         table_pioneers->setObjectName(QStringLiteral("table_pioneers"));
-        table_pioneers->setSortingEnabled(true);
+        table_pioneers->setEditTriggers(QAbstractItemView::AnyKeyPressed|QAbstractItemView::EditKeyPressed);
+        table_pioneers->setSortingEnabled(false);
         table_pioneers->horizontalHeader()->setStretchLastSection(true);
         table_pioneers->verticalHeader()->setStretchLastSection(true);
 
