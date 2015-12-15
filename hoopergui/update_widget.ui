@@ -88,7 +88,7 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="label_info_update">
          <property name="text">
           <string>Double click cell to update</string>
          </property>

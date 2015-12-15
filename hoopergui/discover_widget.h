@@ -15,6 +15,7 @@ class discover_widget : public QWidget
 public:
     explicit discover_widget(QWidget *parent = 0);
     void discover();
+    void setUpUI();
     ~discover_widget();
 
 private slots:

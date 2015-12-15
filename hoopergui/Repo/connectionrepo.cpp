@@ -93,6 +93,39 @@ vector<connection> connectionRepo::getConnectionsSorted(int sort, int column){
     return queryConnection(QString::fromStdString(query.str()));
 }
 
+connection connectionRepo::getRandomConnection()
+{
+
+    QSqlQuery q;
+
+    stringstream querystring;
+    querystring << "SELECT P.firstname, P.lastname, C.name, C.yearMade ";
+    querystring << "FROM invented I ";
+    querystring << "    INNER JOIN persons P ON P.id = I.pID ";
+    querystring << "    INNER JOIN computers C ON C.id = I.cID ";
+    querystring << "WHERE I.Deleted = 'NO' AND P.Deleted = 'NO' ";
+    querystring << "AND C.Deleted = 'NO' ";
+    querystring << "ORDER BY RANDOM() LIMIT 1";
+
+
+    QString query(QString::fromStdString(querystring.str()));
+
+    if(q.exec(query)){
+        q.first();
+
+        string firstName = q.value(0).toString().toStdString();
+        string lastName = q.value(1).toString().toStdString();
+        string computer = q.value(2).toString().toStdString();
+        int yearmade = q.value(3).toInt();
+
+        return connection(firstName,lastName,computer,yearmade);
+
+    } else {
+        qDebug() << q.lastError() << endl;
+        return connection();
+    }
+}
+
 vector<connection> connectionRepo::queryConnection(QString sqlQuery){
 
     vector<connection> connections;

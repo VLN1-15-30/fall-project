@@ -7,20 +7,9 @@ discover_widget::discover_widget(QWidget *parent) :
     ui(new Ui::discover_widget)
 {
     ui->setupUi(this);
-    ui->label_info->setStyleSheet("QLabel {color: white;}");
-    ui->label_define_1->setStyleSheet("QLabel {color: white;}");
-    ui->label_define_2->setStyleSheet("QLabel {color: white;}");
-    ui->label_define_3->setStyleSheet("QLabel {color: white;}");
-    ui->label_define_4->setStyleSheet("QLabel {color: white;}");
-    ui->label_define_5->setStyleSheet("QLabel {color: white;}");
 
-    ui->label_target->setStyleSheet("QLabel {color: white;}");
-    ui->label_target_1->setStyleSheet("QLabel {color: white;}");
-    ui->label_target_2->setStyleSheet("QLabel {color: white;}");
-    ui->label_target_3->setStyleSheet("QLabel {color: white;}");
-    ui->label_target_4->setStyleSheet("QLabel {color: white;}");
-    ui->label_target_5->setStyleSheet("QLabel {color: white;}");
 
+    setUpUI();
     discover();
 }
 
@@ -29,6 +18,7 @@ void discover_widget::discover()
     int i = rand() % 3 + 1;
     switch (i) {
     case 1:{
+
         ui->label_target->setText("Pioneer");
         person p = hpList.discoverPerson();
 
@@ -42,7 +32,7 @@ void discover_widget::discover()
             gender = "Male";
         }
         else if (gender == "f"){
-            gender = "Female2";
+            gender = "Female";
         }
 
         ui->label_target_1->setText(first);
@@ -60,6 +50,7 @@ void discover_widget::discover()
     }
     break;
     case 2:{
+
         ui->label_target->setText("Computer");
         computer c = hpList.discoverComputer();
 
@@ -67,6 +58,7 @@ void discover_widget::discover()
         QString type = QString::fromStdString(c.getType());
         QString year = QString::number(c.getYearMade());
         QString made;
+
         bool wasMade = c.getWasMade();
         if(wasMade){
             made = "YES";
@@ -83,7 +75,6 @@ void discover_widget::discover()
         ui->label_target_5->setText("");
 
         ui ->label_define_5->setText("");
-
         ui ->label_define_1->setText("Name:");
         ui ->label_define_2->setText("Type:");
         ui ->label_define_3->setText("Year made:");
@@ -93,13 +84,49 @@ void discover_widget::discover()
     }
     break;
     case 3:{
+
         ui->label_target->setText("Connection");
+        connection c = hpList.discoverConnection();
+
+        QString first = QString::fromStdString(c.getFirstName());
+        QString last = QString::fromStdString(c.getLastName());
+        QString computer = QString::fromStdString(c.getComputerName());
+        QString year = QString::number(c.getYearInvented());
+
+        ui->label_target_1->setText(first);
+        ui->label_target_2->setText(last);
+        ui->label_target_3->setText(computer);
+        ui->label_target_4->setText(year);
+        ui->label_target_5->setText("");
+
+        ui ->label_define_1->setText("First name:");
+        ui ->label_define_2->setText("Last name:");
+        ui ->label_define_3->setText("Computer:");
+        ui ->label_define_4->setText("Year made:");
+        ui ->label_define_5->setText("");
 
     }
     break;
     default:
         break;
     }
+}
+
+void discover_widget::setUpUI()
+{
+    ui->label_info->setStyleSheet("QLabel {color: white;}");
+    ui->label_define_1->setStyleSheet("QLabel {color: white;}");
+    ui->label_define_2->setStyleSheet("QLabel {color: white;}");
+    ui->label_define_3->setStyleSheet("QLabel {color: white;}");
+    ui->label_define_4->setStyleSheet("QLabel {color: white;}");
+    ui->label_define_5->setStyleSheet("QLabel {color: white;}");
+
+    ui->label_target->setStyleSheet("QLabel {color: white;}");
+    ui->label_target_1->setStyleSheet("QLabel {color: white;}");
+    ui->label_target_2->setStyleSheet("QLabel {color: white;}");
+    ui->label_target_3->setStyleSheet("QLabel {color: white;}");
+    ui->label_target_4->setStyleSheet("QLabel {color: white;}");
+    ui->label_target_5->setStyleSheet("QLabel {color: white;}");
 }
 
 discover_widget::~discover_widget()

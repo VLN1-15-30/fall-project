@@ -149,6 +149,11 @@ computer List::discoverComputer(){
     return computerR.getRandomComputer();
 }
 
+connection List::discoverConnection()
+{
+    return connectionR.getRandomConnection();
+}
+
 void List:: deleteCharacterWithName(string lastname, int type){
 
     utils::deleteObj(type,lastname);
