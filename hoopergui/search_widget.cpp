@@ -1,6 +1,7 @@
 #include "search_widget.h"
 #include "ui_search_widget.h"
 #include <QDebug>
+#include "Utilities/utils.h"
 
 search_widget::search_widget(QWidget *parent) :
     QWidget(parent),
@@ -401,4 +402,15 @@ void search_widget::on_pushButton_remove_connection_clicked()
 
     hpList.removeConnection(first,last,computer);
     populateTableAtIndex(3,-1,0);
+}
+
+void search_widget::writeToFile(){
+
+    utils::writeToFile(dbPersons);
+
+}
+
+void search_widget::on_pushButton_printDbPerson_clicked()
+{
+   writeToFile();
 }

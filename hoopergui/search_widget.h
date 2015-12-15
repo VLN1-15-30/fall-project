@@ -26,6 +26,7 @@ public:
     void searchPeople(string search);
     void searchComputer(string search);
     void searchConnection(string search);
+    void writeToFile();
 private slots:
     void on_tab_search_tabBarClicked(int index);
 
@@ -58,6 +59,8 @@ private slots:
     void on_comboBox_OrderConnection_currentIndexChanged(int index);
 
     void on_comboBox_connections_currentIndexChanged(int index);
+
+    void on_pushButton_printDbPerson_clicked();
 
 private:
     Ui::search_widget *ui;

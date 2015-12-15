@@ -1,4 +1,6 @@
 #include "Utilities/utils.h"
+#include <iostream>
+#include "Services/list.h"
 
 namespace utils {
     QSqlDatabase getDatabaseConnection()
@@ -74,5 +76,22 @@ namespace utils {
         db.close();
     }
 
+    void writeToFile(vector <person>& p){
 
+        ofstream out_stream;
+        out_stream.open("Result.txt", ios::app);
+        if (out_stream.fail( ))
+        {
+            cout << "Failed to write to database."<<endl;
+            return;
+        }
+
+        for (unsigned int i = 0; i< p.size(); i++) {
+            person pers = p[i];
+              out_stream << pers.getFirstName()<<";"<< pers.getLastName() << ";" << pers.getSex() <<";"<< pers.getBorn()<<";"<< pers.getDied() << endl;
+        }
+
+        out_stream.close( );
+
+    }
 }
