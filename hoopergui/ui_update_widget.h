@@ -13,7 +13,6 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -43,11 +42,20 @@ public:
     QTableWidget *tableView_computers_2;
     QWidget *connections;
     QVBoxLayout *verticalLayout_2;
+    QLabel *label_3;
     QTableWidget *tableView_connections_2;
-    QComboBox *updateOptionsConnections;
-    QLineEdit *replaceConnectionsInfo;
+    QLabel *label_7;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label_6;
+    QLabel *label_5;
+    QLabel *label_4;
+    QHBoxLayout *horizontalLayout;
+    QLineEdit *computerName;
+    QLineEdit *firstName;
+    QLineEdit *lastName;
+    QHBoxLayout *horizontalLayout_4;
+    QPushButton *updateComputer;
     QPushButton *updateConnection;
-    QPushButton *updateAnotherConnection;
 
     void setupUi(QWidget *update_widget)
     {
@@ -130,6 +138,11 @@ public:
         connections->setObjectName(QStringLiteral("connections"));
         verticalLayout_2 = new QVBoxLayout(connections);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        label_3 = new QLabel(connections);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        verticalLayout_2->addWidget(label_3);
+
         tableView_connections_2 = new QTableWidget(connections);
         if (tableView_connections_2->columnCount() < 6)
             tableView_connections_2->setColumnCount(6);
@@ -146,6 +159,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
         tableView_connections_2->setHorizontalHeaderItem(5, __qtablewidgetitem16);
         tableView_connections_2->setObjectName(QStringLiteral("tableView_connections_2"));
+        tableView_connections_2->setSelectionBehavior(QAbstractItemView::SelectRows);
         tableView_connections_2->setSortingEnabled(true);
         tableView_connections_2->horizontalHeader()->setStretchLastSection(true);
         tableView_connections_2->verticalHeader()->setProperty("showSortIndicator", QVariant(false));
@@ -153,25 +167,65 @@ public:
 
         verticalLayout_2->addWidget(tableView_connections_2);
 
-        updateOptionsConnections = new QComboBox(connections);
-        updateOptionsConnections->setObjectName(QStringLiteral("updateOptionsConnections"));
+        label_7 = new QLabel(connections);
+        label_7->setObjectName(QStringLiteral("label_7"));
 
-        verticalLayout_2->addWidget(updateOptionsConnections);
+        verticalLayout_2->addWidget(label_7);
 
-        replaceConnectionsInfo = new QLineEdit(connections);
-        replaceConnectionsInfo->setObjectName(QStringLiteral("replaceConnectionsInfo"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        label_6 = new QLabel(connections);
+        label_6->setObjectName(QStringLiteral("label_6"));
 
-        verticalLayout_2->addWidget(replaceConnectionsInfo);
+        horizontalLayout_2->addWidget(label_6);
+
+        label_5 = new QLabel(connections);
+        label_5->setObjectName(QStringLiteral("label_5"));
+
+        horizontalLayout_2->addWidget(label_5);
+
+        label_4 = new QLabel(connections);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        horizontalLayout_2->addWidget(label_4);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_2);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        computerName = new QLineEdit(connections);
+        computerName->setObjectName(QStringLiteral("computerName"));
+
+        horizontalLayout->addWidget(computerName);
+
+        firstName = new QLineEdit(connections);
+        firstName->setObjectName(QStringLiteral("firstName"));
+
+        horizontalLayout->addWidget(firstName);
+
+        lastName = new QLineEdit(connections);
+        lastName->setObjectName(QStringLiteral("lastName"));
+
+        horizontalLayout->addWidget(lastName);
+
+
+        verticalLayout_2->addLayout(horizontalLayout);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        updateComputer = new QPushButton(connections);
+        updateComputer->setObjectName(QStringLiteral("updateComputer"));
+
+        horizontalLayout_4->addWidget(updateComputer);
 
         updateConnection = new QPushButton(connections);
         updateConnection->setObjectName(QStringLiteral("updateConnection"));
 
-        verticalLayout_2->addWidget(updateConnection);
+        horizontalLayout_4->addWidget(updateConnection);
 
-        updateAnotherConnection = new QPushButton(connections);
-        updateAnotherConnection->setObjectName(QStringLiteral("updateAnotherConnection"));
 
-        verticalLayout_2->addWidget(updateAnotherConnection);
+        verticalLayout_2->addLayout(horizontalLayout_4);
 
         updateTabs->addTab(connections, QString());
 
@@ -180,7 +234,7 @@ public:
 
         retranslateUi(update_widget);
 
-        updateTabs->setCurrentIndex(1);
+        updateTabs->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(update_widget);
@@ -215,6 +269,7 @@ public:
         QTableWidgetItem *___qtablewidgetitem10 = tableView_computers_2->horizontalHeaderItem(4);
         ___qtablewidgetitem10->setText(QApplication::translate("update_widget", "Was it built?", 0));
         updateTabs->setTabText(updateTabs->indexOf(computers), QApplication::translate("update_widget", "Computers", 0));
+        label_3->setText(QApplication::translate("update_widget", "Select row to update", 0));
         QTableWidgetItem *___qtablewidgetitem11 = tableView_connections_2->horizontalHeaderItem(0);
         ___qtablewidgetitem11->setText(QApplication::translate("update_widget", "PID", 0));
         QTableWidgetItem *___qtablewidgetitem12 = tableView_connections_2->horizontalHeaderItem(1);
@@ -227,16 +282,12 @@ public:
         ___qtablewidgetitem15->setText(QApplication::translate("update_widget", "Last name", 0));
         QTableWidgetItem *___qtablewidgetitem16 = tableView_connections_2->horizontalHeaderItem(5);
         ___qtablewidgetitem16->setText(QApplication::translate("update_widget", "Year invented", 0));
-        updateOptionsConnections->clear();
-        updateOptionsConnections->insertItems(0, QStringList()
-         << QApplication::translate("update_widget", "Choose what to update", 0)
-         << QApplication::translate("update_widget", "Pioneer first name", 0)
-         << QApplication::translate("update_widget", "Pioneer last name", 0)
-         << QApplication::translate("update_widget", "Computer name", 0)
-        );
-        replaceConnectionsInfo->setText(QApplication::translate("update_widget", "Replace with...", 0));
-        updateConnection->setText(QApplication::translate("update_widget", "Update", 0));
-        updateAnotherConnection->setText(QApplication::translate("update_widget", "Continue updating", 0));
+        label_7->setText(QApplication::translate("update_widget", "Enter either computer name or first and last name of pioneer", 0));
+        label_6->setText(QApplication::translate("update_widget", "Computer name", 0));
+        label_5->setText(QApplication::translate("update_widget", "Pioneers first name", 0));
+        label_4->setText(QApplication::translate("update_widget", "Pioneers last name", 0));
+        updateComputer->setText(QApplication::translate("update_widget", "Update computer", 0));
+        updateConnection->setText(QApplication::translate("update_widget", "Update pioneer", 0));
         updateTabs->setTabText(updateTabs->indexOf(connections), QApplication::translate("update_widget", "Connections", 0));
     } // retranslateUi
 

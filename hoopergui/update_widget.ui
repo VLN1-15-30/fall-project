@@ -20,7 +20,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="pioneer">
       <attribute name="title">
@@ -140,7 +140,17 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Select row to update</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QTableWidget" name="tableView_connections_2">
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
          <property name="sortingEnabled">
           <bool>true</bool>
          </property>
@@ -186,49 +196,67 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="updateOptionsConnections">
-         <item>
-          <property name="text">
-           <string>Choose what to update</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Pioneer first name</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Pioneer last name</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Computer name</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="replaceConnectionsInfo">
+        <widget class="QLabel" name="label_7">
          <property name="text">
-          <string>Replace with...</string>
+          <string>Enter either computer name or first and last name of pioneer</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="updateConnection">
-         <property name="text">
-          <string>Update</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Computer name</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Pioneers first name</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Pioneers last name</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
-        <widget class="QPushButton" name="updateAnotherConnection">
-         <property name="text">
-          <string>Continue updating</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLineEdit" name="computerName"/>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="firstName"/>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lastName"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QPushButton" name="updateComputer">
+           <property name="text">
+            <string>Update computer</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="updateConnection">
+           <property name="text">
+            <string>Update pioneer</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
