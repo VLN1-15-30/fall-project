@@ -12,6 +12,7 @@ namespace utils {
     void deleteObj(int type, string name);
     int countDatabaseInput(int type);
     void closeDBConnection();
+    void writeToFile(vector<person>& p);
 
     QSqlDatabase getDatabaseConnection();
 }

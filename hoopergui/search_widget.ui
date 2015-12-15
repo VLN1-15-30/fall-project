@@ -29,14 +29,14 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="pioneers">
       <attribute name="title">
        <string>Pioneers</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="0">
+       <item row="3" column="0">
         <widget class="QTableWidget" name="table_pioneers">
          <property name="editTriggers">
           <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::EditKeyPressed</set>
@@ -80,7 +80,7 @@
          </column>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="4" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QLineEdit" name="lineEdit_pioneers">
@@ -100,7 +100,13 @@
          </item>
         </layout>
        </item>
-       <item row="4" column="0">
+       <item row="0" column="0" alignment="Qt::AlignRight">
+        <widget class="QComboBox" name="comboBox_OrderPerson"/>
+       </item>
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_11"/>
+       </item>
+       <item row="6" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
           <widget class="QPushButton" name="pushButton_remove_Pioneer">
@@ -112,17 +118,30 @@
            </property>
           </widget>
          </item>
-         <item>
+         <item alignment="Qt::AlignHCenter">
           <widget class="QLabel" name="label_removePioneer">
            <property name="text">
             <string>Select a row to remove a pionner from the database</string>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignRight">
+          <widget class="QPushButton" name="pushButton_printDbPerson">
+           <property name="minimumSize">
+            <size>
+             <width>182</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Print results to .csv</string>
+           </property>
           </widget>
          </item>
         </layout>
-       </item>
-       <item row="0" column="0" alignment="Qt::AlignRight">
-        <widget class="QComboBox" name="comboBox_OrderPerson"/>
        </item>
       </layout>
      </widget>

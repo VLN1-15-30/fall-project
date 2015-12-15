@@ -38,10 +38,12 @@ public:
     QHBoxLayout *horizontalLayout;
     QLineEdit *lineEdit_pioneers;
     QComboBox *comboBox_pioneers;
+    QComboBox *comboBox_OrderPerson;
+    QHBoxLayout *horizontalLayout_11;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *pushButton_remove_Pioneer;
     QLabel *label_removePioneer;
-    QComboBox *comboBox_OrderPerson;
+    QPushButton *pushButton_printDbPerson;
     QWidget *computers;
     QVBoxLayout *verticalLayout_4;
     QComboBox *comboBox_OrderComputers;
@@ -99,7 +101,7 @@ public:
         table_pioneers->horizontalHeader()->setStretchLastSection(true);
         table_pioneers->verticalHeader()->setStretchLastSection(false);
 
-        gridLayout->addWidget(table_pioneers, 1, 0, 1, 1);
+        gridLayout->addWidget(table_pioneers, 3, 0, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -115,7 +117,17 @@ public:
         horizontalLayout->addWidget(comboBox_pioneers);
 
 
-        gridLayout->addLayout(horizontalLayout, 2, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout, 4, 0, 1, 1);
+
+        comboBox_OrderPerson = new QComboBox(pioneers);
+        comboBox_OrderPerson->setObjectName(QStringLiteral("comboBox_OrderPerson"));
+
+        gridLayout->addWidget(comboBox_OrderPerson, 0, 0, 1, 1, Qt::AlignRight);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
+
+        gridLayout->addLayout(horizontalLayout_11, 1, 0, 1, 1);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
@@ -127,16 +139,18 @@ public:
 
         label_removePioneer = new QLabel(pioneers);
         label_removePioneer->setObjectName(QStringLiteral("label_removePioneer"));
+        label_removePioneer->setMargin(0);
 
-        horizontalLayout_4->addWidget(label_removePioneer);
+        horizontalLayout_4->addWidget(label_removePioneer, 0, Qt::AlignHCenter);
+
+        pushButton_printDbPerson = new QPushButton(pioneers);
+        pushButton_printDbPerson->setObjectName(QStringLiteral("pushButton_printDbPerson"));
+        pushButton_printDbPerson->setMinimumSize(QSize(182, 0));
+
+        horizontalLayout_4->addWidget(pushButton_printDbPerson, 0, Qt::AlignRight);
 
 
-        gridLayout->addLayout(horizontalLayout_4, 4, 0, 1, 1);
-
-        comboBox_OrderPerson = new QComboBox(pioneers);
-        comboBox_OrderPerson->setObjectName(QStringLiteral("comboBox_OrderPerson"));
-
-        gridLayout->addWidget(comboBox_OrderPerson, 0, 0, 1, 1, Qt::AlignRight);
+        gridLayout->addLayout(horizontalLayout_4, 6, 0, 1, 1);
 
         tab_search->addTab(pioneers, QString());
         computers = new QWidget();
@@ -215,7 +229,6 @@ public:
         QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
         table_connections->setHorizontalHeaderItem(3, __qtablewidgetitem12);
         table_connections->setObjectName(QStringLiteral("table_connections"));
-
         table_connections->setEditTriggers(QAbstractItemView::AnyKeyPressed|QAbstractItemView::EditKeyPressed);
         table_connections->setSelectionBehavior(QAbstractItemView::SelectRows);
         table_connections->horizontalHeader()->setStretchLastSection(true);
@@ -267,7 +280,7 @@ public:
 
         retranslateUi(search_widget);
 
-        tab_search->setCurrentIndex(2);
+        tab_search->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(search_widget);
@@ -293,6 +306,7 @@ public:
         lineEdit_pioneers->setPlaceholderText(QApplication::translate("search_widget", "Search pioneers...", 0));
         pushButton_remove_Pioneer->setText(QApplication::translate("search_widget", "Remove", 0));
         label_removePioneer->setText(QApplication::translate("search_widget", "Select a row to remove a pionner from the database", 0));
+        pushButton_printDbPerson->setText(QApplication::translate("search_widget", "Print results to .csv", 0));
         tab_search->setTabText(tab_search->indexOf(pioneers), QApplication::translate("search_widget", "Pioneers", 0));
         QTableWidgetItem *___qtablewidgetitem5 = table_computers->horizontalHeaderItem(0);
         ___qtablewidgetitem5->setText(QApplication::translate("search_widget", "Name", 0));

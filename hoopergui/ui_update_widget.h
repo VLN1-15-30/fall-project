@@ -234,7 +234,7 @@ public:
 
         retranslateUi(update_widget);
 
-        updateTabs->setCurrentIndex(2);
+        updateTabs->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(update_widget);
