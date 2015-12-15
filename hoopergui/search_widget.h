@@ -20,6 +20,7 @@ public:
     explicit search_widget(QWidget *parent = 0);
     void setUpUi();
     void populateTableAtIndex(int index, int order, int col);
+    void disableRemove();
     ~search_widget();
 
     void searchPeople(string search);
@@ -46,6 +47,10 @@ private slots:
     void on_comboBox_OrderComputers_currentIndexChanged(int index);
 
     void on_comboBox_computers_currentIndexChanged(int index);
+
+    void on_pushButton_remove_Pioneer_clicked();
+
+    void on_pushButton_remove_computer_clicked();
 
 private:
     Ui::search_widget *ui;

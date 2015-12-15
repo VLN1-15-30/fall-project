@@ -126,6 +126,16 @@ void search_widget::populateTableAtIndex(int index, int order, int col)
     }
 }
 
+void search_widget::disableRemove()
+{
+    ui->pushButton_remove_connection->setEnabled(false);
+    ui->label_remove_conneciton->setText("Select a row to remove a connection from the database");
+    ui->pushButton_remove_Pioneer->setEnabled(false);
+    ui->label_removePioneer->setText("Select a row to remove a pioneer from the database");
+    ui->pushButton_remove_computer->setEnabled(false);
+    ui->label_remove_computer->setText("Select a row to remove a computer from the database");
+}
+
 search_widget::~search_widget()
 {
     delete ui;
@@ -133,12 +143,15 @@ search_widget::~search_widget()
 
 void search_widget::on_tab_search_tabBarClicked(int index)
 {
+    disableRemove();
     populateTableAtIndex(index+1,-1,0);
 }
 
 
 void search_widget::on_comboBox_pioneers_currentIndexChanged(int index)
 {
+    disableRemove();
+
     switch(index){
     case 0:
         searchColumn = "lastname";
@@ -198,17 +211,34 @@ void search_widget::on_lineEdit_connections_textChanged(const QString &arg1)
 void search_widget::on_table_pioneers_clicked(const QModelIndex &index)
 {
     ui->pushButton_remove_Pioneer->setEnabled(true);
+    stringstream ss;
+    ss<<"Row selected at index: ";
+    ss<<index.row()+1;
+    QString ind = QString::fromStdString(ss.str());
+    ui->label_removePioneer->setText(ind);
+
 }
 
 void search_widget::on_table_computers_clicked(const QModelIndex &index)
 {
     ui->pushButton_remove_computer->setEnabled(true);
+    stringstream ss;
+    ss<<"Row selected at index: ";
+    ss<<index.row()+1;
+    QString ind = QString::fromStdString(ss.str());
+    ui->label_remove_computer->setText(ind);
+
 
 }
 
 void search_widget::on_table_connections_clicked(const QModelIndex &index)
 {
     ui->pushButton_remove_connection->setEnabled(true);
+    stringstream ss;
+    ss<<"Row selected at index: ";
+    ss<<index.row()+1;
+    QString ind = QString::fromStdString(ss.str());
+    ui->label_remove_conneciton->setText(ind);
 
 }
 
@@ -266,3 +296,29 @@ void search_widget::on_comboBox_OrderComputers_currentIndexChanged(int index)
 }
 
 
+
+void search_widget::on_pushButton_remove_Pioneer_clicked()
+{
+    string lastname = ui->table_pioneers->item(ui->table_pioneers->currentRow(), 1)->text().toStdString();
+    hpList.deleteCharacterWithName(lastname,0);
+    populateTableAtIndex(1,-1,0);
+
+}
+
+void search_widget::on_pushButton_remove_computer_clicked()
+{
+    string name = ui->table_computers->item(ui->table_computers->currentRow(), 0)->text().toStdString();
+    hpList.deleteCharacterWithName(name,1);
+    populateTableAtIndex(2,-1,0);
+
+}
+
+void search_widget::on_pushButton_remove_connection_clicked()
+{
+    string first = ui->table_computers->item(ui->table_computers->currentRow(), 0)->text().toStdString();
+    string last = ui->table_computers->item(ui->table_computers->currentRow(), 0)->text().toStdString();
+    string computer = ui->table_computers->item(ui->table_computers->currentRow(), 0)->text().toStdString();
+
+    hpList.removeConnection(first,last,computer);
+    populateTableAtIndex(3,-1,0);
+}
