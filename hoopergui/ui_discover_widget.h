@@ -44,17 +44,18 @@ public:
     QSpacerItem *horizontalSpacer_5;
     QLabel *label_define_4;
     QLabel *label_target_4;
-    QSpacerItem *horizontalSpacer_2;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_define_5;
     QLabel *label_target_5;
     QSpacerItem *horizontalSpacer;
+    QLabel *label_3;
+    QLabel *label_2;
 
     void setupUi(QWidget *discover_widget)
     {
         if (discover_widget->objectName().isEmpty())
             discover_widget->setObjectName(QStringLiteral("discover_widget"));
-        discover_widget->resize(696, 474);
+        discover_widget->resize(697, 474);
         verticalLayout = new QVBoxLayout(discover_widget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalSpacer = new QSpacerItem(20, 35, QSizePolicy::Minimum, QSizePolicy::Fixed);
@@ -120,6 +121,7 @@ public:
         QFont font2;
         font2.setPointSize(18);
         label_target_1->setFont(font2);
+        label_target_1->setAlignment(Qt::AlignCenter);
 
         horizontalLayout->addWidget(label_target_1);
 
@@ -138,6 +140,7 @@ public:
         label_target_2->setMinimumSize(QSize(205, 0));
         label_target_2->setMaximumSize(QSize(16777215, 16777215));
         label_target_2->setFont(font2);
+        label_target_2->setAlignment(Qt::AlignCenter);
 
         horizontalLayout->addWidget(label_target_2);
 
@@ -154,11 +157,13 @@ public:
 
         label_target_3 = new QLabel(discover_widget);
         label_target_3->setObjectName(QStringLiteral("label_target_3"));
+        label_target_3->setMinimumSize(QSize(205, 0));
         label_target_3->setFont(font2);
+        label_target_3->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_2->addWidget(label_target_3);
 
-        horizontalSpacer_5 = new QSpacerItem(100, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+        horizontalSpacer_5 = new QSpacerItem(35, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_5);
 
@@ -170,13 +175,11 @@ public:
 
         label_target_4 = new QLabel(discover_widget);
         label_target_4->setObjectName(QStringLiteral("label_target_4"));
+        label_target_4->setMinimumSize(QSize(205, 0));
         label_target_4->setFont(font2);
+        label_target_4->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_2->addWidget(label_target_4);
-
-        horizontalSpacer_2 = new QSpacerItem(50, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer_2);
 
 
         verticalLayout->addLayout(horizontalLayout_2);
@@ -191,13 +194,27 @@ public:
 
         label_target_5 = new QLabel(discover_widget);
         label_target_5->setObjectName(QStringLiteral("label_target_5"));
+        label_target_5->setMinimumSize(QSize(222, 0));
         label_target_5->setFont(font2);
+        label_target_5->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_3->addWidget(label_target_5);
 
-        horizontalSpacer = new QSpacerItem(415, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(35, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
         horizontalLayout_3->addItem(horizontalSpacer);
+
+        label_3 = new QLabel(discover_widget);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setMinimumSize(QSize(80, 0));
+
+        horizontalLayout_3->addWidget(label_3);
+
+        label_2 = new QLabel(discover_widget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setMinimumSize(QSize(205, 0));
+
+        horizontalLayout_3->addWidget(label_2);
 
 
         verticalLayout->addLayout(horizontalLayout_3);
@@ -228,6 +245,8 @@ public:
         label_target_4->setText(QApplication::translate("discover_widget", "target", 0));
         label_define_5->setText(QApplication::translate("discover_widget", "Year died:", 0));
         label_target_5->setText(QApplication::translate("discover_widget", "target", 0));
+        label_3->setText(QString());
+        label_2->setText(QString());
     } // retranslateUi
 
 };

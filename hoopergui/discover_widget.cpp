@@ -7,10 +7,8 @@ discover_widget::discover_widget(QWidget *parent) :
     ui(new Ui::discover_widget)
 {
     ui->setupUi(this);
-
-
     setUpUI();
-    discover();
+
 }
 
 void discover_widget::discover()
@@ -34,6 +32,7 @@ void discover_widget::discover()
         else if (gender == "f"){
             gender = "Female";
         }
+
 
         ui->label_target_1->setText(first);
         ui->label_target_2->setText(last);
@@ -127,6 +126,19 @@ void discover_widget::setUpUI()
     ui->label_target_3->setStyleSheet("QLabel {color: white;}");
     ui->label_target_4->setStyleSheet("QLabel {color: white;}");
     ui->label_target_5->setStyleSheet("QLabel {color: white;}");
+
+    ui->label_target->setText("");
+    ui->label_target_1->setText("");
+    ui->label_target_2->setText("");
+    ui->label_target_3->setText("");
+    ui->label_target_4->setText("");
+    ui->label_target_5->setText("");
+
+    ui ->label_define_1->setText("");
+    ui ->label_define_2->setText("");
+    ui ->label_define_3->setText("");
+    ui ->label_define_4->setText("");
+    ui ->label_define_5->setText("");
 }
 
 discover_widget::~discover_widget()

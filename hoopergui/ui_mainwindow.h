@@ -33,8 +33,8 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *button_view_database;
     QPushButton *button_add_database;
-    QPushButton *button_discover;
     QPushButton *button_update;
+    QPushButton *button_discover;
     QPushButton *button_about;
     QStackedWidget *stack_widget;
 
@@ -42,8 +42,8 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(800, 550);
-        MainWindow->setMinimumSize(QSize(0, 0));
+        MainWindow->resize(1250, 700);
+        MainWindow->setMinimumSize(QSize(800, 500));
         MainWindow->setDockNestingEnabled(false);
         MainWindow->setDockOptions(QMainWindow::AnimatedDocks);
         centralWidget = new QWidget(MainWindow);
@@ -79,19 +79,19 @@ public:
 
         verticalLayout->addWidget(button_add_database);
 
-        button_discover = new QPushButton(groupBox_hooper);
-        button_discover->setObjectName(QStringLiteral("button_discover"));
-        button_discover->setFont(font);
-        button_discover->setFlat(true);
-
-        verticalLayout->addWidget(button_discover);
-
         button_update = new QPushButton(groupBox_hooper);
         button_update->setObjectName(QStringLiteral("button_update"));
         button_update->setFont(font);
         button_update->setFlat(true);
 
         verticalLayout->addWidget(button_update);
+
+        button_discover = new QPushButton(groupBox_hooper);
+        button_discover->setObjectName(QStringLiteral("button_discover"));
+        button_discover->setFont(font);
+        button_discover->setFlat(true);
+
+        verticalLayout->addWidget(button_discover);
 
         button_about = new QPushButton(groupBox_hooper);
         button_about->setObjectName(QStringLiteral("button_about"));
@@ -124,8 +124,8 @@ public:
         groupBox_hooper->setTitle(QApplication::translate("MainWindow", "Hooper   ", 0));
         button_view_database->setText(QApplication::translate("MainWindow", "View", 0));
         button_add_database->setText(QApplication::translate("MainWindow", "Add", 0));
-        button_discover->setText(QApplication::translate("MainWindow", "Discover", 0));
         button_update->setText(QApplication::translate("MainWindow", "Update", 0));
+        button_discover->setText(QApplication::translate("MainWindow", "Discover", 0));
         button_about->setText(QApplication::translate("MainWindow", "About", 0));
     } // retranslateUi
 

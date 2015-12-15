@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>696</width>
+    <width>697</width>
     <height>474</height>
    </rect>
   </property>
@@ -149,6 +149,9 @@
        <property name="text">
         <string>target</string>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
       </widget>
      </item>
      <item>
@@ -203,6 +206,9 @@
        <property name="text">
         <string>target</string>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
       </widget>
      </item>
     </layout>
@@ -225,6 +231,12 @@
      </item>
      <item>
       <widget class="QLabel" name="label_target_3">
+       <property name="minimumSize">
+        <size>
+         <width>205</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -232,6 +244,9 @@
        </property>
        <property name="text">
         <string>target</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -245,7 +260,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>100</width>
+         <width>35</width>
          <height>20</height>
         </size>
        </property>
@@ -267,6 +282,12 @@
      </item>
      <item>
       <widget class="QLabel" name="label_target_4">
+       <property name="minimumSize">
+        <size>
+         <width>205</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -275,23 +296,10 @@
        <property name="text">
         <string>target</string>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
       </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>50</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -313,6 +321,12 @@
      </item>
      <item>
       <widget class="QLabel" name="label_target_5">
+       <property name="minimumSize">
+        <size>
+         <width>222</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -320,6 +334,9 @@
        </property>
        <property name="text">
         <string>target</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -333,11 +350,37 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>415</width>
+         <width>35</width>
          <height>20</height>
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="minimumSize">
+        <size>
+         <width>205</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
