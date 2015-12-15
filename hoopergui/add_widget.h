@@ -22,7 +22,9 @@ class add_widget : public QWidget
 
 public:
     explicit add_widget(QWidget *parent = 0);
-    bool errorCheck();
+    bool pioneerErrorCheck();
+    bool computerErrorCheck();
+    bool connectionErrorCheck();
     void clearContents(int index);
     ~add_widget();
 
