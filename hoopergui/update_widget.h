@@ -26,6 +26,8 @@ private slots:
 
     void on_tableView_computers_2_cellChanged(int row, int column);
 
+    //void on_tableView_connections_2_cellChanged(int row, int column);
+
 private:
     Ui::update_widget *ui;
     List hpList;

@@ -27,70 +27,10 @@
        <string>Pioneers</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
-       <item row="2" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QComboBox" name="updateOptionsPioneers">
-           <item>
-            <property name="text">
-             <string>Choose what to update</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>First name</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Last name</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Gender</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Year born</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Year died</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="replacePioneersInfo">
-           <property name="text">
-            <string>Replace with...</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
        <item row="4" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QPushButton" name="updatePioneer">
-           <property name="text">
-            <string>Update</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="updateAnotherPioneer">
-           <property name="text">
-            <string>Continue updating</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <layout class="QHBoxLayout" name="horizontalLayout_3"/>
        </item>
-       <item row="0" column="0">
+       <item row="1" column="0">
         <widget class="QTableWidget" name="tableView_pioneers_2">
          <property name="sortingEnabled">
           <bool>true</bool>
@@ -133,6 +73,13 @@
          </column>
         </widget>
        </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Double click cell to update</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="computers">
@@ -140,6 +87,13 @@
        <string>Computers</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Double click cell to update</string>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QTableWidget" name="tableView_computers_2">
          <property name="sortingEnabled">
@@ -178,56 +132,6 @@
          </column>
         </widget>
        </item>
-       <item>
-        <widget class="QComboBox" name="updateOptionsComputers">
-         <item>
-          <property name="text">
-           <string>Choose what to update</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Computer name</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Computer type</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Year invented</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Was it built?</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="replaceComputersInfo">
-         <property name="text">
-          <string>Replace with...</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="updateComputer">
-         <property name="text">
-          <string>Update</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="updateAnotherComputer">
-         <property name="text">
-          <string>Continu updating</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="connections">
@@ -251,7 +155,22 @@
          </attribute>
          <column>
           <property name="text">
+           <string>PID</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>CID</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
            <string>Computer name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>First name</string>
           </property>
          </column>
          <column>

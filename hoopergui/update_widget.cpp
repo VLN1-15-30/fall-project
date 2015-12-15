@@ -17,9 +17,7 @@ update_widget::update_widget(QWidget *parent) :
 
 void update_widget::setUpUi(){
 
-    ui->replaceComputersInfo->setStyleSheet("QLineEdit { background: rgb(255, 255, 255); color: black; }");
     ui->replaceConnectionsInfo->setStyleSheet("QLineEdit { background: rgb(255, 255, 255); color: black; }");
-    ui->replacePioneersInfo->setStyleSheet("QLineEdit { background: rgb(255, 255, 255); color: black; }");
     ui->updateTabs->setStyleSheet("QTabWidget::pane { border: 0; }QTabBar::tab { background-color: #34466E; color: #ACADB1 }");
     ui->tableView_pioneers_2->setStyleSheet("QTableView{border : 1px solid white}");
     ui->tableView_computers_2->setStyleSheet("QTableView{border : 1px solid white}");
@@ -106,13 +104,22 @@ void update_widget::populateTableConnections()
     {
         connection currentConnection = conn[row];
 
+        QString pid = QString::number(hpList.getPersonID(currentConnection.getLastName(),currentConnection.getFirstName()));
+        QString cid = QString::number(hpList.getComputerID(currentConnection.getComputerName()));
         QString comp = QString::fromStdString(currentConnection.getComputerName());
-        QString name = QString::fromStdString(currentConnection.getLastName());
+        QString first = QString::fromStdString(currentConnection.getFirstName());
+        QString last = QString::fromStdString(currentConnection.getLastName());
         QString year = QString::number(currentConnection.getYearInvented());
 
-        ui->tableView_connections_2->setItem(row, 0, new QTableWidgetItem(comp));
-        ui->tableView_connections_2->setItem(row, 1, new QTableWidgetItem(name));
-        ui->tableView_connections_2->setItem(row, 2, new QTableWidgetItem(year));
+        ui->tableView_connections_2->setItem(row, 0, new QTableWidgetItem(pid));
+        ui->tableView_connections_2->setItem(row, 1, new QTableWidgetItem(cid));
+        ui->tableView_connections_2->setItem(row, 2, new QTableWidgetItem(comp));
+        ui->tableView_connections_2->setItem(row, 3, new QTableWidgetItem(first));
+        ui->tableView_connections_2->setItem(row, 4, new QTableWidgetItem(last));
+        ui->tableView_connections_2->setItem(row, 5, new QTableWidgetItem(year));
+
+        ui->tableView_connections_2->hideColumn(0);
+        ui->tableView_connections_2->hideColumn(1);
     }
 }
 
@@ -160,3 +167,27 @@ void update_widget::on_tableView_computers_2_cellChanged(int row, int column)
         break;
     }
 }
+
+/*void update_widget::on_tableView_connections_2_cellChanged(int row, int column)
+{
+    if(loading) return;
+
+    int pid = ui->tableView_connections_2->item(row,0)->text().toInt();
+    int cid = ui->tableView_connections_2->item(row,1)->text().toInt();
+    string value = ui->tableView_connections_2->item(row,column)->text().toStdString();
+
+    switch(column){
+    case 2: newID = hpList.getComputerID(value);
+        hpList.updateConnection(pid, cid, "pID", newID);
+        break;
+    case 3: newID = hpList.getPersonID()
+        hpList.update(id, "type", value, "computers");
+        break;
+    case 3: hpList.update(id, "yearMade", value, "computers");
+        break;
+    case 4: hpList.update(id, "wasMade", value, "computers");
+        break;
+    default:
+        break;
+    }
+}*/
