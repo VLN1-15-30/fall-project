@@ -44,6 +44,9 @@ public:
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(800, 500);
         MainWindow->setMinimumSize(QSize(600, 350));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/hooper/prefix1/hooper.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
         MainWindow->setDockNestingEnabled(false);
         MainWindow->setDockOptions(QMainWindow::AnimatedDocks);
         centralWidget = new QWidget(MainWindow);

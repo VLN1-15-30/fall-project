@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Hooper</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="hooper_resource.qrc">
+    <normaloff>:/hooper/prefix1/hooper.png</normaloff>:/hooper/prefix1/hooper.png</iconset>
+  </property>
   <property name="dockNestingEnabled">
    <bool>false</bool>
   </property>
@@ -149,6 +153,8 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="hooper_resource.qrc"/>
+ </resources>
  <connections/>
 </ui>
