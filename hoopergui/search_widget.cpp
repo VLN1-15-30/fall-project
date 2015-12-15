@@ -19,11 +19,17 @@ void search_widget::setUpUi(){
     ui->lineEdit_pioneers->setStyleSheet("QLineEdit { background: rgb(255, 255, 255); color: black; }");
     ui->tab_search->setStyleSheet("QTabWidget::pane { border: 0; }QTabBar::tab { background-color: #34466E; color: #ACADB1 }");
 
-    ui->comboBox_Order->addItem("Order by");
-    ui->comboBox_Order->addItem("Last name - ASC");
-    ui->comboBox_Order->addItem("Last name - DESC");
-    ui->comboBox_Order->addItem("Born - ASC");
-    ui->comboBox_Order->addItem("Born - DESC");
+    ui->comboBox_OrderPerson->addItem("Order by");
+    ui->comboBox_OrderPerson->addItem("Last name - ASC");
+    ui->comboBox_OrderPerson->addItem("Last name - DESC");
+    ui->comboBox_OrderPerson->addItem("Born - ASC");
+    ui->comboBox_OrderPerson->addItem("Born - DESC");
+
+    ui->comboBox_OrderComputers->addItem("Order by");
+    ui->comboBox_OrderComputers->addItem("Name - ASC");
+    ui->comboBox_OrderComputers->addItem("Name - DESC");
+    ui->comboBox_OrderComputers->addItem("Type - ASC");
+    ui->comboBox_OrderComputers->addItem("Type - DESC");
 
     ui->comboBox_pioneers->addItem("Last name");
     ui->comboBox_pioneers->addItem("Gender");
@@ -78,6 +84,42 @@ void search_widget::populateTableAtIndex(int index, int order, int col)
         }
 
     }
+    case 2: {
+
+        if(order == -1){
+            dbComputers = hpList.getComputers();
+        } else if(order == -2) {
+            cout << "searching" << endl;
+        } else {
+            dbComputers = hpList.orderbyComputers(order, col);
+        }
+
+        ui->table_computers->clearContents();
+
+        ui->table_computers->setRowCount(dbComputers.size());
+
+        for (unsigned int row = 0; row < dbComputers.size(); row++)
+        {
+            computer currentComputer = dbComputers[row];
+
+            QString name = QString::fromStdString(currentComputer.getName());
+            QString type = QString::fromStdString(currentComputer.getType());
+            QString year = QString::number(currentComputer.getYearMade());
+            QString made = QString::number(currentComputer.getWasMade());
+            QString wasMade;
+            if(made == 0){
+                wasMade = "No";
+            }
+            else{
+                wasMade = "Yes";
+            }
+
+            ui->table_computers->setItem(row, 0, new QTableWidgetItem(name));
+            ui->table_computers->setItem(row, 1, new QTableWidgetItem(type));
+            ui->table_computers->setItem(row, 2, new QTableWidgetItem(year));
+            ui->table_computers->setItem(row, 3, new QTableWidgetItem(wasMade));
+        }
+    }
         break;
     default:
         break;
@@ -115,6 +157,26 @@ void search_widget::on_comboBox_pioneers_currentIndexChanged(int index)
 
     }
 }
+void search_widget::on_comboBox_computers_currentIndexChanged(int index)
+{
+    switch(index){
+    case 0:
+        searchComputerColumn = "name";
+        break;
+    case 1:
+        searchComputerColumn = "type";
+        break;
+    case 2:
+        searchComputerColumn = "yearMade";
+        break;
+    case 3:
+        searchComputerColumn = "wasMade";
+        break;
+    default:
+        break;
+
+    }
+}
 
 void search_widget::on_lineEdit_pioneers_textChanged(const QString &arg1)
 {
@@ -125,9 +187,8 @@ void search_widget::on_lineEdit_pioneers_textChanged(const QString &arg1)
 void search_widget::on_lineEdit_computers_textChanged(const QString &arg1)
 {
     string currentText = ui->lineEdit_computers->text().toStdString();
-
+    searchComputer(currentText);
 }
-
 
 void search_widget::on_lineEdit_connections_textChanged(const QString &arg1)
 {
@@ -157,7 +218,12 @@ void search_widget::searchPeople(string search){
     populateTableAtIndex(1,-2,0);
 }
 
-void search_widget::on_comboBox_Order_currentIndexChanged(int index)
+void search_widget::searchComputer(string search){
+    dbComputers = hpList.getSearchComputer(searchComputerColumn, search);
+    populateTableAtIndex(2,-2,0);
+}
+
+void search_widget::on_comboBox_OrderPerson_currentIndexChanged(int index)
 {
     switch(index){
     case 1:
@@ -177,3 +243,26 @@ void search_widget::on_comboBox_Order_currentIndexChanged(int index)
 
     }
 }
+
+void search_widget::on_comboBox_OrderComputers_currentIndexChanged(int index)
+{
+    switch(index){
+    case 1:
+        populateTableAtIndex(2,0,0);
+        break;
+    case 2:
+        populateTableAtIndex(2,1,0);
+        break;
+    case 3:
+        populateTableAtIndex(2,0,1);
+        break;
+    case 4:
+        populateTableAtIndex(2,1,1);
+        break;
+    default:
+        break;
+
+    }
+}
+
+
