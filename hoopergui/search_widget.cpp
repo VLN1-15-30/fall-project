@@ -31,6 +31,12 @@ void search_widget::setUpUi(){
     ui->comboBox_OrderComputers->addItem("Type - ASC");
     ui->comboBox_OrderComputers->addItem("Type - DESC");
 
+    ui->comboBox_OrderConnection->addItem("Order by");
+    ui->comboBox_OrderConnection->addItem("Inventor - ASC");
+    ui->comboBox_OrderConnection->addItem("Inventor - DESC");
+    ui->comboBox_OrderConnection->addItem("Computer - ASC");
+    ui->comboBox_OrderConnection->addItem("Computer - DESC");
+
     ui->comboBox_pioneers->addItem("Last name");
     ui->comboBox_pioneers->addItem("Gender");
     ui->comboBox_pioneers->addItem("Year born");
@@ -40,6 +46,10 @@ void search_widget::setUpUi(){
     ui->comboBox_computers->addItem("Type");
     ui->comboBox_computers->addItem("Year made");
     ui->comboBox_computers->addItem("Was made");
+
+    ui->comboBox_connections->addItem("Inventor");
+    ui->comboBox_connections->addItem("Computer");
+    ui->comboBox_connections->addItem("Year Invented");
 
     ui->tab_search->setCurrentIndex(0);
     ui->label_removePioneer->setStyleSheet("QLabel { color: white;}");
@@ -120,6 +130,35 @@ void search_widget::populateTableAtIndex(int index, int order, int col)
             ui->table_computers->setItem(row, 3, new QTableWidgetItem(wasMade));
         }
     }
+    case 3: {
+
+        if(order == -1){
+            dbConnection = hpList.getConnections();
+        } else if(order == -2) {
+            cout << "searching" << endl;
+        } else {
+            dbConnection = hpList.orderbyConnections(order, col);
+        }
+
+        ui->table_connections->clearContents();
+
+        ui->table_connections->setRowCount(dbConnection.size());
+
+        for (unsigned int row = 0; row < dbConnection.size(); row++)
+        {
+            connection currentConnection = dbConnection[row];
+
+            QString comp = QString::fromStdString(currentConnection.getComputerName());
+            QString first = QString::fromStdString(currentConnection.getFirstName());
+            QString last = QString::fromStdString(currentConnection.getLastName());
+            QString year = QString::number(currentConnection.getYearInvented());
+
+            ui->table_connections->setItem(row, 0, new QTableWidgetItem(first));
+            ui->table_connections->setItem(row, 1, new QTableWidgetItem(last));
+            ui->table_connections->setItem(row, 2, new QTableWidgetItem(comp));
+            ui->table_connections->setItem(row, 3, new QTableWidgetItem(year));
+        }
+    }
         break;
     default:
         break;
@@ -191,6 +230,23 @@ void search_widget::on_comboBox_computers_currentIndexChanged(int index)
     }
 }
 
+void search_widget::on_comboBox_connections_currentIndexChanged(int index)
+{
+    switch(index){
+    case 0:
+        searchConnectionColumn = "P.lastname";
+        break;
+    case 1:
+        searchConnectionColumn = "C.name";
+        break;
+    case 2:
+        searchConnectionColumn = "C.yearMade";
+        break;
+    default:
+        break;
+    }
+}
+
 void search_widget::on_lineEdit_pioneers_textChanged(const QString &arg1)
 {
     string currentText = ui->lineEdit_pioneers->text().toStdString();
@@ -206,6 +262,7 @@ void search_widget::on_lineEdit_computers_textChanged(const QString &arg1)
 void search_widget::on_lineEdit_connections_textChanged(const QString &arg1)
 {
     string currentText = ui->lineEdit_connections->text().toStdString();
+    searchConnection(currentText);
 
 }
 void search_widget::on_table_pioneers_clicked(const QModelIndex &index)
@@ -253,6 +310,12 @@ void search_widget::searchComputer(string search){
     populateTableAtIndex(2,-2,0);
 }
 
+void search_widget::searchConnection(string search)
+{
+    dbConnection = hpList.getSearchConnection(searchConnectionColumn, search);
+    populateTableAtIndex(3,-2,0);
+}
+
 void search_widget::on_comboBox_OrderPerson_currentIndexChanged(int index)
 {
     switch(index){
@@ -295,7 +358,26 @@ void search_widget::on_comboBox_OrderComputers_currentIndexChanged(int index)
     }
 }
 
+void search_widget::on_comboBox_OrderConnection_currentIndexChanged(int index)
+{
+    switch(index){
+    case 1:
+        populateTableAtIndex(3,0,0);
+        break;
+    case 2:
+        populateTableAtIndex(3,1,0);
+        break;
+    case 3:
+        populateTableAtIndex(3,0,1);
+        break;
+    case 4:
+        populateTableAtIndex(3,1,1);
+        break;
+    default:
+        break;
 
+    }
+}
 
 void search_widget::on_pushButton_remove_Pioneer_clicked()
 {
