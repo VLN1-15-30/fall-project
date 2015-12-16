@@ -170,6 +170,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
         table_computers->setHorizontalHeaderItem(3, __qtablewidgetitem8);
         table_computers->setObjectName(QStringLiteral("table_computers"));
+        table_computers->setEditTriggers(QAbstractItemView::AnyKeyPressed|QAbstractItemView::EditKeyPressed);
         table_computers->setSelectionBehavior(QAbstractItemView::SelectRows);
         table_computers->horizontalHeader()->setStretchLastSection(true);
         table_computers->verticalHeader()->setStretchLastSection(false);
@@ -286,7 +287,7 @@ public:
 
         retranslateUi(search_widget);
 
-        tab_search->setCurrentIndex(2);
+        tab_search->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(search_widget);
