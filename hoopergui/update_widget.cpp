@@ -69,13 +69,18 @@ void update_widget::populateTablePioneers(int i)
         QString sex = QString::fromStdString(currentPioneer.getSex());
         QString born = QString::number(currentPioneer.getBorn());
         QString died = QString::number(currentPioneer.getDied());
+        QString alive = "-";
 
         ui->tableView_pioneers_2->setItem(row, 0, new QTableWidgetItem(id));
         ui->tableView_pioneers_2->setItem(row, 1, new QTableWidgetItem(firstName));
         ui->tableView_pioneers_2->setItem(row, 2, new QTableWidgetItem(lastName));
         ui->tableView_pioneers_2->setItem(row, 3, new QTableWidgetItem(sex));
         ui->tableView_pioneers_2->setItem(row, 4, new QTableWidgetItem(born));
-        ui->tableView_pioneers_2->setItem(row, 5, new QTableWidgetItem(died));
+        if(died.toUInt() == 0) {
+           ui->tableView_pioneers_2->setItem(row,5,new QTableWidgetItem(alive));
+        } else {
+           ui->tableView_pioneers_2->setItem(row,5,new QTableWidgetItem(died));
+        }
 
         ui->tableView_pioneers_2->hideColumn(0);
     }

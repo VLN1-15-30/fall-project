@@ -84,12 +84,18 @@ void search_widget::populateTableAtIndex(int index, int order, int col)
             QString gender = QString::fromStdString(currentP.getSex());
             QString born = QString::number(currentP.getBorn());
             QString died = QString::number(currentP.getDied());
+            QString alive = "-";
 
             ui->table_pioneers->setItem(row,0,new QTableWidgetItem(firstName));
             ui->table_pioneers->setItem(row,1,new QTableWidgetItem(lastname));
             ui->table_pioneers->setItem(row,2,new QTableWidgetItem(gender));
             ui->table_pioneers->setItem(row,3,new QTableWidgetItem(born));
-            ui->table_pioneers->setItem(row,4,new QTableWidgetItem(died));
+            if(died.toUInt() == 0) {
+               ui->table_pioneers->setItem(row,4,new QTableWidgetItem(alive));
+            } else {
+               ui->table_pioneers->setItem(row,4,new QTableWidgetItem(died));
+            }
+
         }
 
     }
