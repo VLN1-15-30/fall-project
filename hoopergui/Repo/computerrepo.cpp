@@ -116,7 +116,7 @@ vector<computer> computerRepo::queryComputer(QString sqlQuery) {
         //qDebug() << query.executedQuery() << endl;
     while(query.next())
     {
-        int id = query.value(0).toUInt();
+
         string name = query.value(1).toString().toStdString();
         string type = query.value(2).toString().toStdString();
         int yearMade = query.value(3).toInt();

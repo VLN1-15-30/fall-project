@@ -24,7 +24,7 @@ vector<person> personRepo::queryPerson(QString sqlQuery) {
         //qDebug() << query.executedQuery() << endl;
     while(query.next())
     {
-        int id = query.value(0).toUInt();
+
         string firstName = query.value(1).toString().toStdString();
         string lastName = query.value(2).toString().toStdString();
         string sex = query.value(3).toString().toStdString();
