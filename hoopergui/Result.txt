@@ -1,2 +1,0 @@
-Edsger;Dijkstra;m;1930;2002
-Steve;Jobs;m;1955;2011
