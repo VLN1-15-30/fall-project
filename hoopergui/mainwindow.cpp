@@ -244,9 +244,9 @@ void MainWindow::on_button_update_clicked()
     selectedIndex = 4;
     setButtonClicked(selectedIndex);
 
-    update_db->populateTablePioneers();
+    update_db->populateTablePioneers(0);
     update_db->populateTableConnections();
-    update_db->populateTableComputers();
+    update_db->populateTableComputers(0);
 
 
 }

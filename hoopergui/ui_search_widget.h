@@ -118,7 +118,7 @@ public:
         comboBox_pioneers = new QComboBox(pioneers);
         comboBox_pioneers->setObjectName(QStringLiteral("comboBox_pioneers"));
 
-        horizontalLayout->addWidget(comboBox_pioneers);
+        horizontalLayout->addWidget(comboBox_pioneers, 0, Qt::AlignLeft);
 
 
         gridLayout->addLayout(horizontalLayout, 3, 0, 1, 1);

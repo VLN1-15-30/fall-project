@@ -147,7 +147,7 @@ public:
         button_add_database->setText(QApplication::translate("MainWindow", "Add", 0));
         button_discover->setText(QApplication::translate("MainWindow", "Discover", 0));
         button_about->setText(QApplication::translate("MainWindow", "About", 0));
-        menuFile->setTitle(QApplication::translate("MainWindow", "Hooper", 0));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
     } // retranslateUi
 
 };

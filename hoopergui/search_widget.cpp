@@ -45,7 +45,7 @@ void search_widget::setUpUi(){
 
     ui->comboBox_computers->addItem("Name");
     ui->comboBox_computers->addItem("Type");
-    ui->comboBox_computers->addItem("Year made");
+    ui->comboBox_computers->addItem("Year Invented");
     ui->comboBox_computers->addItem("Was made");
 
     ui->comboBox_connections->addItem("Inventor");

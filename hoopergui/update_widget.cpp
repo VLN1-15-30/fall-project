@@ -10,8 +10,8 @@ update_widget::update_widget(QWidget *parent) :
     //ui->label_update->setStyleSheet("QLabel {color: white;}");
     qDebug()<<"running update widget";
     setUpUi();
-    populateTablePioneers();
-    populateTableComputers();
+    populateTablePioneers(0);
+    populateTableComputers(0);
     populateTableConnections();
 }
 
@@ -33,21 +33,35 @@ void update_widget::setUpUi(){
     ui->error_connection->setStyleSheet("QLabel{color :red}");
     ui->error_pioneer->setStyleSheet("QLabel{color :red}");
 
+    ui->comboBox_pioneers->addItem("Last name");
+    ui->comboBox_pioneers->addItem("Gender");
+    ui->comboBox_pioneers->addItem("Year born");
+    ui->comboBox_pioneers->addItem("Year of death");
+
+    ui->comboBox_computers->addItem("Name");
+    ui->comboBox_computers->addItem("Type");
+    ui->comboBox_computers->addItem("Year Invented");
+    ui->comboBox_computers->addItem("Was made");
+
     ui->updateTabs->setCurrentIndex(0);
 }
 
-void update_widget::populateTablePioneers()
+void update_widget::populateTablePioneers(int i)
 {
     loading = true;
-    vector<person> p  = hpList.getPersons();
+    if(i == 0){
+        dbPersons = hpList.getPersons();
+    } else {
+        //do nothing because dbPersons has result of search
+    }
 
     ui->tableView_pioneers_2->clearContents();
 
-    ui->tableView_pioneers_2->setRowCount(p.size());
+    ui->tableView_pioneers_2->setRowCount(dbPersons.size());
 
-    for (unsigned int row = 0; row < p.size(); row++)
+    for (unsigned int row = 0; row < dbPersons.size(); row++)
     {
-        person currentPioneer = p[row];
+        person currentPioneer = dbPersons[row];
 
         QString id = QString::number(hpList.getPersonID(currentPioneer.getLastName(),currentPioneer.getFirstName()));
         QString firstName = QString::fromStdString(currentPioneer.getFirstName());
@@ -68,19 +82,22 @@ void update_widget::populateTablePioneers()
     loading = false;
 }
 
-void update_widget::populateTableComputers()
+void update_widget::populateTableComputers(int i)
 {
     loading = true;
-
-    vector<computer> c  = hpList.getComputers();
+    if(i == 0){
+        dbComputers = hpList.getComputers();
+    } else {
+        //do nothing because dbComputers has result of search
+    }
 
     ui->tableView_computers_2->clearContents();
 
-    ui->tableView_computers_2->setRowCount(c.size());
+    ui->tableView_computers_2->setRowCount(dbComputers.size());
 
-    for (unsigned int row = 0; row < c.size(); row++)
+    for (unsigned int row = 0; row < dbComputers.size(); row++)
     {
-        computer currentComputer = c[row];
+        computer currentComputer = dbComputers[row];
 
         QString id = QString::number(hpList.getComputerID(currentComputer.getName()));
         QString name = QString::fromStdString(currentComputer.getName());
@@ -109,7 +126,7 @@ void update_widget::populateTableComputers()
 
 void update_widget::populateTableConnections()
 {
-    vector<connection> conn  = hpList.getConnections();
+    vector<connection> conn  = hpList.orderbyConnections(0,1);
 
     ui->tableView_connections_2->clearContents();
 
@@ -138,6 +155,18 @@ void update_widget::populateTableConnections()
     }
 }
 
+void update_widget::searchPerson(string search)
+{
+     dbPersons = hpList.getSearchPerson(searchPersonColumn, search);
+     populateTablePioneers(1);
+}
+
+void update_widget::searchComputer(string search)
+{
+    dbComputers = hpList.getSearchComputer(searchComputerColumn, search);
+    populateTableComputers(1);
+}
+
 update_widget::~update_widget()
 {
     delete ui;
@@ -152,7 +181,7 @@ void update_widget::on_tableView_pioneers_2_cellChanged(int row, int column)
 
     if(value.length() == 0){
         ui->error_pioneer->setText("You must type something");
-        populateTablePioneers();
+        populateTablePioneers(0);
         return;
     }
 
@@ -163,7 +192,7 @@ void update_widget::on_tableView_pioneers_2_cellChanged(int row, int column)
         else
         {
             ui->error_pioneer->setText("Please type m/f");
-            populateTablePioneers();
+            populateTablePioneers(0);
 
             return;
         }
@@ -176,7 +205,7 @@ void update_widget::on_tableView_pioneers_2_cellChanged(int row, int column)
 
         if(born == invalidInput && value != "0"){
             ui->error_pioneer->setText("You must type a valid number for year born");
-            populateTablePioneers();
+            populateTablePioneers(0);
 
             return;
         }
@@ -189,11 +218,11 @@ void update_widget::on_tableView_pioneers_2_cellChanged(int row, int column)
 
         if(died < born){
             ui->error_pioneer->setText("Year died can not be less than year of birth");
-            populateTablePioneers();
+            populateTablePioneers(0);
         }
         else if(died == invalidInput && value != "0"){
             ui->error_pioneer->setText("You must type a valid number for year died");
-            populateTablePioneers();
+            populateTablePioneers(0);
 
             return;
         }
@@ -227,7 +256,7 @@ void update_widget::on_tableView_computers_2_cellChanged(int row, int column)
 
     if(value.length() == 0){
         ui->error_computer->setText("You must type something");
-        populateTableComputers();
+        populateTableComputers(0);
         return;
     }
 
@@ -245,7 +274,7 @@ void update_widget::on_tableView_computers_2_cellChanged(int row, int column)
         }
         else{
             ui->error_computer->setText("Please specify YES or NO");
-            populateTableComputers();
+            populateTableComputers(0);
         }
     }
 
@@ -344,4 +373,57 @@ void update_widget::on_updateTabs_currentChanged(int index)
     ui->error_computer->setText("");
     ui->error_pioneer->setText("");
 
+}
+
+void update_widget::on_lineEdit_person_textChanged(const QString &arg1)
+{
+    string currentText = ui->lineEdit_person->text().toStdString();
+    searchPerson(currentText);
+}
+
+void update_widget::on_comboBox_pioneers_currentIndexChanged(int index)
+{
+    switch(index){
+    case 0:
+        searchPersonColumn = "lastname";
+        break;
+    case 1:
+        searchPersonColumn = "sex";
+        break;
+    case 2:
+        searchPersonColumn = "born";
+        break;
+    case 3:
+        searchPersonColumn = "died";
+        break;
+    default:
+        break;
+
+    }
+}
+
+void update_widget::on_lineEdit_computers_textChanged(const QString &arg1)
+{
+    string currenttext = ui->lineEdit_computers->text().toStdString();
+    searchComputer(currenttext);
+}
+
+void update_widget::on_comboBox_computers_currentIndexChanged(int index)
+{
+    switch(index){
+    case 0:
+        searchComputerColumn = "name";
+        break;
+    case 1:
+        searchComputerColumn = "type";
+        break;
+    case 2:
+        searchComputerColumn = "yearMade";
+        break;
+    case 3:
+        searchComputerColumn = "wasMade";
+        break;
+    default:
+        break;
+    }
 }

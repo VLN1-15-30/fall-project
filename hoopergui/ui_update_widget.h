@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -35,6 +36,9 @@ public:
     QGridLayout *gridLayout_5;
     QTableWidget *tableView_pioneers_2;
     QHBoxLayout *horizontalLayout_3;
+    QLineEdit *lineEdit_person;
+    QComboBox *comboBox_pioneers;
+    QHBoxLayout *horizontalLayout_9;
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_info_update_pioneers;
     QLabel *error_pioneer;
@@ -44,6 +48,10 @@ public:
     QLabel *label_info_update_computers;
     QLabel *error_computer;
     QTableWidget *tableView_computers_2;
+    QHBoxLayout *horizontalLayout_10;
+    QLineEdit *lineEdit_computers;
+    QHBoxLayout *horizontalLayout_12;
+    QComboBox *comboBox_computers;
     QWidget *connections;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_7;
@@ -93,7 +101,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
         tableView_pioneers_2->setHorizontalHeaderItem(5, __qtablewidgetitem5);
         tableView_pioneers_2->setObjectName(QStringLiteral("tableView_pioneers_2"));
-        tableView_pioneers_2->setSortingEnabled(true);
+        tableView_pioneers_2->setSortingEnabled(false);
         tableView_pioneers_2->horizontalHeader()->setStretchLastSection(true);
         tableView_pioneers_2->verticalHeader()->setStretchLastSection(false);
 
@@ -101,6 +109,25 @@ public:
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        lineEdit_person = new QLineEdit(pioneer);
+        lineEdit_person->setObjectName(QStringLiteral("lineEdit_person"));
+        lineEdit_person->setInputMethodHints(Qt::ImhNone);
+        lineEdit_person->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+        lineEdit_person->setDragEnabled(true);
+        lineEdit_person->setReadOnly(false);
+
+        horizontalLayout_3->addWidget(lineEdit_person);
+
+        comboBox_pioneers = new QComboBox(pioneer);
+        comboBox_pioneers->setObjectName(QStringLiteral("comboBox_pioneers"));
+
+        horizontalLayout_3->addWidget(comboBox_pioneers, 0, Qt::AlignRight);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
+
+        horizontalLayout_3->addLayout(horizontalLayout_9);
+
 
         gridLayout_5->addLayout(horizontalLayout_3, 5, 0, 1, 1);
 
@@ -153,11 +180,31 @@ public:
         QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
         tableView_computers_2->setHorizontalHeaderItem(4, __qtablewidgetitem10);
         tableView_computers_2->setObjectName(QStringLiteral("tableView_computers_2"));
-        tableView_computers_2->setSortingEnabled(true);
+        tableView_computers_2->setSortingEnabled(false);
         tableView_computers_2->horizontalHeader()->setStretchLastSection(true);
         tableView_computers_2->verticalHeader()->setStretchLastSection(false);
 
         verticalLayout_3->addWidget(tableView_computers_2);
+
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        lineEdit_computers = new QLineEdit(computers);
+        lineEdit_computers->setObjectName(QStringLiteral("lineEdit_computers"));
+
+        horizontalLayout_10->addWidget(lineEdit_computers);
+
+        horizontalLayout_12 = new QHBoxLayout();
+        horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
+        comboBox_computers = new QComboBox(computers);
+        comboBox_computers->setObjectName(QStringLiteral("comboBox_computers"));
+
+        horizontalLayout_12->addWidget(comboBox_computers);
+
+
+        horizontalLayout_10->addLayout(horizontalLayout_12);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_10);
 
         updateTabs->addTab(computers, QString());
         connections = new QWidget();
@@ -196,7 +243,7 @@ public:
         tableView_connections_2->setHorizontalHeaderItem(5, __qtablewidgetitem16);
         tableView_connections_2->setObjectName(QStringLiteral("tableView_connections_2"));
         tableView_connections_2->setSelectionBehavior(QAbstractItemView::SelectRows);
-        tableView_connections_2->setSortingEnabled(true);
+        tableView_connections_2->setSortingEnabled(false);
         tableView_connections_2->horizontalHeader()->setStretchLastSection(true);
         tableView_connections_2->verticalHeader()->setProperty("showSortIndicator", QVariant(false));
         tableView_connections_2->verticalHeader()->setStretchLastSection(false);
@@ -291,6 +338,8 @@ public:
         ___qtablewidgetitem4->setText(QApplication::translate("update_widget", "Year born", 0));
         QTableWidgetItem *___qtablewidgetitem5 = tableView_pioneers_2->horizontalHeaderItem(5);
         ___qtablewidgetitem5->setText(QApplication::translate("update_widget", "Year died", 0));
+        lineEdit_person->setText(QString());
+        lineEdit_person->setPlaceholderText(QApplication::translate("update_widget", "Search for pioneer...", 0));
         label_info_update_pioneers->setText(QApplication::translate("update_widget", "Double click cell to update", 0));
         error_pioneer->setText(QString());
         updateTabs->setTabText(updateTabs->indexOf(pioneer), QApplication::translate("update_widget", "Pioneers", 0));
@@ -306,6 +355,7 @@ public:
         ___qtablewidgetitem9->setText(QApplication::translate("update_widget", "Year invented", 0));
         QTableWidgetItem *___qtablewidgetitem10 = tableView_computers_2->horizontalHeaderItem(4);
         ___qtablewidgetitem10->setText(QApplication::translate("update_widget", "Was it built?", 0));
+        lineEdit_computers->setPlaceholderText(QApplication::translate("update_widget", "Search for computer...", 0));
         updateTabs->setTabText(updateTabs->indexOf(computers), QApplication::translate("update_widget", "Computers", 0));
         label_info_update_connection->setText(QApplication::translate("update_widget", "Select row to update", 0));
         error_connection->setText(QString());

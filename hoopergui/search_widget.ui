@@ -98,7 +98,7 @@
            </property>
           </widget>
          </item>
-         <item>
+         <item alignment="Qt::AlignLeft">
           <widget class="QComboBox" name="comboBox_pioneers"/>
          </item>
         </layout>
