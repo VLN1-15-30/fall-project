@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tab_add">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -106,7 +106,7 @@
           </size>
          </property>
          <property name="placeholderText">
-          <string>Gender</string>
+          <string>Gender(m/f)</string>
          </property>
         </widget>
        </item>
@@ -236,7 +236,7 @@
           </size>
          </property>
          <property name="placeholderText">
-          <string>Built</string>
+          <string>Year of invention</string>
          </property>
         </widget>
        </item>
@@ -249,7 +249,7 @@
           </size>
          </property>
          <property name="placeholderText">
-          <string>Made</string>
+          <string>Was it made ? ( 1 for yes, 0 for no)</string>
          </property>
         </widget>
        </item>
@@ -260,7 +260,7 @@
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignHCenter">
+       <item>
         <widget class="QLabel" name="label_computer_error_2">
          <property name="minimumSize">
           <size>

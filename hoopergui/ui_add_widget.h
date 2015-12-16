@@ -183,7 +183,7 @@ public:
         label_computer_error_2->setObjectName(QStringLiteral("label_computer_error_2"));
         label_computer_error_2->setMinimumSize(QSize(55, 23));
 
-        verticalLayout_2->addWidget(label_computer_error_2, 0, Qt::AlignHCenter);
+        verticalLayout_2->addWidget(label_computer_error_2);
 
         tab_add->addTab(tab_2, QString());
         tab_3 = new QWidget();
@@ -238,7 +238,7 @@ public:
 
         retranslateUi(add_widget);
 
-        tab_add->setCurrentIndex(0);
+        tab_add->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(add_widget);
@@ -250,7 +250,7 @@ public:
         label_3->setText(QString());
         input_firstname->setPlaceholderText(QApplication::translate("add_widget", "Firstname", 0));
         input_lastname->setPlaceholderText(QApplication::translate("add_widget", "Lastname", 0));
-        input_gender->setPlaceholderText(QApplication::translate("add_widget", "Gender", 0));
+        input_gender->setPlaceholderText(QApplication::translate("add_widget", "Gender(m/f)", 0));
         input__yearOfBirth->setPlaceholderText(QApplication::translate("add_widget", "Year of birth", 0));
         input_yearOfDeath->setPlaceholderText(QApplication::translate("add_widget", "Year of death (0 if alive)", 0));
         pushButton_add_pioneer->setText(QApplication::translate("add_widget", "Add", 0));
@@ -259,8 +259,8 @@ public:
         label_2->setText(QString());
         input_computer_name->setPlaceholderText(QApplication::translate("add_widget", "Name", 0));
         input_type->setPlaceholderText(QApplication::translate("add_widget", "Type", 0));
-        input_yearBuilt->setPlaceholderText(QApplication::translate("add_widget", "Built", 0));
-        input_ifMade->setPlaceholderText(QApplication::translate("add_widget", "Made", 0));
+        input_yearBuilt->setPlaceholderText(QApplication::translate("add_widget", "Year of invention", 0));
+        input_ifMade->setPlaceholderText(QApplication::translate("add_widget", "Was it made ? ( 1 for yes, 0 for no)", 0));
         pushButton_add_computer->setText(QApplication::translate("add_widget", "Add", 0));
         label_computer_error_2->setText(QString());
         tab_add->setTabText(tab_add->indexOf(tab_2), QApplication::translate("add_widget", "Computer", 0));
