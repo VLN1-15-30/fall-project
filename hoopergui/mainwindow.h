@@ -54,6 +54,7 @@ private:
     discover_widget *discover_db;
     about_widget *about_db;
     update_widget *update_db;
+    int numOfPrint;
 
 };
 

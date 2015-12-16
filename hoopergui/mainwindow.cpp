@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setUpHooper();
     setButtonColors();
     trackHovers();
+    numOfPrint = 0;
 
 }
 

@@ -29,7 +29,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="pioneers">
       <attribute name="title">
@@ -134,7 +134,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Print results to .csv</string>
+            <string>Print table to .csv</string>
            </property>
           </widget>
          </item>
@@ -219,6 +219,13 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_printDbComputer">
+           <property name="text">
+            <string>Print table to .csv</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>
@@ -280,6 +287,13 @@
           <widget class="QLabel" name="label_remove_conneciton">
            <property name="text">
             <string>Select a row to remove a connection from the database</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_printDbConnection">
+           <property name="text">
+            <string>Print table to .cvs</string>
            </property>
           </widget>
          </item>

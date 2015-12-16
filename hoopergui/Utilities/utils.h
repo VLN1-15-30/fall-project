@@ -3,6 +3,7 @@
 
 #include "Models/person.h"
 #include "Models/computer.h"
+#include "Models/connection.h"
 #include <QtSql>
 
 
@@ -12,7 +13,9 @@ namespace utils {
     void deleteObj(int type, string name);
     int countDatabaseInput(int type);
     void closeDBConnection();
-    void writeToFile(vector<person>& p);
+    void writeToFile(vector<person>& p, int num);
+    void writeToFile(vector<computer>& c, int num);
+    void writeToFile(vector<connection>& conn, int num);
 
     QSqlDatabase getDatabaseConnection();
 }

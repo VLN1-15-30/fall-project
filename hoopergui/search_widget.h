@@ -26,7 +26,7 @@ public:
     void searchPeople(string search);
     void searchComputer(string search);
     void searchConnection(string search);
-    void writeToFile();
+    void convertToCSV(int index);
 private slots:
     void on_tab_search_tabBarClicked(int index);
 
@@ -62,6 +62,10 @@ private slots:
 
     void on_pushButton_printDbPerson_clicked();
 
+    void on_pushButton_printDbComputer_clicked();
+
+    void on_pushButton_printDbConnection_clicked();
+
 private:
     Ui::search_widget *ui;
     List hpList;
@@ -71,6 +75,7 @@ private:
     string searchColumn;
     string searchComputerColumn;
     string searchConnectionColumn;
+    int numOfPrint;
 };
 
 #endif // SEARCH_WIDGET_H

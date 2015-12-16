@@ -1,6 +1,8 @@
 #include "Utilities/utils.h"
-#include <iostream>
 #include "Services/list.h"
+#include <sstream>
+#include <string>
+#include <iostream>
 
 namespace utils {
     QSqlDatabase getDatabaseConnection()
@@ -76,10 +78,15 @@ namespace utils {
         db.close();
     }
 
-    void writeToFile(vector <person>& p){
+    void writeToFile(vector <person>& p, int num){
+
+        ostringstream fileName;
+
+        fileName << "PersonResult" << num << ".csv";
+        string file = fileName.str();
 
         ofstream out_stream;
-        out_stream.open("Result.txt", ios::app);
+        out_stream.open(file.c_str());
         if (out_stream.fail( ))
         {
             cout << "Failed to write to database."<<endl;
@@ -94,4 +101,51 @@ namespace utils {
         out_stream.close( );
 
     }
+
+    void writeToFile(vector<computer> &c, int num)
+    {
+        ostringstream fileName;
+
+        fileName << "ComputerResult" << num << ".csv";
+        string file = fileName.str();
+
+        ofstream out_stream;
+        out_stream.open(file.c_str());
+        if (out_stream.fail( ))
+        {
+            cout << "Failed to write to database."<<endl;
+            return;
+        }
+
+        for (unsigned int i = 0; i< c.size(); i++) {
+            computer cpu = c[i];
+              out_stream << cpu.getName()<<";"<< cpu.getType() << ";" << cpu.getYearMade() <<";"<< cpu.getWasMade() << endl;
+        }
+
+        out_stream.close( );
+    }
+
+    void writeToFile(vector<connection> &conn, int num)
+    {
+        ostringstream fileName;
+
+        fileName << "ConnectionResult" << num << ".csv";
+        string file = fileName.str();
+
+        ofstream out_stream;
+        out_stream.open(file.c_str());
+        if (out_stream.fail( ))
+        {
+            cout << "Failed to write to database."<<endl;
+            return;
+        }
+
+        for (unsigned int i = 0; i< conn.size(); i++) {
+            connection c  = conn[i];
+              out_stream << c.getFirstName()<<";"<< c.getLastName() << ";" << c.getComputerName() <<";"<< c.getYearInvented() << endl;
+        }
+
+        out_stream.close( );
+    }
+
 }

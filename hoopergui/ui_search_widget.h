@@ -53,12 +53,14 @@ public:
     QHBoxLayout *horizontalLayout_5;
     QPushButton *pushButton_remove_computer;
     QLabel *label_remove_computer;
+    QPushButton *pushButton_printDbComputer;
     QWidget *connections;
     QGridLayout *gridLayout_2;
     QTableWidget *table_connections;
     QHBoxLayout *horizontalLayout_6;
     QPushButton *pushButton_remove_connection;
     QLabel *label_remove_conneciton;
+    QPushButton *pushButton_printDbConnection;
     QHBoxLayout *horizontalLayout_3;
     QLineEdit *lineEdit_connections;
     QComboBox *comboBox_connections;
@@ -203,6 +205,11 @@ public:
 
         horizontalLayout_5->addWidget(label_remove_computer);
 
+        pushButton_printDbComputer = new QPushButton(computers);
+        pushButton_printDbComputer->setObjectName(QStringLiteral("pushButton_printDbComputer"));
+
+        horizontalLayout_5->addWidget(pushButton_printDbComputer);
+
 
         verticalLayout_4->addLayout(horizontalLayout_5);
 
@@ -243,6 +250,11 @@ public:
 
         horizontalLayout_6->addWidget(label_remove_conneciton);
 
+        pushButton_printDbConnection = new QPushButton(connections);
+        pushButton_printDbConnection->setObjectName(QStringLiteral("pushButton_printDbConnection"));
+
+        horizontalLayout_6->addWidget(pushButton_printDbConnection);
+
 
         gridLayout_2->addLayout(horizontalLayout_6, 5, 0, 1, 1);
 
@@ -274,7 +286,7 @@ public:
 
         retranslateUi(search_widget);
 
-        tab_search->setCurrentIndex(0);
+        tab_search->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(search_widget);
@@ -300,7 +312,7 @@ public:
         lineEdit_pioneers->setPlaceholderText(QApplication::translate("search_widget", "Search pioneers...", 0));
         pushButton_remove_Pioneer->setText(QApplication::translate("search_widget", "Remove", 0));
         label_removePioneer->setText(QApplication::translate("search_widget", "Select a row to remove a pionner from the database", 0));
-        pushButton_printDbPerson->setText(QApplication::translate("search_widget", "Print results to .csv", 0));
+        pushButton_printDbPerson->setText(QApplication::translate("search_widget", "Print table to .csv", 0));
         tab_search->setTabText(tab_search->indexOf(pioneers), QApplication::translate("search_widget", "Pioneers", 0));
         QTableWidgetItem *___qtablewidgetitem5 = table_computers->horizontalHeaderItem(0);
         ___qtablewidgetitem5->setText(QApplication::translate("search_widget", "Name", 0));
@@ -313,6 +325,7 @@ public:
         lineEdit_computers->setPlaceholderText(QApplication::translate("search_widget", "search computers...", 0));
         pushButton_remove_computer->setText(QApplication::translate("search_widget", "Remove", 0));
         label_remove_computer->setText(QApplication::translate("search_widget", "Select a row to remove a computer from the database", 0));
+        pushButton_printDbComputer->setText(QApplication::translate("search_widget", "Print table to .csv", 0));
         tab_search->setTabText(tab_search->indexOf(computers), QApplication::translate("search_widget", "Computers", 0));
         QTableWidgetItem *___qtablewidgetitem9 = table_connections->horizontalHeaderItem(0);
         ___qtablewidgetitem9->setText(QApplication::translate("search_widget", "First name", 0));
@@ -324,6 +337,7 @@ public:
         ___qtablewidgetitem12->setText(QApplication::translate("search_widget", "Year Invented", 0));
         pushButton_remove_connection->setText(QApplication::translate("search_widget", "PushButton", 0));
         label_remove_conneciton->setText(QApplication::translate("search_widget", "Select a row to remove a connection from the database", 0));
+        pushButton_printDbConnection->setText(QApplication::translate("search_widget", "Print table to .cvs", 0));
         lineEdit_connections->setPlaceholderText(QApplication::translate("search_widget", "Search connections...", 0));
         tab_search->setTabText(tab_search->indexOf(connections), QApplication::translate("search_widget", "Connections", 0));
     } // retranslateUi

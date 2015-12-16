@@ -404,13 +404,30 @@ void search_widget::on_pushButton_remove_connection_clicked()
     populateTableAtIndex(3,-1,0);
 }
 
-void search_widget::writeToFile(){
+void search_widget::convertToCSV(int index){
 
-    utils::writeToFile(dbPersons);
+    if(index == 0) {
+        utils::writeToFile(dbPersons, numOfPrint++);
+    } else if(index == 1) {
+        utils::writeToFile(dbComputers, numOfPrint++);
+    } else {
+        utils::writeToFile(dbConnection, numOfPrint++);
+    }
+
 
 }
 
 void search_widget::on_pushButton_printDbPerson_clicked()
 {
-   writeToFile();
+    convertToCSV(0);
+}
+
+void search_widget::on_pushButton_printDbComputer_clicked()
+{
+    convertToCSV(1);
+}
+
+void search_widget::on_pushButton_printDbConnection_clicked()
+{
+    convertToCSV(2);
 }
