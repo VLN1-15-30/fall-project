@@ -250,3 +250,8 @@ void MainWindow::on_button_update_clicked()
 
 
 }
+
+void MainWindow::on_actionExit_triggered()
+{
+    QApplication::quit();
+}

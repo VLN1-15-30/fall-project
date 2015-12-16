@@ -17,6 +17,8 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QVBoxLayout>
@@ -27,6 +29,7 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionExit;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QGroupBox *groupBox_hooper;
@@ -37,6 +40,8 @@ public:
     QPushButton *button_discover;
     QPushButton *button_about;
     QStackedWidget *stack_widget;
+    QMenuBar *menuBar;
+    QMenu *menuFile;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -49,6 +54,8 @@ public:
         MainWindow->setWindowIcon(icon);
         MainWindow->setDockNestingEnabled(false);
         MainWindow->setDockOptions(QMainWindow::AnimatedDocks);
+        actionExit = new QAction(MainWindow);
+        actionExit->setObjectName(QStringLiteral("actionExit"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -112,6 +119,15 @@ public:
         horizontalLayout->addWidget(stack_widget);
 
         MainWindow->setCentralWidget(centralWidget);
+        menuBar = new QMenuBar(MainWindow);
+        menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 800, 21));
+        menuFile = new QMenu(menuBar);
+        menuFile->setObjectName(QStringLiteral("menuFile"));
+        MainWindow->setMenuBar(menuBar);
+
+        menuBar->addAction(menuFile->menuAction());
+        menuFile->addAction(actionExit);
 
         retranslateUi(MainWindow);
 
@@ -124,12 +140,14 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Hooper", 0));
+        actionExit->setText(QApplication::translate("MainWindow", "Exit", 0));
         groupBox_hooper->setTitle(QApplication::translate("MainWindow", "Hooper   ", 0));
         button_view_database->setText(QApplication::translate("MainWindow", "View", 0));
         button_update->setText(QApplication::translate("MainWindow", "Update", 0));
         button_add_database->setText(QApplication::translate("MainWindow", "Add", 0));
         button_discover->setText(QApplication::translate("MainWindow", "Discover", 0));
         button_about->setText(QApplication::translate("MainWindow", "About", 0));
+        menuFile->setTitle(QApplication::translate("MainWindow", "Hooper", 0));
     } // retranslateUi
 
 };

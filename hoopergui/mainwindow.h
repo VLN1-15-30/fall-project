@@ -42,6 +42,8 @@ private slots:
     void on_button_update_clicked();
 
 
+    void on_actionExit_triggered();
+
 private:
     Ui::MainWindow *ui;
     int selectedIndex;
