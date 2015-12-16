@@ -335,7 +335,7 @@ public:
         ___qtablewidgetitem11->setText(QApplication::translate("search_widget", "Computer", 0));
         QTableWidgetItem *___qtablewidgetitem12 = table_connections->horizontalHeaderItem(3);
         ___qtablewidgetitem12->setText(QApplication::translate("search_widget", "Year Invented", 0));
-        pushButton_remove_connection->setText(QApplication::translate("search_widget", "PushButton", 0));
+        pushButton_remove_connection->setText(QApplication::translate("search_widget", "Remove", 0));
         label_remove_conneciton->setText(QApplication::translate("search_widget", "Select a row to remove a connection from the database", 0));
         pushButton_printDbConnection->setText(QApplication::translate("search_widget", "Print table to .cvs", 0));
         lineEdit_connections->setPlaceholderText(QApplication::translate("search_widget", "Search connections...", 0));

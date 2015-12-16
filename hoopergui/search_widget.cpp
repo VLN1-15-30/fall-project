@@ -396,9 +396,9 @@ void search_widget::on_pushButton_remove_computer_clicked()
 
 void search_widget::on_pushButton_remove_connection_clicked()
 {
-    string first = ui->table_computers->item(ui->table_computers->currentRow(), 0)->text().toStdString();
-    string last = ui->table_computers->item(ui->table_computers->currentRow(), 0)->text().toStdString();
-    string computer = ui->table_computers->item(ui->table_computers->currentRow(), 0)->text().toStdString();
+    string first = ui->table_connections->item(ui->table_connections->currentRow(), 0)->text().toStdString();
+    string last = ui->table_connections->item(ui->table_connections->currentRow(), 1)->text().toStdString();
+    string computer = ui->table_connections->item(ui->table_connections->currentRow(), 2)->text().toStdString();
 
     hpList.removeConnection(first,last,computer);
     populateTableAtIndex(3,-1,0);

@@ -279,7 +279,7 @@
             <bool>false</bool>
            </property>
            <property name="text">
-            <string>PushButton</string>
+            <string>Remove</string>
            </property>
           </widget>
          </item>
